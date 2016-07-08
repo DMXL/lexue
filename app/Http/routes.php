@@ -46,7 +46,7 @@ Route::group(['domain' => '{user_type}.' . appDomain()], function(){
  */
 Route::group(['domain' =>  appDomain('teachers'), 'as' => 'teachers::', 'namespace' => 'Teacher', 'middleware' => ['web','auth:teachers']], function() {
     Route::get('/', function () {
-        return view('welcome');
+        return view('app.welcome');
     });
 
     Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@show']);

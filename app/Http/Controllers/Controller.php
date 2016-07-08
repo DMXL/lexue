@@ -14,7 +14,7 @@ class Controller extends BaseController
 
     protected function view($path, $data)
     {
-        if (isMobile()) {
+        if (isWechat()) {
             return view('wechat.' . $path, $data);
         }
 

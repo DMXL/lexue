@@ -39,7 +39,7 @@ function domainPrefix()
  *
  * @return bool
  */
-function isMobile()
+function isWechat()
 {
     $sessionKey = 'is_mobile';
 
@@ -47,11 +47,7 @@ function isMobile()
         return Session::get($sessionKey);
     }
 
-    if ($userType = Request::route('user_type')) {
-        $isMobile = starts_with($userType, 'm.');
-    } else {
-        $isMobile = starts_with(Request::getHost(), 'm.');
-    }
+    $isMobile = starts_with(Request::getHost(), 'm.');
 
     Session::put($sessionKey, $isMobile);
     return $isMobile;
@@ -70,12 +66,7 @@ function userType()
         return Session::get($sessionKey);
     }
 
-    if ($userType = Request::route('user_type')) {
-    } else {
-        $userType = domainPrefix();
-    }
-
-    $userType = str_replace('m.', '', $userType);
+    $userType = str_replace('m.', '', domainPrefix());
     Session::put($sessionKey, $userType);
     return $userType;
 }
