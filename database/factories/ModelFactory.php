@@ -11,42 +11,23 @@
 |
 */
 
-$factory->define(App\Models\Users\Student::class, function (Faker\Generator $faker) {
+use App\Services\ChineseFaker;
+
+$factory->define(App\Models\User\Student::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'name' => ChineseFaker::name(),
         'email' => $faker->safeEmail,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
     ];
 });
 
-$factory->define(App\Models\Users\Teacher::class, function (Faker\Generator $faker) {
-    $surnames = collect(explode(',', config('faker.surnames')));
-    $chars = collect(explode(',', config('faker.givennames')));
-    $words = collect(explode(',', config('faker.words')));
-
-    // generate name
-    $surname = $surnames->random();
-    $givenname = $chars->random();
-    if ($faker->boolean(60)) {
-        $givenname .= $chars->random();
-    }
-
-    // generate description
-    $description = "";
-    $numberOfSentences = mt_rand(2,4);
-    for ($i = 0; $i < $numberOfSentences; $i++) {
-        $sentence = "";
-        $numberOfSegments = mt_rand(2,4);
-        for ($j = 0; $j < $numberOfSegments; $j++) {
-            $numberOfWords = mt_rand(3,5);
-            $sentence .= implode($words->random($numberOfWords)->toArray()) . "，";
-        }
-        $description .= rtrim($sentence,'，') . "。";
-    }
-    
+$factory->define(App\Models\User\Teacher::class, function (Faker\Generator $faker) {
     return [
-        'name' => $surname . $givenname,
-        'description' => $description
+        'name' => ChineseFaker::name(),
+        'email' => $faker->safeEmail,
+        'password' => bcrypt(str_random(10)),
+        'remember_token' => str_random(10),
+        'description' => ChineseFaker::text()
     ];
 });

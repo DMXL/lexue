@@ -4,6 +4,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Test Account
+    |--------------------------------------------------------------------------
+    |
+    | This is used in dev seeders for testing purposes only.
+    |
+    */
+    'test' => [
+        'email' => env('TEST_ACCOUNT_EMAIL'),
+        'password' => env('TEST_ACCOUNT_PASSWORD'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Authentication Defaults
     |--------------------------------------------------------------------------
     |
@@ -77,17 +90,17 @@ return [
     'providers' => [
         'students' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Users\Student::class,
+            'model' => App\Models\User\Student::class,
         ],
 
         'teachers' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Users\Teacher::class,
+            'model' => App\Models\User\Teacher::class,
         ],
 
         'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Users\Admin::class,
+            'model' => App\Models\User\Admin::class,
         ],
     ],
 
@@ -113,21 +126,21 @@ return [
     'passwords' => [
         'students' => [
             'provider' => 'students',
-            'email' => 'auth.emails.password',
+            'email' => 'app.auth.emails.password',
             'table' => 'password_resets',
             'expire' => 60,
         ],
 
         'teachers' => [
             'provider' => 'teachers',
-            'email' => 'auth.emails.password',
+            'email' => 'app.auth.emails.password',
             'table' => 'password_resets',
             'expire' => 60,
         ],
 
         'admins' => [
             'provider' => 'admins',
-            'email' => 'auth.emails.password',
+            'email' => 'app.auth.emails.password',
             'table' => 'password_resets',
             'expire' => 60,
         ],

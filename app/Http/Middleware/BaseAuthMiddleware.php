@@ -18,6 +18,6 @@ class BaseAuthMiddleware
      */
     public function __construct()
     {
-        $this->guard = \Request::route('user_type');
+        $this->guard = userType();
     }
 }

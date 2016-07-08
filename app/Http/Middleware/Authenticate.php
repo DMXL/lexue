@@ -14,9 +14,9 @@ class Authenticate extends BaseAuthMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($this->guard)->guest()) {
+        if (Auth::guard($guard ? : $this->guard)->guest()) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
             } else {

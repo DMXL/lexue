@@ -14,6 +14,10 @@ class Controller extends BaseController
 
     protected function view($path, $data)
     {
-        //if (\Route::current()->domain())
+        if (isMobile()) {
+            return view('wechat.' . $path, $data);
+        }
+
+        return view($path, $data);
     }
 }

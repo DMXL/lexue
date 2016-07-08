@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\Users\Admin;
-use App\Models\Users\Student;
-use App\Models\Users\Teacher;
+use App\Models\User\Admin;
+use App\Models\User\Student;
+use App\Models\User\Teacher;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -38,6 +38,10 @@ class AuthController extends Controller
      * @var string
      */
     private $guard;
+    
+    protected $registerView = 'app/auth/register';
+
+    protected $loginView = 'app/auth/login';
 
     /**
      * Create a new authentication controller instance.
@@ -46,7 +50,7 @@ class AuthController extends Controller
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
 
-        $this->guard = \Request::route('user_type');
+        $this->guard = userType();
     }
 
     /**

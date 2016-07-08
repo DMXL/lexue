@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Users\Teacher;
+use App\Models\User\Teacher;
 use Illuminate\Database\Seeder;
 
 class TeachersTableSeeder extends Seeder
@@ -12,7 +12,12 @@ class TeachersTableSeeder extends Seeder
      */
     public function run()
     {
-        Teacher::truncate();
+        DB::table('teachers')->insert([
+            'name' => \App\Services\ChineseFaker::name(),
+            'email' => config('auth.test.email'),
+            'password' => bcrypt(config('auth.test.password')),
+            
+        ]);
 
         factory(Teacher::class, 20)->create();
     }

@@ -3,11 +3,15 @@
 /*
  * Test routes
  */
-Route::get('test/{segment}', function(){
-    return Request::root();
+Route::group(['domain' => appDomain()], function() {
+    Route::get('test/{segment}', function () {
+        return Request::getHost();
+    });
+
+    Route::get('/', function () {
+        return 'home page of the home pages';
+    });
 });
-
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -19,32 +23,34 @@ Route::get('test/{segment}', function(){
 |
 */
 
-Route::group(['domain' => '{user_type}.' . config('app.domain')], function(){
-
+Route::group(['domain' => '{user_type}.' . appDomain()], function(){
     /**
      * Auth routes
      */
-    $this->get('login', ['as' => 'getLogin', 'uses' => 'Auth\AuthController@showLoginForm']);
-    $this->post('login', ['as' => 'postLogin', 'uses' => 'Auth\AuthController@login']);
+    $this->get('login', ['as' => 'login', 'uses' => 'Auth\AuthController@showLoginForm']);
+    $this->post('login', ['as' => 'login.post', 'uses' => 'Auth\AuthController@login']);
     $this->get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@logout']);
 
     // Registration Routes...
-    $this->get('register', ['as' => 'getRegister', 'uses' => 'Auth\AuthController@showRegistrationForm']);
-    $this->post('register', ['as' => 'postRegister', 'uses' => 'Auth\AuthController@register']);
+    $this->get('register', ['as' => 'register', 'uses' => 'Auth\AuthController@showRegistrationForm']);
+    $this->post('register', ['as' => 'register.post', 'uses' => 'Auth\AuthController@register']);
 
     // Password Reset Routes...
-    $this->get('password/reset/{token?}', ['as' => 'getReset', 'uses' => 'Auth\PasswordController@showResetForm']);
-    $this->post('password/email', ['as' => 'postResetEmail', 'uses' => 'Auth\PasswordController@sendResetLinkEmail']);
-    $this->post('password/reset', ['as' => 'postReset', 'uses' => 'Auth\PasswordController@reset']);
+    $this->get('password/reset/{token?}', ['as' => 'reset', 'uses' => 'Auth\PasswordController@showResetForm']);
+    $this->post('password/email', ['as' => 'reset.email', 'uses' => 'Auth\PasswordController@sendResetLinkEmail']);
+    $this->post('password/reset', ['as' => 'reset.post', 'uses' => 'Auth\PasswordController@reset']);
+});
 
-    /**
-     * Dashboard
-     */
-    Route::group(['middleware' => ['web','auth']], function() {
-        Route::get('/', function () {
-            return view('welcome');
-        });
+/**
+ * Teacher specific routes
+ */
+Route::group(['domain' =>  appDomain('teachers'), 'as' => 'teachers::', 'namespace' => 'Teacher', 'middleware' => ['web','auth:teachers']], function() {
+    Route::get('/', function () {
+        return view('welcome');
     });
+
+    Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@show']);
+    Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 });
 
 
@@ -57,6 +63,6 @@ Route::get('/home', 'HomeController@index');
 |
 */
 Route::get('debug', function() {
-    $teachers = App\Models\Users\Teacher::all();
+    $teachers = App\Models\User\Teacher::all();
     return view('debug.index', compact('teachers'));
 });

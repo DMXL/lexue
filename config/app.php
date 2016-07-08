@@ -46,10 +46,21 @@ return [
     | Application Domain
     |--------------------------------------------------------------------------
     |
-    | Must be set
+    | There are multiple sub-domains in the application.
+    | The domain value must be set in the env file.
     |
     */
     'domain' => env('APP_DOMAIN', 'localhost'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Name
+    |--------------------------------------------------------------------------
+    |
+    | Default name to display in places like site name, page title and head tags
+    |
+    */
+    'name' => env('APP_NAME'),
 
     /*
     |--------------------------------------------------------------------------
@@ -75,7 +86,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'cn',
 
     /*
     |--------------------------------------------------------------------------
@@ -159,6 +170,11 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
+         * Custom Service Providers
+         */
+        App\Providers\DuobeiyunServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
@@ -211,6 +227,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        /*
+         * Custom Facades
+         */
+        'Duobeiyun' => App\Facades\Duobeiyun::class,
 
     ],
 

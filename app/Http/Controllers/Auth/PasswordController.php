@@ -25,6 +25,10 @@ class PasswordController extends Controller
 
     protected $broker;
 
+    protected $linkRequestView = 'app/auth/passwords/email';
+
+    protected $resetView = 'app/auth/passwords/reset';
+
     /**
      * Create a new password controller instance.
      *
