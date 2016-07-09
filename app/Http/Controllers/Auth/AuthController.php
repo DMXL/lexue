@@ -39,9 +39,9 @@ class AuthController extends Controller
      */
     private $guard;
     
-    protected $registerView = 'app/auth/register';
+    protected $registerView = 'auth/register';
 
-    protected $loginView = 'app/auth/login';
+    protected $loginView = 'auth/login';
 
     /**
      * Create a new authentication controller instance.
@@ -51,6 +51,11 @@ class AuthController extends Controller
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
 
         $this->guard = userType();
+
+        $pathPrefix = viewPrefix();
+
+        $this->registerView = $pathPrefix . $this->registerView;
+        $this->loginView = $pathPrefix . $this->loginView;
     }
 
     /**

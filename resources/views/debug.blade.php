@@ -1,0 +1,1 @@
+{{ Request::route('custom_key') }}

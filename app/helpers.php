@@ -107,3 +107,33 @@ function isLocal()
 {
     return App::environment() === 'local';
 }
+
+/**
+ * "backend" for teachers and admins
+ * "wechat" for student views
+ * "frontend" as a fallback for students
+ *
+ * @return string
+ */
+function viewPrefix()
+{
+    $prefix = "";
+    $userType = userType();
+
+    if ($userType === 'teachers' || $userType === 'admins') {
+        $prefix = 'backend/';
+    } elseif ($userType === 'students') {
+        $prefix = isWechat() ? 'wechat/' : 'frontend/';
+    }
+
+    return $prefix;
+}
+
+function getAvatar($url, $preset)
+{
+    if ($url) {
+        return $url . '?p=' . $preset;
+    }
+
+    return 'default/avatar.png?p=' . $preset;
+}

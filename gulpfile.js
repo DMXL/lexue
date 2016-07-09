@@ -42,5 +42,5 @@ elixir(function(mix) {
 
     mix.copy('resources/assets/fonts', 'public/app/fonts');
     mix.copy('resources/assets/patterns', 'public/app/css/patterns');
-    mix.copy('resources/assets/images', 'public/app/images');
+    mix.copy('resources/assets/images', 'public/images');
 });

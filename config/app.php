@@ -182,6 +182,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Third party
+         */
+        Spatie\Glide\GlideServiceProvider::class,
     ],
 
     /*
@@ -232,6 +236,11 @@ return [
          * Custom Facades
          */
         'Duobeiyun' => App\Facades\Duobeiyun::class,
+
+        /*
+         * Third party
+         */
+        'GlideImage' => Spatie\Glide\GlideImageFacade::class,
 
     ],
 

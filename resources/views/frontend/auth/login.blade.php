@@ -1,4 +1,4 @@
-@extends('app.layouts.blank')
+@extends('backend.layouts.blank')
 
 @section('content')
     <div>
@@ -7,14 +7,14 @@
 
     </div>
 
-    <p>重置{{ userTypeCn() }}帐号密码</p>
+    <p>登录{{ userTypeCn() }}后台</p>
 
-    <form class="m-t" role="form" method="POST" action="{{ route('reset.post', userType()) }}">
+    <form class="m-t" role="form" method="POST" action="{{ route('auth::login.post', userType()) }}">
         {{ csrf_field() }}
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i></span>
-                <input type="email" class="form-control" placeholder="邮箱" name="email" value="{{ $email or old('email') }}">
+                <input type="email" class="form-control" placeholder="邮箱" name="email" value="{{ old('email') }}">
             </div>
             @if ($errors->has('email'))
                 <span class="help-block text-left">
@@ -35,18 +35,22 @@
             @endif
         </div>
 
-        <div class="form-group {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock fa-fw" aria-hidden="true"></i></span>
-                <input type="password" class="form-control" placeholder="确认密码" name="password_confirmation">
+        <div class="form-group">
+            <div class="checkbox checkbox-success text-left">
+                <input name="remember" id="name" type="checkbox">
+                <label for="name">
+                    下次自动登录
+                </label>
             </div>
-            @if ($errors->has('password_confirmation'))
-                <span class="help-block text-left">
-                <strong>{{ $errors->first('password_confirmation') }}</strong>
-            </span>
-            @endif
         </div>
 
-        <button type="submit" class="btn btn-primary block full-width m-b">重置</button>
+        <button type="submit" class="btn btn-primary block full-width m-b">登录</button>
+
+        <a href="{{ route('auth::reset.get', userType()) }}">忘记密码了？</a>
+
+        <hr>
+
+        <p class="text-muted text-center"><small>还不是{{ userTypeCn() }}？</small></p>
+        <a class="btn btn-sm btn-white btn-block" href="{{ route('auth::register.get', userType()) }}">成为{{ userTypeCn() }}</a>
     </form>
 @endsection

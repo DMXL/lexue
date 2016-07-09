@@ -25,6 +25,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         $router->pattern('user_type', 'students|teachers|admins|m\.students');
+        $router->pattern('image_type', 'image|avatar');
 
         parent::boot($router);
     }

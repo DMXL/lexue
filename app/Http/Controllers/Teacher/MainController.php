@@ -7,14 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class ProfileController extends Controller
+class MainController extends Controller
 {
-    //
-
-    public function show()
+    public function index()
     {
-        $teacher = authUser();
-
-        
+        return view('backend.teachers.home');
     }
 }

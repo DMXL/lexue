@@ -1,4 +1,4 @@
-@extends('app.layouts.blank')
+@extends('backend.layouts.blank')
 
 <!-- Main Content -->
 @section('content')
@@ -16,7 +16,7 @@
         </div>
     @endif
 
-    <form class="m-t" role="form" method="POST" action="{{ route('reset.email', userType()) }}">
+    <form class="m-t" role="form" method="POST" action="{{ route('auth::reset.email', userType()) }}">
         {{ csrf_field() }}
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
             <div class="input-group">

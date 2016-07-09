@@ -25,9 +25,9 @@ class PasswordController extends Controller
 
     protected $broker;
 
-    protected $linkRequestView = 'app/auth/passwords/email';
+    protected $linkRequestView = 'auth/passwords/email';
 
-    protected $resetView = 'app/auth/passwords/reset';
+    protected $resetView = 'auth/passwords/reset';
 
     /**
      * Create a new password controller instance.
@@ -38,6 +38,11 @@ class PasswordController extends Controller
         $this->middleware('guest');
 
         $this->broker = userType();
+        
+        $pathPrefix = viewPrefix();
+
+        $this->linkRequestView = $pathPrefix . $this->linkRequestView;
+        $this->resetView = $pathPrefix . $this->resetView;
     }
 
     /**

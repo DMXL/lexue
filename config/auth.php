@@ -126,21 +126,21 @@ return [
     'passwords' => [
         'students' => [
             'provider' => 'students',
-            'email' => 'app.auth.emails.password',
+            'email' => 'frontend.auth.emails.password',
             'table' => 'password_resets',
             'expire' => 60,
         ],
 
         'teachers' => [
             'provider' => 'teachers',
-            'email' => 'app.auth.emails.password',
+            'email' => 'backend.auth.emails.password',
             'table' => 'password_resets',
             'expire' => 60,
         ],
 
         'admins' => [
             'provider' => 'admins',
-            'email' => 'app.auth.emails.password',
+            'email' => 'backend.auth.emails.password',
             'table' => 'password_resets',
             'expire' => 60,
         ],

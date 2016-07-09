@@ -16,6 +16,7 @@ class TeachersTableSeeder extends Seeder
             'name' => \App\Services\ChineseFaker::name(),
             'email' => config('auth.test.email'),
             'password' => bcrypt(config('auth.test.password')),
+            'description' => \App\Services\ChineseFaker::text(),
             
         ]);
 

@@ -1,4 +1,4 @@
-@extends('app.layouts.blank')
+@extends('backend.layouts.blank')
 
 @section('content')
     <div>
@@ -9,7 +9,7 @@
 
     <p>登录{{ userTypeCn() }}后台</p>
 
-    <form class="m-t" role="form" method="POST" action="{{ route('login.post', userType()) }}">
+    <form class="m-t" role="form" method="POST" action="{{ route('auth::login.post', userType()) }}">
         {{ csrf_field() }}
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
             <div class="input-group">
@@ -46,11 +46,11 @@
 
         <button type="submit" class="btn btn-primary block full-width m-b">登录</button>
 
-        <a href="{{ route('reset', userType()) }}">忘记密码了？</a>
+        <a href="{{ route('auth::reset.get', userType()) }}">忘记密码了？</a>
 
         <hr>
 
         <p class="text-muted text-center"><small>还不是{{ userTypeCn() }}？</small></p>
-        <a class="btn btn-sm btn-white btn-block" href="{{ route('register', userType()) }}">成为{{ userTypeCn() }}</a>
+        <a class="btn btn-sm btn-white btn-block" href="{{ route('auth::register.get', userType()) }}">成为{{ userTypeCn() }}</a>
     </form>
 @endsection

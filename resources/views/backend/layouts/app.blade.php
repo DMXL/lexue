@@ -21,17 +21,18 @@
 
 <div id="wrapper">
 
-    @include('app.layouts.sidebar')
+    @include('backend.layouts.sidebar')
 
     <div id="page-wrapper" class="gray-bg">
 
-        @include('app.layouts.header')
+        @include('backend.layouts.header')
 
+        @unless(isset($noHeading))
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
                 <h2>{{ isset($title) ? $title : userTypeCn() . "后台" }}</h2>
                 <ol class="breadcrumb">
-                    <li><a href="{{ url('/') }}">后台</a></li>
+                    <li><a href="{{ url('/') }}">{{ userTypeCn() }}后台</a></li>
                     @if(isset($bct))
                         @each('partials.bct', $bct, 'link')
                     @endif
@@ -43,6 +44,7 @@
                 </ol>
             </div>
         </div>
+        @endunless
 
         @if(isset($customLayout) AND $customLayout)
             @yield('content')
@@ -55,6 +57,7 @@
                 </div>
             </div>
         @endif
+
         <div class="footer">
             <div class="pull-right">
                 10GB of <strong>250GB</strong> Free.
@@ -72,7 +75,7 @@
 
 <!-- Custom scripts -->
 <script>
-    $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+    $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')}});
 </script>
 
 @yield('bottom')
