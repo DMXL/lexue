@@ -5,6 +5,14 @@
  * Date: 12/07/16
  * Time: 4:06 PM
  */
+Route::get('about', ['as' => 'about', 'uses' => function(){
+    return frontendView('about');
+}]);
+
+Route::get('contact', ['as' => 'contact', 'uses' => function(){
+    return frontendView('contact');
+}]);
+
 Route::resource('teachers', 'TeacherController', ['only' => ['index', 'show']]);
 
 Route::group(['middleware' => 'auth:students'], function(){

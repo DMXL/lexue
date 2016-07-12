@@ -27,8 +27,10 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="wrapper wrapper-content animated fadeInUp">
+                    <div class="container">
                     @include('flash::message')
                     @yield('content')
+                    </div>
                 </div>
             </div>
         </div>

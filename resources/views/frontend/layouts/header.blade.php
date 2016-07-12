@@ -12,22 +12,10 @@
                     <a role="button" href="{{ route('students::teachers.index') }}">找老师</a>
                 </li>
                 <li class="dropdown">
-                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item <span class="caret"></span></a>
-                    <ul role="menu" class="dropdown-menu">
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                    </ul>
+                    <a role="button" href="{{ route('students::about') }}">关于乐学云</a>
                 </li>
                 <li class="dropdown">
-                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item <span class="caret"></span></a>
-                    <ul role="menu" class="dropdown-menu">
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                        <li><a href="">Menu item</a></li>
-                    </ul>
+                    <a role="button" href="{{ route('students::contact') }}">联系我们</a>
                 </li>
                 <li class="dropdown">
                     <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Menu item <span class="caret"></span></a>

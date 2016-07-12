@@ -16,7 +16,7 @@ class TeacherController extends Controller
     {
         $teachers = Teacher::all();
 
-        return $this->frontendView('frontend.teachers.index', compact('teachers'));
+        return frontendView('frontend.teachers.index', compact('teachers'));
     }
 
     public function show($id)
@@ -26,7 +26,7 @@ class TeacherController extends Controller
 
         $timetable = $teacher->getTimetable();
 
-        return $this->frontendView('frontend.teachers.show', compact('teacher', 'timetable'));
+        return frontendView('frontend.teachers.show', compact('teacher', 'timetable'));
     }
 
     /**

@@ -15,6 +15,6 @@ class LectureController extends Controller
 
         $lectures->load('teacher');
 
-        return $this->frontendView('lectures.index', compact('lectures'));
+        return frontendView('lectures.index', compact('lectures'));
     }
 }

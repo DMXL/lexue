@@ -172,3 +172,22 @@ function getAvatar($url, $preset)
 
     return '/default/avatar.png?p=' . $preset;
 }
+
+/**
+ * This automatically determines if 'wechat' or 'web' views need to be used
+ *
+ * @param $path
+ * @param array $data
+ * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+ */
+function frontendView($path, $data = [])
+{
+    /* sanitize */
+    $path = preg_replace('/^(frontend|wechat)\./', '', $path);
+
+    if (isWechat()) {
+        return view('wechat.' . $path, $data);
+    }
+
+    return view('frontend.' . $path, $data);
+}
