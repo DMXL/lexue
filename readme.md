@@ -1,9 +1,10 @@
 ## 本地环境简要说明
+- 复制`.env.example`内容到`.env`
 - `php artisan key:generate` 生成一下key
 - `env`文件中的数据库信息必填
 - `env`文件中的`MAIL_SENDER_ADDRESS`,`MAIL_SENDER_NAME`,`TEST_ACCOUNT_EMAIL`,`TEST_ACCOUNT_PASSWORD`必填
-- `php artisan migrate --seed` 或者`php artisan migrate:refresh --seed`重置数据库
-- (optional)`php artisan clear-compiled && php artisan ide-helper:generate`生成`ide helper`文件，帮助开发
+- `php artisan migrate --seed` 生成数据库 或者`php artisan migrate:refresh --seed`重置数据库
+- *(optional)* `php artisan clear-compiled && php artisan ide-helper:generate`生成`ide helper`文件，帮助开发
 - `env`文件中`APP_DOMAIN`必填，请改成自己本地的主域名
 
 ## weChat开发注意事项
