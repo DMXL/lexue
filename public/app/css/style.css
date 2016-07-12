@@ -2814,6 +2814,9 @@ a.forum-item-title:hover {
   padding: 20px;
   position: relative;
 }
+.tabs-container .nav-tabs > li.active {
+  background: none;
+}
 .tabs-container .nav-tabs > li.active > a,
 .tabs-container .nav-tabs > li.active > a:hover,
 .tabs-container .nav-tabs > li.active > a:focus {
@@ -7885,6 +7888,14 @@ body.md-skin {
     display: none;
   }
 }
+/*====== Miscellaneous ======*/
+.no-pull,
+.no-float {
+  float: none!important;
+}
+.no-background {
+  background: transparent!important;
+}
 /*====== Forms ======*/
 .checkbox label input,
 .radio label input {
@@ -7905,6 +7916,10 @@ body.md-skin {
   top: 50%;
   margin-top: -1.5em;
   position: relative;
+}
+/*====== Time Table ======*/
+#time-table div[disabled=disabled] {
+  background: #f8f8f8;
 }
 @media print {
   nav.navbar-static-side {

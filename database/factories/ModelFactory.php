@@ -31,3 +31,20 @@ $factory->define(App\Models\User\Teacher::class, function (Faker\Generator $fake
         'description' => ChineseFaker::text()
     ];
 });
+
+$factory->define(App\Models\Course\Lecture::class, function (Faker\Generator $faker) {
+    return [
+        'teacher_id' => mt_rand(1, \App\Models\User\Teacher::count()),
+        'student_id' => mt_rand(1, \App\Models\User\Student::count()),
+        'start_at' => \Carbon\Carbon::today()->addDays(mt_rand(1,7))->addHours(mt_rand(9,16))
+    ];
+});
+
+
+$factory->define(App\Models\Teacher\OffTime::class, function (Faker\Generator $faker) {
+    return [
+        'teacher_id' => mt_rand(1, \App\Models\User\Teacher::count()),
+        'time' => \Carbon\Carbon::today()->addDays(mt_rand(1,7))->addHours(mt_rand(9,16)),
+        'all_day' => $faker->boolean(20)
+    ];
+});

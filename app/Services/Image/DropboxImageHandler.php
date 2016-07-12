@@ -83,9 +83,33 @@ class DropboxImageHandler
         return $this->dropboxClient->uploadFile($path, WriteMode::force(), $file);
     }
 
-    public function get(Request $request, $path, $type)
+    public function get(Request $request, $type, $file)
     {
-        $path = "/" . ltrim($type, "/") . "/" . ltrim($path, "/");
-        $this->dropboxServer->getImageResponse($path, $request->all())->send();
+        if ($type === 'avatar') {
+            $this->getAvatar($request, $file);
+        } else {
+            $this->getImage($request, $file);
+        }
+    }
+
+    private function getAvatar($request, $file)
+    {
+        $file = 'avatar/' . $file;
+        $this->retrieve($request, $file);
+    }
+
+    private function getImage($request, $file)
+    {
+        $file = 'image/' . $file;
+        $this->retrieve($request, $file);
+    }
+
+    /**
+     * @param Request $request
+     * @param string $file
+     */
+    private function retrieve($request, $file)
+    {
+        $this->dropboxServer->outputImage($file, $request->all());
     }
 }

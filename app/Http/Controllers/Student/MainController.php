@@ -13,4 +13,9 @@ class MainController extends Controller
     {
         
     }
+
+    public function profile()
+    {
+        return $this->frontendView('profile');
+    }
 }

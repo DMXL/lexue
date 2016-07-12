@@ -11,7 +11,8 @@
         "league/glide": "^1.0",
         "league/flysystem-dropbox": "^1.0",
         "league/glide-laravel": "^1.0",
-        "spatie/laravel-glide": "^3.0"
+        "laracasts/flash": "^2.0",
+        "jenssegers/date": "^3.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

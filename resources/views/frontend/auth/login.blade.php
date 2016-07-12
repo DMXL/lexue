@@ -11,6 +11,9 @@
 
     <form class="m-t" role="form" method="POST" action="{{ route('auth::login.post', userType()) }}">
         {{ csrf_field() }}
+        @if($intendedUrl = Request::query('intended'))
+            <input type="hidden" name="intended" value="{{ $intendedUrl }}">
+        @endif
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i></span>

@@ -46,16 +46,24 @@ Route::group(['domain' => '{user_type}.' . appDomain(), 'as' => 'auth::'], funct
 /**
  * Student specific routes
  */
-Route::group(['domain' =>  appDomain('students'), 'as' => 'students::', 'namespace' => 'Student', 'middleware' => ['web','auth:students']], function() {
-    Route::get('/', 'MainController@index');
+Route::group(['domain' =>  appDomain('students'), 'as' => 'students::', 'namespace' => 'Student', 'middlewareGroups' => 'web'], function() {
 
     Route::resource('teachers', 'TeacherController', ['only' => ['index', 'show']]);
+
+    Route::group(['middleware' => 'auth:students'], function(){
+        Route::get('/', 'MainController@index');
+        Route::get('profile', ['as' => 'profile.get', 'uses' => 'MainController@profile']);
+
+        Route::post('teachers/{id}/book', ['as' => 'teachers.book', 'uses' => 'TeacherController@book'] );
+
+        Route::resource('lectures', 'LectureController', ['only' => ['index', 'show']]);
+    });
 });
 
 /**
  * Teacher specific routes
  */
-Route::group(['domain' =>  appDomain('teachers'), 'as' => 'teachers::', 'namespace' => 'Teacher', 'middleware' => ['web','auth:teachers']], function() {
+Route::group(['domain' =>  appDomain('teachers'), 'as' => 'teachers::', 'namespace' => 'Teacher', 'middlewareGroups' => ['web','auth:teachers']], function() {
     Route::get('/', 'MainController@index');
 
     Route::group(['prefix' => 'settings', 'as' => 'settings.', 'namespace' => 'Settings'], function() {
@@ -69,15 +77,18 @@ Route::group(['domain' =>  appDomain('teachers'), 'as' => 'teachers::', 'namespa
 /**
  * Image routes
  */
-Route::get('avatar/{user_type}/{id}/{file}', function(
+Route::get('{image_type}/{file}', function(
+    Illuminate\Http\Request $request,
+    \App\Services\Image\DropboxImageHandler $imageHandler,
+    $imageType, $file) {
+    $imageHandler->get($request, $imageType, $file);
+})->where(['file' => '.*']);
+
+Route::get('default/{file}', function(
     Illuminate\Http\Request $request,
     \App\Services\Image\LocalImageHandler $imageHandler,
-    $userType, $userId, $file) {
-    $imageHandler->getAvatar($request, $userType, $userId, $file);
-});
-
-Route::get('default/{file}', function(Illuminate\Http\Request $request, \App\Services\Image\LocalImageHandler $localImageHandler, $path) {
-    $localImageHandler->getDefault($request, $path);
+    $path) {
+    $imageHandler->getDefault($request, $path);
 });
 
 /*

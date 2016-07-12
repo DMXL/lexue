@@ -2,21 +2,22 @@
 
 @section('content')
     @foreach($teachers as $teacher)
-        <div class="col-lg-4">
-            <div class="contact-box">
-                <a href="profile.html">
-                    <div class="col-sm-4">
-                        <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ getAvatar('', 'sm') }}">
-                        <div class="m-t-xs font-bold">￥{{ $teacher->unit_price }}.00/时</div>
-                    </div>
-                    <div class="col-sm-8">
-                        <h3><strong>{{ $teacher->name }}</strong> - <small>{{ $teacher->levels->implode('name', ',') }}</small></h3>
-                        <p>{{ str_limit($teacher->description, 40) }}</p>
-                    </div>
-                    <div class="clearfix"></div>
-                </a>
-            </div>
-        </div>
+            <div class="col-lg-3">
+                <div class="contact-box center-version">
+                    <a href="{{ route('students::teachers.show', $teacher->id) }}">
 
+                        <img alt="image" class="img-circle" src="{{ getAvatar($teacher->avatar, 'sm') }}">
+                        <h3 class="m-b-xs">{{ $teacher->name }}</h3>
+
+                        <div class="font-bold">
+                            ￥{{ $teacher->unit_price }}.00/时
+                            <br>
+                            <small>{{ $teacher->levels->implode('name', ',') }}</small>
+                        </div>
+                        <p class="m-t-md">{{ str_limit($teacher->description, 40) }}</p>
+
+                    </a>
+                </div>
+            </div>
     @endforeach
 @endsection

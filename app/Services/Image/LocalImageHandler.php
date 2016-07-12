@@ -39,15 +39,9 @@ class LocalImageHandler
         ]);
     }
 
-    public function upload($file, $path, $options = []) {
-        return \GlideImage::create($file)
-        >modify($options)
-        ->save($path);
-    }
-
     public function getDefault(Request $request, $file)
     {
-        $file = 'default/' . $file;
+        $file = 'default/' . ltrim($file, '/');
         $this->get($request, $file);
     }
 

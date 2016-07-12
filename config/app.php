@@ -73,7 +73,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Shanghai',
 
     /*
     |--------------------------------------------------------------------------
@@ -86,7 +86,7 @@ return [
     |
     */
 
-    'locale' => 'cn',
+    'locale' => 'zh_CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -185,7 +185,9 @@ return [
         /*
          * Third party
          */
-        Spatie\Glide\GlideServiceProvider::class,
+        Jenssegers\Date\DateServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
+        
     ],
 
     /*
@@ -240,7 +242,9 @@ return [
         /*
          * Third party
          */
-        'GlideImage' => Spatie\Glide\GlideImageFacade::class,
+        'Carbon' => Carbon\Carbon::class,
+        'Flash' => Laracasts\Flash\Flash::class,
+        'Date' => Jenssegers\Date\Date::class,
 
     ],
 

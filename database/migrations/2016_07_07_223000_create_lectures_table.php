@@ -21,7 +21,11 @@ class CreateLecturesTable extends Migration
             $table->unsignedInteger('teacher_id');
             $table->foreign('teacher_id')->references('id')->on('teachers');
 
+            $table->boolean('complete')->default(false);
+
             $table->timestamp('start_at');
+
+            $table->unique(['student_id', 'teacher_id', 'start_at']);
             
             $table->timestamps();
         });

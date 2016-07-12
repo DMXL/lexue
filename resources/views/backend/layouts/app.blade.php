@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ isset($title) ? $title . " | " : "" }}{{ config('app.name') }}</title>
+    <title>{{ isset($title) ? $title . " | " : "" }}{{ appName() }}</title>
 
     <link href="{{ asset('app/css/all.css') }}" rel="stylesheet">
     <link href="{{ asset('app/css/style.css') }}" rel="stylesheet">
 
-    @yield('head')
+    @yield('css')
 
 </head>
 
@@ -63,7 +63,7 @@
                 10GB of <strong>250GB</strong> Free.
             </div>
             <div>
-                <strong>Copyright</strong> {{ config('app.name') }} &copy; {{ Carbon\Carbon::now()->year }}
+                <strong>Copyright</strong> {{ appName() }} &copy; {{ Carbon\Carbon::now()->year }}
             </div>
         </div>
 
@@ -78,7 +78,7 @@
     $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')}});
 </script>
 
-@yield('bottom')
+@yield('js')
 
 </body>
 

@@ -12,12 +12,20 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
 
-    protected function view($path, $data)
+    /**
+     * @param string $path Absolute or relative to 'frontend' or 'wechat'
+     * @param null $data
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    protected function frontendView($path, $data = [])
     {
+        /* sanitize */
+        $path = preg_replace('/^(frontend|wechat)\./', '', $path);
+
         if (isWechat()) {
             return view('wechat.' . $path, $data);
         }
 
-        return view($path, $data);
+        return view('frontend.' . $path, $data);
     }
 }

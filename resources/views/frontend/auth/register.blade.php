@@ -3,7 +3,7 @@
 @section('content')
     <div>
 
-        <h1 class="logo-name">{{ config('app.name') }}</h1>
+        <h1 class="logo-name">{{ appName() }}</h1>
 
     </div>
 

@@ -1,6 +1,16 @@
 <?php
 
 /**
+ * Shortcut for obtaining the app name
+ *
+ * @return mixed
+ */
+function appName()
+{
+    return config('app.name');
+}
+
+/**
  * Get the application domain or one of the sub-domains.
  * Root domain must be set from the env file
  *
@@ -68,7 +78,12 @@ function userType()
 
     $userType = str_replace('m.', '', domainPrefix());
     Session::put($sessionKey, $userType);
-    return $userType;
+
+    if ($userType) {
+        return $userType;
+    }
+
+    return 'students';
 }
 
 /**
@@ -78,14 +93,7 @@ function userType()
  */
 function userTypeCn()
 {
-    $sessionKey = 'user_type_cn';
-    if (Session::has($sessionKey)) {
-        return Session::get('user_type_cn');
-    }
-
-    $userTypeCn = trans('user.type.' . userType());
-    Session::put($sessionKey, $userTypeCn);
-    return $userTypeCn;
+    return trans('user.type.' . userType());
 }
 
 /**
@@ -96,6 +104,26 @@ function userTypeCn()
 function authUser()
 {
     return Auth::guard(userType())->user();
+}
+
+/**
+ * Returns the id of the currently authenticated user by its type
+ *
+ * @return int|null
+ */
+function authId()
+{
+    return Auth::guard(userType())->id();
+}
+
+/**
+ * Check if the current user type is logged in
+ *
+ * @return bool
+ */
+function authCheck()
+{
+    return Auth::guard(userType())->check();
 }
 
 /**
@@ -129,11 +157,18 @@ function viewPrefix()
     return $prefix;
 }
 
+/**
+ * Fall back to a default placeholder if not set
+ *
+ * @param $url
+ * @param $preset
+ * @return string
+ */
 function getAvatar($url, $preset)
 {
     if ($url) {
         return $url . '?p=' . $preset;
     }
 
-    return 'default/avatar.png?p=' . $preset;
+    return '/default/avatar.png?p=' . $preset;
 }

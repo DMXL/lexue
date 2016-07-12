@@ -56,6 +56,10 @@ class AuthController extends Controller
 
         $this->registerView = $pathPrefix . $this->registerView;
         $this->loginView = $pathPrefix . $this->loginView;
+
+        if ($intendedUrl = \Request::input('intended')) {
+            \Session::set('url.intended', $intendedUrl);
+        }
     }
 
     /**

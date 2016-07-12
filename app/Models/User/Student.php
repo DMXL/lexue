@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Models\Course\Lecture;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Student extends Authenticatable
@@ -23,4 +24,14 @@ class Student extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relations
+    |--------------------------------------------------------------------------
+    */
+    public function Lectures()
+    {
+        return $this->hasMany(Lecture::class);
+    }
 }

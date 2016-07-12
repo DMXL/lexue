@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
                 LevelsTableSeeder::class,
                 LevelTeacherPivotTableSeeder::class,
 
+                LecturesTableSeeder::class,
+                OffTimesTableSeeder::class,
+
                 AdminsTableSeeder::class,
             ];
         } else {
