@@ -46,19 +46,16 @@ Route::group(['domain' => '{user_type}.' . appDomain(), 'as' => 'auth::'], funct
 /**
  * Student specific routes
  */
+/* Web */
 Route::group(['domain' =>  appDomain('students'), 'as' => 'students::', 'namespace' => 'Student', 'middlewareGroups' => 'web'], function() {
-
-    Route::resource('teachers', 'TeacherController', ['only' => ['index', 'show']]);
-
-    Route::group(['middleware' => 'auth:students'], function(){
-        Route::get('/', 'MainController@index');
-        Route::get('profile', ['as' => 'profile.get', 'uses' => 'MainController@profile']);
-
-        Route::post('teachers/{id}/book', ['as' => 'teachers.book', 'uses' => 'TeacherController@book'] );
-
-        Route::resource('lectures', 'LectureController', ['only' => ['index', 'show']]);
-    });
+    include app_path('Routes' . DIRECTORY_SEPARATOR . 'students.php');
 });
+
+/* weChat */
+Route::group(['domain' =>  appDomain('m.students'), 'as' => 'wechat::', 'namespace' => 'Student', 'middlewareGroups' => 'web'], function() {
+    include app_path('Routes' . DIRECTORY_SEPARATOR . 'students.php');
+});
+
 
 /**
  * Teacher specific routes
