@@ -60,7 +60,7 @@ Route::group(['domain' =>  appDomain('m.students'), 'as' => 'wechat::', 'namespa
 /**
  * Teacher specific routes
  */
-Route::group(['domain' =>  appDomain('teachers'), 'as' => 'teachers::', 'namespace' => 'Teacher', 'middlewareGroups' => ['web','auth:teachers']], function() {
+Route::group(['domain' =>  appDomain('teachers'), 'as' => 'teachers::', 'namespace' => 'Teacher', 'middleware' => ['web','auth:teachers']], function() {
     Route::get('/', 'MainController@index');
 
     Route::group(['prefix' => 'settings', 'as' => 'settings.', 'namespace' => 'Settings'], function() {
