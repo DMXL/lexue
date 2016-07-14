@@ -6,7 +6,6 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>所有课程</h5>
-                    </div>
                 </div>
                 <div class="ibox-content">
 
