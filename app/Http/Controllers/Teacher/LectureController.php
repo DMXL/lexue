@@ -9,6 +9,16 @@ use App\Http\Controllers\Controller;
 
 class LectureController extends Controller
 {
+    private $teacher;
+
+    /**
+     * LectureController constructor.
+     */
+    public function __construct()
+    {
+        $this->teacher = authUser();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +26,11 @@ class LectureController extends Controller
      */
     public function index()
     {
-        //
+        $lectures = $this->teacher->lectures()->orderByLatest()->paginate();
+
+        $lectures->load('student');
+
+        return backendView('backend.teachers.lectures.index', compact('lectures'));
     }
 
     /**

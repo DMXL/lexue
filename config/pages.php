@@ -8,6 +8,9 @@
 
 return [
     'teachers' => [
+        'lectures.index' => [
+            'title' => '课程',
+        ],
         'settings.index' => [
             'title' => '设置',
             'children' => [

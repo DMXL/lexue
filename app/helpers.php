@@ -192,7 +192,15 @@ function backendView($path, $data = [])
 
 function isPageActive($route)
 {
-    $activeRoutes = \Page::bct()->pluck('route');
+    if ($bct = \Page::bct()) {
+        $activeRoutes = $bct->pluck('route');
+        return $activeRoutes->contains($route);
+    }
 
-    return $activeRoutes->contains($route);
+    return false;
+}
+
+function humanDate($timestamp)
+{
+    return Date::parse($timestamp)->format('Fj\\号, l, h:i A');
 }

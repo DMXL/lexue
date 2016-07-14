@@ -35,7 +35,7 @@
                             @endif
                         </td>
                         <td>
-                            {{ Date::parse($lecture->start_at)->format('Fj\\号, l, h:i A') }}
+                            {{ humanDate($lecture->start_at) }}
                         </td>
                         <td class="text-left">
                             @if($lecture->single)

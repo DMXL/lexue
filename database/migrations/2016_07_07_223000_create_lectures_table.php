@@ -23,7 +23,7 @@ class CreateLecturesTable extends Migration
 
             $table->boolean('complete')->default(false);
 
-            $table->boolean('single')->default(false);
+            $table->boolean('single')->default(true);
 
             $table->timestamp('start_at');
 
