@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 
 class LevelsTableSeeder extends Seeder
 {
-    private $sample = ['早教','小学','初中','高中','大学','Chinglish'];
+    private $sample = ['一年级','二年级','三年级','四年级','五年级','六年级','七年级','八年级','九年级'];
 
     /**
      * Run the database seeds.
