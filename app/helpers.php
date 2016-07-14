@@ -127,16 +127,6 @@ function authCheck()
 }
 
 /**
- * Check if environment is local
- *
- * @return bool
- */
-function isLocal()
-{
-    return App::environment() === 'local';
-}
-
-/**
  * "backend" for teachers and admins
  * "wechat" for student views
  * "frontend" as a fallback for students

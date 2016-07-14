@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $app = $this->app;
 
-        if (isLocal()) {
+        if (\App::environment() === 'local') {
             $app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
             $app->register(\Barryvdh\Debugbar\ServiceProvider::class);
         }
