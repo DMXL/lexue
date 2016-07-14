@@ -133,9 +133,7 @@ function authCheck()
  */
 function isLocal()
 {
-    $env = App::environment();
-
-    return $env !== 'staging' AND $env !== 'production';
+    return App::environment() === 'local';
 }
 
 /**
