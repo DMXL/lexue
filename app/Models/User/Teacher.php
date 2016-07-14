@@ -26,7 +26,7 @@ class Teacher extends Authenticatable
     protected $appends = [
         'years_of_teaching'
     ];
-    
+
     /*
     |--------------------------------------------------------------------------
     | Relations
