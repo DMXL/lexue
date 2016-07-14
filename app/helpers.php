@@ -204,3 +204,8 @@ function humanDate($timestamp)
 {
     return Date::parse($timestamp)->format('Fj\\号, l, h:i A');
 }
+
+function yearsOfTeaching($teachingSince)
+{
+    return date('Y') - date('Y', strtotime($teachingSince));
+}
