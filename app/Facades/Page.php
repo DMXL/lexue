@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: veoc
  * Date: 14/07/16
- * Time: 11:10 AM
+ * Time: 11:15 AM
  */
 
 namespace App\Facades;
@@ -11,7 +11,7 @@ namespace App\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Duobeiyun extends Facade
+class Page extends Facade
 {
-    protected static function getFacadeAccessor() { return 'duobeiyun'; }
+    protected static function getFacadeAccessor() { return 'page'; }
 }

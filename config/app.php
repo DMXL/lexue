@@ -172,7 +172,7 @@ return [
         /*
          * Custom Service Providers
          */
-        App\Providers\DuobeiyunServiceProvider::class,
+
 
         /*
          * Application Service Providers...
@@ -238,6 +238,7 @@ return [
          * Custom Facades
          */
         'Duobeiyun' => App\Facades\Duobeiyun::class,
+        'Page' => \App\Facades\Page::class,
 
         /*
          * Third party

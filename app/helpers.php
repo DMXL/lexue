@@ -191,3 +191,11 @@ function frontendView($path, $data = [])
 
     return view('frontend.' . $path, $data);
 }
+
+function backendView($path, $data = [])
+{
+    $data['title'] = \Page::title();
+    $data['bct'] = \Page::bct();
+
+    return view($path, $data);
+}

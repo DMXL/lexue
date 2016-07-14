@@ -15,7 +15,7 @@ class CreateLecturesTable extends Migration
         Schema::create('lectures', function (Blueprint $table) {
             $table->increments('id');
             
-            $table->unsignedInteger('student_id');
+            $table->unsignedInteger('student_id')->nullable();
             $table->foreign('student_id')->references('id')->on('students');
 
             $table->unsignedInteger('teacher_id');
@@ -23,9 +23,11 @@ class CreateLecturesTable extends Migration
 
             $table->boolean('complete')->default(false);
 
+            $table->boolean('single')->default(false);
+
             $table->timestamp('start_at');
 
-            $table->unique(['student_id', 'teacher_id', 'start_at']);
+            $table->unique(['teacher_id', 'start_at']);
             
             $table->timestamps();
         });

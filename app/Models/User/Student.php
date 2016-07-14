@@ -30,8 +30,13 @@ class Student extends Authenticatable
     | Relations
     |--------------------------------------------------------------------------
     */
-    public function Lectures()
+    public function singleLectures()
     {
         return $this->hasMany(Lecture::class);
+    }
+
+    public function multiLectures()
+    {
+        return $this->belongsToMany(Lecture::class);
     }
 }

@@ -11,6 +11,6 @@ class MainController extends Controller
 {
     public function index()
     {
-        return view('backend.teachers.home');
+        return backendView('backend.teachers.home');
     }
 }

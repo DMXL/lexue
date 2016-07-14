@@ -38,6 +38,13 @@
                             {{ Date::parse($lecture->start_at)->format('Fj\\号, l, h:i A') }}
                         </td>
                         <td class="text-left">
+                            @if($lecture->single)
+                                <span class="badge badge-primary">一对一</span>
+                            @else
+                                <span class="badge badge-warning">一对多</span>
+                            @endif
+                        </td>
+                        <td class="text-left">
                             <a href="{{ route('students::teachers.show', $lecture->teacher_id) }}">{{ $lecture->teacher->name }}</a>
                         </td>
                         <td class="project-actions">

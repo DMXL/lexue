@@ -33,13 +33,8 @@
                 <h2>{{ isset($title) ? $title : userTypeCn() . "后台" }}</h2>
                 <ol class="breadcrumb">
                     <li><a href="{{ url('/') }}">{{ userTypeCn() }}后台</a></li>
-                    @if(isset($bct))
-                        @each('partials.bct', $bct, 'link')
-                    @endif
-                    @if(isset($title))
-                    <li class="active">
-                        <strong>{{ $title }}</strong>
-                    </li>
+                    @if($bct = \Page::bct())
+                        @each('backend.partials.bct', $bct, 'node')
                     @endif
                 </ol>
             </div>

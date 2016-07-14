@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\PageGenerator;
+use App\Services\Duobeiyun\DuobeiyunApi;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,6 +30,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Duobeiyun
+        $this->app->singleton('duobeiyun', function() {
+            return new DuobeiyunApi();
+        });
+
+        // BCT Generator
+        $this->app->singleton('page', function() {
+            return new PageGenerator();
+        });
     }
 }

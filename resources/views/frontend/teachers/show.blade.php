@@ -5,7 +5,7 @@
         没有找到该老师的信息
     @endunless
 
-    <div class="row">
+    <div class="row" xmlns:v-on="http://www.w3.org/1999/xhtml">
         <div class="col-lg-3">
             <div class="ibox">
                 <div class="ibox-content no-background">
@@ -43,13 +43,13 @@
                                 @foreach($day as $hourKey => $time)
                                 <?php $disabled = $time['disabled'] ?>
                                 <div class="col-md-3 col-sm-6"{{ $disabled ? " disabled=disabled" : null }}>
-                                    <div class="radio radio-info">
-                                        <input type="radio" name="time"
-                                               id="radio-{{ $dayKey }}-{{ $hourKey }}"
+                                    <div class="checkbox checkbox-primary">
+                                        <input type="checkbox" name="times[]"
+                                               id="checkbox-{{ $dayKey }}-{{ $hourKey }}"
                                                value="{{ $time['time'] }}"{{ $disabled ? " disabled=disabled" : null }}
-                                                v-model="picked"
+                                               v-model="picked"
                                         >
-                                        <label for="radio-{{ $dayKey }}-{{ $hourKey }}">
+                                        <label for="checkbox-{{ $dayKey }}-{{ $hourKey }}">
                                         <?php $hour = $time['time']->hour ?>
                                         @if($disabled)
                                             <s>{{ $hour }}:00 - {{ $hour + 1 }}:00</s>
@@ -61,16 +61,34 @@
                                 </div>
                                 @endforeach
                             </div>
-                                <hr>
+
                             <div class="row">
                                 <div class="col-lg-12">
                                     @if(authCheck())
-                                    <div class="input-group">
-                                    <span class="input-group-addon">选择的课时</span>
-                                    <input type="text" class="form-control" :value="picked ? time : ''" readonly>
-                                    <span class="input-group-btn">
-                                        <button type="submit" class="btn btn-primary">购买</button>
-                                    </span>
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-title">
+                                            <h5 class="inline">选择的课程</h5>
+                                        </div>
+
+                                        <div class="ibox-content">
+                                            <div class="row">
+                                                <div class="col-md-6" v-if="selections.length" v-for="item in selections | orderBy 'time'">
+                                                    <div class="alert alert-success">
+                                                        <button class="close" type="button" v-on:click="unselect(item.time)">×</button>
+                                                        @{{ item.translation }}
+                                                    </div>
+                                                </div>
+                                                <div class="alert alert-danger" v-if="!selections.length">
+                                                    还未添加任何课程
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="ibox-footer">
+                                            <span class="pull-right">
+                                                <button type="submit" class="btn btn-primary btn-sm pull-right">确认购买</button>
+                                            </span>
+                                        </div>
                                     </div>
                                     @else
                                         <div class="text-right">
@@ -97,16 +115,27 @@
         new Vue({
             el: '#time-table',
             data: {
-                picked: ""
+                picked: []
             },
             computed: {
-                time() {
-                    var date = new Date(this.picked);
-                    var options = {
-                        weekday: "long", year: "numeric", month: "short",
-                        day: "numeric", hour: "2-digit", minute: "2-digit"
-                    };
-                    return date.toLocaleTimeString("zh-CN", options);
+                selections() {
+                    return this.picked.map(function(selection){
+                        var date = new Date(selection);
+                        var options = {
+                            weekday: "long", year: "numeric", month: "short",
+                            day: "numeric", hour: "2-digit", minute: "2-digit"
+                        };
+                        return {
+                            time: selection,
+                            translation: date.toLocaleTimeString("zh-CN", options)
+                        };
+                    })
+                }
+            },
+            methods: {
+                unselect(time) {
+                    // trigger click on the checkbox
+                    $("input[value='" + time + "'] + label").click();
                 }
             }
         })

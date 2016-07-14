@@ -1,6 +1,4 @@
-@extends('backend.layouts.app', [
-    'title' => '设置'
-])
+@extends('backend.layouts.app')
 
 @section('content')
     {{ $teacher->name }}

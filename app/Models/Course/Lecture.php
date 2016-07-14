@@ -2,6 +2,7 @@
 
 namespace App\Models\Course;
 
+use App\Models\User\Student;
 use App\Models\User\Teacher;
 use App\Scopes\Local\NextDaysTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -27,6 +28,16 @@ class Lecture extends Model
     public function teacher()
     {
         return $this->belongsTo(Teacher::class);
+    }
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class);
     }
 
     /*
