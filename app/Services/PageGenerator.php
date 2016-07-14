@@ -81,14 +81,14 @@ class PageGenerator
     private function buildNodes($config)
     {
         foreach ($config as $route => $node) {
-            if (isset($node['children'])) {
+            if ($this->routeNameSpace . '::' . $route === $this->routeName) {
+                return $this->buildNode($this->routeName, $node['title']);
+            } elseif (isset($node['children'])) {
                 $children = $node['children'];
 
                 if ($newNodes = $this->buildNodes($children)) {
                     return $this->buildNode($this->routeNameSpace . '::' . $route, $node['title'], $newNodes);
                 }
-            } elseif ($this->routeNameSpace . '::' . $route === $this->routeName) {
-                return $this->buildNode($this->routeName, $node['title']);
             } else {
                 return null;
             }

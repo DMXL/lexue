@@ -11,6 +11,8 @@ class MainController extends Controller
 {
     public function index()
     {
-        
+        $teacher = authUser();
+
+        return backendView('backend.teachers.settings.index', compact('teacher'));
     }
 }
