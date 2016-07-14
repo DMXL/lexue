@@ -22,6 +22,10 @@ class Teacher extends Authenticatable
     protected $dates = ['created_at', 'updated_at', 'teaching_since'];
 
     protected $with = ['levels', 'labels'];
+
+    protected $appends = [
+        'years_of_teaching'
+    ];
     
     /*
     |--------------------------------------------------------------------------
@@ -47,12 +51,30 @@ class Teacher extends Authenticatable
     {
         return $this->hasMany(OffTime::class);
     }
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
+    public function getYearsOfTeachingAttribute()
+    {
+        $teachingSince = $this->teaching_since ? : null;
+
+        if ($teachingSince) {
+            return Carbon::now()->diffInYears($teachingSince);
+        }
+
+        return null;
+    }
 
     /*
     |--------------------------------------------------------------------------
     | Computed properties
     |--------------------------------------------------------------------------
     */
+
+    // TODO change name
     public function getUnavailabilities()
     {
         $unavailabilities = [];

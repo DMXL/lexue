@@ -28,6 +28,7 @@ $factory->define(App\Models\User\Teacher::class, function (Faker\Generator $fake
         'email' => $faker->safeEmail,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
+        'teaching_since' => $faker->dateTime,
         'description' => ChineseFaker::text()
     ];
 });

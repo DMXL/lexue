@@ -17,8 +17,14 @@ class PageGenerator
 
     private $routeNameSpace;
 
+    /**
+     * @var \Illuminate\Support\Collection
+     */
     private $bct;
 
+    /**
+     * @var string
+     */
     private $title;
 
     /**
@@ -37,11 +43,17 @@ class PageGenerator
         $this->generate();
     }
 
+    /**
+     * @return string
+     */
     public function title()
     {
         return $this->title;
     }
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public function bct()
     {
         return $this->bct;

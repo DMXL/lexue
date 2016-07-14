@@ -1,0 +1,130 @@
+/*
+ *
+ *
+ *   ______                        _____           __
+ *  /_  __/__  ____ _____ ___     / ___/__  ______/ /___
+ *   / / / _ \/ __ `/ __ `__ \    \__ \/ / / / __  / __ \
+ *  / / /  __/ /_/ / / / / / /   ___/ / /_/ / /_/ / /_/ /
+ * /_/  \___/\__,_/_/ /_/ /_/   /____/\__,_/\__,_/\____/
+ *
+ *
+ *
+ * Filename->lewe.css
+ * Project->lexue
+ * Description->The stylesheet that modifies weui.css
+ *
+ * Created by DM on 16/7/15 上午0:03.
+ * Copyright 2016 Team Sudo. All rights reserved.
+ *
+ */
+
+/*
+|--------------------------------------------------------------------------
+| COMMON STYLES
+|--------------------------------------------------------------------------
+*/
+
+/* Card-like Panel Style */
+.lewe_panel.weui_panel {
+    background-color: #f4f4f4;
+}
+.lewe_panel .weui_panel_hd {
+    background-color: #fff;
+    /* box-shadow: 0 1px 2px rgba(0,0,0,.3); */
+}
+.lewe_panel .weui_panel_hd:after {
+    left: 0;
+}
+.lewe_panel .weui_media_box {
+    padding: 15px;
+}
+.lewe_panel .weui_media_box:before {
+    left: 0;
+    border-top: none;
+}
+.lewe_panel .weui_media_box.weui_media_appmsg {
+    margin: 15px;
+    background-color: #fff;
+    border-radius: 1px;
+    /* box-shadow: 0 1px 2px rgba(0,0,0,.3); */
+}
+.lewe_panel .weui_media_box.weui_media_appmsg .weui_media_hd {
+    margin-right: 15px;
+}
+.lewe_panel .weui_media_box.weui_media_appmsg .weui_media_appmsg_thumb {
+    border-radius: 50%;
+}
+.lewe_panel .weui_media_box.weui_media_appmsg .weui_media_bd h4 {
+    margin: 0;
+}
+.lewe_panel .weui_media_box .weui_media_desc {
+    line-height: 1.5;
+    overflow: auto;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+/* Badges Style */
+.badge {
+    font-size: 13px;
+    line-height: 1;
+    white-space: nowrap;
+    text-align: center;
+    display: inline-block;
+    cursor: default;
+    min-width: 30px;
+    padding: 3px 5px;
+    background: #e6e6e6;
+    border-radius: 0;
+    color: #333;
+}
+.badge.primary {
+    background: #0e90d2;
+    border-radius: 0;
+    color: #fff;
+}
+.badge.secondary {
+    background: #3bb4f2;
+    border-radius: 0;
+    color: #fff;
+}
+.badge.success {
+    background: #5eb95e;
+    border-radius: 0;
+    color: #fff;
+}
+.badge.warning {
+    background: #f37b1d;
+    border-radius: 0;
+    color: #fff;
+}
+.badge.alert {
+    background: #dd514c;
+    border-radius: 0;
+    color: #fff;
+}
+.badge.dark {
+    background: #393939;
+    border-radius: 0;
+    color: #fff;
+}
+
+/*
+|--------------------------------------------------------------------------
+| PAGE STYLES
+|--------------------------------------------------------------------------
+*/
+
+/* Teachers Page */
+.teachers_pricetag {
+    color: #fff;
+    background-color: #85bb65;
+    font-size: 16px;
+    padding: 2px 3px;
+    margin-top: -7px;
+    position: absolute;
+    right: -2px;
+}
+.teachers_badgegroup {
+    margin-top: 3px;
+}

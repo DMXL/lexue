@@ -190,6 +190,10 @@ function backendView($path, $data = [])
     return view($path, $data);
 }
 
+/**
+ * @param $route
+ * @return bool
+ */
 function isPageActive($route)
 {
     if ($bct = \Page::bct()) {
@@ -200,11 +204,25 @@ function isPageActive($route)
     return false;
 }
 
+/**
+ * Convert Carbon timestamps to Chinese human readable format
+ * TODO this package is quite limited. Need to write own formatter.
+ *
+ * @param $timestamp
+ * @return string
+ */
 function humanDate($timestamp)
 {
     return Date::parse($timestamp)->format('Fj\\号, l, h:i A');
 }
 
+/**
+ * Generate absolute path to route file given the file name
+ * All route files are stored in app\Http\Routes
+ *
+ * @param $file
+ * @return string
+ */
 function routeFile($file)
 {
     return app_path('Http' . DIRECTORY_SEPARATOR . 'Routes' . DIRECTORY_SEPARATOR . $file);
