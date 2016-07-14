@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
 
                 AdminsTableSeeder::class,
             ];
-        } elseif (\App::environment() === 'local') {
+        } elseif (\App::environment() === 'staging') {
             $this->seeders = [
                 StudentsTableSeeder::class,
 
