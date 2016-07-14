@@ -29,7 +29,7 @@
 
         @unless(isset($noHeading))
         <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-sm-4">
+            <div>
                 <h2>{{ isset($title) ? $title : userTypeCn() . "后台" }}</h2>
                 <ol class="breadcrumb">
                     <li><a href="{{ url('/') }}">{{ userTypeCn() }}后台</a></li>

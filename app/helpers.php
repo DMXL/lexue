@@ -199,3 +199,10 @@ function backendView($path, $data = [])
 
     return view($path, $data);
 }
+
+function isPageActive($route)
+{
+    $activeRoutes = \Page::bct()->pluck('route');
+
+    return $activeRoutes->contains($route);
+}

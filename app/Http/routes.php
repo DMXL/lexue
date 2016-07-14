@@ -15,6 +15,22 @@ Route::group(['domain' => appDomain()], function() {
 
 /*
 |--------------------------------------------------------------------------
+| Log viewer routes
+|--------------------------------------------------------------------------
+*/
+Route::get('all', ['domain' => appDomain('logs'), 'uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index']);
+
+/*
+|--------------------------------------------------------------------------
+| Wechat routes
+|--------------------------------------------------------------------------
+*/
+Route::group(['domain' => appDomain('wechat')], function() {
+    include app_path('Http' . DIRECTORY_SEPARATOR . 'Routes' . DIRECTORY_SEPARATOR . 'wechat.php');
+});
+
+/*
+|--------------------------------------------------------------------------
 | Authentication routes
 |--------------------------------------------------------------------------
 */
@@ -48,12 +64,12 @@ Route::group(['domain' => '{user_type}.' . appDomain(), 'as' => 'auth::'], funct
  */
 /* Web */
 Route::group(['domain' =>  appDomain('students'), 'as' => 'students::', 'namespace' => 'Student', 'middlewareGroups' => 'web'], function() {
-    include app_path('Routes' . DIRECTORY_SEPARATOR . 'students.php');
+    include app_path('Http' . DIRECTORY_SEPARATOR . 'Routes' . DIRECTORY_SEPARATOR . 'students.php');
 });
 
 /* weChat */
 Route::group(['domain' =>  appDomain('m.students'), 'as' => 'wechat::', 'namespace' => 'Student', 'middlewareGroups' => 'web'], function() {
-    include app_path('Routes' . DIRECTORY_SEPARATOR . 'students.php');
+    include app_path('Http' . DIRECTORY_SEPARATOR . 'Routes' . DIRECTORY_SEPARATOR . 'students.php');
 });
 
 
@@ -69,6 +85,8 @@ Route::group(['domain' =>  appDomain('teachers'), 'as' => 'teachers::', 'namespa
         Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
         Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
     });
+
+    Route::resource('lectures', 'LectureController');
 });
 
 /**

@@ -1,4 +1,4 @@
-@extends('backend.layouts.blank')
+@extends('frontend.layouts.blank')
 
 @section('content')
     <div>

@@ -11,7 +11,7 @@ class MainController extends Controller
 {
     public function index()
     {
-        
+        return frontendView('home');
     }
 
     public function profile()
