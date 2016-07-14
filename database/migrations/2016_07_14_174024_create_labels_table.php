@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLevelsTable extends Migration
+class CreateLabelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,10 @@ class CreateLevelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('levels', function (Blueprint $table) {
+        Schema::create('labels', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('name');
-            $table->unsignedInteger('order');
         });
     }
 
@@ -27,6 +26,6 @@ class CreateLevelsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('levels');
+        Schema::drop('labels');
     }
 }

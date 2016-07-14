@@ -3,7 +3,8 @@
 namespace App\Models\User;
 
 use App\Models\Course\Lecture;
-use App\Models\Course\Level;
+use App\Models\Teacher\Level;
+use App\Models\Teacher\Label;
 use App\Models\Teacher\OffTime;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -20,7 +21,7 @@ class Teacher extends Authenticatable
 
     protected $dates = ['created_at', 'updated_at', 'teaching_since'];
 
-    protected $with = ['levels'];
+    protected $with = ['levels', 'labels'];
     
     /*
     |--------------------------------------------------------------------------
@@ -30,6 +31,11 @@ class Teacher extends Authenticatable
     public function levels()
     {
         return $this->belongsToMany(Level::class);
+    }
+
+    public function labels()
+    {
+        return $this->belongsToMany(Label::class);
     }
 
     public function lectures()

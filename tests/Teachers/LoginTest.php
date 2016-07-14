@@ -3,13 +3,17 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\Teachers\TeacherTestCase;
 
-class LoginTest extends TestCase
+class LoginTest extends TeacherTestCase
 {
+    /**
+     * Test the login redirect
+     */
     public function testLoginRedirect()
     {
         $this->visit('/')
-            ->assertRedirectedTo('login');
+            ->seePageIs('/login');
     }
 
     /**

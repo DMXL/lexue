@@ -204,3 +204,8 @@ function humanDate($timestamp)
 {
     return Date::parse($timestamp)->format('Fj\\号, l, h:i A');
 }
+
+function routeFile($file)
+{
+    return app_path('Http' . DIRECTORY_SEPARATOR . 'Routes' . DIRECTORY_SEPARATOR . $file);
+}

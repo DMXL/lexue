@@ -26,7 +26,7 @@ Route::get('all', ['domain' => appDomain('logs'), 'uses' => '\Rap2hpoutre\Larave
 |--------------------------------------------------------------------------
 */
 Route::group(['domain' => appDomain('wechat')], function() {
-    include app_path('Http' . DIRECTORY_SEPARATOR . 'Routes' . DIRECTORY_SEPARATOR . 'wechat.php');
+    include routeFile('wechat.php');
 });
 
 /*
@@ -36,21 +36,7 @@ Route::group(['domain' => appDomain('wechat')], function() {
 */
 
 Route::group(['domain' => '{user_type}.' . appDomain(), 'as' => 'auth::'], function(){
-    /**
-     * Auth routes
-     */
-    $this->get('login', ['as' => 'login.get', 'uses' => 'Auth\AuthController@showLoginForm']);
-    $this->post('login', ['as' => 'login.post', 'uses' => 'Auth\AuthController@login']);
-    $this->get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@logout']);
-
-    // Registration Routes...
-    $this->get('register', ['as' => 'register.get', 'uses' => 'Auth\AuthController@showRegistrationForm']);
-    $this->post('register', ['as' => 'register.post', 'uses' => 'Auth\AuthController@register']);
-
-    // Password Reset Routes...
-    $this->get('password/reset/{token?}', ['as' => 'reset.get', 'uses' => 'Auth\PasswordController@showResetForm']);
-    $this->post('password/email', ['as' => 'reset.email', 'uses' => 'Auth\PasswordController@sendResetLinkEmail']);
-    $this->post('password/reset', ['as' => 'reset.post', 'uses' => 'Auth\PasswordController@reset']);
+    include routeFile('auth.php');
 });
 
 /*
@@ -59,35 +45,65 @@ Route::group(['domain' => '{user_type}.' . appDomain(), 'as' => 'auth::'], funct
 |--------------------------------------------------------------------------
 */
 
-/**
+/*
  * Student specific routes
  */
 /* Web */
-Route::group(['domain' =>  appDomain('students'), 'as' => 'students::', 'namespace' => 'Student', 'middlewareGroups' => 'web'], function() {
-    include app_path('Http' . DIRECTORY_SEPARATOR . 'Routes' . DIRECTORY_SEPARATOR . 'students.php');
-});
+Route::group(
+    [
+        'domain' =>  appDomain('students'),
+        'as' => 'students::',
+        'namespace' => 'Student',
+        'middlewareGroups' => 'web'
+    ],
+    function() {
+        include routeFile('students.php');
+    }
+);
 
 /* weChat */
-Route::group(['domain' =>  appDomain('m.students'), 'as' => 'wechat::', 'namespace' => 'Student', 'middlewareGroups' => 'web'], function() {
-    include app_path('Http' . DIRECTORY_SEPARATOR . 'Routes' . DIRECTORY_SEPARATOR . 'students.php');
-});
+Route::group(
+    [
+        'domain' =>  appDomain('m.students'),
+        'as' => 'wechat::',
+        'namespace' => 'Student',
+        'middlewareGroups' => 'web'
+    ],
+    function() {
+        include routeFile('students.php');
+    }
+);
 
 
-/**
+/*
  * Teacher specific routes
  */
-Route::group(['domain' =>  appDomain('teachers'), 'as' => 'teachers::', 'namespace' => 'Teacher', 'middleware' => ['web','auth:teachers']], function() {
-    Route::get('/', ['as' => 'home', 'uses' => 'MainController@index']);
+Route::group(
+    [
+        'domain' =>  appDomain('teachers'),
+        'as' => 'teachers::',
+        'namespace' => 'Teacher',
+        'middleware' => ['web','auth:teachers']
+    ],
+    function() {
+        include routeFile('teachers.php');
+    }
+);
 
-    Route::group(['prefix' => 'settings', 'as' => 'settings.', 'namespace' => 'Settings'], function() {
-        Route::get('/', ['as' => 'index', 'uses' => 'MainController@index']);
-
-        Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
-        Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
-    });
-
-    Route::resource('lectures', 'LectureController');
-});
+/*
+ * Admin specific routes
+ */
+Route::group(
+    [
+        'domain' =>  appDomain('admins'),
+        'as' => 'admins::',
+        'namespace' => 'Admin',
+        'middleware' => ['web','auth:admins']
+    ],
+    function() {
+        include routeFile('admins.php');
+    }
+);
 
 /**
  * Image routes

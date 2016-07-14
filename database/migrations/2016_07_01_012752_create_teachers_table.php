@@ -20,9 +20,6 @@ class CreateTeachersTable extends Migration
             $table->string('password');
             $table->rememberToken();
 
-            $table->string('intro')->nullable();
-            $table->string('degrees')->nullable();
-            $table->string('careers')->nullable();
             $table->text('description')->nullable();
             $table->timestamp('teaching_since')->nullable();
             $table->float('unit_price')->default(99);
