@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         /*
          * Configure each environment separately because order matters
          */
-        if (isLocal()) {
+        if (\App::environment() !== 'production') {
             $this->seeders = [
                 StudentsTableSeeder::class,
 
