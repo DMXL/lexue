@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Teacher\Settings;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
@@ -11,8 +11,6 @@ class MainController extends Controller
 {
     public function index()
     {
-        $teacher = authUser();
-
-        return $this->backendView('backend.teachers.settings.index', compact('teacher'));
+        return $this->backendView('backend.admins.home');
     }
 }

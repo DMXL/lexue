@@ -11,11 +11,11 @@ class MainController extends Controller
 {
     public function index()
     {
-        return frontendView('home');
+        return $this->frontendView('home');
     }
 
     public function profile()
     {
-        return frontendView('profile');
+        return $this->frontendView('profile');
     }
 }

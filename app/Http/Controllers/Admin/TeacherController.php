@@ -1,24 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Teacher;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class LectureController extends Controller
+class TeacherController extends Controller
 {
-    private $teacher;
-
-    /**
-     * LectureController constructor.
-     */
-    public function __construct()
-    {
-        $this->teacher = authUser();
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -26,11 +16,7 @@ class LectureController extends Controller
      */
     public function index()
     {
-        $lectures = $this->teacher->lectures()->orderByLatest()->paginate();
-
-        $lectures->load('student');
-
-        return $this->backendView('backend.teachers.lectures.index', compact('lectures'));
+        return $this->backendView('backend.admins.teachers.index');
     }
 
     /**
@@ -40,7 +26,7 @@ class LectureController extends Controller
      */
     public function create()
     {
-        //
+        return $this->backendView('backend.admins.teachers.create');
     }
 
     /**
@@ -51,7 +37,7 @@ class LectureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -62,7 +48,7 @@ class LectureController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this->backendView('backend.admins.teachers.show');
     }
 
     /**
@@ -73,7 +59,7 @@ class LectureController extends Controller
      */
     public function edit($id)
     {
-        //
+        return $this->backendView('backend.admins.teachers.edit');
     }
 
     /**

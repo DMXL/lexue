@@ -27,6 +27,8 @@ class PageGenerator
      */
     private $title;
 
+    private $menu;
+
     /**
      * BctGenerator constructor.
      */
@@ -60,6 +62,14 @@ class PageGenerator
     }
 
     /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function menu()
+    {
+        return $this->menu;
+    }
+
+    /**
      * Generate page meta
      */
     public function generate()
@@ -68,38 +78,45 @@ class PageGenerator
             return null;
         }
 
-        // find page structure config
-        if (! $config = config('pages.' . $this->routeNameSpace)) {
-            return null;
-        }
+        /* Generate bct */
+        $this->generateBct();
 
-        /* set bct */
-        $this->bct = $this->buildNodes($config);
+        $this->generateMenu();
 
-        /* set title */
+        /* Generate title */
         if ($this->bct) {
             $endNode = $this->bct->last();
             if (isset($endNode['end']) AND $endNode['end']) {
                 $this->title = $endNode['title'];
             }
         }
+    }
 
+    private function generateBct()
+    {
+        // find bct structure config
+        if (! $config = config('pages.bct.' . $this->routeNameSpace)) {
+            return null;
+        }
+
+        /* generate bct */
+        $this->bct = $this->buildBctNodes($config);
     }
 
     /**
      * @param $config
      * @return Collection|null
      */
-    private function buildNodes($config)
+    private function buildBctNodes($config)
     {
-        foreach ($config as $route => $node) {
-            if ($this->routeNameSpace . '::' . $route === $this->routeName) {
-                return $this->buildNode($this->routeName, $node['title']);
+        foreach ($config as $node) {
+            if ($this->fullRoute($node['route']) === $this->routeName) {
+                return $this->buildBctNode($this->routeName, $node['title']);
             } elseif (isset($node['children'])) {
                 $children = $node['children'];
 
-                if ($newNodes = $this->buildNodes($children)) {
-                    return $this->buildNode($this->routeNameSpace . '::' . $route, $node['title'], $newNodes);
+                if ($newNodes = $this->buildBctNodes($children)) {
+                    return $this->buildBctNode($this->fullRoute($node['route']), $node['title'], $newNodes);
                 }
             } else {
                 return null;
@@ -115,7 +132,7 @@ class PageGenerator
      * @param array $newNodes
      * @return Collection
      */
-    private function buildNode($route, $title, $newNodes = [])
+    private function buildBctNode($route, $title, $newNodes = [])
     {
         $selfNode = [
             'route' => $route,
@@ -128,5 +145,58 @@ class PageGenerator
         }
 
         return collect($newNodes)->prepend($selfNode);
+    }
+
+    private function generateMenu()
+    {
+        // find bct structure config
+        if (! $config = config('pages.menu.' . $this->routeNameSpace)) {
+            return null;
+        }
+
+        $config = $this->prepareMenuDate($config);
+
+        /* generate bct */
+        $this->menu = $this->buildMenuNodes($config);
+    }
+
+    private function buildMenuNodes($menu)
+    {
+        foreach ($menu as $key => $node) {
+            if (isset($node['children'])) {
+                $menu[$key]['active'] = collect($node['children'])->flatten()->search($this->routeName, true);
+                $menu[$key]['children'] = $this->buildMenuNodes($node['children']);
+            } elseif (isset($node['route'])) {
+                $menu[$key]['active'] = $node['route'] === $this->routeName;
+            }
+        }
+
+        return $menu;
+    }
+
+    private function prepareMenuDate($config)
+    {
+        // prepare data
+        foreach ($config as $key => $node) {
+            if (isset($node['route'])) {
+                $config[$key]['route'] = $this->fullRoute($node['route']);
+            }
+            $config[$key]['active'] = false;
+
+            if (isset($node['children'])) {
+                $config[$key]['children'] = $this->prepareMenuDate($node['children']);
+            }
+        }
+
+        return $config;
+    }
+
+    private function fullRoute($route)
+    {
+        if ($this->routeNameSpace) {
+            return $this->routeNameSpace . '::' . $route;
+        }
+
+        return $route;
     }
 }

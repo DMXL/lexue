@@ -1,10 +1,8 @@
 <?php
     $children = isset($node['children']) ? $node['children'] : null;
-    $userType = userType();
 ?>
-<?php $route = $userType . '::' . $key ?>
-<li class="{{ isPageActive($route) ? "active" : '' }}">
-    <a href="{{ route($route) }}">
+<li class="{{ $node['active'] ? "active" : '' }}">
+    <a href="{{ isset($node['route']) ? route($node['route']) : '#' }}">
         <i class="fa fa-th-large"></i> <span class="nav-label">{{ $node['title'] }}</span>
         @if($children)
         <span class="fa arrow"></span>
@@ -12,9 +10,8 @@
     </a>
     @if($children)
     <ul class="nav nav-second-level collapse">
-        @foreach($children as $route => $child)
-        <?php $route = $userType . '::' . $route ?>
-        <li class="{{ isPageActive($route) ? 'active' : '' }}"><a href="{{ route($route) }}">{{ $child['title'] }}</a></li>
+        @foreach($children as $child)
+        <li class="{{ $child['active'] ? 'active' : '' }}"><a href="{{ route($child['route']) }}">{{ $child['title'] }}</a></li>
         @endforeach
     </ul>
     @endif

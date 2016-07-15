@@ -164,33 +164,6 @@ function getAvatar($url, $preset)
 }
 
 /**
- * This automatically determines if 'wechat' or 'web' views need to be used
- *
- * @param $path
- * @param array $data
- * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
- */
-function frontendView($path, $data = [])
-{
-    /* sanitize */
-    $path = preg_replace('/^(frontend|wechat)\./', '', $path);
-
-    if (isWechat()) {
-        return view('wechat.' . $path, $data);
-    }
-
-    return view('frontend.' . $path, $data);
-}
-
-function backendView($path, $data = [])
-{
-    $data['title'] = \Page::title();
-    $data['bct'] = \Page::bct();
-
-    return view($path, $data);
-}
-
-/**
  * @param $route
  * @return bool
  */
