@@ -25,14 +25,14 @@
         <div class="weui_panel_bd">
 
             @foreach($teachers as $teacher)
-                <a href="{{ route('students::teachers.show', $teacher->id) }}" class="weui_media_box weui_media_appmsg">
+                <a href="{{ route('students::teachers.show', $teacher->id) }}" data-transition="slidefade" class="weui_media_box weui_media_appmsg">
                     <div class="weui_media_hd">
                         <img class="weui_media_appmsg_thumb" src="{{ getAvatar($teacher->avatar, 'sm') }}" alt="{{ $teacher->name }}">
                     </div>
                     <div class="weui_media_bd">
                         <span class="teachers_pricetag">￥{{ $teacher->unit_price }}.00/时</span>
                         <h4 class="weui_media_title">{{ $teacher->name }}</h4>
-                        <p class="weui_media_desc">{{ $teacher->years_of_teaching) }}年教龄&nbsp;&nbsp;授课年级: {{ $teacher->levels->implode('name', ',') }}</p>
+                        <p class="weui_media_desc">{{ $teacher->years_of_teaching }}年教龄&nbsp;&nbsp;授课年级: {{ $teacher->levels->implode('name', ',') }}</p>
                         <div class="teachers_badgegroup">
                             <span class="badge primary">资格证</span><span class="badge secondary">学历</span>
                         </div>
