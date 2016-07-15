@@ -1,0 +1,1 @@
+<span class="label label-default">{{ $name }}</span>&nbsp;

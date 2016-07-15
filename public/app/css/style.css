@@ -7896,6 +7896,10 @@ body.md-skin {
 .no-background {
   background: transparent!important;
 }
+.vertical-middle,
+.vertical-middle td {
+  vertical-align: middle!important;
+}
 /*====== Forms ======*/
 .checkbox label input,
 .radio label input {

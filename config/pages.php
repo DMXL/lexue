@@ -61,7 +61,7 @@ return [
                 'route' => 'teachers.index'
             ],
             [
-                'title' => '课程',
+                'title' => '课程管理',
                 'route' => 'lectures.index'
             ],
         ],

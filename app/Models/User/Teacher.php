@@ -24,7 +24,10 @@ class Teacher extends Authenticatable
     protected $with = ['levels', 'labels'];
 
     protected $appends = [
-        'years_of_teaching'
+        'years_of_teaching',
+        'pretty_levels',
+        'pretty_labels',
+        'price'
     ];
 
     /*
@@ -62,10 +65,25 @@ class Teacher extends Authenticatable
         $teachingSince = $this->teaching_since ? : null;
 
         if ($teachingSince) {
-            return Carbon::now()->diffInYears($teachingSince);
+            return Carbon::now()->diffInYears($teachingSince) . '年';
         }
 
-        return null;
+        return '未填写';
+    }
+
+    public function getPriceAttribute()
+    {
+        return '￥' . number_format($this->getAttribute('unit_price'), 2);
+    }
+
+    public function getPrettyLevelsAttribute()
+    {
+        return implode(',', $this->levels->pluck('name')->toArray());
+    }
+
+    public function getPrettyLabelsAttribute()
+    {
+        return implode(',', $this->labels->pluck('name')->toArray());
     }
 
     /*

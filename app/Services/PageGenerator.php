@@ -160,6 +160,7 @@ class PageGenerator
         $this->menu = $this->buildMenuNodes($config);
     }
 
+    // TODO should be able to optimize the algorithm. this is nasty
     private function buildMenuNodes($menu)
     {
         foreach ($menu as $key => $node) {
