@@ -14,7 +14,7 @@
                     IN+
                 </div>
             </li>
-            @each('backend.partials.menu', config('pages.' . userType()), 'node')
+            @each('backend.partials.menu', $menu, 'node')
         </ul>
 
     </div>
