@@ -165,16 +165,22 @@ class PageGenerator
     {
         foreach ($menu as $key => $node) {
             if (!isset($node['title'])) {
-                return [];
-            } elseif (isset($node['children'])) {
-                $menu[$key]['active'] = collect($node['children'])->flatten()->search($this->routeName, true);
+                return false;
+            }
+
+            if (isset($node['route'])) {
+                $menu[$key]['active'] = $node['route'] === $this->routeName;
+            }
+
+            if (isset($node['children'])) {
+                if (!$menu[$key]['active']) {
+                    $menu[$key]['active'] = collect($node['children'])->flatten()->search($this->routeName, true) !== false;
+                }
                 if ($children = $this->buildMenuNodes($node['children'])) {
                     $menu[$key]['children'] = $children;
                 } else {
                     unset($menu[$key]['children']);
                 }
-            } elseif (isset($node['route'])) {
-                $menu[$key]['active'] = $node['route'] === $this->routeName;
             }
         }
 
