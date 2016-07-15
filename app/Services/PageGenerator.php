@@ -164,9 +164,15 @@ class PageGenerator
     private function buildMenuNodes($menu)
     {
         foreach ($menu as $key => $node) {
-            if (isset($node['children'])) {
+            if (!isset($node['title'])) {
+                return [];
+            } elseif (isset($node['children'])) {
                 $menu[$key]['active'] = collect($node['children'])->flatten()->search($this->routeName, true);
-                $menu[$key]['children'] = $this->buildMenuNodes($node['children']);
+                if ($children = $this->buildMenuNodes($node['children'])) {
+                    $menu[$key]['children'] = $children;
+                } else {
+                    unset($menu[$key]['children']);
+                }
             } elseif (isset($node['route'])) {
                 $menu[$key]['active'] = $node['route'] === $this->routeName;
             }

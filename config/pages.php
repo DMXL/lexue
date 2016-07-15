@@ -58,7 +58,16 @@ return [
         'admins' => [
             [
                 'title' => '教师管理',
-                'route' => 'teachers.index'
+                'route' => 'teachers.index',
+                'children' => [
+                    [
+                        'route' => 'teachers.create'
+                    ], [
+                        'route' => 'teachers.edit'
+                    ], [
+                        'route' => 'teachers.show'
+                    ]
+                ]
             ],
             [
                 'title' => '课程管理',

@@ -35,9 +35,9 @@
                                 <strong>教师教龄</strong>
                             </td>
                             <td>
-                                <p>
+                                <span>
                                     {{ $teacher->years_of_teaching }}
-                                </p>
+                                </span>
                             </td>
 
                         </tr>
@@ -46,9 +46,9 @@
                                 <strong>课时费用</strong>
                             </td>
                             <td>
-                                <p>
+                                <span>
                                     {{ $teacher->price }}
-                                </p>
+                                </span>
                             </td>
 
                         </tr>
@@ -57,9 +57,9 @@
                                 <strong>授课范围</strong>
                             </td>
                             <td>
-                                <p>
+                                <span>
                                     @each('backend.admins.partials.tag', $teacher->levels->pluck('name'), 'name')
-                                </p>
+                                </span>
                             </td>
 
                         </tr>
