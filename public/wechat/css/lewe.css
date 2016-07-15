@@ -50,9 +50,11 @@
 }
 .lewe_panel .weui_media_box.weui_media_appmsg .weui_media_hd {
     margin-right: 15px;
+    width: 20%;
 }
 .lewe_panel .weui_media_box.weui_media_appmsg .weui_media_appmsg_thumb {
     border-radius: 50%;
+    width: auto;
 }
 .lewe_panel .weui_media_box.weui_media_appmsg .weui_media_bd h4 {
     margin: 0;
