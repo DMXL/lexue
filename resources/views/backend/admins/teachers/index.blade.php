@@ -1,6 +1,14 @@
 @extends('backend.layouts.app')
 
 @section('content')
+    <div class="ibox">
+        <div class="ibox-content">
+            <a href="{{ route('admins::teachers.create') }}" class="btn btn-primary">
+                <i class="fa fa-plus"></i> 添加教师
+            </a>
+        </div>
+    </div>
+
     <div class="row">
     @foreach($teachers as $teacher)
         <div class="col-lg-3">

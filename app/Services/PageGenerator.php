@@ -164,7 +164,7 @@ class PageGenerator
     private function buildMenuNodes($menu)
     {
         foreach ($menu as $key => $node) {
-            if (!isset($node['title'])) {
+            if (isset($node['hidden']) AND $node['hidden']) {
                 return false;
             }
 

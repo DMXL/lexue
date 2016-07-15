@@ -30,7 +30,7 @@ class LectureController extends Controller
 
         $lectures->load('student');
 
-        return $this->backendView('backend.teachers.lectures.index', compact('lectures'));
+        return $this->backView('backend.teachers.lectures.index', compact('lectures'));
     }
 
     /**

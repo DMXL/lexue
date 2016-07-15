@@ -31,7 +31,7 @@ return [
                 'route' => 'teachers.index',
                 'children' => [
                     [
-                        'title' => '新建教师',
+                        'title' => '添加教师',
                         'route' => 'teachers.create'
                     ], [
                         'title' => '修改教师',
@@ -43,7 +43,7 @@ return [
                 'route' => 'lectures.index',
                 'children' => [
                     [
-                        'title' => '新建课程',
+                        'title' => '添加课程',
                         'route' => 'lectures.create'
                     ], [
                         'title' => '修改课程',
@@ -61,11 +61,17 @@ return [
                 'route' => 'teachers.index',
                 'children' => [
                     [
-                        'route' => 'teachers.create'
+                        'title' => '添加教师',
+                        'route' => 'teachers.create',
+                        'hidden' => true,
                     ], [
-                        'route' => 'teachers.edit'
+                        'title' => '修改教师',
+                        'route' => 'teachers.edit',
+                        'hidden' => true,
                     ], [
-                        'route' => 'teachers.show'
+                        'title' => '教师信息',
+                        'route' => 'teachers.show',
+                        'hidden' => true,
                     ]
                 ]
             ],

@@ -2,6 +2,14 @@
 
 @section('content')
     <div class="ibox">
+        <div class="ibox-content">
+            <a href="{{ route('admins::teachers.index') }}" class="btn btn-default">
+                <i class="fa fa-long-arrow-left"></i> 教师列表
+            </a>
+        </div>
+    </div>
+
+    <div class="ibox">
         <div class="ibox-title">
             <h5 class="no-margins vertical-middle">教师信息</h5>
             <div class="ibox-tools">

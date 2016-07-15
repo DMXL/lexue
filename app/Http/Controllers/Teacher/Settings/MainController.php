@@ -13,6 +13,6 @@ class MainController extends Controller
     {
         $teacher = authUser();
 
-        return $this->backendView('backend.teachers.settings.index', compact('teacher'));
+        return $this->backView('backend.teachers.settings.index', compact('teacher'));
     }
 }

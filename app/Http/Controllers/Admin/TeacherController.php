@@ -19,7 +19,7 @@ class TeacherController extends Controller
     {
         $teachers = Teacher::paginate();
 
-        return $this->backendView('backend.admins.teachers.index', compact('teachers'));
+        return $this->backView('backend.admins.teachers.index', compact('teachers'));
     }
 
     /**
@@ -29,7 +29,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return $this->backendView('backend.admins.teachers.create');
+        return $this->backView('backend.admins.teachers.create');
     }
 
     /**
@@ -53,7 +53,7 @@ class TeacherController extends Controller
     {
         $teacher = Teacher::find($id);
 
-        return $this->backendView('backend.admins.teachers.show', compact('teacher'));
+        return $this->backView('backend.admins.teachers.show', compact('teacher'));
     }
 
     /**
@@ -64,7 +64,7 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
-        return $this->backendView('backend.admins.teachers.edit');
+        return $this->backView('backend.admins.teachers.edit');
     }
 
     /**

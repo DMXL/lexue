@@ -13,5 +13,5 @@ class ProfileController extends Controller
     {
         $teacher = authUser();
 
-        return $this->backendView('backend.teachers.settings.profile', compact('teacher'));
+        return $this->backView('backend.teachers.settings.profile', compact('teacher'));
     }}

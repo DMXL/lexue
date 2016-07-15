@@ -19,7 +19,7 @@ class Controller extends BaseController
      * @param array $data
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    protected function frontendView($path, $data = [])
+    protected function frontView($path, $data = [])
     {
         /* sanitize */
         $path = preg_replace('/^(frontend|wechat)\./', '', $path);
@@ -31,12 +31,15 @@ class Controller extends BaseController
         return view('frontend.' . $path, $data);
     }
 
-    protected function backendView($path, $data = [])
+    protected function backView($path, $data = [])
     {
         $data['title'] = \Page::title();
         $data['bct'] = \Page::bct();
         $data['menu'] = \Page::menu();
 
-        return view($path, $data);
+        /* sanitize */
+        $path = preg_replace('/^(backend)\./', '', $path);
+
+        return view('backend.' . $path, $data);
     }
 }
