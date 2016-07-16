@@ -60,6 +60,7 @@
                                 </div>
                                 @endforeach
                             </div>
+                            <hr>
 
                             <div class="row">
                                 <div class="col-lg-12">
