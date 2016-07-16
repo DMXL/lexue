@@ -21,13 +21,16 @@ class CreateLecturesTable extends Migration
             $table->unsignedInteger('teacher_id');
             $table->foreign('teacher_id')->references('id')->on('teachers');
 
+            $table->unsignedInteger('time_slot_id');
+            $table->foreign('time_slot_id')->references('id')->on('time_slots');
+
+            $table->date('date');
+
             $table->boolean('complete')->default(false);
 
-            $table->boolean('single')->default(true);
+            $table->boolean('single')->default(true)->comment('whether lecture is 1 on 1');
 
-            $table->timestamp('start_at');
-
-            $table->unique(['teacher_id', 'start_at']);
+            $table->unique(['teacher_id', 'date', 'time_slot_id']);
             
             $table->timestamps();
         });

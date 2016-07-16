@@ -184,10 +184,21 @@ function isPageActive($route)
  * @param $timestamp
  * @return string
  */
-function humanDate($timestamp)
+function humanDateTime($timestamp)
 {
     return Date::parse($timestamp)->format('Fj\\号, l, h:i A');
 }
+
+function humanTime($timestamp)
+{
+    return Date::parse($timestamp)->format('h:i A');
+}
+
+function humanDate($timestamp)
+{
+    return Date::parse($timestamp)->format('Fj\\号, l');
+}
+
 
 /**
  * Generate absolute path to route file given the file name
@@ -199,4 +210,51 @@ function humanDate($timestamp)
 function routeFile($file)
 {
     return app_path('Http' . DIRECTORY_SEPARATOR . 'Routes' . DIRECTORY_SEPARATOR . $file);
+}
+
+/**
+ * Pads nested arrays to be of equal length resursively
+ *
+ * @param array|\Illuminate\Support\Collection $array
+ * @return array
+ */
+function padArray($array)
+{
+    $length = 0;
+
+    /* first we get the max length */
+    foreach ($array as $item) {
+        if (! is_array($item) AND ! $item instanceof \Illuminate\Support\Collection) {
+            continue;
+        } elseif (count($item) > $length) {
+            $length = count($item);
+        }
+    }
+
+    if ($length === 0) {
+        return $array;
+    }
+
+    /* now fill it up */
+    foreach ($array as $item) {
+        if (is_array($item) OR $item instanceof \Illuminate\Support\Collection) {
+            fillArray($item, $length);
+        }
+    }
+
+    return $array;
+}
+
+/**
+ * @param array|\Illuminate\Support\Collection $array
+ * @param int $length
+ * @return array
+ */
+function fillArray($array, int $length)
+{
+    if (count($array) < $length){
+        for ($i = count($array); $i < $length; $i++) {
+            $array[] = false;
+        }
+    }
 }

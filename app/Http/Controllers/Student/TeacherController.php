@@ -39,10 +39,11 @@ class TeacherController extends Controller
     public function book(Request $request, $teacherId)
     {
         $this->validate($request, [
-            'times.*' => 'required|date'
+            'times' => 'required',
+            'times.*' => 'regex:/\d{4}-\d{2}-\d{2}--\d+/'
         ],[
-            'times.*.required' => '请选择课时',
-            'times.*.date' => '课时格式有误'
+            'times.required' => '请选择课时',
+            'times.*.regex' => '课时格式有误'
         ]);
 
         /** @var \App\Models\User\Teacher $teacher */
@@ -56,23 +57,18 @@ class TeacherController extends Controller
          * sanitize and validate the times
          */
         foreach ($bookTimes as $bookTime) {
-            $bookTime = Carbon::parse($bookTime);
-            $bookTime->minute(0)->second(0);
-
-            $request->session()->flash('test', 'Task was successful!');
-
+            $dateString = explode('--', $bookTime)[0];
+            $bookDate = Carbon::parse($dateString);
             /* check if requested time is valid */
-            if ($bookTime < Carbon::tomorrow()
-                OR $bookTime > Carbon::today()->addDays(config('course.days_to_show'))
-                OR $bookTime->hour < config('course.day_start')
-                OR $bookTime->hour > config('course.day_end')) {
-                flash()->error('选择的课时无效');
+            if ($bookDate < Carbon::tomorrow()
+                OR $bookTime > Carbon::today()->addDays(config('course.days_to_show'))) {
+                flash()->error('选择的日期无效');
                 return back();
             }
 
             /* check if requested time is available */
             if (in_array($bookTime, $unavailabilities)) {
-                flash()->error('手慢了！ <b>' . \Date::parse($bookTime)->format('Fj\\号, l, h:i A') . '</b>已被占用');
+                flash()->error('手慢了！ <b>' . humanDateTime($dateString) . '</b>已被占用');
                 return back();
             }
         }
@@ -82,8 +78,10 @@ class TeacherController extends Controller
             \DB::transaction(function() use ($bookTimes, $teacherId) {
                 $studentId = authId();
                 foreach ($bookTimes as $bookTime) {
+                    $values = explode('--', $bookTime);
                     $lecture = new Lecture();
-                    $lecture->start_at = $bookTime;
+                    $lecture->date = $values[0];
+                    $lecture->time_slot_id = $values[1];
                     $lecture->student_id = $studentId;
                     $lecture->teacher_id = $teacherId;
                     $lecture->single = true;

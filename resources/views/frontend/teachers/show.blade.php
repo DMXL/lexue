@@ -40,21 +40,20 @@
                     <div id="tab-{{ $dayKey }}" class="tab-pane{{ $dayKey === 0 ? ' active' : null}}">
                         <div class="panel-body">
                             <div class="row">
-                                @foreach($day as $hourKey => $time)
+                                @foreach($day as $value=> $time)
                                 <?php $disabled = $time['disabled'] ?>
                                 <div class="col-md-3 col-sm-6"{{ $disabled ? " disabled=disabled" : null }}>
                                     <div class="checkbox checkbox-primary">
                                         <input type="checkbox" name="times[]"
-                                               id="checkbox-{{ $dayKey }}-{{ $hourKey }}"
-                                               value="{{ $time['time'] }}"{{ $disabled ? " disabled=disabled" : null }}
+                                               id="timeslot-{{ $value }}"
+                                               value="{{ $value }}"{{ $disabled ? " disabled=disabled" : null }}
                                                v-model="picked"
                                         >
-                                        <label for="checkbox-{{ $dayKey }}-{{ $hourKey }}">
-                                        <?php $hour = $time['time']->hour ?>
+                                        <label for="timeslot-{{ $value }}">
                                         @if($disabled)
-                                            <s>{{ $hour }}:00 - {{ $hour + 1 }}:00</s>
+                                            <s>{{ $time['range'] }}</s>
                                         @else
-                                            {{ $hour }}:00 - {{ $hour + 1 }}:00
+                                            {{ $time['range'] }}
                                         @endif
                                         </label>
                                     </div>
@@ -74,8 +73,8 @@
                                             <div class="row">
                                                 <div class="col-md-6" v-if="selections.length" v-for="item in selections | orderBy 'time'">
                                                     <div class="alert alert-success">
-                                                        <button class="close" type="button" v-on:click="unselect(item.time)">×</button>
-                                                        @{{ item.translation }}
+                                                        <button class="close" type="button" v-on:click.stop="unselect(item.value)">×</button>
+                                                        @{{ item.name }}
                                                     </div>
                                                 </div>
                                                 <div class="alert alert-danger" v-if="!selections.length">
@@ -112,22 +111,19 @@
 
 @section('js')
     <script>
-        new Vue({
+        var vue = new Vue({
             el: '#time-table',
             data: {
+                timetable: {!! json_encode(collect($timetable)->flatten(1)->toArray()) !!},
                 picked: []
             },
             computed: {
                 selections() {
+                    var vm = this;
                     return this.picked.map(function(selection){
-                        var date = new Date(selection);
-                        var options = {
-                            weekday: "long", year: "numeric", month: "short",
-                            day: "numeric", hour: "2-digit", minute: "2-digit"
-                        };
                         return {
-                            time: selection,
-                            translation: date.toLocaleTimeString("zh-CN", options)
+                            name: vm.timetable[selection].string,
+                            value : selection
                         };
                     })
                 }
@@ -135,7 +131,10 @@
             methods: {
                 unselect(time) {
                     // trigger click on the checkbox
-                    $("input[value='" + time + "'] + label").click();
+                    var index = this.picked.indexOf(time);
+                    if (index > -1) {
+                        this.picked.splice(index, 1);
+                    }
                 }
             }
         })

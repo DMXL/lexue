@@ -21,7 +21,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="teacher-years">教师教龄</label>
                 <div class="col-sm-2">
-                    <p type="text" class="form-control-static">请直接输入起始年份</p>
+                    <p class="form-control-static text-muted">请直接输入起始年份</p>
                 </div>
                 <div class="col-sm-8">
                     <div class="input-group">

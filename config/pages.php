@@ -27,7 +27,7 @@ return [
 
         'admins' => [
             [
-                'title' => '所有教师',
+                'title' => '教师管理',
                 'route' => 'teachers.index',
                 'children' => [
                     [
@@ -39,7 +39,7 @@ return [
                     ]
                 ]
             ], [
-                'title' => '所有课程',
+                'title' => '课程管理',
                 'route' => 'lectures.index',
                 'children' => [
                     [
@@ -48,6 +48,18 @@ return [
                     ], [
                         'title' => '修改课程',
                         'route' => 'lectures.edit'
+                    ]
+                ]
+            ], [
+                'title' => '课时管理',
+                'route' => 'timeslots.index',
+                'children' => [
+                    [
+                        'title' => '添加课时',
+                        'route' => 'timeslots.create'
+                    ], [
+                        'title' => '修改课时',
+                        'route' => 'timeslots.edit'
                     ]
                 ]
             ]
@@ -74,11 +86,13 @@ return [
                         'hidden' => true,
                     ]
                 ]
-            ],
-            [
+            ], [
+                'title' => '课时管理',
+                'route' => 'timeslots.index'
+            ], [
                 'title' => '课程管理',
                 'route' => 'lectures.index'
-            ],
+            ]
         ],
     ],
 ];

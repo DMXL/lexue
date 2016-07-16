@@ -18,7 +18,10 @@ class CreateOffTimesTable extends Migration
             $table->unsignedInteger('teacher_id');
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
 
-            $table->timestamp('time');
+            $table->unsignedInteger('time_slot_id')->nullable();
+            $table->foreign('time_slot_id')->references('id')->on('time_slots')->onDelete('cascade');
+
+            $table->date('date');
             $table->boolean('all_day')->default(false);
 
             $table->timestamps();

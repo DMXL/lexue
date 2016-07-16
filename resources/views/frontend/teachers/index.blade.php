@@ -10,9 +10,9 @@
                         <h3 class="m-b-xs">{{ $teacher->name }}</h3>
 
                         <div class="font-bold">
-                            ￥{{ $teacher->unit_price }}.00/时
+                            {{ $teacher->price }}/时
                             <br>
-                            <small>{{ $teacher->levels->implode('name', ',') }}</small>
+                            <small>{{ $teacher->pretty_levels }}</small>
                         </div>
                         <p class="m-t-md">{{ str_limit($teacher->description, 40) }}</p>
 

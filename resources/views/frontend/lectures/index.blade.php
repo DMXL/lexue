@@ -28,14 +28,12 @@
                         <td class="project-status">
                             @if($lecture->complete)
                             <span class="label label-default">完结</span>
-                            @elseif($lecture->start_at->isPast())
-                            <span class="label label-danger">过期</span>
                             @else
                             <span class="label label-primary">待学</span>
                             @endif
                         </td>
                         <td>
-                            {{ humanDate($lecture->start_at) }}
+                            {{ $lecture->time }}
                         </td>
                         <td class="text-left">
                             @if($lecture->single)

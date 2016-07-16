@@ -3,7 +3,7 @@
 @section('content')
     <div class="ibox">
         <div class="ibox-content">
-            <a href="{{ route('admins::teachers.create') }}" class="btn btn-primary">
+            <a href="{{ route('admins::teachers.create') }}" class="btn btn-primary btn-sm">
                 <i class="fa fa-plus"></i> 添加教师
             </a>
         </div>

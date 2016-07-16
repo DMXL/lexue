@@ -7,7 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class OffTime extends Model
 {
-    use NextDaysTrait;
-
     protected $dates = ['time'];
 }
