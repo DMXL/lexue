@@ -41,17 +41,14 @@
         </div>
         @endunless
 
-        @if(isset($customLayout) AND $customLayout)
-            @yield('content')
-        @else
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="wrapper wrapper-content animated fadeInUp">
-                        @yield('content')
-                    </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper wrapper-content animated fadeInUp">
+                    @include('partials.validation')
+                    @yield('content')
                 </div>
             </div>
-        @endif
+        </div>
 
         <div class="footer">
             <div class="pull-right">

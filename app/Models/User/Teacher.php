@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 use App\Models\Course\Lecture;
+use App\Models\Course\TimeSlot;
 use App\Models\Teacher\Level;
 use App\Models\Teacher\Label;
 use App\Models\Teacher\OffTime;
@@ -24,7 +25,10 @@ class Teacher extends Authenticatable
     protected $with = ['levels', 'labels'];
 
     protected $appends = [
-        'years_of_teaching'
+        'years_of_teaching',
+        'pretty_levels',
+        'pretty_labels',
+        'price'
     ];
 
     /*
@@ -40,6 +44,11 @@ class Teacher extends Authenticatable
     public function labels()
     {
         return $this->belongsToMany(Label::class);
+    }
+
+    public function timeSlots()
+    {
+        return $this->belongsToMany(TimeSlot::class);
     }
 
     public function lectures()
@@ -62,10 +71,25 @@ class Teacher extends Authenticatable
         $teachingSince = $this->teaching_since ? : null;
 
         if ($teachingSince) {
-            return Carbon::now()->diffInYears($teachingSince);
+            return Carbon::now()->diffInYears($teachingSince) . '年';
         }
 
-        return null;
+        return '未填写';
+    }
+
+    public function getPriceAttribute()
+    {
+        return '￥' . number_format($this->getAttribute('unit_price'), 2);
+    }
+
+    public function getPrettyLevelsAttribute()
+    {
+        return implode(',', $this->levels->pluck('name')->toArray());
+    }
+
+    public function getPrettyLabelsAttribute()
+    {
+        return implode(',', $this->labels->pluck('name')->toArray());
     }
 
     /*
@@ -74,26 +98,27 @@ class Teacher extends Authenticatable
     |--------------------------------------------------------------------------
     */
 
-    // TODO change name
+    // TODO change name (why? I can't remember...)
     public function getUnavailabilities()
     {
         $unavailabilities = [];
-        $lectureTimes = $this->lectures()->nextDays()->get();
-        $offTimes = $this->offTimes()->nextDays()->get();
+        $lectureTimes = $this->lectures()->followingWeek()->get();
+        $offTimes = $this->offTimes;
+
+        $timeSlots = $this->timeSlots;
 
         foreach ($offTimes as $offTime) {
             if ($offTime->all_day) {
-                $offDay = $offTime->time->startOfDay();
-                for ($hour = config('course.day_start'); $hour <= config('course.day_end'); $hour++) {
-                    $unavailabilities[] = $offDay->addHours($hour);
+                foreach ($timeSlots as $timeSlot) {
+                    $unavailabilities[] = $timeSlot->date . '--' . $timeSlot->id;
                 }
             } else {
-                $unavailabilities[] = $offTime->time;
+                $unavailabilities[] = $offTime->date . '--' . $offTime->time_slot_id;
             }
         }
 
         foreach ($lectureTimes as $lectureTime) {
-            $unavailabilities[] = $lectureTime->start_at;
+            $unavailabilities[] = $lectureTime->date . '--' . $lectureTime->time_slot_id;
         }
         return $unavailabilities;
     }
@@ -103,13 +128,18 @@ class Teacher extends Authenticatable
         $unavailabilities = is_null($unavailabilities)? $this->getUnavailabilities() : $unavailabilities;
 
         $timetable = [];
+        $timeSlots = $this->timeSlots;
         for ($days = 0; $days < config('course.days_to_show'); $days++) {
             $key = Carbon::tomorrow()->addDays($days)->dayOfWeek;
-            for ($hours = config('course.day_start'); $hours <= config('course.day_end'); $hours++) {
-                $time = Carbon::tomorrow()->addDays($days)->addHours($hours);
-                $timetable[$key][] = [
-                    'time' => $time,
-                    'disabled' => in_array($time, $unavailabilities)
+            $date = Carbon::tomorrow()->addDays($days)->toDateString();
+            foreach ($timeSlots as $timeSlot) {
+                $value = $date . '--' . $timeSlot->id;
+                $range = $timeSlot->range;
+                $string = humanDate($date) . ', ' . $timeSlot->day_part . '' . $range;
+                $timetable[$key][$value] = [
+                    'string' => $string,
+                    'range' => $range,
+                    'disabled' => in_array($value, $unavailabilities)
                 ];
             }
         }

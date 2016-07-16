@@ -160,14 +160,27 @@ class PageGenerator
         $this->menu = $this->buildMenuNodes($config);
     }
 
+    // TODO should be able to optimize the algorithm. this is nasty
     private function buildMenuNodes($menu)
     {
         foreach ($menu as $key => $node) {
-            if (isset($node['children'])) {
-                $menu[$key]['active'] = collect($node['children'])->flatten()->search($this->routeName, true);
-                $menu[$key]['children'] = $this->buildMenuNodes($node['children']);
-            } elseif (isset($node['route'])) {
+            if (isset($node['hidden']) AND $node['hidden']) {
+                return false;
+            }
+
+            if (isset($node['route'])) {
                 $menu[$key]['active'] = $node['route'] === $this->routeName;
+            }
+
+            if (isset($node['children'])) {
+                if (!$menu[$key]['active']) {
+                    $menu[$key]['active'] = collect($node['children'])->flatten()->search($this->routeName, true) !== false;
+                }
+                if ($children = $this->buildMenuNodes($node['children'])) {
+                    $menu[$key]['children'] = $children;
+                } else {
+                    unset($menu[$key]['children']);
+                }
             }
         }
 

@@ -6,11 +6,11 @@
  * Time: 4:06 PM
  */
 Route::get('about', ['as' => 'about', 'uses' => function(){
-    return frontendView('about');
+    return 'about';
 }]);
 
 Route::get('contact', ['as' => 'contact', 'uses' => function(){
-    return frontendView('contact');
+    return 'contact';
 }]);
 
 Route::resource('teachers', 'TeacherController', ['only' => ['index', 'show']]);

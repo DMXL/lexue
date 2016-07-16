@@ -11,6 +11,6 @@ class MainController extends Controller
 {
     public function index()
     {
-        return $this->backendView('backend.admins.home');
+        return $this->backView('admins.home');
     }
 }

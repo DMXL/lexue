@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User\Teacher;
+use App\Models\Course\TimeSlot;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class TeacherController extends Controller
+class TimeSlotController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,11 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $teachers = Teacher::paginate();
+        $timeslots = TimeSlot::orderByStart()->get()->groupBy('day_part');
 
-        return $this->backView('backend.admins.teachers.index', compact('teachers'));
+        $timeslots = padArray($timeslots);
+
+        return $this->backView('admins.timeslots.index', compact('timeslots', 'rowCount'));
     }
 
     /**
@@ -29,7 +31,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return $this->backView('backend.admins.teachers.create');
+        //
     }
 
     /**
@@ -40,7 +42,33 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'start' => 'required|regex:/^\d{2}:\d{2}$/',
+            'end' => 'required|regex:/^\d{2}:\d{2}$/'
+        ], [
+            'start.required' => '请填写开始时间',
+            'end.required' => '请填写结束时间',
+            'start.regex' => '请确保开始时间格式为hh:mm',
+            'end.regex' => '请确保结束时间格式为 hh:mm',
+        ]);
 
+        $start = $request->input('start');
+        $end = $request->input('end');
+
+        if (TimeSlot::where('start', $start)->where('end', $end)->exists()) {
+            \Flash::error('重复课时');
+            return back();
+        }
+
+        try {
+            TimeSlot::create($request->all());
+        } catch (\Exception $e) {
+            \Flash::error('系统错误');
+            return back();
+        }
+
+        \Flash::success('添加成功');
+        return back();
     }
 
     /**
@@ -51,9 +79,7 @@ class TeacherController extends Controller
      */
     public function show($id)
     {
-        $teacher = Teacher::find($id);
-
-        return $this->backView('backend.admins.teachers.show', compact('teacher'));
+        //
     }
 
     /**
@@ -64,7 +90,7 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
-        return $this->backView('backend.admins.teachers.edit');
+        //
     }
 
     /**

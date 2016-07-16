@@ -54,7 +54,6 @@ Route::group(
         'domain' =>  appDomain('students'),
         'as' => 'students::',
         'namespace' => 'Student',
-        'middlewareGroups' => 'web'
     ],
     function() {
         include routeFile('students.php');
@@ -67,7 +66,6 @@ Route::group(
         'domain' =>  appDomain('m.students'),
         'as' => 'wechat::',
         'namespace' => 'Student',
-        'middlewareGroups' => 'web'
     ],
     function() {
         include routeFile('students.php');
@@ -83,7 +81,7 @@ Route::group(
         'domain' =>  appDomain('teachers'),
         'as' => 'teachers::',
         'namespace' => 'Teacher',
-        'middleware' => ['web','auth:teachers']
+        'middleware' => 'auth:teachers'
     ],
     function() {
         include routeFile('teachers.php');
@@ -98,7 +96,7 @@ Route::group(
         'domain' =>  appDomain('admins'),
         'as' => 'admins::',
         'namespace' => 'Admin',
-        'middleware' => ['web','auth:admins']
+        'middleware' => 'auth:admins'
     ],
     function() {
         include routeFile('admins.php');

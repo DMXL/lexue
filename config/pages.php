@@ -27,11 +27,11 @@ return [
 
         'admins' => [
             [
-                'title' => '所有教师',
+                'title' => '教师管理',
                 'route' => 'teachers.index',
                 'children' => [
                     [
-                        'title' => '新建教师',
+                        'title' => '添加教师',
                         'route' => 'teachers.create'
                     ], [
                         'title' => '修改教师',
@@ -39,15 +39,27 @@ return [
                     ]
                 ]
             ], [
-                'title' => '所有课程',
+                'title' => '课程管理',
                 'route' => 'lectures.index',
                 'children' => [
                     [
-                        'title' => '新建课程',
+                        'title' => '添加课程',
                         'route' => 'lectures.create'
                     ], [
                         'title' => '修改课程',
                         'route' => 'lectures.edit'
+                    ]
+                ]
+            ], [
+                'title' => '课时管理',
+                'route' => 'timeslots.index',
+                'children' => [
+                    [
+                        'title' => '添加课时',
+                        'route' => 'timeslots.create'
+                    ], [
+                        'title' => '修改课时',
+                        'route' => 'timeslots.edit'
                     ]
                 ]
             ]
@@ -58,12 +70,29 @@ return [
         'admins' => [
             [
                 'title' => '教师管理',
-                'route' => 'teachers.index'
-            ],
-            [
-                'title' => '课程',
+                'route' => 'teachers.index',
+                'children' => [
+                    [
+                        'title' => '添加教师',
+                        'route' => 'teachers.create',
+                        'hidden' => true,
+                    ], [
+                        'title' => '修改教师',
+                        'route' => 'teachers.edit',
+                        'hidden' => true,
+                    ], [
+                        'title' => '教师信息',
+                        'route' => 'teachers.show',
+                        'hidden' => true,
+                    ]
+                ]
+            ], [
+                'title' => '课时管理',
+                'route' => 'timeslots.index'
+            ], [
+                'title' => '课程管理',
                 'route' => 'lectures.index'
-            ],
+            ]
         ],
     ],
 ];

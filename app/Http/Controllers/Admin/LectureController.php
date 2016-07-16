@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User\Teacher;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class TeacherController extends Controller
+class LectureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $teachers = Teacher::paginate();
-
-        return $this->backView('backend.admins.teachers.index', compact('teachers'));
+        //
     }
 
     /**
@@ -29,7 +26,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return $this->backView('backend.admins.teachers.create');
+        //
     }
 
     /**
@@ -40,7 +37,7 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-
+        //
     }
 
     /**
@@ -51,9 +48,7 @@ class TeacherController extends Controller
      */
     public function show($id)
     {
-        $teacher = Teacher::find($id);
-
-        return $this->backView('backend.admins.teachers.show', compact('teacher'));
+        //
     }
 
     /**
@@ -64,7 +59,7 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
-        return $this->backView('backend.admins.teachers.edit');
+        //
     }
 
     /**

@@ -24,6 +24,8 @@ class CreateTeachersTable extends Migration
             $table->timestamp('teaching_since')->nullable();
             $table->float('unit_price')->default(99);
 
+            $table->boolean('enabled')->default(false);
+
             $table->timestamps();
         });
     }

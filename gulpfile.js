@@ -22,7 +22,9 @@ elixir(function(mix) {
         'plugins/font-awesome/font-awesome.min.css',
         'plugins/toastr/toastr.min.css',
         'plugins/select2/select2.min.css',
-        'plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css'
+        'plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css',
+        'plugins/touchspin/jquery.bootstrap-touchspin.min.css',
+        'plugins/clockpicker/clockpicker.css',
     ], 'public/app/css');
 
     mix.scripts([
@@ -37,6 +39,8 @@ elixir(function(mix) {
         'plugins/toastr/toastr.min.js',
         'plugins/toastr/custom.js',
         'plugins/select2/select2.full.min.js',
+        'plugins/touchspin/jquery.bootstrap-touchspin.min.js',
+        'plugins/clockpicker/clockpicker.js',
         'vue.min.js'
     ], 'public/app/js');
 

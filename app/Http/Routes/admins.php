@@ -11,3 +11,5 @@ Route::get('/', ['as' => 'home', 'uses' => 'MainController@index']);
 Route::resource('teachers', 'TeacherController');
 
 Route::resource('lectures', 'LectureController');
+
+Route::resource('timeslots', 'TimeSlotController');

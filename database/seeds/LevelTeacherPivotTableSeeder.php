@@ -18,12 +18,10 @@ class LevelTeacherPivotTableSeeder extends Seeder
                 'teacher_id' => $teacher->id,
                 'level_id' => $levels->random()->id,
             ]);
-            if (mt_rand(1,10) > 7) {
-                DB::table('level_teacher')->insert([
-                    'teacher_id' => $teacher->id,
-                    'level_id' => $levels->random()->id,
-                ]);
-            }
+            DB::table('level_teacher')->insert([
+                'teacher_id' => $teacher->id,
+                'level_id' => $levels->random()->id,
+            ]);
         }
     }
 }

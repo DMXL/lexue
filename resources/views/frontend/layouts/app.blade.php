@@ -28,7 +28,7 @@
             <div class="col-lg-12">
                 <div class="wrapper wrapper-content animated fadeInUp">
                     <div class="container">
-                    @include('flash::message')
+                    @include('partials.validation')
                     @yield('content')
                     </div>
                 </div>
