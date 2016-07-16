@@ -217,10 +217,10 @@ function padArray($array)
 
     /* first we get the max length */
     foreach ($array as $item) {
-        if (! is_array($item) AND ! $item instanceof \Illuminate\Contracts\Support\Arrayable) {
+        if (! is_array($item) AND ! $item instanceof \Illuminate\Support\Collection) {
             continue;
-        } elseif (count($array) > $length) {
-            $length = count($array);
+        } elseif (count($item) > $length) {
+            $length = count($item);
         }
     }
 
@@ -230,8 +230,8 @@ function padArray($array)
 
     /* now fill it up */
     foreach ($array as $item) {
-        if (is_array($item) OR $item instanceof \Illuminate\Contracts\Support\Arrayable) {
-            fillArray($item, $length);
+        if (is_array($item) OR $item instanceof \Illuminate\Support\Collection) {
+            fillArray($item, $length, '');
         }
     }
 
@@ -241,15 +241,15 @@ function padArray($array)
 /**
  * @param array|\Illuminate\Support\Collection $array
  * @param int $length
+ * @param null|mixed $filler
  * @return array
  */
-function fillArray($array, int $length)
+function fillArray($array, int $length, $filler = null)
 {
     if (count($array) < $length){
-        for ($i = 0; $i < $length - count($array); $i++) {
-            $array[] = false;
+        $currentLength = count($array);
+        for ($i = $currentLength; $i < $length; $i++) {
+            $array[] = $filler;
         }
     }
-
-    return $array;
 }
