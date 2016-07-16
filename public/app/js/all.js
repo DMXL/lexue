@@ -596,7 +596,9 @@ b.id!=f.id&&d.push(f.id)}c.$element.val(d.join(c._valueSeparator)),c.$element.tr
 					top: dialRadius - Math.cos(radian) * radius - tickRadius
 				});
 				if (inner) {
-					tick.css('font-size', '120%');
+					tick.css('font-weight', 'bold');
+				} else {
+					tick.css('font-size', '90%');
 				}
 				tick.html(i === 0 ? '00' : i);
 				hoursView.append(tick);
@@ -612,7 +614,7 @@ b.id!=f.id&&d.push(f.id)}c.$element.val(d.join(c._valueSeparator)),c.$element.tr
 				left: dialRadius + Math.sin(radian) * outerRadius - tickRadius,
 				top: dialRadius - Math.cos(radian) * outerRadius - tickRadius
 			});
-			tick.css('font-size', '120%');
+			tick.css('font-weight', 'bold');
 			tick.html(leadingZero(i));
 			minutesView.append(tick);
 			tick.on(mousedownEvent, mousedown);
