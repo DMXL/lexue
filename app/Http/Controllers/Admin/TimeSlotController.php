@@ -17,7 +17,7 @@ class TimeSlotController extends Controller
      */
     public function index()
     {
-        $timeslots = TimeSlot::all()->groupBy('day_part');
+        $timeslots = TimeSlot::orderByStart()->get()->groupBy('day_part');
 
         $timeslots = padArray($timeslots);
 
@@ -42,7 +42,33 @@ class TimeSlotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'start' => 'required|regex:/^\d{2}:\d{2}$/',
+            'end' => 'required|regex:/^\d{2}:\d{2}$/'
+        ], [
+            'start.required' => '请填写开始时间',
+            'end.required' => '请填写结束时间',
+            'start.regex' => '请确保开始时间格式为hh:mm',
+            'end.regex' => '请确保结束时间格式为 hh:mm',
+        ]);
+
+        $start = $request->input('start');
+        $end = $request->input('end');
+
+        if (TimeSlot::where('start', $start)->where('end', $end)->exists()) {
+            \Flash::error('重复课时');
+            return back();
+        }
+
+        try {
+            TimeSlot::create($request->all());
+        } catch (\Exception $e) {
+            \Flash::error('系统错误');
+            return back();
+        }
+
+        \Flash::success('添加成功');
+        return back();
     }
 
     /**

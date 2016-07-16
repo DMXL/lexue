@@ -44,6 +44,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="wrapper wrapper-content animated fadeInUp">
+                    @include('partials.validation')
                     @yield('content')
                 </div>
             </div>

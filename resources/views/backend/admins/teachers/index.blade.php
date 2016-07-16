@@ -27,9 +27,7 @@
                         </p>
                         <p>
                             <i class="fa fa-fw fa-tags"></i>
-                            @foreach($teacher->labels as $label)
-                                @each('backend.admins.partials.tag', $teacher->labels->pluck('name'), 'name')
-                            @endforeach
+                            @each('backend.admins.partials.tag', $teacher->labels->pluck('name'), 'name')
                         </p>
                     </div>
                     <div class="m-t-md">

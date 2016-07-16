@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
                 LabelTeacherPivotTableSeeder::class,
 
                 TimeslotsTableSeeder::class,
-                TeacherTimeSlotTableSeeder::class,
+                TeacherTimeSlotPivotTableSeeder::class,
 
                 LecturesTableSeeder::class,
                 OffTimesTableSeeder::class,
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
                 LabelTeacherPivotTableSeeder::class,
 
                 TimeslotsTableSeeder::class,
-                TeacherTimeSlotTableSeeder::class,
+                TeacherTimeSlotPivotTableSeeder::class,
 
                 AdminsTableSeeder::class,
             ];

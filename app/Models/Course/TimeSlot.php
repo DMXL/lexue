@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class TimeSlot extends Model
 {
 
+    public $timestamps = false;
+
+    protected $fillable = [
+        'start',
+        'end'
+    ];
+
     protected $appends = [
         'day_part',
         'range',
@@ -30,7 +37,17 @@ class TimeSlot extends Model
 
     public function getRangeAttribute()
     {
-        return $this->from . ' - ' . $this->to;
+        return $this->start . ' - ' . $this->end;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+    public function scopeOrderByStart($query)
+    {
+        return $query->orderBy('start');
     }
 
     /*
@@ -53,6 +70,6 @@ class TimeSlot extends Model
 
     public function getHourAttribute()
     {
-        return (int ) substr($this->attributes['from'], 0, 2);
+        return (int ) substr($this->attributes['start'], 0, 2);
     }
 }

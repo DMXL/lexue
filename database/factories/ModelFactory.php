@@ -52,7 +52,8 @@ $factory->define(App\Models\Course\Lecture::class, function (Faker\Generator $fa
 $factory->define(App\Models\Teacher\OffTime::class, function (Faker\Generator $faker) {
     return [
         'teacher_id' => mt_rand(1, \App\Models\User\Teacher::count()),
-        'time' => \Carbon::today()->addDays(mt_rand(1,7))->addHours(mt_rand(9,16)),
+        'date' => \Carbon::today()->addDays(mt_rand(1,7)),
+        'time_slot_id' => mt_rand(1, \App\Models\Course\TimeSlot::count()),
         'all_day' => $faker->boolean(20)
     ];
 });

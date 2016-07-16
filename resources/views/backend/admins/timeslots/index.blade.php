@@ -3,26 +3,28 @@
 @section('content')
     <div class="ibox float-e-margins">
         <div class="ibox-content">
-            <form role="form" class="form-horizontal">
+            <form role="form" class="form-horizontal" method="POST" action="{{ route('admins::timeslots.store') }}">
                 {{ csrf_field() }}
                 <div class="form-group m-b-none">
-                    <label for="timeslot-day-part" class="control-label col-md-1 col-xs-2">时间段</label>
-                    <div class="col-md-2 col-xs-10">
-                        <select name="day_part" id="timeslot-day-part" class="form-control">
-                            <option value="morning">上午</option>
-                            <option value="afternoon">下午</option>
-                            <option value="evening">晚上</option>
-                        </select>
+                    <label for="timeslot-start" class="control-label col-md-1 col-md-offset-1 col-xs-2">开始时间</label>
+                    <div class="col-md-3 col-xs-10">
+                        <div class="input-group clockpicker" data-autoclose="true">
+                            <input name="start" id="timeslot-start" type="text" class="form-control" value="" >
+                            <span class="input-group-addon">
+                                <span class="fa fa-clock-o"></span>
+                            </span>
+                        </div>
                     </div>
-                    <label for="timeslot-start" class="control-label col-md-1 col-xs-2">开始</label>
-                    <div class="col-md-2 col-xs-10">
-                        <input type="text" name="from" placeholder="开始时间" id="timeslot-start" class="form-control">
+                    <label for="timeslot-end" class="control-label col-md-1 col-xs-2">结束时间</label>
+                    <div class="col-md-3 col-xs-10">
+                        <div class="input-group clockpicker" data-autoclose="true">
+                            <input name="end" id="timeslot-end" type="text" class="form-control" value="" >
+                            <span class="input-group-addon">
+                                <span class="fa fa-clock-o"></span>
+                            </span>
+                        </div>
                     </div>
-                    <label for="timeslot-end" class="control-label col-md-1 col-xs-2">结束</label>
-                    <div class="col-md-2 col-xs-10">
-                        <input type="text" placeholder="结束时间" id="timeslot-end" class="form-control">
-                    </div>
-                    <div class="col-md-3 text-right">
+                    <div class="col-md-2 text-right">
                         <button class="btn btn-white" type="submit"><i class="fa fa-plus"></i> 添加课时</button>
                     </div>
                 </div>
@@ -61,4 +63,10 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        $('.clockpicker').clockpicker();
+    </script>
 @endsection

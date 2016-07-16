@@ -16,8 +16,8 @@ class TimeslotsTableSeeder extends Seeder
             $from = $time->toTimeString();
             $to = $time->addMinutes(45)->toTimeString();
             DB::table('time_slots')->insert([
-                'from' => $from,
-                'to' => $to
+                'start' => $from,
+                'end' => $to
             ]);
         }
     }
