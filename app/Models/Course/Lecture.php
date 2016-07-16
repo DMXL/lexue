@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Lecture extends Model
 {
     protected $appends = [
-        'time'
+        'human_time'
     ];
 
     /*
@@ -44,10 +44,10 @@ class Lecture extends Model
     | Accessors
     |--------------------------------------------------------------------------
     */
-    public function getTimeAttribute()
+    public function getHumanTimeAttribute()
     {
         $timeSlot = $this->timeSlot;
-        return humanDate($this->date) . ', ' . $timeSlot->day_part . '' . $timeSlot->range;
+        return humanDate($this->date) . ', ' . $timeSlot->day_part . ' ' . $timeSlot->range;
     }
 
     /*

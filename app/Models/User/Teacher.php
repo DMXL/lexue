@@ -103,7 +103,7 @@ class Teacher extends Authenticatable
     {
         $unavailabilities = [];
         $lectureTimes = $this->lectures()->followingWeek()->get();
-        $offTimes = $this->offTimes()->get();
+        $offTimes = $this->offTimes;
 
         $timeSlots = $this->timeSlots;
 

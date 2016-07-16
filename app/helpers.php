@@ -51,15 +51,8 @@ function domainPrefix()
  */
 function isWechat()
 {
-    $sessionKey = 'is_mobile';
-
-    if (Session::has($sessionKey)) {
-        return Session::get($sessionKey);
-    }
-
     $isMobile = starts_with(Request::getHost(), 'm.');
 
-    Session::put($sessionKey, $isMobile);
     return $isMobile;
 }
 
@@ -224,10 +217,10 @@ function padArray($array)
 
     /* first we get the max length */
     foreach ($array as $item) {
-        if (! is_array($item) AND ! $item instanceof \Illuminate\Support\Collection) {
+        if (! is_array($item) AND ! $item instanceof \Illuminate\Contracts\Support\Arrayable) {
             continue;
-        } elseif (count($item) > $length) {
-            $length = count($item);
+        } elseif (count($array) > $length) {
+            $length = count($array);
         }
     }
 
@@ -237,7 +230,7 @@ function padArray($array)
 
     /* now fill it up */
     foreach ($array as $item) {
-        if (is_array($item) OR $item instanceof \Illuminate\Support\Collection) {
+        if (is_array($item) OR $item instanceof \Illuminate\Contracts\Support\Arrayable) {
             fillArray($item, $length);
         }
     }
@@ -253,8 +246,10 @@ function padArray($array)
 function fillArray($array, int $length)
 {
     if (count($array) < $length){
-        for ($i = count($array); $i < $length; $i++) {
+        for ($i = 0; $i < $length - count($array); $i++) {
             $array[] = false;
         }
     }
+
+    return $array;
 }
