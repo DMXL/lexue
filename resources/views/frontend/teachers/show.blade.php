@@ -70,7 +70,7 @@
         <div class="col-lg-8">
             <video controls>
                 <source src="{{ getVideoUrl($teacher->video) }}">
-                Your browser does not support the video tag.
+                你的浏览器不支持Html5视频，是时候换Chrome了
             </video>
         </div>
     </div>
