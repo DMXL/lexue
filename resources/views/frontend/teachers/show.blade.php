@@ -10,7 +10,7 @@
             <div class="ibox">
                 <div class="ibox-content no-background">
                     <div class="profile-image no-float">
-                        <img src="{{ getAvatar($teacher->avatr, 'md') }}" class="img-circle circle-border m-b-md" alt="profile">
+                        <img src="{{ getAvatarUrl($teacher->avatr, 'md') }}" class="img-circle circle-border m-b-md" alt="profile">
                     </div>
                     <h3>{{ $teacher->name }}</h3>
                     <div>
@@ -69,7 +69,7 @@
         </div>
         <div class="col-lg-8">
             <video controls>
-                <source src="{{ getVideo($teacher->video) }}">
+                <source src="{{ getVideoUrl($teacher->video) }}">
                 Your browser does not support the video tag.
             </video>
         </div>

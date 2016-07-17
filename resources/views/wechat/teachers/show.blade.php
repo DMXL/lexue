@@ -6,7 +6,7 @@
     @endunless
     <div class="bd teachers_show" style="height: 100%;">
         <div class="weui_icon_area">
-            <img src="{{ getAvatar($teacher->avatr, 'md') }}" class="avatar" />
+            <img src="{{ getAvatarUrl($teacher->avatr, 'md') }}" class="avatar" />
             <h2 class="weui_msg_title">{{ $teacher->name }}</h2>
         </div>
         <div class="weui_tab">
