@@ -36,20 +36,23 @@
             <div class="form-group">
                 <label for="teacher-levels" class="col-sm-2 control-label">教授范围</label>
                 <div class="col-sm-10">
-                    <select id="teacher-levels" class="form-control" multiple="multiple">
-                        <option value="AL">Alabama</option>
-                        <option value="WY">Wyoming</option>
-                    </select>
+                    @foreach($levels as $level)
+                        <div class="checkbox checkbox-success text-left col-md-2 col-sm-3 col-xs-6">
+                            <input name="levels[]" id="teacher-level-{{ $level->id }}" type="checkbox">
+                            <label for="teacher-level-{{ $level->id }}">
+                                {{ $level->name }}
+                            </label>
+                        </div>
+                    @endforeach
                 </div>
             </div>
+
+            <div class="hr-line-dashed"></div>
 
             <div class="form-group">
                 <label for="teacher-labels" class="col-sm-2 control-label">教师标签</label>
                 <div class="col-sm-10">
-                    <select id="teacher-labels" class="form-control" multiple="multiple">
-                        <option value="AL">Alabama</option>
-                        <option value="WY">Wyoming</option>
-                    </select>
+                    <input type="text" name="labels" id="teacher-labels" class="form-control" data-role="tagsinput">
                 </div>
             </div>
 

@@ -1,17 +1,34 @@
-@extends('backend.layouts.app')
+@extends("backend.layouts.app")
 
-@section('content')
-    @include('backend.admins.teachers.form')
+@section("content")
+    @include("backend.admins.teachers.form", [compact('levels')])
 @endsection
 
-@section('js')
+@section("js")
     <script type="text/javascript">
-        $("#teacher-levels").select2();
-        $("#teacher-labels").select2();
+        var labels = {!! json_encode($labelnames->toArray()) !!};
 
-        /*$("#teacher-years").TouchSpin({
-            buttondown_class: 'btn btn-white',
-            buttonup_class: 'btn btn-white'
-        });*/
+        var labelnames = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            local: labels
+        });
+
+        var teacher_labels = $('#teacher-labels');
+
+        labelnames.initialize();
+
+        teacher_labels.tagsinput({
+            typeaheadjs: {
+                name: 'labelnames',
+                displayKey: 'name',
+                valueKey: 'name',
+                source: labelnames.ttAdapter()
+            },
+//            freeInput: false
+        });
+
+        $(".twitter-typeahead").css('display', 'inline');
+
     </script>
 @endsection

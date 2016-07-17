@@ -25,6 +25,7 @@ elixir(function(mix) {
         'plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css',
         'plugins/touchspin/jquery.bootstrap-touchspin.min.css',
         'plugins/clockpicker/clockpicker.css',
+        'plugins/bootstrap-tagsinput/bootstrap-tagsinput.css',
     ], 'public/app/css');
 
     mix.scripts([
@@ -41,6 +42,8 @@ elixir(function(mix) {
         'plugins/select2/select2.full.min.js',
         'plugins/touchspin/jquery.bootstrap-touchspin.min.js',
         'plugins/clockpicker/clockpicker.js',
+        'plugins/typeahead/typeahead.js',
+        'plugins/bootstrap-tagsinput/bootstrap-tagsinput.js',
         'vue.min.js'
     ], 'public/app/js');
 
