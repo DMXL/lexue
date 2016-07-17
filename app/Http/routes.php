@@ -107,7 +107,13 @@ Route::group(
  * Video routes
  */
 Route::get('video/{path}', function($path) {
-    return Storage::disk('video')->get($path);
+    $fileContents = Storage::disk('video')->get($path);
+
+    $response = Response::make($fileContents, 200);
+
+    $response->header('Content-Type', "video/mp4");
+
+    return $response;
 })->where(['path' => '.*']);
 
 /*

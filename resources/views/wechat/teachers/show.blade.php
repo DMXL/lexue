@@ -36,6 +36,10 @@
                         <source src="{{ getVideoUrl($teacher->video) }}" type="video/mp4">
                         Your browser does not support HTML5 video.
                     </video>
+                    <video controls>
+                        <source src="" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
                 </div>
                 <div id="tab3" class="weui_tab_bd_item">
                     <h1 class="doc-head">购买课时!</h1>
