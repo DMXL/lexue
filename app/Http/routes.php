@@ -107,7 +107,15 @@ Route::group(
  * Video routes
  */
 Route::get('video/{path}', function($path) {
-    return Storage::disk('video')->get($path);
+    $fileContents = Storage::disk('video')->get($path);
+
+    $response = Response::make($fileContents, 200);
+
+    if (preg_match('/\.(\w+)$/', $path, $matches)) {
+        $response->header('Content-Type', "video/" . $matches[1]);
+    }
+
+    return $response;
 })->where(['path' => '.*']);
 
 /*
