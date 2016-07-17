@@ -69,7 +69,7 @@
         </div>
         <div class="col-lg-8">
             <video controls>
-                <source src="{{ getSampleVideoUrl() }}" type="video/mp4">
+                <source src="{{ getVideo($teacher->video) }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>

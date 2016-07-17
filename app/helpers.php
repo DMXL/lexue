@@ -156,9 +156,13 @@ function getAvatar($url, $preset)
     return '/default/avatar.png?p=' . $preset;
 }
 
-function getSampleVideoUrl()
+function getVideo($path)
 {
-    return url('video/' . env('TEST_VIDEO'));
+    if (!$path) {
+        $path = 'video/' . env('TEST_VIDEO');
+    }
+
+    return url($path);
 }
 
 /**
