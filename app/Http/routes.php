@@ -111,7 +111,9 @@ Route::get('video/{path}', function($path) {
 
     $response = Response::make($fileContents, 200);
 
-    $response->header('Content-Type', "video/ogg");
+    if (preg_match('/\.(\w+)$/', $path, $matches)) {
+        $response->header('Content-Type', "video/" . $matches[1]);
+    }
 
     return $response;
 })->where(['path' => '.*']);
