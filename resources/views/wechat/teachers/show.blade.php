@@ -33,7 +33,7 @@
                 </div>
                 <div id="tab2" class="weui_tab_bd_item">
                     <video controls>
-                        <source src="{{ getVideoUrl($teacher->video) }}" type="video/mp4">
+                        <source src="{{ getVideoUrl($teacher->video) }}" type="video/ogg">
                         Your browser does not support HTML5 video.
                     </video>
                     <video controls>
