@@ -103,7 +103,14 @@ Route::group(
     }
 );
 
-/**
+/*
+ * Video routes
+ */
+Route::get('video/{path}', function($path) {
+    return Storage::disk('video')->get($path);
+})->where(['path' => '.*']);
+
+/*
  * Image routes
  */
 Route::get('{image_type}/{file}', function(

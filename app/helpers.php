@@ -143,17 +143,26 @@ function viewPrefix()
 /**
  * Fall back to a default placeholder if not set
  *
- * @param $url
+ * @param $path
  * @param $preset
  * @return string
  */
-function getAvatar($url, $preset)
+function getAvatarUrl($path, $preset)
 {
-    if ($url) {
-        return $url . '?p=' . $preset;
+    if ($path) {
+        return $path . '?p=' . $preset;
     }
 
-    return '/default/avatar.png?p=' . $preset;
+    return config('default_files.avatar') . '?p=' . $preset;
+}
+
+function getVideoUrl($path)
+{
+    if (!$path) {
+        $path = 'video/' . ltrim(config('default_files.video'),'/');
+    }
+
+    return url($path);
 }
 
 /**

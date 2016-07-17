@@ -25,12 +25,12 @@ class TimeSlot extends Model
     | Accessors
     |--------------------------------------------------------------------------
     */
-    public function getFromAttribute($value)
+    public function getStartAttribute($value)
     {
         return preg_replace('/:\d\d$/', '', $value);
     }
 
-    public function getToAttribute($value)
+    public function getEndAttribute($value)
     {
         return preg_replace('/:\d\d$/', '', $value);
     }
