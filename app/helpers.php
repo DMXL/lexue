@@ -159,10 +159,10 @@ function getAvatarUrl($path, $preset)
 function getVideoUrl($path)
 {
     if (!$path) {
-        $path = 'video/' . ltrim(config('default_files.video'),'/');
+        $path = '/video/' . ltrim(config('default_files.video'),'/');
     }
 
-    return url($path);
+    return $path;
 }
 
 /**
