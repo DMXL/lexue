@@ -6,7 +6,7 @@
     @endunless
     <div class="bd teachers_show" style="height: 100%;">
         <div class="weui_icon_area">
-            <img src="{{ getAvatarUrl($teacher->avatr, 'md') }}" class="avatar" />
+            <img src="{{ getAvatarUrl($teacher->avatar, 'md') }}" class="avatar" />
             <h2 class="weui_msg_title">{{ $teacher->name }}</h2>
         </div>
         <div class="weui_tab">
@@ -32,7 +32,13 @@
                     </article>
                 </div>
                 <div id="tab2" class="weui_tab_bd_item">
-                    <h1 class="doc-head">试听课程!</h1>
+                    <button onclick="playVid()" type="button">播放视频</button>
+                    <button onclick="pauseVid()" type="button">暂停视频</button>
+                    <br />
+                    <video id="video1">
+                        <source src="{{ getVideoUrl($teacher->video) }}" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
                 </div>
                 <div id="tab3" class="weui_tab_bd_item">
                     <h1 class="doc-head">购买课时!</h1>
@@ -46,4 +52,18 @@
             <a class="weui_btn weui_btn_mini weui_btn_primary">购买课时</a>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        var myVideo = document.getElementById("video1");
+
+        function playVid() {
+            myVideo.play();
+        }
+
+        function pauseVid() {
+            myVideo.pause();
+        }
+    </script>
 @endsection
