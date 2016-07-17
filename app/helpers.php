@@ -153,13 +153,13 @@ function getAvatar($url, $preset)
         return $url . '?p=' . $preset;
     }
 
-    return '/default/avatar.png?p=' . $preset;
+    return config('default_files.avatar') . '?p=' . $preset;
 }
 
 function getVideo($path)
 {
     if (!$path) {
-        $path = 'video/' . env('TEST_VIDEO');
+        $path = 'video/' . ltrim(config('default_files.video'),'/');
     }
 
     return url($path);
