@@ -6,7 +6,7 @@
     @endunless
     <div class="bd teachers_show" style="height: 100%;">
         <div class="weui_icon_area">
-            <img src="{{ getAvatar($teacher->avatr, 'md') }}" class="avatar" />
+            <img src="{{ getAvatar($teacher->avatar, 'md') }}" class="avatar" />
             <h2 class="weui_msg_title">{{ $teacher->name }}</h2>
         </div>
         <div class="weui_tab">
@@ -32,7 +32,9 @@
                     </article>
                 </div>
                 <div id="tab2" class="weui_tab_bd_item">
-                    <h1 class="doc-head">试听课程!</h1>
+                    <video controls loop width="100%">
+                        <source src="/videos/sudointro.mp4" type="video/mp4" />
+                    </video>
                 </div>
                 <div id="tab3" class="weui_tab_bd_item">
                     <h1 class="doc-head">购买课时!</h1>

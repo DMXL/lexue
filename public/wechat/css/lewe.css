@@ -156,6 +156,7 @@
 }
 .teachers_show .weui_tab_bd {
     background-color: #fff;
+    padding-bottom: 50px;
 }
 .teachers_show .bottombar {
     position: fixed;
