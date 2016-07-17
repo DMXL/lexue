@@ -156,6 +156,11 @@ function getAvatar($url, $preset)
     return '/default/avatar.png?p=' . $preset;
 }
 
+function getSampleVideoUrl()
+{
+    return url('video/' . env('TEST_VIDEO'));
+}
+
 /**
  * @param $route
  * @return bool
