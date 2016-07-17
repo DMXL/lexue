@@ -32,11 +32,8 @@
                     </article>
                 </div>
                 <div id="tab2" class="weui_tab_bd_item">
-                    <button onclick="playVid()" type="button">播放视频</button>
-                    <button onclick="pauseVid()" type="button">暂停视频</button>
-                    <br />
-                    <video id="video1">
-                        <source src="{{ getVideoUrl($teacher->video) }}" type="video/mp4">
+                    <video controls>
+                        <source src="{{ getVideoUrl($teacher->video) }}">
                         Your browser does not support HTML5 video.
                     </video>
                 </div>
@@ -55,15 +52,5 @@
 @endsection
 
 @section('js')
-    <script>
-        var myVideo = document.getElementById("video1");
 
-        function playVid() {
-            myVideo.play();
-        }
-
-        function pauseVid() {
-            myVideo.pause();
-        }
-    </script>
 @endsection
