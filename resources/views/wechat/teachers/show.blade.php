@@ -17,7 +17,7 @@
                 <a href="#tab2" class="weui_navbar_item">
                     试听课程
                 </a>
-                <a href="#tab3" class="weui_navbar_item">
+                <a id="purchase_tab" href="#tab3" class="weui_navbar_item">
                     购买课时
                 </a>
             </div>
@@ -32,11 +32,8 @@
                     </article>
                 </div>
                 <div id="tab2" class="weui_tab_bd_item">
-                    <button onclick="playVid()" type="button">播放视频</button>
-                    <button onclick="pauseVid()" type="button">暂停视频</button>
-                    <br />
-                    <video id="video1">
-                        <source src="{{ getVideoUrl($teacher->video) }}" type="video/mp4">
+                    <video loop id="teachers_video">
+                        <source src="/videos/sudointro.mp4" type="video/mp4">
                         Your browser does not support HTML5 video.
                     </video>
                 </div>
@@ -49,21 +46,24 @@
             <div class="bottombar_text">
                 ￥{{ $teacher->unit_price }}.00/课时（45分钟）
             </div>
-            <a class="weui_btn weui_btn_mini weui_btn_primary">购买课时</a>
+            <a id="purchase" class="weui_btn weui_btn_mini weui_btn_primary">购买课时</a>
         </div>
     </div>
 @endsection
 
 @section('js')
     <script>
-        var myVideo = document.getElementById("video1");
+        // 点击#tab1#tab3时暂停播放
+        $('.weui_navbar_item').click(function() {
+            if($(this).attr('href') == '#tab2')
+                $('#teachers_video')[0].play();
+            else $('#teachers_video')[0].pause();
+        });
 
-        function playVid() {
-            myVideo.play();
-        }
-
-        function pauseVid() {
-            myVideo.pause();
-        }
+        // 点击购买课程事件
+        $('#purchase').click(function() {
+            if($('.weui_bar_item_on').attr('href') != '#tab3')
+                $('#purchase_tab').click();
+        });
     </script>
 @endsection
