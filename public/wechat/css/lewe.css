@@ -23,47 +23,14 @@
 | COMMON STYLES
 |--------------------------------------------------------------------------
 */
+/* Generic Style */
+.bd {
+    background-color: #fbf9fe;
+}
 
-/* Card-like Panel Style */
-.lewe_panel.weui_panel {
-    background-color: #f4f4f4;
-}
-.lewe_panel .weui_panel_hd {
-    background-color: #fff;
-    /* box-shadow: 0 1px 2px rgba(0,0,0,.3); */
-}
-.lewe_panel .weui_panel_hd:after {
-    left: 0;
-}
-.lewe_panel .weui_media_box {
-    padding: 15px;
-}
-.lewe_panel .weui_media_box:before {
-    left: 0;
-    border-top: none;
-}
-.lewe_panel .weui_media_box.weui_media_appmsg {
-    margin: 15px;
-    background-color: #fff;
-    border-radius: 1px;
-    /* box-shadow: 0 1px 2px rgba(0,0,0,.3); */
-}
-.lewe_panel .weui_media_box.weui_media_appmsg .weui_media_hd {
-    margin-right: 15px;
-    width: 20%;
-}
-.lewe_panel .weui_media_box.weui_media_appmsg .weui_media_appmsg_thumb {
-    border-radius: 50%;
-    width: auto;
-}
-.lewe_panel .weui_media_box.weui_media_appmsg .weui_media_bd h4 {
-    margin: 0;
-}
-.lewe_panel .weui_media_box .weui_media_desc {
-    line-height: 1.5;
-    overflow: auto;
-    text-overflow: ellipsis;
-    display: block;
+/* Icon Area Style */
+.weui_icon_area {
+    text-align: center;
 }
 
 /* Badges Style */
@@ -117,8 +84,53 @@
 |--------------------------------------------------------------------------
 */
 
-/* Teachers Page */
-.teachers_pricetag {
+/* Teachers Index Page */
+.teachers_index .weui_panel {
+    background-color: transparent;
+}
+.teachers_index .weui_panel_hd {
+    background-color: #fff;
+    /* box-shadow: 0 1px 2px rgba(0,0,0,.3); */
+}
+.teachers_index .weui_panel_hd:after {
+    left: 0;
+    border-bottom: 1px solid #bcbab6;
+}
+.teachers_index .weui_media_box {
+    padding: 15px;
+}
+.teachers_index .weui_media_box:before {
+    left: 0;
+    border-top: none;
+}
+.teachers_index .weui_media_box.weui_media_appmsg {
+    margin: 15px;
+    background-color: #fff;
+    border-radius: 1px;
+    /*
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    */
+    box-shadow: 1px 1px 0 rgba(100,100,100,.1);
+}
+.teachers_index .weui_media_box.weui_media_appmsg .weui_media_hd {
+    margin-right: 15px;
+    width: 20%;
+}
+.teachers_index .weui_media_box.weui_media_appmsg .weui_media_appmsg_thumb {
+    border-radius: 50%;
+    width: auto;
+}
+.teachers_index .weui_media_box.weui_media_appmsg .weui_media_bd h4 {
+    margin: 0;
+}
+.teachers_index .weui_media_box .weui_media_desc {
+    line-height: 1.5;
+    overflow: auto;
+    text-overflow: ellipsis;
+    display: block;
+}
+.teachers_index .pricetag {
     color: #fff;
     background-color: #85bb65;
     font-size: 16px;
@@ -127,6 +139,39 @@
     position: absolute;
     right: -2px;
 }
-.teachers_badgegroup {
+.teachers_index .badgegroup {
     margin-top: 3px;
+}
+
+/* Teachers Show Page */
+.teachers_show .weui_icon_area {
+    padding: 5% 0 3%;
+}
+.teachers_show .avatar {
+    width: 30%;
+    border-radius: 50%;
+}
+.teachers_show .weui_navbar {
+    border-top: 0.04em solid #ddd;
+}
+.teachers_show .weui_tab_bd {
+    background-color: #fff;
+}
+.teachers_show .bottombar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 0.04em solid #ddd;
+    background-color: rgba(245,245,245,.8);
+    font-size: 15px;
+    padding: 13px 0;
+}
+.teachers_show .bottombar_text {
+    float: left;
+    margin-left: 10px;
+}
+.teachers_show .bottombar .weui_btn {
+    float: right;
+    margin-top: -2px;
+    margin-right: 15px;
 }
