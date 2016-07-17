@@ -167,6 +167,17 @@ function getVideoUrl($path, $ext)
     return url($path);
 }
 
+function getVideosUrl($path, $ext)
+{
+    if (!$path) {
+        $path = 'videos/' . ltrim(config('default_files.video'),'/');
+    }
+
+    $path = $path . '.' . $ext;
+
+    return url($path);
+}
+
 /**
  * @param $route
  * @return bool
