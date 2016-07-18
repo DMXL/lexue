@@ -25,7 +25,7 @@
                 <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
                     <article class="weui_article">
                         <section>
-                            <p>{{ $teacher->years_of_teaching }}教龄&nbsp;&nbsp;授课年级: {{ $teacher->levels->implode('name', ',') }}</p>
+                            <p>{{ $teacher->years_of_teaching }}教龄&nbsp;&nbsp;授课年级: {{ $teacher->pretty_levels }}</p>
                             <p>{{ $teacher->description }}</p>
                             <p>学生评价:</p>
                         </section>
@@ -44,7 +44,7 @@
         </div>
         <div class="bottombar">
             <div class="bottombar_text">
-                ￥{{ $teacher->unit_price }}.00/课时（45分钟）
+                {{ $teacher->price }}/课时（45分钟）
             </div>
             <a id="purchase" class="weui_btn weui_btn_mini weui_btn_primary">购买课时</a>
         </div>
