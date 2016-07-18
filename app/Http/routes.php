@@ -135,3 +135,7 @@ Route::get('default/{file}', function(
 Route::get('debug', function() {
     return view('debug');
 });
+
+Route::get('debug/teachers/{id}/timetable', function($id){
+    dd(\App\Models\User\Teacher::find($id)->getTimetable());
+});
