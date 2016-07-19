@@ -168,7 +168,7 @@
 
 @section('js')
     <script>
-        var vue = new Vue({
+        new Vue({
             el: '#time-table',
             data: {
                 timetable: {!! json_encode(collect($timetable)->flatten(1)->toArray()) !!},

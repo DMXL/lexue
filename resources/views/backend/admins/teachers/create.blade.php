@@ -5,11 +5,5 @@
 @endsection
 
 @section("js")
-    <script type="text/javascript">
-        $(function() {
-            $("#teacher-labels").selectize({
-                create: true
-            });
-        });
-    </script>
+    @include('backend.admins.teachers._formJs')
 @endsection
