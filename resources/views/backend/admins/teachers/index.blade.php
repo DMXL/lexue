@@ -47,4 +47,8 @@
         </div>
         @endforeach
     </div>
+
+    @if($teachers->render())
+        {!! $teachers->render() !!}
+    @endif
 @endsection
