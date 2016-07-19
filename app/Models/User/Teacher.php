@@ -13,7 +13,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Teacher extends Authenticatable
 {
     protected $fillable = [
-        'name'
+        'name',
+        'unit_price',
+        'teaching_since',
+        'description'
     ];
 
     protected $hidden = [
@@ -138,6 +141,7 @@ class Teacher extends Authenticatable
                 $range = $timeSlot->range;
                 $string = humanDate($date) . ', ' . $timeSlot->day_part . '' . $range;
                 $timetable[$key]['times'][$value] = [
+                    'value' => $value,
                     'string' => $string,
                     'range' => $range,
                     'disabled' => in_array($value, $unavailabilities)
