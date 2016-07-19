@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Course\TimeSlot;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -44,16 +45,19 @@ class TimeSlotController extends Controller
     {
         $this->validate($request, [
             'start' => 'required|regex:/^\d{2}:\d{2}$/',
-            'end' => 'required|regex:/^\d{2}:\d{2}$/'
+            'length' => 'required|numeric'
         ], [
             'start.required' => '请填写开始时间',
-            'end.required' => '请填写结束时间',
             'start.regex' => '请确保开始时间格式为hh:mm',
-            'end.regex' => '请确保结束时间格式为 hh:mm',
+            'length.required' => '请选择时长',
+            'length.numeric' => '时长必须为数字',
         ]);
 
         $start = $request->input('start');
-        $end = $request->input('end');
+        $length = $request->input('length');
+
+        /* calculate end time */
+        $end = Carbon::parse($start)->addMinutes($length)->format('H:i');
 
         if (TimeSlot::where('start', $start)->where('end', $end)->exists()) {
             \Flash::error('重复课时');
@@ -61,7 +65,10 @@ class TimeSlotController extends Controller
         }
 
         try {
-            TimeSlot::create($request->all());
+            $timeSlot = new TimeSlot();
+            $timeSlot->start = $start;
+            $timeSlot->end = $end;
+            $timeSlot->save();
         } catch (\Exception $e) {
             \Flash::error('系统错误');
             return back();

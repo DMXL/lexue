@@ -1,30 +1,38 @@
 @extends('backend.layouts.app')
 
 @section('content')
-    <div class="ibox float-e-margins">
+    <div class="ibox float-e-margins" id="timeslot-creation">
         <div class="ibox-content">
             <form role="form" class="form-horizontal" method="POST" action="{{ route('admins::timeslots.store') }}">
                 {{ csrf_field() }}
                 <div class="form-group m-b-none">
                     <label for="timeslot-start" class="control-label col-md-1 col-md-offset-1 col-xs-2">开始时间</label>
-                    <div class="col-md-3 col-xs-10">
-                        <div class="input-group clockpicker" data-autoclose="true">
-                            <input name="start" id="timeslot-start" type="text" class="form-control" value="" >
+                    <div class="col-md-2 col-xs-4">
+                        <div class="input-group">
+                            <input name="start" id="timeslot-start" type="text" class="form-control" value="" v-model="timeslotStart">
                             <span class="input-group-addon">
                                 <span class="fa fa-clock-o"></span>
                             </span>
                         </div>
                     </div>
-                    <label for="timeslot-end" class="control-label col-md-1 col-xs-2">结束时间</label>
-                    <div class="col-md-3 col-xs-10">
-                        <div class="input-group clockpicker" data-autoclose="true">
-                            <input name="end" id="timeslot-end" type="text" class="form-control" value="" >
+                    <label for="timeslot-length" class="control-label col-md-1 col-xs-2">时长</label>
+                    <div class="col-md-2 col-xs-4">
+                        <select name="length" id="timeslot-length" class="form-control" v-model="timeslotLength">
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                            <option value="60">60</option>
+                        </select>
+                    </div>
+                    <label class="control-label col-md-1 col-xs-2">结束时间</label>
+                    <div class="col-md-2 col-xs-4">
+                        <div class="input-group">
+                            <input type="text" class="form-control" :value="timeslotEnd" readonly>
                             <span class="input-group-addon">
-                                <span class="fa fa-clock-o"></span>
+                                    <span class="fa fa-clock-o"></span>
                             </span>
                         </div>
                     </div>
-                    <div class="col-md-2 text-right">
+                    <div class="col-md-2 col-xs-6 text-right">
                         <button class="btn btn-white" type="submit"><i class="fa fa-plus"></i> 添加课时</button>
                     </div>
                 </div>
@@ -67,6 +75,28 @@
 
 @section('js')
     <script>
-        $('.clockpicker').clockpicker();
+        $(function() {
+            $("#timeslot-start").pickatime({
+                format: "HH:i"
+            });
+        });
+
+        // Vue stuff
+        new Vue({
+            el: '#timeslot-creation',
+            data: {
+                timeslotStart: '',
+                timeslotLength: ''
+            },
+            computed: {
+                timeslotEnd() {
+                    if (! this.timeslotStart || ! this.timeslotLength) {
+                        return '';
+                    } else {
+                        return moment(this.timeslotStart, 'HH:mm').add(this.timeslotLength,'minutes').format('HH:mm');
+                    }
+                }
+            }
+        })
     </script>
 @endsection

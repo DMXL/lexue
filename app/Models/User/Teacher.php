@@ -132,11 +132,12 @@ class Teacher extends Authenticatable
         for ($days = 0; $days < config('course.days_to_show'); $days++) {
             $key = Carbon::tomorrow()->addDays($days)->dayOfWeek;
             $date = Carbon::tomorrow()->addDays($days)->toDateString();
+            $timetable[$key]['date'] = $date;
             foreach ($timeSlots as $timeSlot) {
                 $value = $date . '--' . $timeSlot->id;
                 $range = $timeSlot->range;
                 $string = humanDate($date) . ', ' . $timeSlot->day_part . '' . $range;
-                $timetable[$key][$value] = [
+                $timetable[$key]['times'][$value] = [
                     'string' => $string,
                     'range' => $range,
                     'disabled' => in_array($value, $unavailabilities)

@@ -84,9 +84,9 @@
             </div>
             <div class="tabs-container">
                 <ul class="nav nav-tabs">
-                    @foreach(collect($timetable)->keys() as $index => $key)
+                    @foreach(collect($timetable)->keys() as $index => $dayOfWeek)
                         <li{{ $index === 0 ? " class=active" : null }}>
-                            <a data-toggle="tab" href="#tab-{{ $key }}">{{ trans('times.day_of_week.' . $key) }}</a>
+                            <a data-toggle="tab" href="#tab-{{ $index }}">{{ trans('times.day_of_week.' . $dayOfWeek) }}</a>
                         </li>
                     @endforeach
                 </ul>
@@ -94,11 +94,11 @@
                 <form action="{{ route('students::teachers.book', $teacher->id) }}" method="POST">
                     {{ csrf_field() }}
                     <div class="tab-content" id="time-table">
-                        @foreach($timetable as $dayKey => $day)
-                            <div id="tab-{{ $dayKey }}" class="tab-pane{{ $dayKey === 0 ? ' active' : null}}">
+                        @foreach($timetable as $dayOfWeek => $day)
+                            <div id="tab-{{ $dayOfWeek }}" class="tab-pane{{ $dayOfWeek === 0 ? ' active' : null}}">
                                 <div class="panel-body">
                                     <div class="row">
-                                        @foreach($day as $value=> $time)
+                                        @foreach($day['times'] as $value=> $time)
                                             <?php $disabled = $time['disabled'] ?>
                                             <div class="col-md-3 col-sm-6"{{ $disabled ? " disabled=disabled" : null }}>
                                                 <div class="checkbox checkbox-primary">
@@ -168,7 +168,7 @@
 
 @section('js')
     <script>
-        var vue = new Vue({
+        new Vue({
             el: '#time-table',
             data: {
                 timetable: {!! json_encode(collect($timetable)->flatten(1)->toArray()) !!},

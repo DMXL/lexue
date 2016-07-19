@@ -24,8 +24,11 @@ elixir(function(mix) {
         'plugins/select2/select2.min.css',
         'plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css',
         'plugins/touchspin/jquery.bootstrap-touchspin.min.css',
-        'plugins/clockpicker/clockpicker.css',
-        'plugins/bootstrap-tagsinput/bootstrap-tagsinput.css',
+        'plugins/pickadate/default.css',
+        'plugins/pickadate/default.date.css',
+        'plugins/pickadate/default.time.css',
+        'plugins/selectize/selectize.css',
+        'plugins/selectize/selectize.bootstrap3.css',
     ], 'public/app/css');
 
     mix.scripts([
@@ -41,9 +44,11 @@ elixir(function(mix) {
         'plugins/toastr/custom.js',
         'plugins/select2/select2.full.min.js',
         'plugins/touchspin/jquery.bootstrap-touchspin.min.js',
-        'plugins/clockpicker/clockpicker.js',
-        'plugins/typeahead/typeahead.js',
-        'plugins/bootstrap-tagsinput/bootstrap-tagsinput.js',
+        'plugins/pickadate/picker.js',
+        'plugins/pickadate/picker.date.js',
+        'plugins/pickadate/picker.time.js',
+        'plugins/selectize/selectize.min.js',
+        'plugins/moment/moment.js',
         'vue.min.js'
     ], 'public/app/js');
 
