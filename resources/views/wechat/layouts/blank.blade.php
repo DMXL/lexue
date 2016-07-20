@@ -20,11 +20,6 @@
     <link href="{{ asset('wechat/css/jquery-weui.css') }}" rel="stylesheet">
     <link href="{{ asset('wechat/css/lewe.css') }}" rel="stylesheet">
 
-    <!-- Scripts -->
-    <script src="{{ asset('wechat/lib/jquery-2.1.4.min.js') }}"></script>
-    <script src="{{ asset('wechat/js/jquery-weui.js') }}"></script>
-    <script src="{{ asset('wechat/js/lewe.js') }}"></script>
-
 </head>
 
 <body>
@@ -32,6 +27,11 @@
 <div>
     @yield('content')
 </div>
+
+<!-- Scripts -->
+<script src="{{ asset('wechat/lib/jquery-2.1.4.min.js') }}"></script>
+<script src="{{ asset('wechat/js/jquery-weui.js') }}"></script>
+<script src="{{ asset('wechat/js/lewe.js') }}"></script>
 
 <!-- Ajax Setup -->
 <!--

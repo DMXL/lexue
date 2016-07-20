@@ -40,19 +40,12 @@
                 <div id="tab3" class="weui_tab_bd_item">
                     <div>
                         <div class="calendar">
-                            @foreach(collect($timetable)->keys() as $index => $dayOfWeek)
+                            @foreach(collect($timetable) as $dayOfWeek => $day)
                                 <a class="calendar_day select">
-                                    <span class="date">{{ explode("-", (collect($timetable)->pluck('date')[$index]))[2] }}</span><br />
+                                    <span class="date">{{ dayOfMonth($day['date']) }}</span><br />
                                     {{ trans('times.day_of_week.' . $dayOfWeek) }}
                                 </a>
                                 <input type="hidden" class='select_input' id="{{ $dayOfWeek }}" />
-                                <script>
-                                    $('.select_input#{{ $dayOfWeek }}').select({
-                                        title: "请选择课程时间",
-                                        multi: true,
-                                        items: {!! json_encode(array_values(collect($timetable)->pluck('times')[$index])) !!}
-                                    });
-                                </script>
                             @endforeach
                         </div>
                     </div>
@@ -123,6 +116,24 @@
         });
 
         // 课时选择selector
+        var timetable = new Array();
+        timetable = {!! json_encode($timetable) !!};
+
+        for (var dayOfWeek in timetable) {
+            var times = new Array();
+            var timesWithKeys = timetable[dayOfWeek]['times'];
+
+            for (var value in timesWithKeys) {
+                times.push(timesWithKeys[value]);
+            }
+
+            $('.select_input#' + dayOfWeek).select({
+                title: "请选择课程时间",
+                multi: true,
+                items: times
+            });
+        }
+
         $('.select').click(function() {
             $(this).next().select('open');
         });
