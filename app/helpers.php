@@ -188,7 +188,7 @@ function isPageActive($route)
  */
 function humanDateTime($timestamp)
 {
-    return Date::parse($timestamp)->format('Fj\\号, l, h:i A');
+    return Carbon::parse($timestamp)->format('m月j日, l, h:i A');
 }
 
 function humanTime($timestamp)
@@ -198,7 +198,7 @@ function humanTime($timestamp)
 
 function humanDate($timestamp)
 {
-    return Date::parse($timestamp)->format('Fj\\号, l');
+    return Date::parse($timestamp)->format('m月j日');
 }
 
 function dayOfMonth($timestamp)
