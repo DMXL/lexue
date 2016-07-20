@@ -1,18 +1,20 @@
 @extends("backend.layouts.app")
 
 <?php
-$defaults = [
-        'name' => '',
-        'unit_price' => '',
-        'teaching_since' => '',
-        'description' => '',
-        'levels' => [],
-        'labels' => [],
-];
+    $action = route('admins::teachers.store');
+    $method = 'post';
+    $defaults = [
+            'name' => '',
+            'unit_price' => '',
+            'teaching_since' => '',
+            'description' => '',
+            'levels' => [],
+            'labels' => [],
+    ];
 ?>
 
 @section("content")
-    @include("backend.admins.teachers._form", compact('defaults'))
+    @include("backend.admins.teachers._form", compact('defaults','action'))
 @endsection
 
 @section("js")
