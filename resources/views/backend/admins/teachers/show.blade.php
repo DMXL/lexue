@@ -13,7 +13,7 @@
         <div class="ibox-title">
             <h5 class="no-margins vertical-middle">教师信息</h5>
             <div class="ibox-tools">
-                <a class="btn btn-warning btn-outline btn-xs">
+                <a href="{{ route('admins::teachers.edit', $teacher->id) }}" class="btn btn-warning btn-outline btn-xs">
                     <i class="fa fa-wrench"></i> 修改
                 </a>
             </div>
