@@ -39,10 +39,19 @@
                 </div>
                 <div id="tab3" class="weui_tab_bd_item">
                     <div class="calendar">
-                        @foreach(collect($timetable)->keys() as $index => $key)
-                            <a href="#tab-{{ $key }}" class="calendar_day">
-                                {{ trans('times.day_of_week.' . $key) }}
+                        @foreach(collect($timetable)->keys() as $index => $dayOfWeek)
+                            <a class="calendar_day select">
+                                <span class="date">{{ explode("-", (collect($timetable)->pluck('date')[$index]))[2] }}</span><br />
+                                {{ trans('times.day_of_week.' . $dayOfWeek) }}
                             </a>
+                            <input type="hidden" class='select_input' id="{{ $dayOfWeek }}" />
+                            <script>
+                                $('.select_input#{{ $dayOfWeek }}').select({
+                                    title: "请选择课程时间",
+                                    multi: true,
+                                    items: {!! json_encode(array_values(collect($timetable)->pluck('times')[$index])) !!}
+                                });
+                            </script>
                         @endforeach
                     </div>
                 </div>
@@ -73,6 +82,11 @@
         $('#purchase').click(function() {
             if($('.weui_bar_item_on').attr('href') != '#tab3')
                 $('#purchase_tab').click();
+        });
+
+        // 课时选择selector
+        $('.select').click(function() {
+            $(this).next().select('open');
         });
     </script>
 @endsection

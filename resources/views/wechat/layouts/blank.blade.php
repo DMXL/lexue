@@ -15,9 +15,15 @@
 
     <title>{{ isset($title) ? $title . ' - ' : ''}}{{ appName() }}</title>
 
+    <!-- Styles -->
     <link href="{{ asset('wechat/css/weui.css') }}" rel="stylesheet">
     <link href="{{ asset('wechat/css/jquery-weui.css') }}" rel="stylesheet">
     <link href="{{ asset('wechat/css/lewe.css') }}" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="{{ asset('wechat/lib/jquery-2.1.4.min.js') }}"></script>
+    <script src="{{ asset('wechat/js/jquery-weui.js') }}"></script>
+    <script src="{{ asset('wechat/js/lewe.js') }}"></script>
 
 </head>
 
@@ -26,11 +32,6 @@
 <div>
     @yield('content')
 </div>
-
-<!-- Mainly scripts -->
-<script src="{{ asset('wechat/lib/jquery-2.1.4.min.js') }}"></script>
-<script src="{{ asset('wechat/js/jquery-weui.js') }}"></script>
-<script src="{{ asset('wechat/js/lewe.js') }}"></script>
 
 <!-- Ajax Setup -->
 <!--

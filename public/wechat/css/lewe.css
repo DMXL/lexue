@@ -152,7 +152,7 @@
     border-radius: 50%;
 }
 .teachers_show .weui_navbar {
-    border-top: 0.04em solid #ddd;
+    border-top: 1px solid #ccc;
 }
 .teachers_show .weui_tab_bd {
     background-color: #fff;
@@ -162,7 +162,7 @@
     position: fixed;
     bottom: 0;
     width: 100%;
-    border-top: 0.04em solid #ddd;
+    border-top: 1px solid #ccc;
     background-color: rgba(245,245,245,.8);
     font-size: 15px;
     padding: 13px 0;
@@ -178,4 +178,19 @@
 }
 .teachers_show video {
     width: 100%;
+}
+.teachers_show .calendar {
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+    background-color: #f4f4f4;
+}
+.teachers_show .calendar_day {
+    display: inline-block;
+    width: calc(100% / 7 - 4px);
+    text-align: center;
+    font-size: 13px;
+    color: #444;
+}
+.teachers_show .calendar_day .date {
+    font-size: 24px;
 }

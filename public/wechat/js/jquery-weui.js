@@ -4308,7 +4308,12 @@ Device/OS Detection
       function closeOnHTMLClick(e) {
           if (inPopover()) return;
           if (p.input && p.input.length > 0) {
-              if (e.target !== p.input[0] && $(e.target).parents('.weui-picker-modal').length === 0) p.close();
+            /*
+            为避免input类型为hidden时造成的bug
+              if (e.target !== p.input[0] && $(e.target).parents('.weui-picker-modal').length === 0) {
+                p.close();
+              }
+            */
           }
           else {
               if ($(e.target).parents('.weui-picker-modal').length === 0) p.close();   
@@ -4558,7 +4563,6 @@ Device/OS Detection
       return d;
     });
 
-
     this.tpl = $.t7.compile("<div class='weui-picker-modal weui-select-modal'>" + config.toolbarTemplate + (config.multi ? config.checkboxTemplate : config.radioTemplate) + "</div>");
 
     if(config.input !== undefined) this.$input.val(config.input);
@@ -4741,12 +4745,12 @@ Device/OS Detection
     radioTemplate:
       '<div class="weui_cells weui_cells_radio">\
         {{#items}}\
-        <label class="weui_cell weui_check_label" for="weui-select-id-{{this.title}}">\
+        <label class="weui_cell weui_check_label {{#if this.disabled}}disabled{{/if}}" for="weui-select-id-{{this.range}}">\
           <div class="weui_cell_bd weui_cell_primary">\
-            <p>{{this.title}}</p>\
+            <p>{{this.range}}</p>\
           </div>\
           <div class="weui_cell_ft">\
-            <input type="radio" class="weui_check" name="weui-select" id="weui-select-id-{{this.title}}" value="{{this.value}}" {{#if this.checked}}checked="checked"{{/if}} data-title="{{this.title}}">\
+            <input type="radio" class="weui_check" name="weui-select" id="weui-select-id-{{this.range}}" value="{{this.value}}" {{#if this.checked}}checked="checked"{{/if}} {{#if this.disabled}}disabled="disabled"{{/if}} data-title="{{this.range}}">\
             <span class="weui_icon_checked"></span>\
           </div>\
         </label>\
@@ -4755,12 +4759,12 @@ Device/OS Detection
     checkboxTemplate:
       '<div class="weui_cells weui_cells_checkbox">\
         {{#items}}\
-        <label class="weui_cell weui_check_label" for="weui-select-id-{{this.title}}">\
+        <label class="weui_cell weui_check_label {{#if this.disabled}}disabled{{/if}}" for="weui-select-id-{{this.range}}">\
           <div class="weui_cell_bd weui_cell_primary">\
-            <p>{{this.title}}</p>\
+            <p>{{this.range}}</p>\
           </div>\
           <div class="weui_cell_ft">\
-            <input type="checkbox" class="weui_check" name="weui-select" id="weui-select-id-{{this.title}}" value="{{this.value}}" {{#if this.checked}}checked="checked"{{/if}} data-title="{{this.title}}" >\
+            <input type="checkbox" class="weui_check" name="weui-select" id="weui-select-id-{{this.range}}" value="{{this.value}}" {{#if this.checked}}checked="checked"{{/if}} {{#if this.disabled}}disabled="disabled"{{/if}} data-title="{{this.range}}" >\
             <span class="weui_icon_checked"></span>\
           </div>\
         </label>\
