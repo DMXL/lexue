@@ -48,7 +48,7 @@ class TeacherController extends Controller
                 return $this->writeTeacherData($teacher, $request);
             });
         } catch (\Exception $e) {
-            throw $e;
+            return back();
             // TODO write to logs and notify
         }
 
@@ -97,8 +97,8 @@ class TeacherController extends Controller
                 return $this->writeTeacherData($teacher, $request);
             });
         } catch (\Exception $e) {
-            throw $e;
             // TODO write to logs and notify
+            return back();
         }
 
         \Flash::success('添加成功');
@@ -113,7 +113,14 @@ class TeacherController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Teacher::destroy($id);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+
+        \Flash::success('删除成功');
+        return redirect()->route('admins::teachers.index');
     }
 
     private function writeTeacherData(Teacher $teacher, TeacherFormRequest $request)
