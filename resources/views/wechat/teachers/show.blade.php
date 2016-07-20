@@ -38,21 +38,47 @@
                     </video>
                 </div>
                 <div id="tab3" class="weui_tab_bd_item">
-                    <div class="calendar">
-                        @foreach(collect($timetable)->keys() as $index => $dayOfWeek)
-                            <a class="calendar_day select">
-                                <span class="date">{{ explode("-", (collect($timetable)->pluck('date')[$index]))[2] }}</span><br />
-                                {{ trans('times.day_of_week.' . $dayOfWeek) }}
+                    <div>
+                        <div class="calendar">
+                            @foreach(collect($timetable)->keys() as $index => $dayOfWeek)
+                                <a class="calendar_day select">
+                                    <span class="date">{{ explode("-", (collect($timetable)->pluck('date')[$index]))[2] }}</span><br />
+                                    {{ trans('times.day_of_week.' . $dayOfWeek) }}
+                                </a>
+                                <input type="hidden" class='select_input' id="{{ $dayOfWeek }}" />
+                                <script>
+                                    $('.select_input#{{ $dayOfWeek }}').select({
+                                        title: "请选择课程时间",
+                                        multi: true,
+                                        items: {!! json_encode(array_values(collect($timetable)->pluck('times')[$index])) !!}
+                                    });
+                                </script>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="course_list">
+                        <div class="weui_cells_title">已选课程</div>
+                        <div class="weui_cells weui_cells_access">
+                            <p class="weui_cell_desc">你还未选择任何课程</p>
+                        </div>
+                        <!--
+                        <div class="weui_cells weui_cells_access">
+                            <a class="weui_cell" href="javascript:;">
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <p>cell standard</p>
+                                </div>
+                                <div class="weui_cell_ft">
+                                </div>
                             </a>
-                            <input type="hidden" class='select_input' id="{{ $dayOfWeek }}" />
-                            <script>
-                                $('.select_input#{{ $dayOfWeek }}').select({
-                                    title: "请选择课程时间",
-                                    multi: true,
-                                    items: {!! json_encode(array_values(collect($timetable)->pluck('times')[$index])) !!}
-                                });
-                            </script>
-                        @endforeach
+                            <a class="weui_cell" href="javascript:;">
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <p>cell standard</p>
+                                </div>
+                                <div class="weui_cell_ft">
+                                </div>
+                            </a>
+                        </div>
+                        -->
                     </div>
                 </div>
             </div>
@@ -71,11 +97,23 @@
         // Hashtag定位
         // var hash = window.location.hash;
 
-        // 点击#tab1#tab3时暂停播放
+        // 点击tab事件
         $('.weui_navbar_item').click(function() {
-            if($(this).attr('href') == '#tab2')
-                $('#teachers_video')[0].play();
-            else $('#teachers_video')[0].pause();
+            var tab = $(this).attr('href');
+
+            switch(tab) {
+                case '#tab1':
+                    $('.select_input').select('close');
+                    $('#teachers_video')[0].pause();
+                    break;
+                case '#tab2':
+                    $('.select_input').select('close');
+                    $('#teachers_video')[0].play();
+                    break;
+                case '#tab3':
+                    $('#teachers_video')[0].pause();
+                    break;
+            }
         });
 
         // 点击'购买课程'事件

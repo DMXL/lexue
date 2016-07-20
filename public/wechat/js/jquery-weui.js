@@ -4616,7 +4616,7 @@ Device/OS Detection
     for(var i=0;i<items.length;i++) {
       items[i].checked = false;
       for(var j=0;j<titles.length;j++) {
-        if(items[i].title === titles[j]) {
+        if(items[i].range === titles[j]) {
           items[i].checked = true;
         }
       }
@@ -4751,7 +4751,7 @@ Device/OS Detection
           </div>\
           <div class="weui_cell_ft">\
             <input type="radio" class="weui_check" name="weui-select" id="weui-select-id-{{this.range}}" value="{{this.value}}" {{#if this.checked}}checked="checked"{{/if}} {{#if this.disabled}}disabled="disabled"{{/if}} data-title="{{this.range}}">\
-            <span class="weui_icon_checked"></span>\
+            {{#if this.disabled}}不可约{{/if}} <span class="weui_icon_checked" {{#if this.disabled}}style="display: none"{{/if}}></span>\
           </div>\
         </label>\
         {{/items}}\
@@ -4765,7 +4765,7 @@ Device/OS Detection
           </div>\
           <div class="weui_cell_ft">\
             <input type="checkbox" class="weui_check" name="weui-select" id="weui-select-id-{{this.range}}" value="{{this.value}}" {{#if this.checked}}checked="checked"{{/if}} {{#if this.disabled}}disabled="disabled"{{/if}} data-title="{{this.range}}" >\
-            <span class="weui_icon_checked"></span>\
+            {{#if this.disabled}}不可约{{/if}} <span class="weui_icon_checked" {{#if this.disabled}}style="display: none"{{/if}}></span>\
           </div>\
         </label>\
         {{/items}}\
