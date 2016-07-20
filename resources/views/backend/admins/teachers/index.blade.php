@@ -12,7 +12,7 @@
     <div class="row">
     @foreach($teachers as $teacher)
         <div class="col-lg-3">
-            <div class="contact-box center-version">
+            <div class="contact-box center-version{{ $teacher->enabled ? '' : ' disabled' }}">
 
                 <a href="{{ route('admins::teachers.show', $teacher->id) }}">
 

@@ -105,6 +105,40 @@ class TeacherController extends Controller
         return redirect()->route('admins::teachers.show', $teacher->id);
     }
 
+    public function enable($id)
+    {
+        try {
+            $teacher = Teacher::find($id);
+            if (!$teacher->enabled) {
+                $teacher->enabled = true;
+                $teacher->save();
+            }
+        } catch (\Exception $e) {
+            // TODO logging and notify
+            return back();
+        }
+
+        \Flash::success('教师已上线');
+        return back();
+    }
+
+    public function disable($id)
+    {
+        try {
+            $teacher = Teacher::find($id);
+            if ($teacher->enabled) {
+                $teacher->enabled = false;
+                $teacher->save();
+            }
+        } catch (\Exception $e) {
+            // TODO logging and notify
+            return back();
+        }
+
+        \Flash::success('教师已下线');
+        return back();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -116,13 +150,21 @@ class TeacherController extends Controller
         try {
             Teacher::destroy($id);
         } catch (\Exception $e) {
-            throw $e;
+            //throw $e;
+            return back();
         }
 
         \Flash::success('删除成功');
         return redirect()->route('admins::teachers.index');
     }
 
+    /**
+     * Write teacher form data to db.
+     *
+     * @param Teacher $teacher
+     * @param TeacherFormRequest $request
+     * @return Teacher
+     */
     private function writeTeacherData(Teacher $teacher, TeacherFormRequest $request)
     {
         $teacher->fill($request->all())->save();
