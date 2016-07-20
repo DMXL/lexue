@@ -9,7 +9,6 @@ $defaults = [
         'levels' => [],
         'labels' => [],
 ];
-// closing tag has to exist
 ?>
 
 @section("content")
