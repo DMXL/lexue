@@ -1,113 +1,167 @@
-@extends('wechat.layouts.blank')
+@extends('frontend.layouts.app')
 
 @section('content')
-    @unless($teacher)
-        没有找到该老师的信息
-    @endunless
+    @if($teacher)
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="ibox">
+                    <div class="ibox-content no-background">
+                        <div class="profile-image no-float">
+                            <img src="{{ getAvatarUrl($teacher->avatar, 'md') }}" class="img-circle circle-border m-b-md" alt="profile">
+                        </div>
+                        <h3>{{ $teacher->name }}</h3>
+                        <div>
+                            {{ $teacher->description }}
+                        </div>
+                        <hr>
+                        <div>
+                            <table class="table m-b-xs vertical-middle">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <strong>教师教龄</strong>
+                                    </td>
+                                    <td>
+                                <span>
+                                    {{ $teacher->years_of_teaching }}
+                                </span>
+                                    </td>
 
-    <div class="row" xmlns:v-on="http://www.w3.org/1999/xhtml">
-        <div class="col-lg-3">
-            <div class="ibox">
-                <div class="ibox-content no-background">
-                    <div class="profile-image no-float">
-                        <img src="{{ getAvatarUrl($teacher->avatar, 'md') }}" class="img-circle circle-border m-b-md" alt="profile">
-                    </div>
-                    <h3>{{ $teacher->name }}</h3>
-                    <p class="small">
-                        {{ $teacher->description }}
-                    </p>
-                    <p class="small font-bold">
-                        <span><i class="fa fa-circle text-navy"></i> Online status</span>
-                    </p>
-                </div>
-            </div>
-        </div>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>课时费用</strong>
+                                    </td>
+                                    <td>
+                                <span>
+                                    {{ $teacher->price }}
+                                </span>
+                                    </td>
 
-        <div class="col-lg-9">
-            <div class="tabs-container">
-                <ul class="nav nav-tabs">
-                    @foreach(collect($timetable)->keys() as $index => $key)
-                    <li{{ $index === 0 ? " class=active" : null }}>
-                        <a data-toggle="tab" href="#tab-{{ $key }}">{{ trans('times.day_of_week.' . $key) }}</a>
-                    </li>
-                    @endforeach
-                </ul>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>授课范围</strong>
+                                    </td>
+                                    <td>
+                                <span>
+                                    @each('backend.admins.partials.tag', $teacher->levels->pluck('name'), 'name')
+                                </span>
+                                    </td>
 
-                <form action="{{ route('students::teachers.book', $teacher->id) }}" method="POST">
-                    {{ csrf_field() }}
-                    <div class="tab-content" id="time-table">
-                    @foreach($timetable as $dayKey => $day)
-                    <div id="tab-{{ $dayKey }}" class="tab-pane{{ $dayKey === 0 ? ' active' : null}}">
-                        <div class="panel-body">
-                            <div class="row">
-                                @foreach($day as $hourKey => $time)
-                                <?php $disabled = $time['disabled'] ?>
-                                <div class="col-md-3 col-sm-6"{{ $disabled ? " disabled=disabled" : null }}>
-                                    <div class="checkbox checkbox-primary">
-                                        <input type="checkbox" name="times[]"
-                                               id="checkbox-{{ $dayKey }}-{{ $hourKey }}"
-                                               value="{{ $time['time'] }}"{{ $disabled ? " disabled=disabled" : null }}
-                                               v-model="picked"
-                                        >
-                                        <label for="checkbox-{{ $dayKey }}-{{ $hourKey }}">
-                                        <?php $hour = $time['time']->hour ?>
-                                        @if($disabled)
-                                            <s>{{ $hour }}:00 - {{ $hour + 1 }}:00</s>
-                                        @else
-                                            {{ $hour }}:00 - {{ $hour + 1 }}:00
-                                        @endif
-                                        </label>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    @if(authCheck())
-                                    <div class="ibox float-e-margins">
-                                        <div class="ibox-title">
-                                            <h5 class="inline">选择的课程</h5>
-                                        </div>
-
-                                        <div class="ibox-content">
-                                            <div class="row">
-                                                <div class="col-md-6" v-if="selections.length" v-for="item in selections | orderBy 'time'">
-                                                    <div class="alert alert-success">
-                                                        <button class="close" type="button" v-on:click="unselect(item.time)">×</button>
-                                                        @{{ item.translation }}
-                                                    </div>
-                                                </div>
-                                                <div class="alert alert-danger" v-if="!selections.length">
-                                                    还未添加任何课程
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="ibox-footer">
-                                            <span class="pull-right">
-                                                <button type="submit" class="btn btn-primary btn-sm pull-right">确认购买</button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    @else
-                                        <div class="text-right">
-                                            购买课程请先 <a href="{{ route('auth::login.get', ['user_type' => userType(), 'intended' => Request::getRequestUri()]) }}"
-                                                     class="btn btn-primary btn-sm">登录</a>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>教师资历</strong>
+                                    </td>
+                                    <td>
+                                        @each('backend.admins.partials.tag', $teacher->labels->pluck('name'), 'name')
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    @endforeach
                 </div>
-                </form>
             </div>
-
-
+            <div class="col-lg-8">
+                <video controls>
+                    <source src="{{ getVideoUrl($teacher->video) }}">
+                    你的浏览器不支持Html5视频，是时候换Chrome了
+                </video>
+            </div>
         </div>
-    </div>
+        <hr>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h4><i class="fa fa-university"></i> 购买课程</h4>
+                    </div>
+                </div>
+                <div class="tabs-container">
+                    <ul class="nav nav-tabs">
+                        @foreach(collect($timetable)->keys() as $index => $dayOfWeek)
+                            <li{{ $index === 0 ? " class=active" : null }}>
+                                <a data-toggle="tab" href="#tab-{{ $index }}">{{ trans('times.day_of_week.' . $dayOfWeek) }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+
+                    <form action="{{ route('students::teachers.book', $teacher->id) }}" method="POST">
+                        {{ csrf_field() }}
+                        <div class="tab-content" id="time-table">
+                            @foreach($timetable as $dayOfWeek => $day)
+                                <div id="tab-{{ $dayOfWeek }}" class="tab-pane{{ $dayOfWeek === 0 ? ' active' : null}}">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            @foreach($day['times'] as $time)
+                                                <?php $disabled = $time['disabled'] ?>
+                                                <div class="col-md-3 col-sm-6"{{ $disabled ? " disabled=disabled" : null }}>
+                                                    <div class="checkbox checkbox-primary">
+                                                        <input type="checkbox" name="times[]"
+                                                               id="timeslot-{{ $time['value'] }}"
+                                                               value="{{ $time['value'] }}"{{ $disabled ? " disabled=disabled" : null }}
+                                                               v-model="picked"
+                                                        >
+                                                        <label for="timeslot-{{ $time['value'] }}">
+                                                            @if($disabled)
+                                                                <s>{{ $time['range'] }}</s>
+                                                            @else
+                                                                {{ $time['range'] }}
+                                                            @endif
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        <hr>
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                @if(authCheck())
+                                                    <div class="ibox float-e-margins">
+                                                        <div class="ibox-title">
+                                                            <h5 class="inline">选择的课程</h5>
+                                                        </div>
+
+                                                        <div class="ibox-content">
+                                                            <div class="row">
+                                                                <div class="col-md-6" v-if="selections.length" v-for="item in selections | orderBy 'time'">
+                                                                    <div class="alert alert-success">
+                                                                        <button class="close" type="button" v-on:click.stop="unselect(item.value)">×</button>
+                                                                        @{{ item.name }}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="alert alert-danger" v-if="!selections.length">
+                                                                    还未添加任何课程
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="ibox-footer">
+                                        <span class="pull-right">
+                                            <button type="submit" class="btn btn-primary btn-sm pull-right">确认购买</button>
+                                        </span>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div class="text-right">
+                                                        购买课程请先 <a href="{{ route('auth::login.get', ['user_type' => userType(), 'intended' => Request::getRequestUri()]) }}"
+                                                                  class="btn btn-primary btn-sm">登录</a>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection
 
 @section('js')
@@ -115,19 +169,16 @@
         new Vue({
             el: '#time-table',
             data: {
+                timetable: {!! json_encode(collect($timetable)->pluck('times')->flatten(1)->toArray()) !!},
                 picked: []
             },
             computed: {
                 selections() {
+                    var vm = this;
                     return this.picked.map(function(selection){
-                        var date = new Date(selection);
-                        var options = {
-                            weekday: "long", year: "numeric", month: "short",
-                            day: "numeric", hour: "2-digit", minute: "2-digit"
-                        };
                         return {
-                            time: selection,
-                            translation: date.toLocaleTimeString("zh-CN", options)
+                            name: vm.timetable[selection].string,
+                            value : selection
                         };
                     })
                 }
@@ -135,7 +186,10 @@
             methods: {
                 unselect(time) {
                     // trigger click on the checkbox
-                    $("input[value='" + time + "'] + label").click();
+                    var index = this.picked.indexOf(time);
+                    if (index > -1) {
+                        this.picked.splice(index, 1);
+                    }
                 }
             }
         })

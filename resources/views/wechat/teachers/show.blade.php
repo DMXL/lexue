@@ -38,7 +38,22 @@
                     </video>
                 </div>
                 <div id="tab3" class="weui_tab_bd_item">
-                    <h1 class="doc-head">购买课时!</h1>
+                    <div class="calendar">
+                        @foreach(collect($timetable)->keys() as $index => $dayOfWeek)
+                            <a class="calendar_day select">
+                                <span class="date">{{ explode("-", (collect($timetable)->pluck('date')[$index]))[2] }}</span><br />
+                                {{ trans('times.day_of_week.' . $dayOfWeek) }}
+                            </a>
+                            <input type="hidden" class='select_input' id="{{ $dayOfWeek }}" />
+                            <script>
+                                $('.select_input#{{ $dayOfWeek }}').select({
+                                    title: "请选择课程时间",
+                                    multi: true,
+                                    items: {!! json_encode(array_values(collect($timetable)->pluck('times')[$index])) !!}
+                                });
+                            </script>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
@@ -53,6 +68,9 @@
 
 @section('js')
     <script>
+        // Hashtag定位
+        // var hash = window.location.hash;
+
         // 点击#tab1#tab3时暂停播放
         $('.weui_navbar_item').click(function() {
             if($(this).attr('href') == '#tab2')
@@ -60,10 +78,15 @@
             else $('#teachers_video')[0].pause();
         });
 
-        // 点击购买课程事件
+        // 点击'购买课程'事件
         $('#purchase').click(function() {
             if($('.weui_bar_item_on').attr('href') != '#tab3')
                 $('#purchase_tab').click();
+        });
+
+        // 课时选择selector
+        $('.select').click(function() {
+            $(this).next().select('open');
         });
     </script>
 @endsection
