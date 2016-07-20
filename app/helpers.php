@@ -201,6 +201,10 @@ function humanDate($timestamp)
     return Date::parse($timestamp)->format('Fj\\号, l');
 }
 
+function dayOfMonth($timestamp)
+{
+    return Date::parse($timestamp)->format('d');
+}
 
 /**
  * Generate absolute path to route file given the file name
