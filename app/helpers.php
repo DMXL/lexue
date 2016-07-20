@@ -198,7 +198,7 @@ function humanTime($timestamp)
 
 function humanDate($timestamp)
 {
-    return Date::parse($timestamp)->format('Fj\\号, l');
+    return Date::parse($timestamp)->format('m月j日');
 }
 
 
