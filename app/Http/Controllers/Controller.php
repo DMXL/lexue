@@ -42,4 +42,16 @@ class Controller extends BaseController
 
         return view('backend.' . $path, $data);
     }
+
+    protected function frontRedirect($route)
+    {
+        /* sanitize */
+        $route = preg_replace('/^(students|wechat)::/', '', $route);
+
+        if (isWechat()) {
+            return redirect()->route('wechat::' . $route);
+        }
+
+        return redirect()->route('students::' . $route);
+    }
 }

@@ -44,6 +44,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="ibox-footer text-right">
+                    {{ $lectures->render() }}
+                </div>
             </div>
         </div>
     </div>

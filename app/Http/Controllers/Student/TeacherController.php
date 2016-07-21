@@ -100,6 +100,6 @@ class TeacherController extends Controller
         }
 
         flash()->success('课程添加成功');
-        return redirect()->route('students::lectures.index');
+        return $this->frontRedirect('students::lectures.index');
     }
 }
