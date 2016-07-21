@@ -43,36 +43,23 @@
                             @foreach(collect($timetable) as $dayOfWeek => $day)
                                 <a class="calendar_day select">
                                     <span class="date">{{ Carbon::parse($day['date'])->day }}</span><br />
-                                    {{ trans('times.day_of_week.' . $dayOfWeek) }}
+                                    <span class="dayow">{{ trans('times.day_of_week.' . $dayOfWeek) }}</span>
                                 </a>
                                 <input type="hidden" class='select_input' id="{{ $dayOfWeek }}" />
                             @endforeach
                         </div>
                     </div>
-                    <div class="course_list">
-                        <div class="weui_cells_title">已选课程</div>
-                        <div class="weui_cells weui_cells_access">
-                            <p class="weui_cell_desc">你还未选择任何课程</p>
+                    <form action="{{ route('students::teachers.book', $teacher->id) }}" method="POST">
+                        <div class="course_list">
+                            <div class="weui_cells_title">已选课程</div>
+                            <div class="weui_cells weui_cells_access">
+                                <p class="weui_cell_desc">你还未选择任何课程</p>
+                                @foreach(collect($timetable) as $dayOfWeek => $day)
+                                    <div class="coursegroup" id="group_{{ $dayOfWeek }}"></div>
+                                @endforeach
+                            </div>
                         </div>
-                        <!--
-                        <div class="weui_cells weui_cells_access">
-                            <a class="weui_cell" href="javascript:;">
-                                <div class="weui_cell_bd weui_cell_primary">
-                                    <p>cell standard</p>
-                                </div>
-                                <div class="weui_cell_ft">
-                                </div>
-                            </a>
-                            <a class="weui_cell" href="javascript:;">
-                                <div class="weui_cell_bd weui_cell_primary">
-                                    <p>cell standard</p>
-                                </div>
-                                <div class="weui_cell_ft">
-                                </div>
-                            </a>
-                        </div>
-                        -->
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -80,7 +67,7 @@
             <div class="bottombar_text">
                 {{ $teacher->price }}/课时（45分钟）
             </div>
-            <a id="purchase" class="weui_btn weui_btn_mini weui_btn_primary">购买课时</a>
+            <button type="submit" id="purchase" class="weui_btn weui_btn_mini weui_btn_primary">购买课时</>
         </div>
     </div>
 @endsection
@@ -116,9 +103,6 @@
         });
 
         // 课时选择selector
-        function test() {
-            alert('test');
-        }
         var timetable = new Array();
         timetable = {!! json_encode($timetable) !!};
 
@@ -134,12 +118,72 @@
                 title: "请选择课程时间",
                 multi: true,
                 items: times,
-                beforeClose: test()
+                dow: dayOfWeek,
+                onClose: function(callback) {
+                    if(callback) {
+                        var group_id = callback.dow;
+                        var titles = callback.titles.split(',');
+                        var values = callback.values.split(',');
+                        var appendix = '';
+
+                        if(callback.length == 0) {
+                            $('#group_'+group_id).html('').removeClass('nonempty');
+                        }
+                        else {
+                            $.toptip(dayToDay(group_id)+'已添加'+callback.length+'个课程', 'success');
+                            for (var index in titles) {
+                                appendix += '<a class="weui_cell" href="javascript:;">\
+                                    <div class="weui_cell_bd weui_cell_primary">\
+                                        <p>'+values[index].split('--')[0]+'&nbsp;&nbsp;&nbsp;&nbsp;'+titles[index]+'</p>\
+                                    </div>\
+                                    <div class="weui_cell_ft">\
+                                    </div>\
+                                </a>';
+                            }
+                            $('#group_'+group_id).html(appendix).addClass('nonempty');
+                        }
+
+                        emptyCheck();
+                    }
+                },
             });
         }
 
         $('.select').click(function() {
             $(this).next().select('open');
         });
+
+        function dayToDay(num) {
+            switch(num) {
+                case '1':
+                    return '周一';
+                    break;
+                case '2':
+                    return '周二';
+                    break;
+                case '3':
+                    return '周三';
+                    break;
+                case '4':
+                    return '周四';
+                    break;
+                case '5':
+                    return '周五';
+                    break;
+                case '6':
+                    return '周六';
+                    break;
+                case '0':
+                    return '周日';
+                    break;
+
+            }
+        }
+
+        function emptyCheck() {
+            if($('.course_list .weui_cells .nonempty').length == 0)
+                $('.weui_cell_desc').show();
+            else $('.weui_cell_desc').hide();
+        }
     </script>
 @endsection
