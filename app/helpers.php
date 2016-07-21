@@ -206,11 +206,6 @@ function humanDayOfWeek($dayNumber)
     return trans('times.day_of_week.' . $dayNumber);
 }
 
-function dayOfMonth($timestamp)
-{
-    return Date::parse($timestamp)->format('d');
-}
-
 /**
  * Generate absolute path to route file given the file name
  * All route files are stored in app\Http\Routes

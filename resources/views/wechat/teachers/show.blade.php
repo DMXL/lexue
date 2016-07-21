@@ -42,7 +42,7 @@
                         <div class="calendar">
                             @foreach(collect($timetable) as $dayOfWeek => $day)
                                 <a class="calendar_day select">
-                                    <span class="date">{{ dayOfMonth($day['date']) }}</span><br />
+                                    <span class="date">{{ Carbon::parse($day['date'])->day }}</span><br />
                                     {{ trans('times.day_of_week.' . $dayOfWeek) }}
                                 </a>
                                 <input type="hidden" class='select_input' id="{{ $dayOfWeek }}" />
@@ -116,6 +116,9 @@
         });
 
         // 课时选择selector
+        function test() {
+            alert('test');
+        }
         var timetable = new Array();
         timetable = {!! json_encode($timetable) !!};
 
@@ -130,7 +133,8 @@
             $('.select_input#' + dayOfWeek).select({
                 title: "请选择课程时间",
                 multi: true,
-                items: times
+                items: times,
+                beforeClose: test()
             });
         }
 
