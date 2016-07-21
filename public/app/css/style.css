@@ -3796,6 +3796,9 @@ table.table-mail tr td {
   margin-left: 5px;
   color: #c4c4c4;
 }
+.ibox-tools.ibox-tools-buttons a {
+  color: inherit;
+}
 .ibox-tools a.btn-primary {
   color: #fff;
 }
@@ -4345,6 +4348,10 @@ body.mini-navbar.fixed-sidebar .logo-element {
   border: 1px solid #e7eaec;
   padding: 20px;
   margin-bottom: 20px;
+}
+.contact-box.disabled {
+  opacity: 0.4;
+  background-color: #D1DADE;
 }
 .contact-box > a {
   color: inherit;

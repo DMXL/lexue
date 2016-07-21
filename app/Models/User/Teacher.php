@@ -101,34 +101,48 @@ class Teacher extends Authenticatable
     |--------------------------------------------------------------------------
     */
 
-    // TODO change name (why? I can't remember...)
-    public function getUnavailabilities()
+    public function getLectureUnavailabilities()
     {
         $unavailabilities = [];
         $lectureTimes = $this->lectures()->followingWeek()->get();
-        $offTimes = $this->offTimes;
 
+        foreach ($lectureTimes as $lectureTime) {
+            $unavailabilities[] = $lectureTime->date . '--' . $lectureTime->time_slot_id;
+        }
+
+        return $unavailabilities;
+    }
+
+    public function getOffTimeUnavailabilities()
+    {
+        $unavailabilities = [];
+
+        $offTimes = $this->offTimes;
         $timeSlots = $this->timeSlots;
 
         foreach ($offTimes as $offTime) {
             if ($offTime->all_day) {
                 foreach ($timeSlots as $timeSlot) {
-                    $unavailabilities[] = $timeSlot->date . '--' . $timeSlot->id;
+                    $unavailabilities[] = $offTime->date . '--' . $timeSlot->id;
                 }
             } else {
                 $unavailabilities[] = $offTime->date . '--' . $offTime->time_slot_id;
             }
         }
 
-        foreach ($lectureTimes as $lectureTime) {
-            $unavailabilities[] = $lectureTime->date . '--' . $lectureTime->time_slot_id;
-        }
         return $unavailabilities;
     }
 
-    public function getTimetable($unavailabilities = null)
+    public function getUnavailabilities()
     {
-        $unavailabilities = is_null($unavailabilities)? $this->getUnavailabilities() : $unavailabilities;
+        return array_merge($this->getLectureUnavailabilities(), $this->getOffTimeUnavailabilities());
+    }
+
+    public function getTimetable()
+    {
+        $lectureUnavailabilities = $this->getLectureUnavailabilities();
+        $offtimeUnavailabilities = $this->getOffTimeUnavailabilities();
+        $unavailabilities = $this->getUnavailabilities();
 
         $timetable = [];
         $timeSlots = $this->timeSlots;
@@ -137,14 +151,28 @@ class Teacher extends Authenticatable
             $date = Carbon::tomorrow()->addDays($days)->toDateString();
             $timetable[$key]['date'] = $date;
             foreach ($timeSlots as $timeSlot) {
-                $value = $date . '--' . $timeSlot->id;
+                $timeSlotId = $timeSlot->id;
+                $value = $date . '--' . $timeSlotId;
                 $range = $timeSlot->range;
                 $string = humanDate($date) . ', ' . $timeSlot->day_part . '' . $range;
+                $hour = \Carbon::parse($timeSlot->start)->hour;
+                if ($hour < 12) {
+                    $dayPart = '上午';
+                } elseif ($hour < 18) {
+                    $dayPart = '下午';
+                } else {
+                    $dayPart = '晚上';
+                }
                 $timetable[$key]['times'][$value] = [
+                    'time_slot_id' => $timeSlotId,
+                    'dayPart' => $dayPart,
                     'value' => $value,
                     'string' => $string,
+                    'date' => $date,
                     'range' => $range,
-                    'disabled' => in_array($value, $unavailabilities)
+                    'disabled' => in_array($value, $unavailabilities),
+                    'lecture' => in_array($value, $lectureUnavailabilities),
+                    'offtime' => in_array($value, $offtimeUnavailabilities)
                 ];
             }
         }

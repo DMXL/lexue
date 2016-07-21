@@ -95,24 +95,29 @@
                             <div id="tab-{{ $dayOfWeek }}" class="tab-pane{{ $dayOfWeek === 0 ? ' active' : null}}">
                                 <div class="panel-body">
                                     <div class="row">
-                                        @foreach($day['times'] as $time)
-                                            <?php $disabled = $time['disabled'] ?>
-                                            <div class="col-md-3 col-sm-6"{{ $disabled ? " disabled=disabled" : null }}>
-                                                <div class="checkbox checkbox-primary">
-                                                    <input type="checkbox" name="times[]"
-                                                           id="timeslot-{{ $time['value'] }}"
-                                                           value="{{ $time['value'] }}"{{ $disabled ? " disabled=disabled" : null }}
-                                                           v-model="picked"
-                                                    >
-                                                    <label for="timeslot-{{ $time['value'] }}">
-                                                        @if($disabled)
-                                                            <s>{{ $time['range'] }}</s>
-                                                        @else
-                                                            {{ $time['range'] }}
-                                                        @endif
-                                                    </label>
+                                        @foreach(collect($day['times'])->groupBy('dayPart') as $dayPart => $times)
+                                        <div class="col-sm-4 text-center">
+                                            <h4 class="border-bottom p-sm">{{ $dayPart }}</h4>
+                                            @foreach($times as $time)
+                                                <?php $disabled = $time['disabled'] ?>
+                                                <div class="col-sm-12"{{ $disabled ? " disabled=disabled" : null }}>
+                                                    <div class="checkbox checkbox-primary">
+                                                        <input type="checkbox" name="times[]"
+                                                               id="timeslot-{{ $time['value'] }}"
+                                                               value="{{ $time['value'] }}"{{ $disabled ? " disabled=disabled" : null }}
+                                                               v-model="picked"
+                                                        >
+                                                        <label for="timeslot-{{ $time['value'] }}">
+                                                            @if($disabled)
+                                                                <s>{{ $time['range'] }}</s>
+                                                            @else
+                                                                {{ $time['range'] }}
+                                                            @endif
+                                                        </label>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            @endforeach
+                                        </div>
                                         @endforeach
                                     </div>
                                     <hr>

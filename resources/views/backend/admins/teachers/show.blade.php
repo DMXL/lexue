@@ -12,12 +12,25 @@
     <div class="ibox">
         <div class="ibox-title">
             <h5 class="no-margins vertical-middle">教师信息</h5>
-            <div class="ibox-tools">
-                <a href="{{ route('admins::teachers.edit', $teacher->id) }}" class="btn btn-warning btn-outline btn-xs">
+            <div class="ibox-tools ibox-tools-buttons">
+                <a href="{{ route('admins::teachers.edit', $teacher->id) }}" class="btn btn-default btn-outline btn-xs">
                     <i class="fa fa-wrench"></i> 修改
                 </a>
+                <?php
+                $enabled = $teacher->enabled;
+                $routeAction = $enabled ? 'disable' : 'enable';
+                $buttonText = $enabled ? '下线' : '上线';
+                $buttonClass = $enabled ? 'warning' : 'primary';
+                $faClass = $enabled ? 'arrow-down' : 'arrow-up';
+                ?>
+                <form action="{{ route('admins::teachers.' . $routeAction, $teacher->id) }}" class="inline" method="post">
+                    {{ method_field('put') }}
+                    {{ csrf_field() }}
+                    <button class="btn btn-{{ $buttonClass }} btn-outline btn-xs"><i class="fa fa-{{ $faClass }}"></i> {{ $buttonText }}</button>
+                </form>
+                <span class="m-l-sm m-r-sm"> - </span>
                 <button class="btn btn-danger btn-outline btn-xs"  data-toggle="modal" data-target="#teacher-delete-modal">
-                    <i class="fa fa-wrench"></i> 删除
+                    <i class="fa fa-trash"></i> 删除
                 </button>
             </div>
         </div>
@@ -102,7 +115,7 @@
                         <i class="fa fa-exclamation-circle"></i> 删除后将无法恢复
                     </div>
                     <div class="form-group">
-                        <div class="text-center">请输入要删除教师的名字</div>
+                        <div class="text-center">请输入要删除的教师名字以确认</div>
                         <input type="text" class="form-control" v-model="input">
                     </div>
                     <form action="{{ route('admins::teachers.destroy', $teacher->id) }}" method="post">

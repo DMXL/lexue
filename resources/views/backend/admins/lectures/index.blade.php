@@ -30,7 +30,7 @@
                                         <span class="label label-primary">待学</span>
                                     @endif
                                 </td>
-                                <td>{{ humanDateTime($lecture->start_at) }}</td>
+                                <td>{{ $lecture->human_time }}</td>
                                 <td>
                                     @if( $lecture->single)
                                         <span class="label label-primary">一对一</span>
