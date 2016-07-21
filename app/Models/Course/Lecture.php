@@ -11,7 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 class Lecture extends Model
 {
     protected $appends = [
-        'human_time'
+        'human_time',
+        'mode'
     ];
 
     /*
@@ -48,6 +49,15 @@ class Lecture extends Model
     {
         $timeSlot = $this->timeSlot;
         return humanDate($this->date) . ', ' . $timeSlot->day_part . ' ' . $timeSlot->range;
+    }
+
+    public function getModeAttribute()
+    {
+        if ($this->single) {
+            return '一对一';
+        }
+
+        return '一对多';
     }
 
     /*

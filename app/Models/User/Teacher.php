@@ -137,12 +137,24 @@ class Teacher extends Authenticatable
             $date = Carbon::tomorrow()->addDays($days)->toDateString();
             $timetable[$key]['date'] = $date;
             foreach ($timeSlots as $timeSlot) {
-                $value = $date . '--' . $timeSlot->id;
+                $timeSlotId = $timeSlot->id;
+                $value = $date . '--' . $timeSlotId;
                 $range = $timeSlot->range;
                 $string = humanDate($date) . ', ' . $timeSlot->day_part . '' . $range;
+                $hour = \Carbon::parse($timeSlot->start)->hour;
+                if ($hour < 12) {
+                    $dayPart = '上午';
+                } elseif ($hour < 18) {
+                    $dayPart = '下午';
+                } else {
+                    $dayPart = '晚上';
+                }
                 $timetable[$key]['times'][$value] = [
+                    'time_slot_id' => $timeSlotId,
+                    'dayPart' => $dayPart,
                     'value' => $value,
                     'string' => $string,
+                    'date' => $date,
                     'range' => $range,
                     'disabled' => in_array($value, $unavailabilities)
                 ];

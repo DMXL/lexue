@@ -201,6 +201,11 @@ function humanDate($timestamp)
     return Date::parse($timestamp)->format('m月j日');
 }
 
+function humanDayOfWeek($dayNumber)
+{
+    return trans('times.day_of_week.' . $dayNumber);
+}
+
 function dayOfMonth($timestamp)
 {
     return Date::parse($timestamp)->format('d');

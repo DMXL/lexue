@@ -66,7 +66,9 @@ class TeacherController extends Controller
     {
         $teacher = Teacher::find($id);
 
-        return $this->backView('backend.admins.teachers.show', compact('teacher'));
+        $timetable = $teacher->getTimetable();
+
+        return $this->backView('backend.admins.teachers.show', compact('teacher', 'timetable'));
     }
 
     /**
