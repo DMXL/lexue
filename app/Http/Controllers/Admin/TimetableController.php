@@ -80,7 +80,7 @@ class TimetableController extends Controller
             ['time_slot_id', '=', $timeSlotId]
         ])->orWhere([
             ['date', '=', $date],
-            ['all', '=', 1]
+            ['all_day', '=', 1]
         ])->first();
 
         if ($offtime) {

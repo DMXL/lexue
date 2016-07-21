@@ -193,12 +193,12 @@ function humanDateTime($timestamp)
 
 function humanTime($timestamp)
 {
-    return Date::parse($timestamp)->format('h:i A');
+    return Carbon::parse($timestamp)->format('h:i A');
 }
 
 function humanDate($timestamp)
 {
-    return Date::parse($timestamp)->format('m月j日');
+    return Carbon::parse($timestamp)->format('m月j日');
 }
 
 function humanDayOfWeek($dayNumber)

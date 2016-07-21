@@ -12,11 +12,9 @@
     <div class="ibox">
         <div class="ibox-title">
             <h5 class="no-margins vertical-middle inline">
-                <a href="{{ route('admins::teachers.show', $teacher->id) }}">{{ $teacher->name }}</a> - 教师课表
+                <a class="btn btn-link btn-sm" href="{{ route('admins::teachers.show', $teacher->id) }}">{{ $teacher->name }}</a>
             </h5>
-            <div class="ibox-tools ibox-tools-buttons">
-                <a href="" class="btn btn-default btn-xs"><i class="fa fa-wrench"></i> 修改</a>
-            </div>
+            <a href="" class="btn btn-default btn-sm"><i class="fa fa-wrench"></i> 修改教师课时</a>
         </div>
         <div class="ibox-content">
             <div class="row">
@@ -34,7 +32,18 @@
                                             @foreach($times as $time)
                                                 <?php $disabled = $time['disabled'] ?>
                                                 <div class="m-b-sm"{{ $disabled ? " disabled=disabled" : null }}>
-                                                    <button type="button" class="btn btn-link btn-sm"
+                                                    <?php
+                                                        if ($time['lecture']) {
+                                                            $buttonClass = 'text-success';
+                                                        } elseif ($time['offtime']) {
+                                                            $buttonClass = 'text-danger';
+                                                        } elseif (! $disabled) {
+                                                            $buttonClass = 'btn-link';
+                                                        } else {
+                                                            $buttonClass = '';
+                                                        }
+                                                    ?>
+                                                    <button type="button" class="btn {{ $buttonClass }} btn-sm"
                                                             data-toggle="modal"
                                                             data-target="{{ $disabled ? '#teacher-timetable-taken' : '#teacher-timetable-empty' }}"
                                                             data-snippet-url="{{ route('admins::timetables.snippets.show', ['teacher_id' => $teacher->id, 'date' => $time['date'], 'time_slot_id' => $time['time_slot_id']]) }}"
@@ -69,7 +78,7 @@
                     <h4></h4>
                 </div>
                 <div class="modal-body">
-                    <button class="btn btn-default btn-outline btn-block">
+                    <button class="btn btn-primary btn-outline btn-block">
                         手动添加课程
                     </button>
                     <button class="btn btn-danger btn-outline btn-block">
