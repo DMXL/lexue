@@ -54,4 +54,9 @@ class Controller extends BaseController
 
         return redirect()->route('students::' . $route);
     }
+
+    protected function handleException(\Exception $e)
+    {
+        \Log::error($e);
+    }
 }

@@ -47,7 +47,7 @@ class TimetableController extends Controller
      * @param $teacherId
      * @return \Illuminate\Http\Response
      */
-    public function show($teacherId)
+    public function showTeacher($teacherId)
     {
         $teacher = Teacher::find($teacherId);
 
@@ -56,12 +56,8 @@ class TimetableController extends Controller
         return $this->backView('backend.admins.timetables.show', compact('teacher', 'timetable'));
     }
 
-    public function showSnippet($teacherId)
+    public function showSnippet($teacherId, $date, $timeSlotId)
     {
-        if (! $date = \Request::query('date') OR ! $timeSlotId = \Request::query('time_slot_id')) {
-            return '请求数据有误';
-        }
-
         $teacher = Teacher::find($teacherId);
 
         /* check for lectures */
@@ -71,11 +67,11 @@ class TimetableController extends Controller
         ])->first();
 
         if ($lecture) {
-            return view('backend.admins.snippets.lecture', compact('lecture'));
+            return view('backend.admins.timetables.snippets.lecture', compact('lecture'));
         }
 
         /* check for offtimes */
-        $offtime = $teacher->offTimes()->where([
+        $offTime = $teacher->offTimes()->where([
             ['date', '=', $date],
             ['time_slot_id', '=', $timeSlotId]
         ])->orWhere([
@@ -83,11 +79,11 @@ class TimetableController extends Controller
             ['all_day', '=', 1]
         ])->first();
 
-        if ($offtime) {
-            return view('backend.admins.snippets.offtime', compact('offtime'));
+        if ($offTime) {
+            return view('backend.admins.timetables.snippets.offtime', compact('teacher','offTime'));
         }
 
-        return '没有找到相关内容';
+        return view('backend.admins.timetables.snippets.empty', compact('teacher', 'date', 'timeSlotId'));
     }
 
     /**

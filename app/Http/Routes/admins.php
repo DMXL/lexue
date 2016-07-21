@@ -13,8 +13,13 @@ Route::put('teachers/{id}/enable', ['as' => 'teachers.enable', 'uses' => 'Teache
 Route::put('teachers/{id}/disable', ['as' => 'teachers.disable', 'uses' => 'TeacherController@disable']);
 
 Route::resource('lectures', 'LectureController');
+Route::get('teachers/{teacher_id}/lectures', ['as' => 'teachers.lectures.index', 'uses' => 'LectureController@showTeacher']);
 
 Route::resource('timeslots', 'TimeSlotController');
 
-Route::get('timetables/{teacher_id}/snippet', ['as' => 'timetables.snippets.show', 'uses' => 'TimetableController@showSnippet']);
-Route::resource('timetables', 'TimetableController', ['only' => ['index', 'show']]);
+Route::resource('teachers.offtimes', 'OffTimeController', ['except' => ['show', 'create', 'edit']]);
+
+Route::get('timetables', ['as' => 'timetables.index', 'uses' => 'TimetableController@all']);
+Route::get('teachers/{teacher_id}/timetable', ['as' => 'teachers.timetable.index', 'uses' => 'TimetableController@showTeacher']);
+
+Route::get('teachers/{teacher_id}/timetable/{date}/snippet/{timeslot}', ['as' => 'teachers.timetable.snippet', 'uses' => 'TimetableController@showSnippet']);

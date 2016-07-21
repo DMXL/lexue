@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class OffTime extends Model
 {
     protected $dates = ['time'];
+
+    protected $fillable = [
+        'date',
+        'time_slot_id'
+    ];
 }

@@ -45,8 +45,8 @@
                                                     ?>
                                                     <button type="button" class="btn {{ $buttonClass }} btn-sm"
                                                             data-toggle="modal"
-                                                            data-target="{{ $disabled ? '#teacher-timetable-taken' : '#teacher-timetable-empty' }}"
-                                                            data-snippet-url="{{ route('admins::timetables.snippets.show', ['teacher_id' => $teacher->id, 'date' => $time['date'], 'time_slot_id' => $time['time_slot_id']]) }}"
+                                                            data-target="{{ $time['lecture'] ? '#teacher-timetable-large' : '#teacher-timetable-small' }}"
+                                                            data-snippet-url="{{ route('admins::teachers.timetable.snippet', ['teacher_id' => $teacher->id, 'date' => $time['date'], 'time_slot_id' => $time['time_slot_id']]) }}"
                                                             data-title="{{ $time['string'] }}">
                                                         <small>
                                                             @if($disabled)
@@ -70,27 +70,8 @@
         </div>
     </div>
 
-    <div class="modal inmodal fade" id="teacher-timetable-empty" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal inmodal fade teacher-timetable-modal" id="teacher-timetable-small" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4></h4>
-                </div>
-                <div class="modal-body">
-                    <button class="btn btn-primary btn-outline btn-block">
-                        手动添加课程
-                    </button>
-                    <button class="btn btn-danger btn-outline btn-block">
-                        标记为不可约
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal inmodal fade" id="teacher-timetable-taken" tabindex="-1" role="dialog"  aria-hidden="true">
-        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -105,36 +86,51 @@
             </div>
         </div>
     </div>
+
+    <div class="modal inmodal fade teacher-timetable-modal" id="teacher-timetable-large" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4></h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('js')
     <script>
-        $('#teacher-timetable-empty').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            var title = button.data('title');
-            var modal = $(this);
-            modal.find('h4').text(title);
-        })
+        $(function(){
+            var teacherTimetableTemplate = '<div class="text-center"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> <span class="sr-only">Loading...</span></div>';
 
-        var teacherTimetableTakenButton = $('#teacher-timetable-taken');
+            var teacherTimetableModal = $('.teacher-timetable-modal');
 
-        teacherTimetableTakenButton.on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            var title = button.data('title');
-            var snippetUrl = button.data('snippet-url');
-            var modal = $(this);
-            var modalBody = modal.find('.modal-body');
-            modal.find('h4').text(title);
-            $.ajax({
-                url: snippetUrl
-            }).done(function(data) {
-                modalBody.html(data);
+            // init
+            teacherTimetableModal.find('.modal-body').html(teacherTimetableTemplate);
+
+            // show
+            teacherTimetableModal.on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var title = button.data('title');
+                var snippetUrl = button.data('snippet-url');
+                var modal = $(this);
+                var modalBody = modal.find('.modal-body');
+                modal.find('h4').text(title);
+                $.ajax({
+                    url: snippetUrl
+                }).done(function(data) {
+                    modalBody.html(data);
+                });
             });
-        });
 
-        teacherTimetableTakenButton.on('hide.bs.modal', function (event) {
-            var loadingHtml = '<div class="text-center"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> <span class="sr-only">Loading...</span></div>';
-            $(this).find('.modal-body').html(loadingHtml);
+            // reset
+            teacherTimetableModal.on('hide.bs.modal', function (event) {
+                $(this).find('.modal-body').html(teacherTimetableTemplate);
+            });
         });
     </script>
 @endsection

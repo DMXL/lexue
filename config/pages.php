@@ -95,7 +95,7 @@ return [
                 'children' => [
                     [
                         'title' => '教师课表',
-                        'route' => 'timetables.show',
+                        'route' => 'teachers.timetables.show',
                         'hidden' => true,
                     ]
                 ]
