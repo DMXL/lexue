@@ -1,3 +1,22 @@
+<!--
+*
+*
+*   ______                        _____           __
+*  /_  __/__  ____ _____ ___     / ___/__  ______/ /___
+*   / / / _ \/ __ `/ __ `__ \    \__ \/ / / / __  / __ \
+*  / / /  __/ /_/ / / / / / /   ___/ / /_/ / /_/ / /_/ /
+* /_/  \___/\__,_/_/ /_/ /_/   /____/\__,_/\__,_/\____/
+*
+*
+*
+* Filename->index.blade.php
+* Project->lexue
+* Description->This is the view for lectures.
+*
+* Created by DM on 16/7/12 下午3:16.
+* Copyright 2016 Team Sudo. All rights reserved.
+*
+-->
 @extends('wechat.layouts.blank')
 
 @section('content')
@@ -5,7 +24,7 @@
         没有找到该老师的信息
     @endunless
     <div class="bd teachers_show" style="height: 100%;">
-        <form action="{{ route('students::teachers.book', $teacher->id) }}" method="POST">
+        <form id="courses_form" action="{{ route('wechat::teachers.book', $teacher->id) }}" method="POST">
             {{ csrf_field() }}
             <div class="weui_icon_area">
                 <img src="{{ getAvatarUrl($teacher->avatar, 'md') }}" class="avatar" />
@@ -67,7 +86,7 @@
                 <div class="bottombar_text">
                     {{ $teacher->price }}/课时（45分钟）
                 </div>
-                <button type="submit" id="purchase" class="weui_btn weui_btn_mini weui_btn_primary">购买课时</button>
+                <a id="purchase" class="weui_btn weui_btn_mini weui_btn_primary">购买课时</a>
             </div>
         </form>
     </div>
@@ -95,12 +114,6 @@
                     $('#teachers_video')[0].pause();
                     break;
             }
-        });
-
-        // 点击'购买课程'事件
-        $('#purchase').click(function() {
-            if($('.weui_bar_item_on').attr('href') != '#tab3')
-                $('#purchase_tab').click();
         });
 
         // 课时选择selector
@@ -150,10 +163,13 @@
             });
         }
 
+
+        // 点击日期事件
         $('.select').click(function() {
             $(this).next().select('open');
         });
 
+        // 星期几数字转汉字工具
         function dayToDay(num) {
             switch(num) {
                 case '1':
@@ -181,10 +197,32 @@
             }
         }
 
+        // 课程列表空检查工具
         function emptyCheck() {
-            if($('.course_list .weui_cells .nonempty').length == 0)
+            if($('.course_list .weui_cells .nonempty').length == 0) {
                 $('.weui_cell_desc').show();
-            else $('.weui_cell_desc').hide();
+                return true;
+            } else {
+                $('.weui_cell_desc').hide();
+                return false;
+            }
         }
+
+        // 点击'购买'按钮事件
+        $('#purchase').click(function() {
+            var currenttab = $('.weui_bar_item_on').attr('href');
+
+            if(currenttab != '#tab3') {
+                $('#purchase_tab').click();
+            }
+            else {
+                if(emptyCheck())
+                    $.toptip('您还未选择课程', 'error');
+                else {
+                    $.showLoading("进入支付页面...");
+                    $('#courses_form').submit();
+                }
+            }
+        });
     </script>
 @endsection
