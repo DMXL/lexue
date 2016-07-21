@@ -4575,11 +4575,11 @@ Device/OS Detection
   Select.prototype.updateInputValue = function(values, titles) {
     var v, t;
     if(this.config.multi) {
-      v = values.join(this.config.split);
-      t = titles.join(this.config.split);
+      t = values.join(this.config.split);
+      v = titles.join(this.config.split);
     } else {
-      v = values[0];
-      t = titles[0];
+      t = values[0];
+      v = titles[0];
     }
 
     //caculate origin data
@@ -4591,12 +4591,12 @@ Device/OS Detection
       });
     });
 
-    this.$input.val(t).data("values", v);
+    this.$input.val(v).data("values", t);
     this.$input.attr("value", t).attr("data-values", v);
 
     var data = {
-      values: v,
-      titles: t,
+      values: t,
+      titles: v,
       origins: origins,
       length: origins.length
     };
@@ -4616,7 +4616,7 @@ Device/OS Detection
     for(var i=0;i<items.length;i++) {
       items[i].checked = false;
       for(var j=0;j<titles.length;j++) {
-        if(items[i].range === titles[j]) {
+        if(items[i].value === titles[j]) {
           items[i].checked = true;
         }
       }
