@@ -4688,14 +4688,16 @@ Device/OS Detection
       }
     }
     $.closePicker(function() {
-      self.onClose();
+      // Picker为啥要call一遍自己的onClose()
+      // self.onClose();
       callback && callback();
     });
   }
 
   Select.prototype.onClose = function() {
     this._open = false;
-    if(this.config.onClose) this.config.onClose(this);
+    if(this.data) this.data.dow = this.config.dow;
+    if(this.config.onClose) this.config.onClose(this.data);
   }
 
   Select.prototype.getHTML = function(callback) {
@@ -4709,7 +4711,6 @@ Device/OS Detection
 
 
   $.fn.select = function(params, args) {
-
     return this.each(function() {
       var $this = $(this);
       if(!$this.data("weui-select")) $this.data("weui-select", new Select(this, params));
@@ -4723,6 +4724,7 @@ Device/OS Detection
   }
 
   defaults = $.fn.select.prototype.defaults = {
+    dow: 1,
     items: [],
     input: undefined, //输入框的初始值
     title: "请选择",

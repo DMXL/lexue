@@ -492,7 +492,7 @@ input.weui_btn_plain_default {
 }
 .weui_cell.disabled {
   color: #888;
-  background-color: #f4f4f4;
+  background-color: #ececec;
 }
 .weui_cell.disabled .weui_cell_bd p {
   text-decoration: line-through;
