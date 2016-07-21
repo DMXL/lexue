@@ -48,7 +48,7 @@ class Lecture extends Model
     public function getHumanTimeAttribute()
     {
         $timeSlot = $this->timeSlot;
-        return humanDate($this->date) . ', ' . $timeSlot->day_part . ' ' . $timeSlot->range;
+        return humanDate($this->date, true) . ', ' . $timeSlot->day_part . ' ' . $timeSlot->range;
     }
 
     public function getModeAttribute()

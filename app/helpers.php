@@ -196,9 +196,15 @@ function humanTime($timestamp)
     return Carbon::parse($timestamp)->format('h:i A');
 }
 
-function humanDate($timestamp)
+function humanDate($timestamp, $dayOfWeek = false)
 {
-    return Carbon::parse($timestamp)->format('m月j日');
+    $date = Carbon::parse($timestamp)->format('m月j日');
+
+    if ($dayOfWeek) {
+        $date .=  ', ' . humanDayOfWeek(Carbon::parse($timestamp)->dayOfWeek);
+    }
+
+    return $date;
 }
 
 function humanDayOfWeek($dayNumber)
