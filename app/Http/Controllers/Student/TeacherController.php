@@ -53,6 +53,11 @@ class TeacherController extends Controller
 
         $bookTimes = $request->input('times');
 
+        /* in case concatenated values are mixed in */
+        $bookTimes = collect($bookTimes)->transform(function ($item) {
+            return explode(',', $item);
+        })->flatten();
+
         /*
          * sanitize and validate the times
          */
