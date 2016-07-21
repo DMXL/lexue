@@ -45,7 +45,7 @@
                                     <span class="date">{{ Carbon::parse($day['date'])->day }}</span><br />
                                     <span class="dayow">{{ trans('times.day_of_week.' . $dayOfWeek) }}</span>
                                 </a>
-                                <input type="hidden" class='select_input' id="{{ $dayOfWeek }}" />
+                                <input type="hidden" name="times[]" class='select_input' id="{{ $dayOfWeek }}" />
                             @endforeach
                         </div>
                     </div>
@@ -67,7 +67,7 @@
             <div class="bottombar_text">
                 {{ $teacher->price }}/课时（45分钟）
             </div>
-            <button type="submit" id="purchase" class="weui_btn weui_btn_mini weui_btn_primary">购买课时</>
+            <button type="submit" id="purchase" class="weui_btn weui_btn_mini weui_btn_primary">购买课时</button>
         </div>
     </div>
 @endsection
