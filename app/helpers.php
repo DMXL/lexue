@@ -201,11 +201,6 @@ function humanDate($timestamp)
     return Date::parse($timestamp)->format('m月j日');
 }
 
-function dayOfMonth($timestamp)
-{
-    return Date::parse($timestamp)->format('d');
-}
-
 /**
  * Generate absolute path to route file given the file name
  * All route files are stored in app\Http\Routes
