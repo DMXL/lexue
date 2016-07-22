@@ -15,6 +15,8 @@ class Lecture extends Model
         'mode'
     ];
 
+    protected $with = ['timeSlot', 'student'];
+
     /*
     |--------------------------------------------------------------------------
     | Relations
