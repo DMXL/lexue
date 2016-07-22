@@ -34,6 +34,10 @@ class Teacher extends Authenticatable
         'price'
     ];
 
+    private $lectureUnavailabilities;
+
+    private $offTimeUnavailabilities;
+
     /*
     |--------------------------------------------------------------------------
     | Relations
@@ -103,6 +107,10 @@ class Teacher extends Authenticatable
 
     public function getLectureUnavailabilities()
     {
+        if (isset($this->lectureUnavailabilities)) {
+            return $this->lectureUnavailabilities;
+        }
+
         $unavailabilities = [];
         $lectureTimes = $this->lectures()->followingWeek()->get();
 
@@ -110,11 +118,17 @@ class Teacher extends Authenticatable
             $unavailabilities[] = $lectureTime->date . '--' . $lectureTime->time_slot_id;
         }
 
+        $this->lectureUnavailabilities = $unavailabilities;
+
         return $unavailabilities;
     }
 
     public function getOffTimeUnavailabilities()
     {
+        if (isset($this->offTimeUnavailabilities)) {
+            return $this->offTimeUnavailabilities;
+        }
+
         $unavailabilities = [];
 
         $offTimes = $this->offTimes;
@@ -130,6 +144,8 @@ class Teacher extends Authenticatable
             }
         }
 
+        $this->offTimeUnavailabilities = $unavailabilities;
+
         return $unavailabilities;
     }
 
@@ -141,7 +157,7 @@ class Teacher extends Authenticatable
     public function getTimetable()
     {
         $lectureUnavailabilities = $this->getLectureUnavailabilities();
-        $offtimeUnavailabilities = $this->getOffTimeUnavailabilities();
+        $offTimeUnavailabilities = $this->getOffTimeUnavailabilities();
         $unavailabilities = $this->getUnavailabilities();
 
         $timetable = [];
@@ -172,7 +188,7 @@ class Teacher extends Authenticatable
                     'range' => $range,
                     'disabled' => in_array($value, $unavailabilities),
                     'lecture' => in_array($value, $lectureUnavailabilities),
-                    'offtime' => in_array($value, $offtimeUnavailabilities)
+                    'offtime' => in_array($value, $offTimeUnavailabilities)
                 ];
             }
         }

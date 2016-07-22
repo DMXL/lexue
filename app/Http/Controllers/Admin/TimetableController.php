@@ -80,7 +80,7 @@ class TimetableController extends Controller
         ])->first();
 
         if ($offTime) {
-            return view('backend.admins.timetables.snippets.offtime', compact('teacher','offTime'));
+            return view('backend.admins.timetables.snippets.offtime', compact('teacher','offTime','date','timeSlotId'));
         }
 
         return view('backend.admins.timetables.snippets.empty', compact('teacher', 'date', 'timeSlotId'));

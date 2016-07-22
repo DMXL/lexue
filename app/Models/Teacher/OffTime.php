@@ -10,7 +10,8 @@ class OffTime extends Model
     protected $dates = ['time'];
 
     protected $fillable = [
+        'teacher_id',
         'date',
-        'time_slot_id'
+        'time_slot_id',
     ];
 }

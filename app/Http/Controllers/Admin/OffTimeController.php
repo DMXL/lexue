@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\TeacherOffTimeFormRequest;
+use App\Models\Course\TimeSlot;
 use App\Models\Teacher\OffTime;
 use App\Models\User\Teacher;
 use Illuminate\Http\Request;
@@ -87,7 +88,33 @@ class OffTimeController extends Controller
     public function destroy($teacherId, $offTimeId)
     {
         try {
-            OffTime::destroy($offTimeId);
+            $offTime = OffTime::find($offTimeId);
+
+            if (! \Request::input('all_day') AND $offTime->all_day) {
+                \DB::transaction(function() use ($teacherId, $offTimeId) {
+                    $teacher = Teacher::find($teacherId);
+                    $timeSlots = $teacher->timeSlots;
+                    foreach ($timeSlots as $timeSlot) {
+                        if ($timeSlot->id == \Request::input('time_slot_id')) {
+                            continue;
+                        } elseif (! OffTime::where([
+                            ['teacher_id', '=', $teacherId],
+                            ['date', '=', \Request::input('date')],
+                            ['time_slot_id', '=', \Request::input('date')],
+                        ])->exists()) {
+                            $offTime = new OffTime();
+                            $offTime->teacher_id = $teacherId;
+                            $offTime->date = \Request::input('date');
+                            $offTime->time_slot_id = $timeSlot->id;
+                            $offTime->save();
+                        }
+                    }
+
+                    OffTime::destroy($offTimeId);
+                });
+            } else {
+                OffTime::destroy($offTimeId);
+            }
         } catch (\Exception $e) {
             $this->handleException($e);
             return back();
