@@ -74,7 +74,12 @@ class Lecture extends Model
 
     public function scopeFollowingWeek($query)
     {
-        return $query->where('date', '>' , Carbon::now()->tomorrow()->toDateString())
-            ->where('date', '<', Carbon::now()->tomorrow()->addWeek()->toDateString());
+        return $this->scopeFollowingDays($query, 7);
+    }
+
+    public function scopeFollowingDays($query, $days)
+    {
+        return $query->where('date', '>=' , Carbon::now()->tomorrow()->toDateString())
+            ->where('date', '<', Carbon::now()->tomorrow()->addDays($days)->toDateString());
     }
 }

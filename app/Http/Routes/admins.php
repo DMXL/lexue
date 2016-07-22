@@ -20,6 +20,6 @@ Route::resource('timeslots', 'TimeSlotController');
 Route::resource('teachers.offtimes', 'OffTimeController', ['except' => ['show', 'create', 'edit']]);
 
 Route::get('timetables', ['as' => 'timetables.index', 'uses' => 'TimetableController@all']);
-Route::get('teachers/{teacher_id}/timetable', ['as' => 'teachers.timetable.index', 'uses' => 'TimetableController@showTeacher']);
+Route::get('teachers/{teacher_id}/timetables', ['as' => 'teachers.timetables.index', 'uses' => 'TimetableController@showTeacher']);
 
 Route::get('teachers/{teacher_id}/timetable/{date}/snippet/{timeslot}', ['as' => 'teachers.timetable.snippet', 'uses' => 'TimetableController@showSnippet']);
