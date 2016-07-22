@@ -17,4 +17,8 @@
  * Copyright 2016 Team Sudo. All rights reserved.
  *
 -->
-{{ dd($lectues); }}
+@extends('wechat.layouts.blank')
+
+@section('content')
+    {{ dd($lectures) }}
+@endsection
