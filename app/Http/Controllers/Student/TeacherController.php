@@ -54,9 +54,14 @@ class TeacherController extends Controller
         $bookTimes = $request->input('times');
 
         /* in case concatenated values are mixed in */
-        $bookTimes = collect($bookTimes)->transform(function ($item) {
-            return explode(',', $item);
-        })->flatten();
+        $bookTimes = collect($bookTimes)
+            ->transform(function ($item) {
+                return explode(',', $item);
+            })
+            ->flatten()
+            ->reject(function ($value) {
+                return !$value;
+            });
 
         /*
          * sanitize and validate the times
@@ -94,7 +99,7 @@ class TeacherController extends Controller
                 }
             });
         } catch (\Exception $e) {
-            // TODO add notifications to backend to manually create lectures
+            \Log::error($e);
             flash()->error('系统错误……我们将手动添加课程，请稍等片刻');
             return back();
         }

@@ -39,9 +39,9 @@ class AuthController extends Controller
      */
     private $guard;
     
-    protected $registerView = 'auth/register';
+    protected $registerView = 'auth.register';
 
-    protected $loginView = 'auth/login';
+    protected $loginView = 'auth.login';
 
     /**
      * Create a new authentication controller instance.

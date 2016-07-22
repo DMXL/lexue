@@ -63,14 +63,7 @@ function isWechat()
  */
 function userType()
 {
-    $sessionKey = 'user_type';
-
-    if (Session::has($sessionKey)) {
-        return Session::get($sessionKey);
-    }
-
     $userType = str_replace('m.', '', domainPrefix());
-    Session::put($sessionKey, $userType);
 
     if ($userType) {
         return $userType;
@@ -132,9 +125,9 @@ function viewPrefix()
     $userType = userType();
 
     if ($userType === 'teachers' || $userType === 'admins') {
-        $prefix = 'backend/';
+        $prefix = 'backend.';
     } elseif ($userType === 'students') {
-        $prefix = isWechat() ? 'wechat/' : 'frontend/';
+        $prefix = isWechat() ? 'wechat.' : 'frontend.';
     }
 
     return $prefix;
