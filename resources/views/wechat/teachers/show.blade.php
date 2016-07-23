@@ -71,7 +71,7 @@
                             </div>
                         </div>
                         <div class="course_list">
-                            <div class="weui_cells_title">已选课程</div>
+                            <div class="weui_cells_title">已选课时</div>
                             <div class="weui_cells weui_cells_access">
                                 <p class="weui_cell_desc">你还未选择任何课程</p>
                                 @foreach(collect($timetable) as $dayOfWeek => $day)
@@ -120,8 +120,9 @@
         });
 
         // 课时选择selector
-        var timetable = new Array();
-        timetable = {!! json_encode($timetable) !!};
+        var timetable = {!! json_encode($timetable) !!};
+
+        var courseCount = 0;
 
         for (var dayOfWeek in timetable) {
             var times = new Array();
@@ -160,8 +161,11 @@
                             $('#group_'+group_id).html(appendix).addClass('nonempty');
                         }
 
+                        courseCount += callback.offset;
                         emptyCheck();
                     }
+
+                    updateBottomBar(courseCount);
                 },
             });
         }
@@ -209,6 +213,12 @@
                 $('.weui_cell_desc').hide();
                 return false;
             }
+        }
+
+        // 底栏更新工具
+        function updateBottomBar(count) {
+            var unitPrice = {!! json_encode($teacher->unit_price) !!};
+            $('.bottombar_text').html('已选' + count +'课时，共' + (count * unitPrice) + '元');
         }
 
         // 点击'购买'按钮事件

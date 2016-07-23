@@ -4598,7 +4598,8 @@ Device/OS Detection
       values: t,
       titles: v,
       origins: origins,
-      length: origins.length
+      length: origins.length,
+      offset: (origins.length - this.oldlength)
     };
     this.data = data;
     this.$input.trigger("change", data);
@@ -4609,18 +4610,25 @@ Device/OS Detection
     var value = this.$input.val();
     var items = this.config.items;
 
-    //如果input为空，只有在第一次初始化的时候才保留默认选择。因为后来就是用户自己取消了全部选择，不能再为他选中默认值。
+    // 初始长度
+    var oldlength = 0
+
+    // 如果input为空，只有在第一次初始化的时候才保留默认选择。因为后来就是用户自己取消了全部选择，不能再为他选中默认值。
     if( !this._init && (value === undefined || value == null || value === "")) return;
 
     var titles = this.config.multi ? value.split(this.config.split) : [value];
+
     for(var i=0;i<items.length;i++) {
       items[i].checked = false;
       for(var j=0;j<titles.length;j++) {
         if(items[i].value === titles[j]) {
+          oldlength++;
           items[i].checked = true;
         }
       }
     }
+
+    this.oldlength = oldlength;
   }
 
 
