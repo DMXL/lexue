@@ -20,9 +20,13 @@
 @extends('wechat.layouts.blank')
 
 @section('content')
+
     @unless($teacher)
+
         没有找到该老师的信息
+
     @endunless
+
     <div class="bd teachers_show" style="height: 100%;">
         <form id="courses_form" action="{{ route('wechat::teachers.book', $teacher->id) }}" method="POST">
             {{ csrf_field() }}
@@ -90,6 +94,7 @@
             </div>
         </form>
     </div>
+
 @endsection
 
 @section('js')
@@ -238,4 +243,5 @@
             }
         });
     </script>
+
 @endsection
