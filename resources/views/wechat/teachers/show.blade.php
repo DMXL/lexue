@@ -93,6 +93,9 @@
 @endsection
 
 @section('js')
+
+    @include('wechat.snippets.alert')
+
     <script>
         // Hashtag定位
         // var hash = window.location.hash;
