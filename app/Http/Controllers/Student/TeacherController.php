@@ -71,7 +71,7 @@ class TeacherController extends Controller
             $bookDate = Carbon::parse($dateString);
             /* check if requested time is valid */
             if ($bookDate < Carbon::tomorrow()
-                OR $bookTime > Carbon::today()->addDays(config('course.days_to_show'))) {
+                OR $bookTime > Carbon::tomorrow()->addDays(config('course.days_to_show'))) {
                 \Flash::error('选择的日期无效');
                 return back();
             }
