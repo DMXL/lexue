@@ -12,6 +12,7 @@ class Lecture extends Model
 {
     protected $appends = [
         'human_time',
+        'lecture_time',
         'mode'
     ];
 
@@ -51,6 +52,12 @@ class Lecture extends Model
     {
         $timeSlot = $this->timeSlot;
         return humanDate($this->date, true) . ', ' . $timeSlot->day_part . ' ' . $timeSlot->range;
+    }
+
+    public function getLectureTimeAttribute()
+    {
+        $timeSlot = $this->timeSlot;
+        return humanDayOfWeek(Carbon::parse($this->date)->dayOfWeek).$timeSlot->day_part . ' ' . $timeSlot->range;
     }
 
     public function getModeAttribute()
