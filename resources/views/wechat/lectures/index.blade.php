@@ -20,27 +20,86 @@
 @extends('wechat.layouts.blank')
 
 @section('content')
+    <div class="weui_tab lectures_index">
 
-    <div class="weui_panel weui_panel_access">
-        <div class="weui_panel_hd">所有课程</div>
-        <div class="weui_panel_bd">
+        <div class="weui_tab_bd">
 
-            @foreach($lectures as $lecture)
+            <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
+                <div class="weui_panel weui_panel_access">
+                    <div class="weui_panel_bd">
 
-                <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
-                    <div class="weui_media_hd">
-                        <img class="weui_media_appmsg_thumb" src="{{ getAvatarUrl($lecture->teacher->avatar, 'md') }}" alt="">
+                        @foreach($lectures as $lecture)
+                            @if(!$lecture->complete)
+
+                                <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+                                    <div class="weui_media_hd">
+                                        <div class="teacher_name">{{ $lecture->teacher->name }}</div>
+                                        <img class="weui_media_appmsg_thumb" src="{{ getAvatarUrl($lecture->teacher->avatar, 'md') }}" alt="">
+                                    </div>
+                                    <div class="weui_media_bd">
+                                        <h4 class="weui_media_title">{{ $lecture->lecture_time }}</h4>
+
+                                        @if(Carbon::now()->diffInDays(Carbon::parse($lecture->date), false) < 0)
+                                            <span class="badge grey">{{ $lecture->date }}</span>
+                                        @else
+                                            <span class="badge success">{{ $lecture->date }}</span>
+                                        @endif
+
+                                        @if($lecture->single)
+                                            <span class="badge secondary">一对一</span>
+                                        @else
+                                            <span class="badge primary">一对多</span>
+                                        @endif
+                                    </div>
+                                </a>
+
+                            @endif
+                        @endforeach
+
                     </div>
-                    <div class="weui_media_bd">
-                        <h4 class="weui_media_title">{{ $lecture->human_time }}</h4>
-                        <p class="weui_media_desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
-                    </div>
-                </a>
+                </div>
+            </div>
 
-            @endforeach
+            <div id="tab2" class="weui_tab_bd_item">
+                @foreach($lectures as $lecture)
+                    @if($lecture->complete)
+
+                        <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+                            <div class="weui_media_hd">
+                                <img class="weui_media_appmsg_thumb" src="{{ getAvatarUrl($lecture->teacher->avatar, 'md') }}" alt="">
+                            </div>
+                            <div class="weui_media_bd">
+                                <h4 class="weui_media_title">{{ $lecture->human_time }}</h4>
+                                <p class="weui_media_desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+                            </div>
+                        </a>
+
+                    @endif
+                @endforeach
+            </div>
+        </div>
+
+        <div class="weui_tabbar">
+
+            <a href="#tab1" class="weui_tabbar_item weui_bar_item_on">
+                <div class="weui_tabbar_icon">
+                    <i class="fa fa-check-square-o"></i>
+                </div>
+                <p class="weui_tabbar_label">待学</p>
+            </a>
+
+            <a href="#tab2" class="weui_tabbar_item">
+                <div class="weui_tabbar_icon">
+                    <i class="fa fa-clock-o"></i>
+                </div>
+                <p class="weui_tabbar_label">完结</p>
+            </a>
 
         </div>
+
     </div>
+
+
 
 @endsection
 
@@ -49,27 +108,22 @@
     @include('wechat.snippets.alert')
 
     <script>
-        $('.weui_media_box').click(function() {
+        $('.weui_media_hd').click(function() {
+            location.href = '{{ route('m.students::teachers.show', $lecture->teacher_id) }}';
+        });
+        $('.weui_media_bd').click(function() {
             $.actions({
                 actions: [{
                     text: "更改课时",
                     className: "color-primary",
                     onClick: function() {
-                        $.confirm("您确认要更改该课时信息吗？", "确认更改？", function() {
-                            // 点击确认后的回调函数
-                        }, function() {
-                            // 点击取消后的回调函数
-                        });
+                        $.alert("请致电唯开乐学客服电话", "更改课时");
                     }
                 },{
                     text: "删除课时",
                     className: "color-danger",
                     onClick: function() {
-                        $.confirm("您确认要删除该课时吗？", "确认删除？", function() {
-                            // 点击确认后的回调函数
-                        }, function() {
-                            // 点击取消后的回调函数
-                        });
+                        $.alert("请致电唯开乐学客服电话", "删除课时");
                     }
                 }]
             });
