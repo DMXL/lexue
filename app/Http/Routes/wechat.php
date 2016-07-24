@@ -23,5 +23,5 @@ Route::get('menu', ['as' => 'menu', 'uses' => 'WechatController@menu']);
 /*
  * OAuth
  */
-Route::get('auth', ['as' => 'auth.redirect', 'uses' => 'Auth\AuthController@redirectToProvider']);
-Route::get('auth/callback', ['as' => 'auth.callback', 'uses' => 'Auth\AuthController@handleProviderCallback']);
+Route::get('auth', ['as' => 'auth.redirect', 'uses' => 'Auth\WechatAuthController@redirectToProvider']);
+Route::get('auth/callback', ['as' => 'auth.callback', 'uses' => 'Auth\WechatAuthController@handleProviderCallback']);
