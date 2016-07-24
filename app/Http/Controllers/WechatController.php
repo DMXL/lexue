@@ -122,12 +122,7 @@ class WechatController extends Controller
                     [
                         "type" => "view",
                         "name" => "立即登录",
-                        "url"  => "https://weui.io/#/"
-                    ],
-                    [
-                        "type" => "view",
-                        "name" => "登录测试",
-                        "url"  => route('m.students::lectures.index')
+                        "url"  => route('wechat::auth.redirect')
                     ],
                 ],
             ],
@@ -142,7 +137,7 @@ class WechatController extends Controller
                     [
                         "type" => "view",
                         "name" => "名师介绍",
-                        "url"  => "https://weui.io/#/"
+                        "url"  => route('m.students::teachers.index')
                     ],
                 ],
             ],
@@ -153,6 +148,21 @@ class WechatController extends Controller
                         "type" => "view",
                         "name" => "直播课堂",
                         "url"  => "https://weui.io/#/"
+                    ],
+                    [
+                        "type" => "view",
+                        "name" => "精彩回放",
+                        "url"  => "https://weui.io/#/"
+                    ],
+                ],
+            ],
+            [
+                "name"       => "我的课程",
+                "sub_button" => [
+                    [
+                        "type" => "view",
+                        "name" => "所有课程",
+                        "url"  => route('m.students::lectures.index')
                     ],
                     [
                         "type" => "view",

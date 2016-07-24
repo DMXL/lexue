@@ -53,7 +53,7 @@ Route::group(
     [
         'domain' =>  appDomain('students'),
         'as' => 'students::',
-        'namespace' => 'Student',
+        'namespace' => 'Student'
     ],
     function() {
         include routeFile('students.php');
@@ -66,6 +66,7 @@ Route::group(
         'domain' =>  appDomain('m.students'),
         'as' => 'm.students::',
         'namespace' => 'Student',
+        'middleware' => 'auth.wechat:students'
     ],
     function() {
         include routeFile('students.php');

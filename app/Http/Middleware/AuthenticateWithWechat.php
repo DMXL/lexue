@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use Auth;
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
-class Authenticate extends BaseAuthMiddleware
+class AuthenticateWithWechat extends BaseAuthMiddleware
 {
     /**
      * Handle an incoming request.
@@ -20,8 +20,8 @@ class Authenticate extends BaseAuthMiddleware
         if (Auth::guard($guard ? : $this->guard)->guest()) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
-            } else {
-                return redirect()->guest('login');
+            } elseif (app()->environment() !== 'local' AND isWechat()) {
+                return redirect()->route('wechat::auth.redirect');
             }
         }
 
