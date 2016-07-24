@@ -60,7 +60,15 @@ class WechatAuthController extends AuthController
      */
     public function handleProviderCallback()
     {
-        dd($user = $this->wechatProvider->user());
+        if (! $rawUser = $this->wechatProvider->user()) {
+            return 'gg';
+        }
+
+        $wechatUserService = app('wechat')->user;
+
+        $user = $wechatUserService->get($rawUser->id);
+
+        dd($user);
 
         // $user->token;
     }
