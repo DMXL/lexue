@@ -25,7 +25,7 @@ Route::get('all', ['domain' => appDomain('logs'), 'uses' => '\Rap2hpoutre\Larave
 | Wechat routes
 |--------------------------------------------------------------------------
 */
-Route::group(['domain' => appDomain('wechat'), 'as' => 'wechat::'], function() {
+Route::group(['domain' => appDomain('m.students'), 'as' => 'wechat::'], function() {
     include routeFile('wechat.php');
 });
 
