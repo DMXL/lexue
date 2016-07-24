@@ -36,7 +36,7 @@ class WechatAuthController extends AuthController
             'wechat' => [
                 'client_id'     => config('wechat.app_id'),
                 'client_secret' => config('wechat.secret'),
-                'redirect'      => config('wechat.oauth.callback'),
+                'redirect'      => route('wechat::oauth.callback'),
             ],
         ]);
 
