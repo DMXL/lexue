@@ -10,8 +10,9 @@ class Authenticate extends BaseAuthMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
+     * @param null $guard
      * @return mixed
      */
     public function handle($request, Closure $next, $guard = null)
@@ -19,6 +20,8 @@ class Authenticate extends BaseAuthMiddleware
         if (Auth::guard($guard ? : $this->guard)->guest()) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
+            } elseif (isWechat()) {
+                return redirect()->route('wechat::auth.callback');
             } else {
                 return redirect()->guest('login');
             }

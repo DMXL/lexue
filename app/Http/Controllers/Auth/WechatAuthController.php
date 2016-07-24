@@ -36,11 +36,11 @@ class WechatAuthController extends AuthController
             'wechat' => [
                 'client_id'     => config('wechat.app_id'),
                 'client_secret' => config('wechat.secret'),
-                'redirect'      => route('wechat::oauth.callback'),
+                'redirect'      => route('wechat::auth.callback'),
             ],
         ]);
 
-        $this->wechatProvider = $socialiteManager->driver('wechat')->scope(config('wechat.oauth.scopes'));
+        $this->wechatProvider = $socialiteManager->driver('wechat')->scopes(config('wechat.oauth.scopes'));
     }
 
     /**
