@@ -20,4 +20,5 @@
 
 <div>
     <h1>This is a fucking home!!</h1>
+    <p><b>Name:</b> {{ authUser()->name }}</p>
 </div>

@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Auth;
 
 
+use App\Models\User\Student;
 use Overtrue\Socialite\SocialiteManager;
 
 class WechatAuthController extends AuthController
@@ -44,7 +45,7 @@ class WechatAuthController extends AuthController
     }
 
     /**
-     * Redirect the user to the GitHub authentication page.
+     * Redirect the user to the wechat authentication page.
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -54,22 +55,30 @@ class WechatAuthController extends AuthController
     }
 
     /**
-     * Obtain the user information from GitHub.
-     *
-     * @return
+     * Obtain the user information from wechat.
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function handleProviderCallback()
     {
-        if (! $rawUser = $this->wechatProvider->user()) {
-            return 'gg';
-        }
+        $wechatId = $this->wechatProvider->user()->id;
 
         $wechatUserService = app('wechat')->user;
 
-        $user = $wechatUserService->get($rawUser->id);
+        $wechatUser = $wechatUserService->get($wechatId);
 
-        dd($user);
+        if (! Student::where('wechat_id', $wechatId)->exists()) {
+            $user = new Student();
+            $user->name = $wechatUser->get('nickname');
+            $user->wechat_id = $wechatId;
+            $user->avatar = $wechatUser->get('headimgurl');
+            $user->save();
+        }
 
-        // $user->token;
+        if (! isset($user)) {
+            $user = Student::where('wechat_id', $wechatId)->first();
+        }
+
+        \Auth::loginUsingId($user->id, true);
+        return redirect()->intended($this->redirectPath());
     }
 }
