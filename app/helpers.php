@@ -63,14 +63,7 @@ function isWechat()
  */
 function userType()
 {
-    $sessionKey = 'user_type';
-
-    if (Session::has($sessionKey)) {
-        return Session::get($sessionKey);
-    }
-
     $userType = str_replace('m.', '', domainPrefix());
-    Session::put($sessionKey, $userType);
 
     if ($userType) {
         return $userType;
@@ -132,9 +125,9 @@ function viewPrefix()
     $userType = userType();
 
     if ($userType === 'teachers' || $userType === 'admins') {
-        $prefix = 'backend/';
+        $prefix = 'backend.';
     } elseif ($userType === 'students') {
-        $prefix = isWechat() ? 'wechat/' : 'frontend/';
+        $prefix = isWechat() ? 'wechat.' : 'frontend.';
     }
 
     return $prefix;
@@ -201,19 +194,29 @@ function isPageActive($route)
  */
 function humanDateTime($timestamp)
 {
-    return Date::parse($timestamp)->format('Fj\\号, l, h:i A');
+    return Carbon::parse($timestamp)->format('m月j日, l, h:i A');
 }
 
 function humanTime($timestamp)
 {
-    return Date::parse($timestamp)->format('h:i A');
+    return Carbon::parse($timestamp)->format('h:i A');
 }
 
-function humanDate($timestamp)
+function humanDate($timestamp, $dayOfWeek = false)
 {
-    return Date::parse($timestamp)->format('Fj\\号, l');
+    $date = Carbon::parse($timestamp)->format('m月j日');
+
+    if ($dayOfWeek) {
+        $date .=  ', ' . humanDayOfWeek(Carbon::parse($timestamp)->dayOfWeek);
+    }
+
+    return $date;
 }
 
+function humanDayOfWeek($dayNumber)
+{
+    return trans('times.day_of_week.' . $dayNumber);
+}
 
 /**
  * Generate absolute path to route file given the file name

@@ -13,7 +13,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Teacher extends Authenticatable
 {
     protected $fillable = [
-        'name'
+        'name',
+        'unit_price',
+        'teaching_since',
+        'description'
     ];
 
     protected $hidden = [
@@ -30,6 +33,10 @@ class Teacher extends Authenticatable
         'pretty_labels',
         'price'
     ];
+
+    private $lectureUnavailabilities;
+
+    private $offTimeUnavailabilities;
 
     /*
     |--------------------------------------------------------------------------
@@ -98,48 +105,90 @@ class Teacher extends Authenticatable
     |--------------------------------------------------------------------------
     */
 
-    // TODO change name (why? I can't remember...)
-    public function getUnavailabilities()
+    public function getLectureUnavailabilities()
     {
+        if (isset($this->lectureUnavailabilities)) {
+            return $this->lectureUnavailabilities;
+        }
+
         $unavailabilities = [];
         $lectureTimes = $this->lectures()->followingWeek()->get();
-        $offTimes = $this->offTimes;
 
+        foreach ($lectureTimes as $lectureTime) {
+            $unavailabilities[] = $lectureTime->date . '--' . $lectureTime->time_slot_id;
+        }
+
+        $this->lectureUnavailabilities = $unavailabilities;
+
+        return $unavailabilities;
+    }
+
+    public function getOffTimeUnavailabilities()
+    {
+        if (isset($this->offTimeUnavailabilities)) {
+            return $this->offTimeUnavailabilities;
+        }
+
+        $unavailabilities = [];
+
+        $offTimes = $this->offTimes;
         $timeSlots = $this->timeSlots;
 
         foreach ($offTimes as $offTime) {
             if ($offTime->all_day) {
                 foreach ($timeSlots as $timeSlot) {
-                    $unavailabilities[] = $timeSlot->date . '--' . $timeSlot->id;
+                    $unavailabilities[] = $offTime->date . '--' . $timeSlot->id;
                 }
             } else {
                 $unavailabilities[] = $offTime->date . '--' . $offTime->time_slot_id;
             }
         }
 
-        foreach ($lectureTimes as $lectureTime) {
-            $unavailabilities[] = $lectureTime->date . '--' . $lectureTime->time_slot_id;
-        }
+        $this->offTimeUnavailabilities = $unavailabilities;
+
         return $unavailabilities;
     }
 
-    public function getTimetable($unavailabilities = null)
+    public function getUnavailabilities()
     {
-        $unavailabilities = is_null($unavailabilities)? $this->getUnavailabilities() : $unavailabilities;
+        return array_merge($this->getLectureUnavailabilities(), $this->getOffTimeUnavailabilities());
+    }
+
+    public function getTimetable()
+    {
+        $lectureUnavailabilities = $this->getLectureUnavailabilities();
+        $offTimeUnavailabilities = $this->getOffTimeUnavailabilities();
+        $unavailabilities = $this->getUnavailabilities();
 
         $timetable = [];
         $timeSlots = $this->timeSlots;
         for ($days = 0; $days < config('course.days_to_show'); $days++) {
             $key = Carbon::tomorrow()->addDays($days)->dayOfWeek;
             $date = Carbon::tomorrow()->addDays($days)->toDateString();
+            $timetable[$key]['date'] = $date;
             foreach ($timeSlots as $timeSlot) {
-                $value = $date . '--' . $timeSlot->id;
+                $timeSlotId = $timeSlot->id;
+                $value = $date . '--' . $timeSlotId;
                 $range = $timeSlot->range;
                 $string = humanDate($date) . ', ' . $timeSlot->day_part . '' . $range;
-                $timetable[$key][$value] = [
+                $hour = \Carbon::parse($timeSlot->start)->hour;
+                if ($hour < 12) {
+                    $dayPart = '上午';
+                } elseif ($hour < 18) {
+                    $dayPart = '下午';
+                } else {
+                    $dayPart = '晚上';
+                }
+                $timetable[$key]['times'][$value] = [
+                    'time_slot_id' => $timeSlotId,
+                    'dayPart' => $dayPart,
+                    'value' => $value,
                     'string' => $string,
+                    'date' => $date,
                     'range' => $range,
-                    'disabled' => in_array($value, $unavailabilities)
+                    'disabled' => in_array($value, $unavailabilities),
+                    'lecture' => in_array($value, $lectureUnavailabilities),
+                    'offtime' => in_array($value, $offTimeUnavailabilities)
                 ];
             }
         }

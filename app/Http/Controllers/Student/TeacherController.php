@@ -53,6 +53,16 @@ class TeacherController extends Controller
 
         $bookTimes = $request->input('times');
 
+        /* in case concatenated values are mixed in */
+        $bookTimes = collect($bookTimes)
+            ->transform(function ($item) {
+                return explode(',', $item);
+            })
+            ->flatten()
+            ->reject(function ($value) {
+                return !$value;
+            });
+
         /*
          * sanitize and validate the times
          */
@@ -62,13 +72,13 @@ class TeacherController extends Controller
             /* check if requested time is valid */
             if ($bookDate < Carbon::tomorrow()
                 OR $bookTime > Carbon::today()->addDays(config('course.days_to_show'))) {
-                flash()->error('选择的日期无效');
+                \Flash::error('选择的日期无效');
                 return back();
             }
 
             /* check if requested time is available */
             if (in_array($bookTime, $unavailabilities)) {
-                flash()->error('手慢了！ <b>' . humanDateTime($dateString) . '</b>已被占用');
+                \Flash::error('手慢了！ <b>' . humanDateTime($dateString) . '</b>已被占用');
                 return back();
             }
         }
@@ -89,12 +99,12 @@ class TeacherController extends Controller
                 }
             });
         } catch (\Exception $e) {
-            // TODO add notifications to backend to manually create lectures
+            $this->handleException($e);
             flash()->error('系统错误……我们将手动添加课程，请稍等片刻');
             return back();
         }
 
         flash()->success('课程添加成功');
-        return redirect()->route('students::lectures.index');
+        return $this->frontRedirect('students::lectures.index');
     }
 }

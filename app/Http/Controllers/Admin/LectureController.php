@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Course\Lecture;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +17,9 @@ class LectureController extends Controller
      */
     public function index()
     {
-        //
+        $lectures = Lecture::paginate();
+
+        return $this->backView('backend.admins.lectures.index', compact('lectures'));
     }
 
     /**

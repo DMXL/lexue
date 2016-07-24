@@ -11,8 +11,11 @@ use Illuminate\Database\Eloquent\Model;
 class Lecture extends Model
 {
     protected $appends = [
-        'human_time'
+        'human_time',
+        'mode'
     ];
+
+    protected $with = ['timeSlot', 'student'];
 
     /*
     |--------------------------------------------------------------------------
@@ -47,7 +50,16 @@ class Lecture extends Model
     public function getHumanTimeAttribute()
     {
         $timeSlot = $this->timeSlot;
-        return humanDate($this->date) . ', ' . $timeSlot->day_part . ' ' . $timeSlot->range;
+        return humanDate($this->date, true) . ', ' . $timeSlot->day_part . ' ' . $timeSlot->range;
+    }
+
+    public function getModeAttribute()
+    {
+        if ($this->single) {
+            return '一对一';
+        }
+
+        return '一对多';
     }
 
     /*
@@ -62,7 +74,14 @@ class Lecture extends Model
 
     public function scopeFollowingWeek($query)
     {
-        return $query->where('date', '>' , Carbon::now()->tomorrow()->toDateString())
-            ->where('date', '<', Carbon::now()->tomorrow()->addWeek()->toDateString());
+        return $this->scopeFollowingDays($query, 7);
+    }
+
+    public function scopeFollowingDays($query, $days)
+    {
+        return $query->where([
+            ['date', '>=' , Carbon::now()->tomorrow()->toDateString()],
+            ['date', '<', Carbon::now()->tomorrow()->addDays($days)->toDateString()]
+        ]);
     }
 }

@@ -58,10 +58,10 @@ return [
         'array'   => 'The :attribute must have at least :min items.',
     ],
     'not_in'               => 'The selected :attribute is invalid.',
-    'numeric'              => 'The :attribute must be a number.',
+    'numeric'              => ':attribute 必须为数字.',
     'present'              => 'The :attribute field must be present.',
-    'regex'                => 'The :attribute format is invalid.',
-    'required'             => 'The :attribute field is required.',
+    'regex'                => ':attribute 的格式有误.',
+    'required'             => '请输入 :attribute.',
     'required_if'          => 'The :attribute field is required when :other is :value.',
     'required_unless'      => 'The :attribute field is required unless :other is in :values.',
     'required_with'        => 'The :attribute field is required when :values is present.',
@@ -109,9 +109,14 @@ return [
     */
 
     'attributes' => [
+        /* general users */
         'name' => '用户名',
         'email' => '邮箱',
-        'password' => '密码'
+        'password' => '密码',
+
+        /* teachers */
+        'unit_price' => '课时费用',
+        'teaching_since' => '起始年份'
     ],
 
 ];

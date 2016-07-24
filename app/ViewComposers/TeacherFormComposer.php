@@ -25,9 +25,9 @@ class TeacherFormComposer
     {
         $levels = Level::all();
 
-        $labelnames = Label::all();
+        $labels = Label::all();
 
         $view->with('levels', $levels);
-        $view->with('labelnames', $labelnames);
+        $view->with('labels', $labels);
     }
 }

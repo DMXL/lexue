@@ -486,6 +486,17 @@ input.weui_btn_plain_default {
   content: '\EA06';
   color: #09BB07;
 }
+.weui_cells_checkbox .weui_check:disabled + .weui_icon_checked:before {
+  content: '\EA03';
+  color: #C9C9C9;
+}
+.weui_cell.disabled {
+  color: #888;
+  background-color: #ececec;
+}
+.weui_cell.disabled .weui_cell_bd p {
+  text-decoration: line-through;
+}
 .weui_label {
   display: block;
   width: 105px;

@@ -15,7 +15,7 @@ class ComposerServiceProvider extends ServiceProvider
     {
         // Using class based composers...
         view()->composer(
-            ['backend.admins.teachers.create', 'backend.admins.teachers.edit'],
+            'backend.admins.teachers._form',
             'App\ViewComposers\TeacherFormComposer'
         );
     }

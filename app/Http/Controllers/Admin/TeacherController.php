@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TeacherFormRequest;
+use App\Models\Teacher\Label;
+use App\Models\Teacher\Level;
 use App\Models\User\Teacher;
 use Illuminate\Http\Request;
 
@@ -33,12 +36,24 @@ class TeacherController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param TeacherFormRequest|Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function store(Request $request)
+    public function store(TeacherFormRequest $request)
     {
+        try {
+            $teacher = \DB::transaction(function() use ($request) {
+                $teacher = new Teacher();
+                return $this->writeTeacherData($teacher, $request);
+            });
+        } catch (\Exception $e) {
+            return back();
+            // TODO write to logs and notify
+        }
 
+        \Flash::success('添加成功');
+        return redirect()->route('admins::teachers.show', $teacher->id);
     }
 
     /**
@@ -51,7 +66,9 @@ class TeacherController extends Controller
     {
         $teacher = Teacher::find($id);
 
-        return $this->backView('backend.admins.teachers.show', compact('teacher'));
+        $timetable = $teacher->getTimetable();
+
+        return $this->backView('backend.admins.teachers.show', compact('teacher', 'timetable'));
     }
 
     /**
@@ -62,19 +79,66 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
-        return $this->backView('backend.admins.teachers.edit');
+        $teacher = Teacher::find($id);
+
+        return $this->backView('backend.admins.teachers.edit', compact('teacher'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param TeacherFormRequest|Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TeacherFormRequest $request, $id)
     {
-        //
+        try {
+            $teacher = \DB::transaction(function() use ($request, $id) {
+                $teacher = Teacher::find($id);
+                return $this->writeTeacherData($teacher, $request);
+            });
+        } catch (\Exception $e) {
+            // TODO write to logs and notify
+            return back();
+        }
+
+        \Flash::success('添加成功');
+        return redirect()->route('admins::teachers.show', $teacher->id);
+    }
+
+    public function enable($id)
+    {
+        try {
+            $teacher = Teacher::find($id);
+            if (!$teacher->enabled) {
+                $teacher->enabled = true;
+                $teacher->save();
+            }
+        } catch (\Exception $e) {
+            // TODO logging and notify
+            return back();
+        }
+
+        \Flash::success('教师已上线');
+        return back();
+    }
+
+    public function disable($id)
+    {
+        try {
+            $teacher = Teacher::find($id);
+            if ($teacher->enabled) {
+                $teacher->enabled = false;
+                $teacher->save();
+            }
+        } catch (\Exception $e) {
+            // TODO logging and notify
+            return back();
+        }
+
+        \Flash::success('教师已下线');
+        return back();
     }
 
     /**
@@ -85,6 +149,47 @@ class TeacherController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Teacher::destroy($id);
+        } catch (\Exception $e) {
+            //throw $e;
+            return back();
+        }
+
+        \Flash::success('删除成功');
+        return redirect()->route('admins::teachers.index');
+    }
+
+    /**
+     * Write teacher form data to db.
+     *
+     * @param Teacher $teacher
+     * @param TeacherFormRequest $request
+     * @return Teacher
+     */
+    private function writeTeacherData(Teacher $teacher, TeacherFormRequest $request)
+    {
+        $teacher->fill($request->all())->save();
+
+        /* If have levels */
+        if ($levels = $request->input('levels')) {
+            $teacher->levels()->sync($levels);
+        }
+
+        /* If have labels */
+        if ($labels = $request->input('labels')) {
+            $existingLabels = Label::lists('name');
+
+            /* If have new labels */
+            $newLabels = collect($labels)->diff($existingLabels);
+            foreach ($newLabels as $newLabel) {
+                Label::create(['name' => $newLabel]);
+            }
+
+            $labelIds = Label::whereIn('name', $labels)->lists('id')->all();
+            $teacher->labels()->sync($labelIds);
+        }
+
+        return $teacher;
     }
 }

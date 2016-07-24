@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Models\User\Admin;
 use App\Models\User\Student;
 use App\Models\User\Teacher;
-use Validator;
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Validator;
 
 class AuthController extends Controller
 {
@@ -39,9 +39,9 @@ class AuthController extends Controller
      */
     private $guard;
     
-    protected $registerView = 'auth/register';
+    protected $registerView = 'auth.register';
 
-    protected $loginView = 'auth/login';
+    protected $loginView = 'auth.login';
 
     /**
      * Create a new authentication controller instance.

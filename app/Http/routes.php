@@ -25,7 +25,7 @@ Route::get('all', ['domain' => appDomain('logs'), 'uses' => '\Rap2hpoutre\Larave
 | Wechat routes
 |--------------------------------------------------------------------------
 */
-Route::group(['domain' => appDomain('wechat')], function() {
+Route::group(['domain' => appDomain('wechat'), 'as' => 'wechat::'], function() {
     include routeFile('wechat.php');
 });
 
@@ -64,7 +64,7 @@ Route::group(
 Route::group(
     [
         'domain' =>  appDomain('m.students'),
-        'as' => 'wechat::',
+        'as' => 'm.students::',
         'namespace' => 'Student',
     ],
     function() {
@@ -142,4 +142,8 @@ Route::get('default/{file}', function(
 */
 Route::get('debug', function() {
     return view('debug');
+});
+
+Route::get('debug/teachers/{id}/timetable', function($id){
+    dd(\App\Models\User\Teacher::find($id)->getTimetable());
 });

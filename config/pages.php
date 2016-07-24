@@ -88,8 +88,18 @@ return [
                 ]
             ], [
                 'title' => '课时管理',
-                'route' => 'timeslots.index'
+                'route' => 'timeslots.index',
             ], [
+                'title' => '课表管理',
+                'route' => 'timetables.index',
+                'children' => [
+                    [
+                        'title' => '教师课表',
+                        'route' => 'teachers.timetables.show',
+                        'hidden' => true,
+                    ]
+                ]
+            ],[
                 'title' => '课程管理',
                 'route' => 'lectures.index'
             ]
