@@ -14,4 +14,17 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         //
     ];
+
+    protected $except_routes = [
+        'wechat::user_request'
+    ];
+
+    protected function shouldPassThrough($request)
+    {
+        if (in_array(\Route::currentRouteName(), $this->except_routes)) {
+            return true;
+        }
+
+        return parent::shouldPassThrough($request);
+    }
 }

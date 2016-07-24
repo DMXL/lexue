@@ -39,8 +39,6 @@ class WechatController extends Controller
      */
     public function __construct()
     {
-        $this->middleware([]);
-
         // 获取wechat singleton
         $this->wechat = app('wechat');
     }

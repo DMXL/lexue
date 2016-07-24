@@ -15,7 +15,7 @@
 
 /* General requests - no names needed */
 Route::get('/', 'WechatController@verify');
-Route::post('/', 'WechatController@serve');
+Route::post('/', ['as' => 'user_request', 'uses' => 'WechatController@serve']);
 
 /* Get menu */
 Route::get('menu', ['as' => 'menu', 'uses' => 'WechatController@menu']);

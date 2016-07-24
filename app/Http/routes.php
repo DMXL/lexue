@@ -140,9 +140,9 @@ Route::get('default/{file}', function(
 | Debug and Testing routes
 |--------------------------------------------------------------------------
 */
-Route::get('debug', function() {
+Route::get('debug', ['as' => 'debug' , 'uses' => function() {
     return view('debug');
-});
+}]);
 
 Route::get('debug/teachers/{id}/timetable', function($id){
     dd(\App\Models\User\Teacher::find($id)->getTimetable());
