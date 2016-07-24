@@ -65,10 +65,6 @@ function userType()
 {
     $userType = str_replace('m.', '', domainPrefix());
 
-    if ($userType AND $userType !== 'wechat') {
-        return $userType;
-    }
-
     return 'students';
 }
 

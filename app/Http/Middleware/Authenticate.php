@@ -20,7 +20,7 @@ class Authenticate extends BaseAuthMiddleware
         if (Auth::guard($guard ? : $this->guard)->guest()) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
-            } elseif (isWechat()) {
+            } elseif (app()->environment() !== 'local' AND isWechat()) {
                 return redirect()->route('wechat::auth.redirect');
             } else {
                 return redirect()->guest('login');
