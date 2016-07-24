@@ -186,8 +186,8 @@ return [
         /*
          * Third party
          */
-        Jenssegers\Date\DateServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        Overtrue\LaravelSocialite\ServiceProvider::class,
         Overtrue\LaravelWechat\ServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         
@@ -248,7 +248,7 @@ return [
          */
         'Carbon' => Carbon\Carbon::class,
         'Flash' => Laracasts\Flash\Flash::class,
-        'Date' => Jenssegers\Date\Date::class,
+        'Socialite' => Overtrue\LaravelSocialite\Socialite::class,
         'Wechat' => Overtrue\LaravelWechat\Facade::class,
 
     ],

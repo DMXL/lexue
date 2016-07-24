@@ -12,10 +12,10 @@
         "league/flysystem-dropbox": "^1.0",
         "league/glide-laravel": "^1.0",
         "laracasts/flash": "^2.0",
-        "jenssegers/date": "^3.2",
         "overtrue/laravel-wechat": "~3.0",
         "rap2hpoutre/laravel-log-viewer": "^0.7.0",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "overtrue/laravel-socialite": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
