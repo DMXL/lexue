@@ -28,7 +28,7 @@
     @endunless
 
     <div class="bd teachers_show" style="height: 100%;">
-        <form id="courses_form" action="{{ route('wechat::teachers.book', $teacher->id) }}" method="POST">
+        <form id="courses_form" action="{{ route('m.students::teachers.book', $teacher->id) }}" method="POST">
             {{ csrf_field() }}
             <div class="weui_icon_area">
                 <img src="{{ getAvatarUrl($teacher->avatar, 'md') }}" class="avatar" />

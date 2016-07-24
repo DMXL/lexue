@@ -13,9 +13,15 @@
 */
 
 
-/* Wechat - User Request */
+/* General requests - no names needed */
 Route::get('/', 'WechatController@verify');
 Route::post('/', 'WechatController@serve');
 
-/* Wechat - Menu */
-Route::get('menu', 'WechatController@menu');
+/* Get menu */
+Route::get('menu', ['as' => 'menu', 'uses' => 'WechatController@menu']);
+
+/*
+ * OAuth
+ */
+Route::get('auth', ['as' => 'auth.redirect', 'uses' => 'Auth\AuthController@redirectToProvider']);
+Route::get('auth/callback', ['as' => 'auth.callback', 'uses' => 'Auth\AuthController@handleProviderCallback']);

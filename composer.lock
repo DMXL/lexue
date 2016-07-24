@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "947619bbd12982828d28da9a77dce82a",
-    "content-hash": "72f884d63329777cb1bf3b3f6b63bb16",
+    "hash": "f940951a4fa588e1aa5ffbcb54f2bb0b",
+    "content-hash": "5745e213f7a65f2921de3c821b73d21c",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -604,27 +604,27 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.2.0",
+            "version": "6.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "d094e337976dff9d8e2424e8485872194e768662"
+                "reference": "3f808fba627f2c5b69e2501217bf31af349c1427"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/d094e337976dff9d8e2424e8485872194e768662",
-                "reference": "d094e337976dff9d8e2424e8485872194e768662",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/3f808fba627f2c5b69e2501217bf31af349c1427",
+                "reference": "3f808fba627f2c5b69e2501217bf31af349c1427",
                 "shasum": ""
             },
             "require": {
-                "guzzlehttp/promises": "~1.0",
-                "guzzlehttp/psr7": "~1.1",
-                "php": ">=5.5.0"
+                "guzzlehttp/promises": "^1.0",
+                "guzzlehttp/psr7": "^1.3.1",
+                "php": ">=5.5"
             },
             "require-dev": {
                 "ext-curl": "*",
-                "phpunit/phpunit": "~4.0",
-                "psr/log": "~1.0"
+                "phpunit/phpunit": "^4.0",
+                "psr/log": "^1.0"
             },
             "type": "library",
             "extra": {
@@ -662,7 +662,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2016-03-21 20:02:09"
+            "time": "2016-07-15 17:22:37"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1646,42 +1646,6 @@
                 "php"
             ],
             "time": "2016-04-19 13:41:41"
-        },
-        {
-            "name": "overtrue/laravel-socialite",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/overtrue/laravel-socialite.git",
-                "reference": "f9f25888b1390d6e1ec71640b7c7da44130fefa6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/laravel-socialite/zipball/f9f25888b1390d6e1ec71640b7c7da44130fefa6",
-                "reference": "f9f25888b1390d6e1ec71640b7c7da44130fefa6",
-                "shasum": ""
-            },
-            "require": {
-                "overtrue/socialite": "~1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Overtrue\\LaravelSocialite\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "overtrue",
-                    "email": "anzhengchao@gmail.com"
-                }
-            ],
-            "description": "Social OAuth authentication for Laravel 5.",
-            "time": "2015-12-13 04:57:00"
         },
         {
             "name": "overtrue/laravel-wechat",

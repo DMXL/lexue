@@ -46,10 +46,10 @@ class Controller extends BaseController
     protected function frontRedirect($route)
     {
         /* sanitize */
-        $route = preg_replace('/^(students|wechat)::/', '', $route);
+        $route = preg_replace('/^(students|m.students)::/', '', $route);
 
         if (isWechat()) {
-            return redirect()->route('wechat::' . $route);
+            return redirect()->route('m.students::' . $route);
         }
 
         return redirect()->route('students::' . $route);
