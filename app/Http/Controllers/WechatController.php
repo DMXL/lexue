@@ -26,6 +26,7 @@ use Log;
 class WechatController extends Controller
 {
 
+
     /**
      * Overtrue wechat实例
      *
@@ -38,7 +39,9 @@ class WechatController extends Controller
      */
     public function __construct()
     {
-        // 获取echat singleton
+        $this->middleware([]);
+
+        // 获取wechat singleton
         $this->wechat = app('wechat');
     }
 
