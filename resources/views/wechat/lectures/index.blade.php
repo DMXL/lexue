@@ -37,7 +37,7 @@
                                         <img class="weui_media_appmsg_thumb" src="{{ getAvatarUrl($lecture->teacher->avatar, 'md') }}" alt="">
                                     </div>
                                     <div class="weui_media_bd">
-                                        <h4 class="weui_media_title">{{ $lecture->lecture_time }}</h4>
+                                        <h4 class="weui_media_title">{{ $lecture->human_time }}</h4>
 
                                         @if(Carbon::now()->diffInDays(Carbon::parse($lecture->date), false) < 0)
                                             <span class="badge grey">{{ $lecture->date }}</span>
@@ -69,7 +69,7 @@
                                 <img class="weui_media_appmsg_thumb" src="{{ getAvatarUrl($lecture->teacher->avatar, 'md') }}" alt="">
                             </div>
                             <div class="weui_media_bd">
-                                <h4 class="weui_media_title">{{ $lecture->human_time }}</h4>
+                                <h4 class="weui_media_title">{{ $lecture->human_date_time }}</h4>
                                 <p class="weui_media_desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
                             </div>
                         </a>

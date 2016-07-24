@@ -27,7 +27,7 @@
                             @endif
                         </td>
                         <td>
-                            {{ $lecture->human_time }}
+                            {{ $lecture->human_date_time }}
                         </td>
                         <td class="text-left">
                             @if($lecture->single)

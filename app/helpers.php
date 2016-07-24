@@ -145,24 +145,11 @@ function getAvatarUrl($path, $preset)
     return config('default_files.avatar') . '?p=' . $preset;
 }
 
-function getVideoUrl($path, $ext)
-{
-    if (!$path) {
-        $path = 'video/' . ltrim(config('default_files.video'),'/');
-    }
-
-    $path = $path . '.' . $ext;
-
-    return url($path);
-}
-
-function getVideosUrl($path, $ext)
+function getVideoUrl($path)
 {
     if (!$path) {
         $path = 'videos/' . ltrim(config('default_files.video'),'/');
     }
-
-    $path = $path . '.' . $ext;
 
     return url($path);
 }

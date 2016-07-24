@@ -20,7 +20,7 @@
                     @endif
                 </td>
                 <td>{{ $lecture->mode }}</td>
-                <td>{{ $lecture->human_time }}</td>
+                <td>{{ $lecture->human_date_time }}</td>
             </tr>
             </tbody>
         </table>

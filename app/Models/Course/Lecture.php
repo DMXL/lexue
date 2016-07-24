@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 class Lecture extends Model
 {
     protected $appends = [
+        'human_date_time',
         'human_time',
-        'lecture_time',
         'mode'
     ];
 
@@ -48,13 +48,13 @@ class Lecture extends Model
     | Accessors
     |--------------------------------------------------------------------------
     */
-    public function getHumanTimeAttribute()
+    public function getHumanDateTimeAttribute()
     {
         $timeSlot = $this->timeSlot;
-        return humanDate($this->date, true) . ', ' . $timeSlot->day_part . ' ' . $timeSlot->range;
+        return humanDate($this->date, true) . $timeSlot->day_part . ' ' . $timeSlot->range;
     }
 
-    public function getLectureTimeAttribute()
+    public function getHumanTimeAttribute()
     {
         $timeSlot = $this->timeSlot;
         return humanDayOfWeek(Carbon::parse($this->date)->dayOfWeek).$timeSlot->day_part . ' ' . $timeSlot->range;
