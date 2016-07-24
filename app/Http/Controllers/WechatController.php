@@ -123,6 +123,11 @@ class WechatController extends Controller
                         "name" => "立即登录",
                         "url"  => "https://weui.io/#/"
                     ],
+                    [
+                        "type" => "view",
+                        "name" => "登录测试",
+                        "url"  => route('m.students::lectures.index')
+                    ],
                 ],
             ],
             [
