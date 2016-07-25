@@ -68,22 +68,24 @@ class WechatAuthController extends AuthController
 
         $wechatUser = $wechatUserService->get($wechatId);
 
-        dd($wechatUser);
-
         if (! Student::where('wechat_id', $wechatId)->exists()) {
+            \Log::debug('id not seen:' . $wechatId);
             $user = new Student();
             $user->name = $wechatUser->get('nickname');
             $user->email = $wechatId . '@lexue.com';
             $user->wechat_id = $wechatId;
             $user->avatar = $wechatUser->get('headimgurl');
             $user->save();
+            \Log::debug('user created' . $user->id);
         }
 
         if (! isset($user)) {
+            \Log::debug('id exists:' . $wechatId);
             $user = Student::where('wechat_id', $wechatId)->first();
         }
 
         \Auth::guard($this->guard)->loginUsingId($user->id, true);
+        \Log::debug('authUser output:' . authUser()->name);
         return redirect()->intended($this->redirectPath());
     }
 }
