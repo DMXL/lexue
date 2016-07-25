@@ -37,7 +37,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    private $guard;
+    protected $guard;
     
     protected $registerView = 'auth.register';
 

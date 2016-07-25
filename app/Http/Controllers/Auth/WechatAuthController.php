@@ -78,7 +78,7 @@ class WechatAuthController extends AuthController
             $user = Student::where('wechat_id', $wechatId)->first();
         }
 
-        \Auth::loginUsingId($user->id, true);
+        \Auth::guard($this->guard)->loginUsingId($user->id, true);
         return redirect()->intended($this->redirectPath());
     }
 }
