@@ -69,6 +69,7 @@ class WechatAuthController extends AuthController
         if (! Student::where('wechat_id', $wechatId)->exists()) {
             $user = new Student();
             $user->name = $wechatUser->get('nickname');
+            $user->email = $wechatId . '@lexue.com';
             $user->wechat_id = $wechatId;
             $user->avatar = $wechatUser->get('headimgurl');
             $user->save();
