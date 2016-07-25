@@ -124,6 +124,11 @@ class WechatController extends Controller
                         "name" => "立即登录",
                         "url"  => route('wechat::auth.redirect')
                     ],
+                    [
+                        "type" => "view",
+                        "name" => "我的课程",
+                        "url"  => route('m.students::lectures.index')
+                    ],
                 ],
             ],
             [
@@ -155,22 +160,7 @@ class WechatController extends Controller
                         "url"  => "https://weui.io/#/"
                     ],
                 ],
-            ],
-            [
-                "name"       => "我的课程",
-                "sub_button" => [
-                    [
-                        "type" => "view",
-                        "name" => "所有课程",
-                        "url"  => route('m.students::lectures.index')
-                    ],
-                    [
-                        "type" => "view",
-                        "name" => "精彩回放",
-                        "url"  => "https://weui.io/#/"
-                    ],
-                ],
-            ],
+            ]
         ];
 
         return $menu->add($buttons);
