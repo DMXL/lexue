@@ -110,6 +110,8 @@ class TeacherController extends Controller
 
         flash()->success('课程添加成功');
 
+        dd(config('wechat.template.purchase_success'));
+
         /*
          * send the success message to student's Wechat
          */
