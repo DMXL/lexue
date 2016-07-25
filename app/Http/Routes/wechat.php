@@ -13,12 +13,21 @@
 */
 
 
-/* General requests - no names needed */
+/*
+ * General requests - no names needed
+ */
 Route::get('weixin', ['as' => 'verify', 'uses' => 'WechatController@verify']);
 Route::post('weixin', ['as' => 'user_request', 'uses' => 'WechatController@serve']);
 
-/* Get menu */
+/*
+ * Server side tools - normally they are POST requests sent to Wechat server
+ */
+
+/* Set menu */
 Route::get('weixin/menu', ['as' => 'menu', 'uses' => 'WechatController@menu']);
+
+/* Set industry */
+Route::get('weixin/industry', ['as' => 'industry', 'uses' => 'WechatController@industry']);
 
 /*
  * OAuth

@@ -170,4 +170,21 @@ class WechatController extends Controller
 
         return $menu->add($buttons);
     }
+
+    /**
+     * 修改账号所属行业
+     *
+     * @return boolean
+     */
+    public function industry()
+    {
+        if (app()->environment() === 'local') {
+            return 'skipping local environment';
+        }
+
+        Log::info('sending industry request.');
+
+        $notice = $this->wechat->notice;
+        return $notice->setIndustry(16, 1); // #16:教育->培训; #1:IT科技->互联网/电子商务
+    }
 }
