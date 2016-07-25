@@ -63,9 +63,7 @@ function isWechat()
  */
 function userType()
 {
-    $userType = str_replace('m.', '', domainPrefix());
-
-    return 'students';
+    return str_replace('m.', '', domainPrefix());
 }
 
 /**
