@@ -20,14 +20,11 @@ Route::get('weixin', ['as' => 'verify', 'uses' => 'WechatController@verify']);
 Route::post('weixin', ['as' => 'user_request', 'uses' => 'WechatController@serve']);
 
 /*
- * Server side tools - normally they are POST requests sent to Wechat server
+ * MP setup tools - normally they are POST requests sent to Wechat server
  */
 
-/* Set menu */
-Route::get('weixin/menu', ['as' => 'menu', 'uses' => 'WechatController@menu']);
-
-/* Set industry */
-Route::get('weixin/industry', ['as' => 'industry', 'uses' => 'WechatController@industry']);
+Route::get('weixin/menu', ['as' => 'menu', 'uses' => 'WechatController@setMenu']);
+Route::get('weixin/industry', ['as' => 'industry', 'uses' => 'WechatController@setIndustry']);
 
 /*
  * OAuth

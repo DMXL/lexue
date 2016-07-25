@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Http\Controllers\Auth\WechatAuthController;
 use App\Models\Course\Lecture;
 use App\Models\User\Teacher;
 use Carbon\Carbon;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\WechatController;
 
 class TeacherController extends Controller
 {
@@ -105,6 +107,25 @@ class TeacherController extends Controller
         }
 
         flash()->success('课程添加成功');
+
+        /*
+         * send the success message to student's Wechat
+         */
+        $timeString = '';
+        foreach ($bookTimes as $bookTime) {
+            $values = explode('--', $bookTime);
+            $timeString .= $values[0].' '.$values[1];
+        }
+
+        $wechat = new WechatController();
+        $wechat->sendSuccess([
+            'student_id' => authId(),
+            'student_name' => authUser()->name,
+            'teacher_name' => $teacher->name,
+            'price' => ( count($bookTimes) *  $teacher->unit_price ),
+            'time' => $timeString
+        ]);
+
         return $this->frontRedirect('students::lectures.index');
     }
 }

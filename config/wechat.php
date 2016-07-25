@@ -45,6 +45,15 @@ return [
      ],
 
     /**
+     * 模板消息ID
+     *
+     * purchase_success：学生购买课程成功
+     */
+    'template_id' => [
+        'purchase_success' => 'FE_ZtvON-PYrQUCK_5J9e_SmfjX_AT0ZmCnH0KbxRvI',
+    ]
+
+    /**
      * 微信支付
      */
     // 'payment' => [
