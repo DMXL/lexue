@@ -41,7 +41,7 @@ function domainPrefix()
     }
 
     $hostWithoutRootDomain = str_replace(appDomain(), '', $host);
-    return $hostWithoutRootDomain = rtrim($hostWithoutRootDomain, '.');
+    return $hostWithoutRootDomain = trim($hostWithoutRootDomain, '.');
 }
 
 /**

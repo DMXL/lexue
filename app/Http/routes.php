@@ -142,6 +142,7 @@ Route::get('default/{file}', function(
 |--------------------------------------------------------------------------
 */
 Route::get('debug', ['as' => 'debug' , 'uses' => function() {
+    return userType();
     return view('debug');
 }]);
 
