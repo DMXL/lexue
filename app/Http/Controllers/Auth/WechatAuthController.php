@@ -82,8 +82,6 @@ class WechatAuthController extends AuthController
         }
 
         \Auth::guard($this->guard)->loginUsingId($user->id, true);
-        \Log::debug('intended:' . \Session::get('url.intended'));
-        \Log::debug('authUser output:' . authUser()->name);
         return redirect()->intended($this->redirectPath());
     }
 }
