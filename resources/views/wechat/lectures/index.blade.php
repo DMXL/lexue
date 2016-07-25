@@ -109,7 +109,7 @@
 
     <script>
         $('.weui_media_hd').click(function() {
-            location.href = '{{ route('m.students::teachers.show', $lecture->teacher_id) }}';
+            //location.href = '{{ route('m.students::teachers.show', $lecture->teacher_id) }}';
         });
         $('.weui_media_bd').click(function() {
             $.actions({

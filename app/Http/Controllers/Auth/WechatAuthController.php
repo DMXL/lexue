@@ -33,6 +33,8 @@ class WechatAuthController extends AuthController
     {
         parent::__construct();
 
+        $this->middleware($this->guestMiddleware());
+
         $socialiteManager = new SocialiteManager([
             'wechat' => [
                 'client_id'     => config('wechat.app_id'),

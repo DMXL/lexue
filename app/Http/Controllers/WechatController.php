@@ -131,6 +131,11 @@ class WechatController extends Controller
                     ],
                     [
                         "type" => "view",
+                        "name" => "立即登出",
+                        "url"  => route('auth::logout', 'm.students')
+                    ],
+                    [
+                        "type" => "view",
                         "name" => "我的课程",
                         "url"  => route('m.students::lectures.index')
                     ],

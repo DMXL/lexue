@@ -26,7 +26,9 @@ class LectureController extends Controller
 
         $lectures = $singleLectures->merge($multiLectures)->sortByDesc('start_at');
 
-        $lectures->load('teacher');
+        if ($lectures->count()) {
+            $lectures->load('teacher');
+        }
 
         return $this->frontView('lectures.index', compact('lectures'));
     }
