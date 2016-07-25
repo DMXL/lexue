@@ -93,6 +93,8 @@ class WechatController extends Controller
     {
         Log::info('sending industry request.');
 
+        dd(config('wechat.template.purchase_success'));
+
         $notice = $this->wechat->notice;
         $messageId = $notice->send([
             'touser'      => $data['student_id'],

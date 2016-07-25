@@ -20,6 +20,7 @@
 @extends('wechat.layouts.blank')
 
 @section('content')
+    {{ dd(config('wechat.template.purchase_success')) }}
     <div class="bd teachers_index" style="height: 100%;">
         <div class="weui_panel weui_panel_access">
             <div class="weui_panel_hd">名师介绍</div>

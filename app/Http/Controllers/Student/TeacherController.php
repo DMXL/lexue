@@ -121,7 +121,7 @@ class TeacherController extends Controller
 
         $wechat = new WechatController();
         $wechat->sendSuccess([
-            'student_id' => authId(),
+            'student_id' => authUser()->wechat_id,
             'student_name' => authUser()->name,
             'teacher_name' => $teacher->name,
             'price' => ( count($bookTimes) *  $teacher->unit_price ),
