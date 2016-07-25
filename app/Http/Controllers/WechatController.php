@@ -21,6 +21,7 @@
 namespace App\Http\Controllers;
 
 use EasyWeChat\Message\Text;
+use EasyWeChat\Support\Collection;
 use Log;
 
 class WechatController extends Controller
@@ -98,10 +99,14 @@ class WechatController extends Controller
     /**
      * 添加自定义菜单
      *
-     * @return json
+     * @return Collection|string
      */
     public function menu()
     {
+        if (app()->environment() === 'local') {
+            return 'skipping local environment';
+        }
+
         Log::info('sending menu request.');
 
         $menu = $this->wechat->menu; // 获取菜单模块
