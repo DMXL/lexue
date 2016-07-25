@@ -21,7 +21,10 @@ class AuthenticateWithWechat extends BaseAuthMiddleware
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
             } elseif (app()->environment() !== 'local' AND isWechat()) {
+                \Session::put('url.intended', \Request::fullUrl());
                 return redirect()->route('wechat::auth.redirect');
+            } else {
+                return redirect()->guest('login');
             }
         }
 
