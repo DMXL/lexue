@@ -45,13 +45,13 @@ return [
      ],
 
     /**
-     * 模板消息ID
+     * 模板消息
      *
      * purchase_success：学生购买课程成功
      */
-    'template_id' => [
+    'template' => [
         'purchase_success' => 'FE_ZtvON-PYrQUCK_5J9e_SmfjX_AT0ZmCnH0KbxRvI',
-    ]
+    ],
 
     /**
      * 微信支付

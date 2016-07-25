@@ -96,7 +96,7 @@ class WechatController extends Controller
         $notice = $this->wechat->notice;
         $messageId = $notice->send([
             'touser'      => $data['student_id'],
-            'template_id' => config('wechat.template_id.purchase_success'),
+            'template_id' => config('wechat.template.purchase_success'),
             'url'         => route('m.students::lectures.index'),
             'topcolor'    => '#f7f7f7',
             'data'        => [

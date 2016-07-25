@@ -85,7 +85,9 @@ class TeacherController extends Controller
             }
         }
 
-        /* create lecture */
+        /*
+         * create lecture
+         */
         try {
             \DB::transaction(function() use ($bookTimes, $teacherId) {
                 $studentId = authId();
