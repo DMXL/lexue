@@ -84,34 +84,6 @@ class WechatController extends Controller
     }
 
     /**
-     * 发送购买成功模板消息
-     *
-     * @param array $data
-     * @return int
-     */
-    public function sendSuccess($data)
-    {
-        Log::info('sending industry request.');
-
-        $notice = $this->wechat->notice;
-        $messageId = $notice->send([
-            'touser'      => $data['student_id'],
-            'template_id' => config('wechat.template.purchase_success'),
-            'url'         => route('m.students::lectures.index'),
-            'topcolor'    => '#f7f7f7',
-            'data'        => [
-                "first"      => "亲爱的 ".$data['student_name']."，您已成功购买课程。",
-                "keyword1"   => $data['teacher_name']." 老师的一对一微信课程",    // 课程名称
-                "keyword2"   => $data['price'].".00元",    // 支付金额
-                "keyword3"   => $data['time'],    // 课程时间
-                "remark"     => "随后乐学云教学主管老师将第一时间与您取得联系，请您及时关注微信消息！"
-            ],
-        ]);
-
-        return $messageId;
-    }
-
-    /**
      * 获取订阅返回消息内容
      * TODO 后期考虑从API读取回复内容，并做本地缓存
      *

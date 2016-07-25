@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Auth\WechatAuthController;
+use App\Jobs\HandleLecturesPurchased;
 use App\Models\Course\Lecture;
 use App\Models\User\Teacher;
 use Carbon\Carbon;
@@ -89,7 +90,8 @@ class TeacherController extends Controller
          * create lecture
          */
         try {
-            \DB::transaction(function() use ($bookTimes, $teacherId) {
+            $lectureIds = \DB::transaction(function() use ($bookTimes, $teacherId) {
+                $lectureIds = [];
                 $studentId = authId();
                 foreach ($bookTimes as $bookTime) {
                     $values = explode('--', $bookTime);
@@ -100,6 +102,9 @@ class TeacherController extends Controller
                     $lecture->teacher_id = $teacherId;
                     $lecture->single = true;
                     $lecture->save();
+
+                    // stack new lecture's id
+                    $lectureIds[] = $lecture->id;
                 }
             });
         } catch (\Exception $e) {
@@ -108,27 +113,9 @@ class TeacherController extends Controller
             return back();
         }
 
+        $this->dispatch(new HandleLecturesPurchased($lectureIds));
+
         flash()->success('课程添加成功');
-
-        dd(config('wechat.template.purchase_success'));
-
-        /*
-         * send the success message to student's Wechat
-         */
-        $timeString = '';
-        foreach ($bookTimes as $bookTime) {
-            $values = explode('--', $bookTime);
-            $timeString .= $values[0].' '.$values[1];
-        }
-
-        $wechat = new WechatController();
-        $wechat->sendSuccess([
-            'student_id' => authUser()->wechat_id,
-            'student_name' => authUser()->name,
-            'teacher_name' => $teacher->name,
-            'price' => ( count($bookTimes) *  $teacher->unit_price ),
-            'time' => $timeString
-        ]);
 
         return $this->frontRedirect('students::lectures.index');
     }

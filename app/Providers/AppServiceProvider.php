@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Services\PageGenerator;
 use App\Services\Duobeiyun\DuobeiyunApi;
+use App\Services\Wechat\PushNotification;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -38,6 +39,11 @@ class AppServiceProvider extends ServiceProvider
         // BCT Generator
         $this->app->singleton('page', function() {
             return new PageGenerator();
+        });
+
+        //
+        $this->app->singleton('wechat.pusher', function() {
+            return new PushNotification();
         });
     }
 }
