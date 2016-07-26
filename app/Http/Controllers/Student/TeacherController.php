@@ -104,8 +104,10 @@ class TeacherController extends Controller
                     $lecture->save();
 
                     // stack new lecture's id
-                    $lectureIds[] = $lecture->id;
+                    $lectureIds[] = $lecture->getAttribute('id');
                 }
+
+                return $lectureIds;
             });
         } catch (\Exception $e) {
             $this->handleException($e);
