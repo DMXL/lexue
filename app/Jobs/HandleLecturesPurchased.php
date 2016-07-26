@@ -44,7 +44,7 @@ class HandleLecturesPurchased extends Job implements ShouldQueue
      * @param array $orderId
      * @return bool
      */
-    public function notify($orderId)
+    private function notify($orderId)
     {
         $order = Order::find($orderId);
 

@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers\Student;
 
-use App\Http\Controllers\Auth\WechatAuthController;
+use App\Http\Controllers\Controller;
 use App\Jobs\HandleLecturesPurchased;
 use App\Models\Course\Lecture;
 use App\Models\Course\Order;
 use App\Models\User\Teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\WechatController;
 
 class TeacherController extends Controller
 {
