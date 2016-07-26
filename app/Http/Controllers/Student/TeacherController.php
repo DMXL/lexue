@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Auth\WechatAuthController;
 use App\Jobs\HandleLecturesPurchased;
 use App\Models\Course\Lecture;
+use App\Models\Course\Order;
 use App\Models\User\Teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -86,20 +87,30 @@ class TeacherController extends Controller
             }
         }
 
-        /*
-         * create lecture
-         */
         try {
-            $lectureIds = \DB::transaction(function() use ($bookTimes, $teacherId) {
+            $orderId = \DB::transaction(function() use ($bookTimes, $teacher) {
+                $student = authUser();
+
+                /*
+                 * create order
+                 */
+                $order = new Order();
+                $order->student_id = $student->id;
+                // TODO calculate based on lecture price with teacher unit price as a fallback
+                $order->total = count($bookTimes) * $teacher->unit_price;
+                $order->save();
+
+                /*
+                 * create lectures
+                 */
                 $lectureIds = [];
-                $studentId = authId();
                 foreach ($bookTimes as $bookTime) {
                     $values = explode('--', $bookTime);
                     $lecture = new Lecture();
                     $lecture->date = $values[0];
                     $lecture->time_slot_id = $values[1];
-                    $lecture->student_id = $studentId;
-                    $lecture->teacher_id = $teacherId;
+                    $lecture->student_id = $student->id;
+                    $lecture->teacher_id = $teacher->id;
                     $lecture->single = true;
                     $lecture->save();
 
@@ -107,7 +118,12 @@ class TeacherController extends Controller
                     $lectureIds[] = $lecture->getAttribute('id');
                 }
 
-                return $lectureIds;
+                /*
+                 * associate lectures with order
+                 */
+                $order->lectures()->sync($lectureIds);
+
+                return $order->id;
             });
         } catch (\Exception $e) {
             $this->handleException($e);
@@ -115,7 +131,7 @@ class TeacherController extends Controller
             return back();
         }
 
-        $this->dispatch(new HandleLecturesPurchased($lectureIds));
+        $this->dispatch(new HandleLecturesPurchased($orderId));
 
         flash()->success('课程添加成功');
 

@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Jobs\Job;
 use App\Models\Course\Lecture;
+use App\Models\Course\Order;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,15 +16,15 @@ class HandleLecturesPurchased extends Job implements ShouldQueue
     /**
      * @var null|array
      */
-    private $lectureIds;
+    private $orderId;
 
     /**
      * Create a new job instance.
      * @param
      */
-    public function __construct($lectureIds = null)
+    public function __construct($orderId = null)
     {
-        $this->lectureIds = $lectureIds;
+        $this->orderId = $orderId;
     }
 
     /**
@@ -33,20 +34,22 @@ class HandleLecturesPurchased extends Job implements ShouldQueue
      */
     public function handle()
     {
-        if (isset($this->lectureIds)) {
-            $this->notify($this->lectureIds);
+        if (isset($this->orderId)) {
+            $this->notify($this->orderId);
         }
     }
 
     /**
      * 发送购买成功模板消息
-     * @param array $lectureIds
+     * @param array $orderId
      * @return bool
      */
-    public function notify($lectureIds)
+    public function notify($orderId)
     {
+        $order = Order::find($orderId);
+
         /** @var \Illuminate\Support\Collection $lectures */
-        $lectures = Lecture::whereIn('id', $lectureIds)->get();
+        $lectures = $order->lectures;
 
         $sampleLecture = $lectures->first();
 
@@ -62,11 +65,11 @@ class HandleLecturesPurchased extends Job implements ShouldQueue
             'touser'      => $student->wechat_id,
             'template_id' => config('wechat.template.purchase_success'),
             'url'         => route('m.students::lectures.index'),
-            'topcolor'    => '#f7f7f7',
+            'topcolor'    => '#00f7f7',
             'data'        => [
                 "first"      => "亲爱的 " . $student->name . "，您已成功购买课程。",
                 "keyword1"   => $teacher->name . " 老师的一对一微信课程",    // 课程名称
-                "keyword2"   => number_format($teacher->unit_price * count($lectureIds), 2) . "元",    // 支付金额
+                "keyword2"   => $order->total . "元",    // 支付金额
                 "keyword3"   => $lectures->pluck('human_date_time')->implode(', '),    // 课程时间
                 "remark"     => "随后乐学云教学主管老师将第一时间与您取得联系，请您及时关注微信消息！"
             ],

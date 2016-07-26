@@ -98,6 +98,16 @@ class Teacher extends Authenticatable
     {
         return implode(',', $this->labels->pluck('name')->toArray());
     }
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators
+    |--------------------------------------------------------------------------
+    */
+    public function setUnitPriceAttribute($value)
+    {
+        $this->attributes['unit_price'] = number_format($value, 2);
+    }    
 
     /*
     |--------------------------------------------------------------------------

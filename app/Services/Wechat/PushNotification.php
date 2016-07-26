@@ -12,7 +12,7 @@ namespace App\Services\Wechat;
 class PushNotification
 {
     /**
-     * @var \Illuminate\Foundation\Application
+     * @var \EasyWeChat\Foundation\Application
      */
     private $wechat;
 
