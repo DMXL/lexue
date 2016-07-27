@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         /*
          * Configure each environment separately because order matters
          */
-        if (\App::environment() === 'local') {
+        if (\App::environment() !== 'production') {
             $this->seeders = [
                 StudentsTableSeeder::class,
 
@@ -30,22 +30,6 @@ class DatabaseSeeder extends Seeder
 
                 LecturesTableSeeder::class,
                 OffTimesTableSeeder::class,
-
-                AdminsTableSeeder::class,
-            ];
-        } elseif (\App::environment() === 'staging') {
-            $this->seeders = [
-                StudentsTableSeeder::class,
-
-                TeachersTableSeeder::class,
-                LevelsTableSeeder::class,
-                LevelTeacherPivotTableSeeder::class,
-
-                LabelsTableSeeder::class,
-                LabelTeacherPivotTableSeeder::class,
-
-                TimeslotsTableSeeder::class,
-                TeacherTimeSlotPivotTableSeeder::class,
 
                 AdminsTableSeeder::class,
             ];
