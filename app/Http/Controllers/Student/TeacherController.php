@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\HandleLecturesPurchased;
 use App\Models\Course\Lecture;
 use App\Models\Course\Order;
+use App\Models\Course\TimeSlot;
 use App\Models\User\Teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -103,9 +104,13 @@ class TeacherController extends Controller
                 $lectureIds = [];
                 foreach ($bookTimes as $bookTime) {
                     $values = explode('--', $bookTime);
+
+                    $timeSlot = TimeSlot::find($values[1]);
+
                     $lecture = new Lecture();
                     $lecture->date = $values[0];
                     $lecture->time_slot_id = $values[1];
+                    $lecture->start = $timeSlot->start;
                     $lecture->student_id = $student->id;
                     $lecture->teacher_id = $teacher->id;
                     $lecture->single = true;

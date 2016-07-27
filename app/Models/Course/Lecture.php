@@ -76,7 +76,7 @@ class Lecture extends Model
     */
     public function scopeOrderByLatest($query)
     {
-        return $query->orderBy('start_at', 'desc');
+        return $query->orderBy('date', 'desc')->orderBy('start', 'desc');
     }
 
     public function scopeFollowingWeek($query)

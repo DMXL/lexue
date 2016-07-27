@@ -24,7 +24,7 @@ class LectureController extends Controller
         $singleLectures = $this->student->singleLectures;
         $multiLectures = $this->student->multiLectures;
 
-        $lectures = $singleLectures->merge($multiLectures)->sortByDesc('start_at');
+        $lectures = $singleLectures->merge($multiLectures)->sortByDesc('date')->sortByDesc('start');
 
         if ($lectures->count()) {
             $lectures->load('teacher');

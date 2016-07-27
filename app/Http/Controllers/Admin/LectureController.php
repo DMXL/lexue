@@ -17,7 +17,7 @@ class LectureController extends Controller
      */
     public function index()
     {
-        $lectures = Lecture::paginate();
+        $lectures = Lecture::orderByLatest()->paginate();
 
         return $this->backView('backend.admins.lectures.index', compact('lectures'));
     }

@@ -40,12 +40,14 @@ $factory->define(App\Models\Course\Lecture::class, function (Faker\Generator $fa
     $teacher_id = (int) $randomNumber[0];
     $days = (int) $randomNumber[1];
     $time_slot_id = (int) $randomNumber[2] + 1;
+    $start = \App\Models\Course\TimeSlot::find($time_slot_id)->start;
 
     return [
         'teacher_id' => $teacher_id,
         'student_id' => mt_rand(1, \App\Models\User\Student::count()),
         'date' => \Carbon::today()->addDays($days),
-        'time_slot_id' => $time_slot_id
+        'time_slot_id' => $time_slot_id,
+        'start' => $start,
     ];
 });
 

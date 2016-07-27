@@ -26,6 +26,8 @@ class CreateLecturesTable extends Migration
 
             $table->date('date');
 
+            $table->time('start')->comment('for sorting purposes only');
+
             $table->boolean('complete')->default(false);
 
             $table->boolean('single')->default(true)->comment('whether lecture is 1 on 1');
