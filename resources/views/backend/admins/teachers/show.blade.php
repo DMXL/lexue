@@ -100,6 +100,9 @@
                 </div>
             </div>
         </div>
+        <div class="ibox-footer">
+            <a href="{{ route('admins::teachers.timetables.index', $teacher->id) }}" class="btn btn-default"><i class="fa fa-calendar"></i> 教师课表</a>
+        </div>
     </div>
 
 
