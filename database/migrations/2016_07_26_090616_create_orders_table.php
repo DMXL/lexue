@@ -18,6 +18,9 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students');
 
+            $table->unsignedInteger('teacher_id');
+            $table->foreign('teacher_id')->references('id')->on('teachers');
+
             $table->float('total');
             $table->boolean('paid')->default(false);
             $table->boolean('cancelled')->default(false);

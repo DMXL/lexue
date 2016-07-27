@@ -22,4 +22,6 @@ Route::group(['middleware' => 'auth:students'], function(){
     Route::post('teachers/{id}/book', ['as' => 'teachers.book', 'uses' => 'TeacherController@book'] );
 
     Route::resource('lectures', 'LectureController', ['only' => ['index', 'show']]);
+
+    Route::resource('orders', 'OrderController', ['only' => ['index', 'show']]);
 });

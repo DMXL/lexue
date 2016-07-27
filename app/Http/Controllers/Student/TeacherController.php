@@ -92,6 +92,7 @@ class TeacherController extends Controller
                  */
                 $order = new Order();
                 $order->student_id = $student->id;
+                $order->teacher_id = $teacher->id;
                 // TODO calculate based on lecture price with teacher unit price as a fallback
                 $order->total = count($bookTimes) * $teacher->unit_price;
                 $order->save();

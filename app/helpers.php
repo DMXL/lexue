@@ -166,29 +166,25 @@ function isPageActive($route)
     return false;
 }
 
-/**
- * Convert Carbon timestamps to Chinese human readable format
- * TODO this package is quite limited. Need to write own formatter.
- *
- * @param $timestamp
- * @return string
- */
-function humanDateTime($timestamp)
+function humanDateTime($timestamp, $showDayOfWeek = true)
 {
-    return Carbon::parse($timestamp)->format('m月j日, l, h:i A');
+    $date = humanDate($timestamp, $showDayOfWeek);
+    $time = humanTime($timestamp);
+    return $date . ', ' . $time;
 }
 
 function humanTime($timestamp)
 {
-    return Carbon::parse($timestamp)->format('h:i A');
+    $time = Carbon::parse($timestamp);
+    return humanDayPart($time->hour) . $time->format('h:1');
 }
 
-function humanDate($timestamp, $dayOfWeek = false)
+function humanDate($timestamp, $showDayOfWeek = false)
 {
     $date = Carbon::parse($timestamp)->format('m月j日');
 
-    if ($dayOfWeek) {
-        $date .=  ', ' . humanDayOfWeek(Carbon::parse($timestamp)->dayOfWeek);
+    if ($showDayOfWeek) {
+        $date .=  ' ' . humanDayOfWeek(Carbon::parse($timestamp)->dayOfWeek);
     }
 
     return $date;
@@ -197,6 +193,17 @@ function humanDate($timestamp, $dayOfWeek = false)
 function humanDayOfWeek($dayNumber)
 {
     return trans('times.day_of_week.' . $dayNumber);
+}
+
+function humanDayPart($hour)
+{
+    if ($hour < 12) {
+        return '上午';
+    } elseif ($hour < 19) {
+        return '下午';
+    } else {
+        return '晚上';
+    }
 }
 
 /**

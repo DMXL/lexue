@@ -12,8 +12,10 @@ class StudentsTableSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker\Factory::create('zh_CN');
+
         DB::table('students')->insert([
-            'name' => \App\Services\ChineseFaker::name(),
+            'name' => $faker->name,
             'email' => config('auth.test.email'),
             'password' => bcrypt(config('auth.test.password')),
         ]);

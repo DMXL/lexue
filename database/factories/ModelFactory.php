@@ -11,25 +11,25 @@
 |
 */
 
-use App\Services\ChineseFaker;
-
-$factory->define(App\Models\User\Student::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User\Student::class, function () {
+    $faker = Faker\Factory::create('zh_CN');
     return [
-        'name' => ChineseFaker::name(),
+        'name' => $faker->name,
         'email' => $faker->safeEmail,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
     ];
 });
 
-$factory->define(App\Models\User\Teacher::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User\Teacher::class, function () {
+    $faker = Faker\Factory::create('zh_CN');
     return [
-        'name' => ChineseFaker::name(),
+        'name' => $faker->name,
         'email' => $faker->safeEmail,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
         'teaching_since' => $faker->dateTime,
-        'description' => ChineseFaker::text(),
+        'description' => $faker->text,
         'enabled' => $faker->boolean(80),
     ];
 });

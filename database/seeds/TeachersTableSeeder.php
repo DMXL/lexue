@@ -12,11 +12,13 @@ class TeachersTableSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker\Factory::create('zh_CN');
+
         DB::table('teachers')->insert([
-            'name' => \App\Services\ChineseFaker::name(),
+            'name' => $faker->name,
             'email' => config('auth.test.email'),
             'password' => bcrypt(config('auth.test.password')),
-            'description' => \App\Services\ChineseFaker::text(),
+            'description' => $faker->text,
             
         ]);
 
