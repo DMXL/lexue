@@ -8,10 +8,13 @@ use App\Models\Teacher\Level;
 use App\Models\Teacher\Label;
 use App\Models\Teacher\OffTime;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Teacher extends Authenticatable
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'name',
         'unit_price',
@@ -23,7 +26,7 @@ class Teacher extends Authenticatable
         'password', 'remember_token',
     ];
 
-    protected $dates = ['created_at', 'updated_at', 'teaching_since'];
+    protected $dates = ['teaching_since', 'deleted_at'];
 
     protected $with = ['levels', 'labels'];
 

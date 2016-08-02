@@ -152,7 +152,7 @@ class TeacherController extends Controller
         try {
             Teacher::destroy($id);
         } catch (\Exception $e) {
-            //throw $e;
+            $this->handleException($e);
             return back();
         }
 

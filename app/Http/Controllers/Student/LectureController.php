@@ -21,14 +21,10 @@ class LectureController extends Controller
 
     public function index()
     {
-        $singleLectures = $this->student->singleLectures;
-        $multiLectures = $this->student->multiLectures;
+        $singleLectures = $this->student->singleLectures()->with('teacher')->get();
+        $multiLectures = $this->student->multiLectures()->with('teacher')->get();
 
-        $lectures = $singleLectures->merge($multiLectures)->sortByDesc('date')->sortByDesc('start');
-
-        if ($lectures->count()) {
-            $lectures->load('teacher');
-        }
+        $lectures = $singleLectures->merge($multiLectures)->sortByDesc('start')->sortByDesc('date');
 
         return $this->frontView('lectures.index', compact('lectures'));
     }
