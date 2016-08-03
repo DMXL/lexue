@@ -30,12 +30,6 @@
                             @each('backend.admins.partials.tag', $teacher->labels->pluck('name'), 'name')
                         </p>
                     </div>
-                    <div class="m-t-md">
-                        <p>
-                            {{ str_limit($teacher->description, 40) }}
-                        </p>
-                    </div>
-
                 </a>
                 <div class="contact-box-footer">
                         <a href="{{ route('admins::teachers.show', $teacher->id) }}" class="btn btn-sm btn-white"><i class="fa fa-user"></i> 资料</a>
