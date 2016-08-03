@@ -4,12 +4,13 @@
     $action = route('admins::teachers.store');
     $method = 'post';
     $defaults = [
-            'name' => '',
-            'unit_price' => '',
-            'teaching_since' => '',
-            'description' => '',
-            'levels' => [],
-            'labels' => [],
+        'name' => '',
+        'email' => '',
+        'unit_price' => '',
+        'teaching_since' => '',
+        'description' => '',
+        'levels' => [],
+        'labels' => [],
     ];
 ?>
 
