@@ -24,7 +24,7 @@
 |--------------------------------------------------------------------------
 */
 /* Generic Style */
-.bd {
+body, .bd {
     background-color: #fbf9fe;
 }
 
@@ -95,6 +95,14 @@
 | PAGE STYLES
 |--------------------------------------------------------------------------
 */
+
+/* About Page */
+.about .weui_panel {
+    background-color: transparent;
+}
+.about .weui_panel_hd, .about .weui_media_box {
+    background-color: #fff;
+}
 
 /* Teachers Index Page */
 .teachers_index .weui_panel {
