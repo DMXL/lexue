@@ -38,10 +38,10 @@
                     </div>
                 </div>
                 <label class="col-xs-2 control-label" for="teacher-years">教师教龄</label>
-                <div class="col-xs-2">
+                <div class="col-xs-1">
                     <p class="form-control-static text-muted">@{{ yearsOfTeaching }}</p>
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-3">
                     <div class="input-group">
                         <span class="input-group-addon"><small>起始年份</small></span>
                         <input type="text" id="teacher-years" name="teaching_since" class="form-control" value="{!! Request::old('teaching_since', $defaults['teaching_since']) !!}" v-model="teachingSince">
