@@ -123,7 +123,7 @@ class WechatController extends Controller
                     [
                         "type" => "view",
                         "name" => "联系我们",
-                        "url"  => "http://123.57.223.193/wecare/index/contac"
+                        "url"  => "http://123.57.223.193/wecare/index/contact"
                     ],
                     [
                         "type" => "view",
