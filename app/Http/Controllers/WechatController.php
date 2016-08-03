@@ -118,17 +118,17 @@ class WechatController extends Controller
                     [
                         "type" => "view",
                         "name" => "关于乐学云",
-                        "url"  => "https://weui.io/#/"
+                        "url"  => "http://u1177627.jisuapp.cn/index.php?r=Invitation/showNewInvitation&id=1758970"
                     ],
                     [
                         "type" => "view",
                         "name" => "联系我们",
-                        "url"  => "https://weui.io/#/"
+                        "url"  => "http://123.57.223.193/wecare/index/contac"
                     ],
                     [
                         "type" => "view",
                         "name" => "立即登录",
-                        "url"  => route('wechat::auth.redirect')
+                        "url"  => "http://123.57.223.193/wecare/"  //route('wechat::auth.redirect')
                     ],
                 ],
             ],
