@@ -25,6 +25,7 @@ class TeacherFormRequest extends Request
     {
         return [
             'name' => 'required',
+            'email' => 'required|unique:teachers,email',
             'unit_price' => 'required|numeric',
             'teaching_since' => 'required|regex:/\d{4}/',
         ];
