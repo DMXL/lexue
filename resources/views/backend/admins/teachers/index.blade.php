@@ -43,6 +43,10 @@
     </div>
 
     @if($teachers->render())
-        {!! $teachers->render() !!}
+        <div class="row">
+            <div class="col-lg-12 text-right">
+                {!! $teachers->render() !!}
+            </div>
+        </div>
     @endif
 @endsection

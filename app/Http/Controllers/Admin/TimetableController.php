@@ -53,6 +53,11 @@ class TimetableController extends Controller
 
         $timetable = $teacher->getTimetable();
 
+        if (!$timetable) {
+            \Flash::warning('请先添加教师课时');
+            return redirect()->route('admins::teachers.timeslots.index', $teacherId);
+        }
+
         return $this->backView('backend.admins.timetables.show', compact('teacher', 'timetable'));
     }
 

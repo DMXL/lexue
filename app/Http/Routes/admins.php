@@ -16,6 +16,7 @@ Route::resource('lectures', 'LectureController');
 Route::get('teachers/{teacher_id}/lectures', ['as' => 'teachers.lectures.index', 'uses' => 'LectureController@showTeacher']);
 
 Route::resource('timeslots', 'TimeSlotController');
+Route::resource('teachers.timeslots', 'TeacherTimeSlotController', ['only' => ['index', 'store']]);
 
 Route::resource('teachers.offtimes', 'OffTimeController', ['except' => ['show', 'create', 'edit']]);
 

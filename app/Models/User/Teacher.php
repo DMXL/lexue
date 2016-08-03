@@ -15,6 +15,8 @@ class Teacher extends Authenticatable
 {
     use SoftDeletes;
 
+    protected $perPage = 16;
+
     protected $fillable = [
         'name',
         'email',
@@ -176,6 +178,11 @@ class Teacher extends Authenticatable
 
         $timetable = [];
         $timeSlots = $this->timeSlots;
+
+        if ($timeSlots->count() === 0) {
+            return [];
+        }
+
         for ($days = 0; $days < config('course.days_to_show'); $days++) {
             $key = Carbon::tomorrow()->addDays($days)->dayOfWeek;
             $date = Carbon::tomorrow()->addDays($days)->toDateString();
