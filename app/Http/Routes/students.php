@@ -6,7 +6,7 @@
  * Time: 4:06 PM
  */
 Route::get('about', ['as' => 'about', 'uses' => function(){
-    return 'about';
+    return view('wechat.about');
 }]);
 
 Route::get('contact', ['as' => 'contact', 'uses' => function(){
