@@ -57,6 +57,10 @@ class Controller extends BaseController
 
     protected function handleException(\Exception $e)
     {
+        if (config('app.debug')) {
+            throw $e;
+        }
+        
         \Log::error($e);
     }
 }
