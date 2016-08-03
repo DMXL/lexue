@@ -48,8 +48,8 @@ class TeacherController extends Controller
                 return $this->writeTeacherData($teacher, $request);
             });
         } catch (\Exception $e) {
+            $this->handleException($e);
             return back();
-            // TODO write to logs and notify
         }
 
         \Flash::success('添加成功');

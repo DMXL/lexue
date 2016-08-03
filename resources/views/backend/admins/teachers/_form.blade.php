@@ -15,6 +15,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-6">
+                    <div class="form-group{!! ($errors->has('email')) ? ' has-error' : '' !!}">
+                        <label class="col-md-4 col-xs-2 control-label" for="teacher-email">教师邮箱</label>
+                        <div class="col-md-8 col-xs-10">
+                            <input name="email" id="teacher-email" type="text" class="form-control" value="{!! Request::old('email', $defaults['email']) !!}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group{!! ($errors->has('unit_price')) ? ' has-error' : '' !!}">
                 <div class="col-md-6">
                     <div class="form-group{!! ($errors->has('unit_price')) ? ' has-error' : '' !!}">
                         <label class="col-md-4 col-xs-2 control-label" for="teacher-price">课时费用</label>
@@ -26,14 +37,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group{!! ($errors->has('unit_price')) ? ' has-error' : '' !!}">
                 <label class="col-xs-2 control-label" for="teacher-years">教师教龄</label>
-                <div class="col-xs-2">
+                <div class="col-xs-1">
                     <p class="form-control-static text-muted">@{{ yearsOfTeaching }}</p>
                 </div>
-                <div class="col-xs-8">
+                <div class="col-xs-3">
                     <div class="input-group">
                         <span class="input-group-addon"><small>起始年份</small></span>
                         <input type="text" id="teacher-years" name="teaching_since" class="form-control" value="{!! Request::old('teaching_since', $defaults['teaching_since']) !!}" v-model="teachingSince">
