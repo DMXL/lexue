@@ -14,6 +14,6 @@ class OpenLectureController extends Controller
     {
         $lectures = Lecture::where('single', 0)->orderBy('start','desc')->paginate();
 
-        dd($lectures);
+        return $this->frontView('openlectures.index', compact('lectures'));
     }
 }
