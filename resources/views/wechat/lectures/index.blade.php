@@ -32,7 +32,7 @@
                             @if(!$lecture->complete)
 
                                 <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
-                                    <div class="weui_media_hd">
+                                    <div class="weui_media_hd" data-value="{{ route('m.students::teachers.show', $lecture->teacher_id) }}">
                                         <div class="teacher_name">{{ $lecture->teacher->name }}</div>
                                         <img class="weui_media_appmsg_thumb" src="{{ $lecture->teacher->avatar->url('thumb') }}" alt="">
                                     </div>
@@ -61,21 +61,34 @@
             </div>
 
             <div id="tab2" class="weui_tab_bd_item">
-                @foreach($lectures as $lecture)
-                    @if($lecture->complete)
+                <div class="weui_panel weui_panel_access">
+                    <div class="weui_panel_bd">
 
-                        <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
-                            <div class="weui_media_hd">
-                                <img class="weui_media_appmsg_thumb" src="{{ $lecture->teacher->avatar->url('thumb') }}" alt="">
-                            </div>
-                            <div class="weui_media_bd">
-                                <h4 class="weui_media_title">{{ $lecture->human_date_time }}</h4>
-                                <p class="weui_media_desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
-                            </div>
-                        </a>
+                        @foreach($lectures as $lecture)
+                            @if($lecture->complete)
 
-                    @endif
-                @endforeach
+                                <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+                                    <div class="weui_media_hd" data-value="{{ route('m.students::teachers.show', $lecture->teacher_id) }}">
+                                        <div class="teacher_name">{{ $lecture->teacher->name }}</div>
+                                        <img class="weui_media_appmsg_thumb" src="{{ $lecture->teacher->avatar->url('thumb') }}" alt="">
+                                    </div>
+                                    <div class="weui_media_bd">
+                                        <h4 class="weui_media_title">{{ $lecture->human_time }}</h4>
+                                        <span class="badge grey">{{ $lecture->date }}</span>
+
+                                        @if($lecture->single)
+                                            <span class="badge secondary">一对一</span>
+                                        @else
+                                            <span class="badge primary">一对多</span>
+                                        @endif
+                                    </div>
+                                </a>
+
+                            @endif
+                        @endforeach
+
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -109,7 +122,7 @@
 
     <script>
         $('.weui_media_hd').click(function() {
-            //location.href = '{{ route('m.students::teachers.show', $lecture->teacher_id) }}';
+            location.href = $(this).attr('data-value');
         });
         $('.weui_media_bd').click(function() {
             $.actions({

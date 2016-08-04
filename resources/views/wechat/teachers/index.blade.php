@@ -35,7 +35,9 @@
                             <h4 class="weui_media_title">{{ $teacher->name }}</h4>
                             <p class="weui_media_desc">{{ $teacher->years_of_teaching }}教龄&nbsp;&nbsp;授课年级: {{ $teacher->levels->implode('name', ',') }}</p>
                             <div class="badgegroup">
-                                <span class="badge primary">资格证</span><span class="badge secondary">学历</span>
+                                @foreach( $teacher->labels->pluck('name') as $name )
+                                    <span class="badge secondary">{{ $name }}</span>
+                                @endforeach
                             </div>
                         </div>
                     </a>
