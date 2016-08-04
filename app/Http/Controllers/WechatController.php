@@ -158,7 +158,7 @@ class WechatController extends Controller
                     [
                         "type" => "view",
                         "name" => "直播课堂",
-                        "url"  => "https://weui.io/#/"
+                        "url"  => route('m.students::openlectures.index')
                     ],
                     [
                         "type" => "view",
