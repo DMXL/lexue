@@ -163,7 +163,7 @@ class WechatController extends Controller
                     [
                         "type" => "view",
                         "name" => "精彩回放",
-                        "url"  => "https://weui.io/#/"
+                        "url"  => "https://weui.io/"
                     ],
                 ],
             ]
