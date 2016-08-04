@@ -80,10 +80,10 @@ class TimetableController extends Controller
         $offTime = $teacher->offTimes()->where([
             ['date', '=', $date],
             ['time_slot_id', '=', $timeSlotId]
-        ])->first() ? $teacher->offTimes()->where([
+        ])->first() ? : $teacher->offTimes()->where([
             ['date', '=', $date],
             ['all_day', '=', 1]
-        ])->first() : null;
+        ])->first();
 
         if ($offTime) {
             return view('backend.admins.timetables.snippets.offtime', compact('teacher','offTime','date','timeSlotId'));
