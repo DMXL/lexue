@@ -230,26 +230,28 @@ body, .bd {
             transform: scaleY(0.5);
 }
 
-/* Lectures Index Page */
-.lectures_index .weui_tabbar_icon i {
+/* Tutorials Index Page */
+.tutorials_index .weui_tabbar_icon i {
     color: #bbb;
     font-size: 24px;
     display: block;
 }
-.lectures_index .weui_bar_item_on .weui_tabbar_icon i {
+.tutorials_index .weui_bar_item_on .weui_tabbar_icon i {
     color: #09bb07;
 }
-.lectures_index .weui_tabbar {
+.tutorials_index .weui_tabbar {
     position: fixed;
     z-index: 99;
 }
-.lectures_index .weui_panel_bd .weui_media_hd .teacher_name {
+.tutorials_index .weui_panel_bd .weui_media_hd .teacher_name {
     position: absolute;
     width: 60px;
     background-color: rgba(80,80,80,.2);
     color: #fff;
     font-size: 16px;
 }
-.lectures_index .weui_media_desc {
+.tutorials_index .weui_media_desc {
     display: inline-flex;
 }
+
+/* Lectures Index Page */

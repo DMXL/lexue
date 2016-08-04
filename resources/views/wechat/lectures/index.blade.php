@@ -20,7 +20,7 @@
 @extends('wechat.layouts.blank')
 
 @section('content')
-    <div class="weui_tab lectures_index">
+    <div class="weui_tab tutorials_index">
 
         <div class="weui_tab_bd">
 
