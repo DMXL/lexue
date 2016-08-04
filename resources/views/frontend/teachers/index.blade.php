@@ -6,7 +6,7 @@
                 <div class="contact-box center-version">
                     <a href="{{ route('students::teachers.show', $teacher->id) }}">
 
-                        <img alt="image" class="img-circle" src="{{ getAvatarUrl($teacher->avatar, 'sm') }}">
+                        <img alt="image" class="img-circle" src="{{ $teacher->avatar->url('thumb') }}">
                         <h3 class="m-b-xs">{{ $teacher->name }}</h3>
 
                         <div class="font-bold">

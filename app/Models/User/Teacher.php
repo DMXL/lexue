@@ -8,12 +8,14 @@ use App\Models\Teacher\Level;
 use App\Models\Teacher\Label;
 use App\Models\Teacher\OffTime;
 use Carbon\Carbon;
+use Codesleeve\Stapler\ORM\EloquentTrait;
+use Codesleeve\Stapler\ORM\StaplerableInterface;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Teacher extends Authenticatable
+class Teacher extends Authenticatable implements StaplerableInterface
 {
-    use SoftDeletes;
+    use SoftDeletes, EloquentTrait;
 
     protected $perPage = 16;
 
@@ -22,7 +24,8 @@ class Teacher extends Authenticatable
         'email',
         'unit_price',
         'teaching_since',
-        'description'
+        'description',
+        'avatar'
     ];
 
     protected $hidden = [
@@ -43,6 +46,22 @@ class Teacher extends Authenticatable
     private $lectureUnavailabilities;
 
     private $offTimeUnavailabilities;
+
+    /**
+     * Teacher constructor.
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = array())
+    {
+        $this->hasAttachedFile('avatar', [
+            'styles' => [
+                'medium' => '300x300#',
+                'thumb' => '100x100#'
+            ]
+        ]);
+
+        parent::__construct($attributes);
+    }
 
     /*
     |--------------------------------------------------------------------------

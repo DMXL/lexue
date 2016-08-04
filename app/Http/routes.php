@@ -120,23 +120,6 @@ Route::get('video/{path}', function($path) {
 })->where(['path' => '.*']);
 
 /*
- * Image routes
- */
-Route::get('{image_type}/{file}', function(
-    Illuminate\Http\Request $request,
-    \App\Services\Image\LocalImageHandler $imageHandler,
-    $imageType, $file) {
-    $imageHandler->get($request, $imageType, $file);
-})->where(['file' => '.*']);
-
-Route::get('default/{file}', function(
-    Illuminate\Http\Request $request,
-    \App\Services\Image\LocalImageHandler $imageHandler,
-    $path) {
-    $imageHandler->getDefault($request, $path);
-})->where(['file' => '.*']);
-
-/*
 |--------------------------------------------------------------------------
 | Debug and Testing routes
 |--------------------------------------------------------------------------

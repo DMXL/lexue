@@ -10,8 +10,8 @@
 
     <title>{{ isset($title) ? $title . " | " : "" }}{{ appName() }}</title>
 
-    <link href="{{ asset('app/css/all.css') }}" rel="stylesheet">
-    <link href="{{ asset('app/css/style.css') }}" rel="stylesheet">
+    <link href="{{ elixir('app/css/all.css') }}" rel="stylesheet">
+    <link href="{{ elixir('app/css/style.css') }}" rel="stylesheet">
 
     @yield('css')
 
@@ -63,7 +63,7 @@
 </div>
 
 <!-- Main scripts -->
-<script src="{{ asset('app/js/all.js') }}"></script>
+<script src="{{ elixir('app/js/all.js') }}"></script>
 
 <!-- Custom scripts -->
 <script>

@@ -8,14 +8,12 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "predis/predis": "^1.1",
-        "league/glide": "^1.0",
-        "league/flysystem-dropbox": "^1.0",
-        "league/glide-laravel": "^1.0",
         "laracasts/flash": "^2.0",
         "overtrue/laravel-wechat": "~3.0",
         "rap2hpoutre/laravel-log-viewer": "^0.7.0",
         "doctrine/dbal": "^2.5",
-        "pda/pheanstalk": "~3.0"
+        "pda/pheanstalk": "~3.0",
+        "codesleeve/laravel-stapler": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

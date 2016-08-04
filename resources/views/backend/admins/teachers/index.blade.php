@@ -16,7 +16,7 @@
 
                 <a href="{{ route('admins::teachers.show', $teacher->id) }}">
 
-                    <img alt="image" class="img-circle" src="{{ getAvatarUrl($teacher->avatar, 'sm') }}">
+                    <img alt="image" class="img-circle" src="{{ $teacher->avatar->url('thumb') }}">
 
                     <h4 class="m-b-xs"><strong>{{ $teacher->name }}</strong></h4>
                     <br>

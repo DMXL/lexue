@@ -3,6 +3,7 @@
 @section('content')
     <div class="ibox">
         <div class="ibox-title">
+            <a href="{{ route('admins::teachers.show', $teacher->id) }}" class="btn btn-default btn-sm">教师信息</a>
             <a href="{{ route('admins::teachers.timetables.index', $teacher->id) }}" class="btn btn-default btn-sm">查看课表</a>
         </div>
         <form action="{{ route('admins::teachers.timeslots.store', $teacher->id) }}" method="post">

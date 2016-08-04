@@ -28,7 +28,7 @@
                 @foreach($teachers as $teacher)
                     <a href="{{ route('m.students::teachers.show', $teacher->id) }}" class="weui_media_box weui_media_appmsg">
                         <div class="weui_media_hd">
-                            <img class="weui_media_appmsg_thumb" src="{{ getAvatarUrl($teacher->avatar, 'sm') }}" alt="{{ $teacher->name }}">
+                            <img class="weui_media_appmsg_thumb" src="{{ $teacher->avatar->url('thumb') }}" alt="{{ $teacher->name }}">
                         </div>
                         <div class="weui_media_bd">
                             <span class="pricetag">￥{{ $teacher->unit_price }}.00/课时</span>

@@ -52,7 +52,9 @@ elixir(function(mix) {
         'vue.min.js'
     ], 'public/app/js');
 
-    mix.copy('resources/assets/fonts', 'public/app/fonts');
-    mix.copy('resources/assets/patterns', 'public/app/css/patterns');
-    mix.copy('resources/assets/images', 'public/images');
+    mix.version(['app/css/all.css', 'app/css/style.css', 'app/js/all.js']);
+
+    mix.copy('resources/assets/app/fonts', 'public/build/app/fonts');
+    mix.copy('resources/assets/app/patterns', 'public/build/app/css/patterns');
+    mix.copy('resources/assets/app/avatars', 'public/avatars');
 });

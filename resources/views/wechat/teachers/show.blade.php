@@ -31,7 +31,7 @@
         <form id="courses_form" action="{{ route('m.students::teachers.book', $teacher->id) }}" method="POST">
             {{ csrf_field() }}
             <div class="weui_icon_area">
-                <img src="{{ getAvatarUrl($teacher->avatar, 'md') }}" class="avatar" />
+                <img src="{{ $teacher->avatar->url('medium') }}" class="avatar" />
                 <h2 class="weui_msg_title">{{ $teacher->name }}</h2>
             </div>
             <div class="weui_tab">

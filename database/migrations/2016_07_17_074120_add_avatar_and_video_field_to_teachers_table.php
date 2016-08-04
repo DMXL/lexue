@@ -13,7 +13,6 @@ class AddAvatarAndVideoFieldToTeachersTable extends Migration
     public function up()
     {
         Schema::table('teachers', function (Blueprint $table) {
-            $table->string('avatar')->nullable()->after('description');
             $table->string('video')->nullable()->after('description');
         });
     }
@@ -26,7 +25,6 @@ class AddAvatarAndVideoFieldToTeachersTable extends Migration
     public function down()
     {
         Schema::table('teachers', function (Blueprint $table) {
-            $table->dropColumn('avatar');
             $table->dropColumn('video');
         });
     }

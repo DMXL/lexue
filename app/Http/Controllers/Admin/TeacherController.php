@@ -7,6 +7,7 @@ use App\Http\Requests\TeacherFormRequest;
 use App\Models\Teacher\Label;
 use App\Models\Teacher\Level;
 use App\Models\User\Teacher;
+use App\Services\Image\LocalImageHandler;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -97,12 +98,23 @@ class TeacherController extends Controller
                 return $this->writeTeacherData($teacher, $request);
             });
         } catch (\Exception $e) {
-            // TODO write to logs and notify
+            $this->handleException($e);
             return back();
         }
 
         \Flash::success('添加成功');
         return redirect()->route('admins::teachers.show', $teacher->id);
+    }
+
+    public function uploadAvatar(Request $request, $id)
+    {
+        /** @var \App\Models\User\Teacher $teacher */
+        $teacher = Teacher::findOrFail($id);
+
+        $teacher->avatar = $request->file('avatar');
+        $teacher->save();
+
+        return 1;
     }
 
     public function enable($id)

@@ -7,7 +7,7 @@
             <div class="ibox">
                 <div class="ibox-content no-background">
                     <div class="profile-image no-float">
-                        <img src="{{ getAvatarUrl($teacher->avatar, 'md') }}" class="img-circle circle-border m-b-md" alt="profile">
+                        <img src="{{ $teacher->avatar->url('thumb') }}" class="img-circle circle-border m-b-md" alt="profile">
                     </div>
                     <h3>{{ $teacher->name }}</h3>
                     <div>

@@ -34,7 +34,7 @@
                                 <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
                                     <div class="weui_media_hd">
                                         <div class="teacher_name">{{ $lecture->teacher->name }}</div>
-                                        <img class="weui_media_appmsg_thumb" src="{{ getAvatarUrl($lecture->teacher->avatar, 'md') }}" alt="">
+                                        <img class="weui_media_appmsg_thumb" src="{{ $lecture->teacher->avatar->url('thumb') }}" alt="">
                                     </div>
                                     <div class="weui_media_bd">
                                         <h4 class="weui_media_title">{{ $lecture->human_time }}</h4>
@@ -66,7 +66,7 @@
 
                         <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
                             <div class="weui_media_hd">
-                                <img class="weui_media_appmsg_thumb" src="{{ getAvatarUrl($lecture->teacher->avatar, 'md') }}" alt="">
+                                <img class="weui_media_appmsg_thumb" src="{{ $lecture->teacher->avatar->url('thumb') }}" alt="">
                             </div>
                             <div class="weui_media_bd">
                                 <h4 class="weui_media_title">{{ $lecture->human_date_time }}</h4>
