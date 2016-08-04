@@ -34,8 +34,37 @@ $factory->define(App\Models\User\Teacher::class, function () {
     ];
 });
 
+$factory->define(App\Models\Course\Tutorial::class, function (\Faker\Generator $faker) {
+    do {
+        $randomNumber = $faker->unique()->randomNumber(3, true);
+        $randomNumber = (string) $randomNumber;
+        $teacher_id = (int) $randomNumber[0];
+        $days = (int) $randomNumber[1] + 1;
+        $date = \Carbon::today()->addDays($days);
+        $time_slot_id = (int) $randomNumber[2] + 1;
+        $start = \App\Models\Course\TimeSlot::find($time_slot_id)->start;
+    } while(
+        \App\Models\Course\Lecture::where([
+            ['teacher_id', '=', $teacher_id],
+            ['date', '=', $date->toDateString()],
+            ['time_slot_id', '=', $time_slot_id]
+        ])->exists() OR
+        \App\Models\Course\Tutorial::where([
+            ['teacher_id', '=', $teacher_id],
+            ['date', '=', $date->toDateString()],
+            ['time_slot_id', '=', $time_slot_id]
+        ])->exists());
+
+    return [
+        'teacher_id' => $teacher_id,
+        'student_id' => App\Models\User\Student::get()->random()->id,
+        'date' => $date,
+        'time_slot_id' => $time_slot_id,
+        'start' => $start,
+    ];
+});
+
 $factory->define(App\Models\Course\Lecture::class, function (\Faker\Generator $faker) {
-    $open = $faker->boolean(70);
     $cnFaker = Faker\Factory::create('zh_CN');
 
     do {
@@ -46,26 +75,21 @@ $factory->define(App\Models\Course\Lecture::class, function (\Faker\Generator $f
         $date = \Carbon::today()->addDays($days);
         $time_slot_id = (int) $randomNumber[2] + 1;
         $start = \App\Models\Course\TimeSlot::find($time_slot_id)->start;
-    } while(\App\Models\Course\Lecture::where([
-        ['teacher_id', '=', $teacher_id],
-        ['date', '=', $date->toDateString()],
-        ['time_slot_id', '=', $time_slot_id]
-    ])->exists());
-
-    if ($open) {
-        return [
-            'teacher_id' => $teacher_id,
-            'name' => $cnFaker->catchPhrase,
-            'date' => $date,
-            'time_slot_id' => $time_slot_id,
-            'start' => $start,
-            'single' => false,
-        ];
-    }
+    } while(
+        \App\Models\Course\Lecture::where([
+            ['teacher_id', '=', $teacher_id],
+            ['date', '=', $date->toDateString()],
+            ['time_slot_id', '=', $time_slot_id]
+        ])->exists() OR
+        \App\Models\Course\Tutorial::where([
+            ['teacher_id', '=', $teacher_id],
+            ['date', '=', $date->toDateString()],
+            ['time_slot_id', '=', $time_slot_id]
+        ])->exists());
 
     return [
         'teacher_id' => $teacher_id,
-        'student_id' => mt_rand(1, \App\Models\User\Student::count()),
+        'name' => $cnFaker->catchPhrase,
         'date' => $date,
         'time_slot_id' => $time_slot_id,
         'start' => $start,

@@ -65,6 +65,16 @@ class TimetableController extends Controller
     {
         $teacher = Teacher::find($teacherId);
 
+        /* check for tutorials */
+        $tutorial = $teacher->tutorials()->where([
+            ['date', '=', $date],
+            ['time_slot_id', '=', $timeSlotId]
+        ])->first();
+
+        if ($tutorial) {
+            return view('backend.admins.timetables.snippets.tutorial', compact('tutorial'));
+        }
+
         /* check for lectures */
         $lecture = $teacher->lectures()->where([
             ['date', '=', $date],
@@ -79,10 +89,10 @@ class TimetableController extends Controller
         // for some reason orWhere does not work properly here so queyring individually
         $offTime = $teacher->offTimes()->where([
             ['date', '=', $date],
-            ['time_slot_id', '=', $timeSlotId]
+            ['all_day', '=', 1]
         ])->first() ? : $teacher->offTimes()->where([
             ['date', '=', $date],
-            ['all_day', '=', 1]
+            ['time_slot_id', '=', $timeSlotId]
         ])->first();
 
         if ($offTime) {

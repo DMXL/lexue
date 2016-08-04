@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrdersTable extends Migration
+class CreateTutorialsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,24 +12,23 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('tutorials', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->unsignedInteger('student_id');
+            $table->unsignedInteger('student_id')->nullable();
             $table->foreign('student_id')->references('id')->on('students');
 
             $table->unsignedInteger('teacher_id');
             $table->foreign('teacher_id')->references('id')->on('teachers');
 
-            $table->unsignedInteger('lecture_id');
-            $table->foreign('lecture_id')->references('id')->on('lectures');
+            $table->unsignedInteger('time_slot_id');
+            $table->foreign('time_slot_id')->references('id')->on('time_slots');
 
-            $table->boolean('is_lecture');
+            $table->date('date');
 
-            $table->float('total');
-            $table->boolean('paid')->default(false);
-            $table->boolean('cancelled')->default(false);
-            $table->boolean('refunded')->default(false);
+            $table->time('start')->comment('for sorting purposes only');
+
+            $table->unique(['teacher_id', 'date', 'time_slot_id']);
 
             $table->timestamps();
         });
@@ -42,6 +41,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('orders');
+        Schema::drop('tutorials');
     }
 }

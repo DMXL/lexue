@@ -27,7 +27,7 @@ class CreateLecturesTable extends Migration
 
             $table->string('name')->nullable();
 
-            $table->boolean('complete')->default(false);
+            $table->boolean('finished')->default(false);
 
             $table->unique(['teacher_id', 'date', 'time_slot_id']);
             
