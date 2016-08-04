@@ -7,9 +7,3 @@ Homestead.yaml
 Homestead.json
 .env
 /_*
-/public/app/
-/public/avatars/
-/public/build/
-/public/images/
-/public/system/
-/public/videos/
