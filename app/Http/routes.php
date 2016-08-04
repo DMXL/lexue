@@ -124,7 +124,7 @@ Route::get('video/{path}', function($path) {
  */
 Route::get('{image_type}/{file}', function(
     Illuminate\Http\Request $request,
-    \App\Services\Image\DropboxImageHandler $imageHandler,
+    \App\Services\Image\LocalImageHandler $imageHandler,
     $imageType, $file) {
     $imageHandler->get($request, $imageType, $file);
 })->where(['file' => '.*']);
@@ -134,7 +134,7 @@ Route::get('default/{file}', function(
     \App\Services\Image\LocalImageHandler $imageHandler,
     $path) {
     $imageHandler->getDefault($request, $path);
-});
+})->where(['file' => '.*']);
 
 /*
 |--------------------------------------------------------------------------
@@ -142,7 +142,6 @@ Route::get('default/{file}', function(
 |--------------------------------------------------------------------------
 */
 Route::get('debug', ['as' => 'debug' , 'uses' => function() {
-    return userType();
     return view('debug');
 }]);
 
