@@ -11,10 +11,11 @@
 
     <div class="ibox">
         <div class="ibox-title">
-            <h5 class="no-margins vertical-middle inline">
-                <a class="btn btn-link btn-sm" href="{{ route('admins::teachers.show', $teacher->id) }}">{{ $teacher->name }}</a>
-            </h5>
-            <a href="" class="btn btn-default btn-sm"><i class="fa fa-wrench"></i> 修改教师课时</a>
+            <h4 class="no-margins vertical-middle inline">
+                {{ $teacher->name }}
+            </h4>
+            <a href="{{ route('admins::teachers.show', $teacher->id) }}" class="btn btn-default btn-sm"><i class="fa fa-user"></i> 教师信息</a>
+            <a href="{{ route('admins::teachers.timeslots.index', $teacher->id) }}" class="btn btn-default btn-sm"><i class="fa fa-wrench"></i> 修改课时</a>
         </div>
         <div class="ibox-content">
             <div class="row">

@@ -106,10 +106,10 @@
         </div>
         <div class="ibox-footer">
             <a href="{{ route('admins::teachers.timeslots.index', $teacher->id) }}" class="btn btn-default">
-                <i class="fa fa-clock-o"></i> 教师课时
+                <i class="fa fa-clock-o"></i> 课时管理
             </a>
             <a href="{{ route('admins::teachers.timetables.index', $teacher->id) }}" class="btn btn-default">
-                <i class="fa fa-calendar"></i> 教师课表
+                <i class="fa fa-calendar"></i> 课表管理
             </a>
         </div>
     </div>

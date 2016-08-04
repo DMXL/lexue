@@ -132,7 +132,12 @@ class Teacher extends Authenticatable implements StaplerableInterface
     public function setUnitPriceAttribute($value)
     {
         $this->attributes['unit_price'] = number_format($value, 2);
-    }    
+    }
+
+    public function setTeachingSinceAttribute($value)
+    {
+        $this->attributes['teaching_since'] = \Carbon::parse($value . '-00-00');
+    }
 
     /*
     |--------------------------------------------------------------------------

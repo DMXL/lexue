@@ -25,7 +25,7 @@ class TeacherFormRequest extends Request
     {
         return [
             'name' => 'required',
-            'email' => 'required|unique:teachers,email',
+            'email' => 'required|unique:teachers,email,'. $this->route('teachers'),
             'unit_price' => 'required|numeric',
             'teaching_since' => 'required|regex:/\d{4}/',
         ];

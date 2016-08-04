@@ -23,5 +23,7 @@ Route::group(['middleware' => 'auth:students'], function(){
 
     Route::resource('lectures', 'LectureController', ['only' => ['index', 'show']]);
 
+    Route::resource('openlectures', 'OpenLectureController', ['only' => ['index', 'show']]);
+
     Route::resource('orders', 'OrderController', ['only' => ['index', 'show']]);
 });

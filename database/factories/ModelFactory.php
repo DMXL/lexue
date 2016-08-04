@@ -28,24 +28,45 @@ $factory->define(App\Models\User\Teacher::class, function () {
         'email' => $faker->safeEmail,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
-        'teaching_since' => $faker->dateTime,
+        'teaching_since' => Carbon::parse($faker->year),
         'description' => $faker->text,
         'enabled' => $faker->boolean(80),
     ];
 });
 
-$factory->define(App\Models\Course\Lecture::class, function (Faker\Generator $faker) {
-    $randomNumber = $faker->unique()->randomNumber(3, true);
-    $randomNumber = (string) $randomNumber;
-    $teacher_id = (int) $randomNumber[0];
-    $days = (int) $randomNumber[1];
-    $time_slot_id = (int) $randomNumber[2] + 1;
-    $start = \App\Models\Course\TimeSlot::find($time_slot_id)->start;
+$factory->define(App\Models\Course\Lecture::class, function (\Faker\Generator $faker) {
+    $open = $faker->boolean(70);
+    $cnFaker = Faker\Factory::create('zh_CN');
+
+    do {
+        $randomNumber = $faker->unique()->randomNumber(3, true);
+        $randomNumber = (string) $randomNumber;
+        $teacher_id = (int) $randomNumber[0];
+        $days = (int) $randomNumber[1] + 1;
+        $date = \Carbon::today()->addDays($days);
+        $time_slot_id = (int) $randomNumber[2] + 1;
+        $start = \App\Models\Course\TimeSlot::find($time_slot_id)->start;
+    } while(\App\Models\Course\Lecture::where([
+        ['teacher_id', '=', $teacher_id],
+        ['date', '=', $date->toDateString()],
+        ['time_slot_id', '=', $time_slot_id]
+    ])->exists());
+
+    if ($open) {
+        return [
+            'teacher_id' => $teacher_id,
+            'name' => $cnFaker->catchPhrase,
+            'date' => $date,
+            'time_slot_id' => $time_slot_id,
+            'start' => $start,
+            'single' => false,
+        ];
+    }
 
     return [
         'teacher_id' => $teacher_id,
         'student_id' => mt_rand(1, \App\Models\User\Student::count()),
-        'date' => \Carbon::today()->addDays($days),
+        'date' => $date,
         'time_slot_id' => $time_slot_id,
         'start' => $start,
     ];
