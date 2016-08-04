@@ -32,8 +32,10 @@
                     </div>
                 </a>
                 <div class="contact-box-footer">
-                        <a href="{{ route('admins::teachers.show', $teacher->id) }}" class="btn btn-sm btn-white"><i class="fa fa-user"></i> 资料</a>
-                        <a href="{{ route('admins::teachers.timetables.index', $teacher->id) }}" class="btn btn-sm btn-white"><i class="fa fa-calendar"></i> 课表</a>
+                        <a href="{{ route('admins::teachers.timeslots.index', $teacher->id) }}" class="btn btn-sm btn-white">
+                            <i class="fa fa-clock-o"></i> 课时</a>
+                        <a href="{{ route('admins::teachers.timetables.index', $teacher->id) }}" class="btn btn-sm btn-white">
+                            <i class="fa fa-calendar"></i> 课表</a>
                         <a class="btn btn-sm btn-white"><i class="fa fa-bullhorn"></i> 课程</a>
                 </div>
 
