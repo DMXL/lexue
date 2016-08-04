@@ -80,7 +80,7 @@ class TimetableController extends Controller
         $offTime = $teacher->offTimes()->where([
             ['date', '=', $date],
             ['time_slot_id', '=', $timeSlotId]
-        ])->first() ? $teacher->offTimes->where([
+        ])->first() ? $teacher->offTimes()->where([
             ['date', '=', $date],
             ['all_day', '=', 1]
         ])->first() : null;
