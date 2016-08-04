@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAvatarAndVideoFieldToTeachersTable extends Migration
+class RemoveAvatarFieldFromTeachersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,7 @@ class AddAvatarAndVideoFieldToTeachersTable extends Migration
     public function up()
     {
         Schema::table('teachers', function (Blueprint $table) {
-            $table->string('avatar')->nullable()->after('description');
-            $table->string('video')->nullable()->after('description');
+            $table->dropColumn('avatar');
         });
     }
 
@@ -26,8 +25,7 @@ class AddAvatarAndVideoFieldToTeachersTable extends Migration
     public function down()
     {
         Schema::table('teachers', function (Blueprint $table) {
-            $table->dropColumn('avatar');
-            $table->dropColumn('video');
+            $table->string('avatar')->nullable()->after('description');
         });
     }
 }
