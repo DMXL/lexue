@@ -101,7 +101,16 @@ return [
                 ]
             ],[
                 'title' => '课程管理',
-                'route' => 'lectures.index'
+                'route' => 'lectures.index',
+                'children' => [
+                    [
+                        'title' => '公开课',
+                        'route' => 'lectures.index',
+                    ], [
+                        'title' => '微课',
+                        'route' => 'tutorials.index',
+                    ]
+                ]
             ]
         ],
     ],
