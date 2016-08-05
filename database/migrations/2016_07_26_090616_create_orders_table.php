@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('teacher_id');
             $table->foreign('teacher_id')->references('id')->on('teachers');
 
-            $table->unsignedInteger('lecture_id');
+            $table->unsignedInteger('lecture_id')->nullable();
             $table->foreign('lecture_id')->references('id')->on('lectures');
 
             $table->boolean('is_lecture');
