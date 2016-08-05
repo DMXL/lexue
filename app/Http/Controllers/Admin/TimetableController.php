@@ -17,7 +17,7 @@ class TimetableController extends Controller
      */
     public function index()
     {
-        //
+        return $this->backView('admins.timetables.index');
     }
 
     /**
