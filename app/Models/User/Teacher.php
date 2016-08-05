@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 use App\Models\Course\Lecture;
 use App\Models\Course\TimeSlot;
+use App\Models\Course\Tutorial;
 use App\Models\Teacher\Level;
 use App\Models\Teacher\Label;
 use App\Models\Teacher\OffTime;
@@ -44,6 +45,8 @@ class Teacher extends Authenticatable implements StaplerableInterface
     ];
 
     private $lectureUnavailabilities;
+
+    private $tutorialUnavailabilities;
 
     private $offTimeUnavailabilities;
 
@@ -86,6 +89,11 @@ class Teacher extends Authenticatable implements StaplerableInterface
     public function lectures()
     {
         return $this->hasMany(Lecture::class);
+    }
+
+    public function tutorials()
+    {
+        return $this->hasMany(Tutorial::class);
     }
 
     public function offTimes()
@@ -152,10 +160,28 @@ class Teacher extends Authenticatable implements StaplerableInterface
         }
 
         $unavailabilities = [];
-        $lectureTimes = $this->lectures()->followingWeek()->get();
+        $lectures = $this->lectures()->incoming()->get();
 
-        foreach ($lectureTimes as $lectureTime) {
-            $unavailabilities[] = $lectureTime->date . '--' . $lectureTime->time_slot_id;
+        foreach ($lectures as $lecture) {
+            $unavailabilities[] = $lecture->date . '--' . $lecture->time_slot_id;
+        }
+
+        $this->lectureUnavailabilities = $unavailabilities;
+
+        return $unavailabilities;
+    }
+
+    public function getTutorialUnavailabilities()
+    {
+        if (isset($this->tutorialUnavailabilities)) {
+            return $this->tutorialUnavailabilities;
+        }
+
+        $unavailabilities = [];
+        $tutorials = $this->tutorials()->followingWeek()->get();
+
+        foreach ($tutorials as $tutorial) {
+            $unavailabilities[] = $tutorial->date . '--' . $tutorial->time_slot_id;
         }
 
         $this->lectureUnavailabilities = $unavailabilities;
@@ -191,12 +217,17 @@ class Teacher extends Authenticatable implements StaplerableInterface
 
     public function getUnavailabilities()
     {
-        return array_merge($this->getLectureUnavailabilities(), $this->getOffTimeUnavailabilities());
+        return array_merge(
+            $this->getLectureUnavailabilities(),
+            $this->getOffTimeUnavailabilities(),
+            $this->getTutorialUnavailabilities()
+        );
     }
 
     public function getTimetable()
     {
         $lectureUnavailabilities = $this->getLectureUnavailabilities();
+        $tutorialUnavailabilities = $this->getTutorialUnavailabilities();
         $offTimeUnavailabilities = $this->getOffTimeUnavailabilities();
         $unavailabilities = $this->getUnavailabilities();
 
@@ -233,7 +264,8 @@ class Teacher extends Authenticatable implements StaplerableInterface
                     'range' => $range,
                     'disabled' => in_array($value, $unavailabilities),
                     'lecture' => in_array($value, $lectureUnavailabilities),
-                    'offtime' => in_array($value, $offTimeUnavailabilities)
+                    'offtime' => in_array($value, $offTimeUnavailabilities),
+                    'tutorial' => in_array($value, $tutorialUnavailabilities),
                 ];
             }
         }

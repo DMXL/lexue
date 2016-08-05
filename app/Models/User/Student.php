@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 use App\Models\Course\Lecture;
 use App\Models\Course\Order;
+use App\Models\Course\Tutorial;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Student extends Authenticatable
@@ -31,12 +32,12 @@ class Student extends Authenticatable
     | Relations
     |--------------------------------------------------------------------------
     */
-    public function singleLectures()
+    public function Tutorials()
     {
-        return $this->hasMany(Lecture::class);
+        return $this->hasMany(Tutorial::class);
     }
 
-    public function multiLectures()
+    public function Lectures()
     {
         return $this->belongsToMany(Lecture::class);
     }

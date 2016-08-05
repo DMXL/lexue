@@ -19,6 +19,14 @@
         </div>
         <div class="ibox-content">
             <div class="row">
+                <div class="col-lg-12">
+                    <strong>说明： </strong>
+                    <div class="m-b-sm inline" disabled><button class="btn text-success btn-sm"><s>公开课</s></button></div>
+                    <div class="m-b-sm inline" disabled><button class="btn text-warning btn-sm"><s>微课</s></button></div>
+                    <div class="m-b-sm inline" disabled><button class="btn text-danger btn-sm"><s>教师有事</s></button></div>
+                </div>
+            </div>
+            <div class="row">
                 @foreach($timetable as $dayOfWeek => $day)
                     <div class="col-lg-4 col-md-6">
                         <div class="panel panel-default">
@@ -36,6 +44,8 @@
                                                     <?php
                                                         if ($time['lecture']) {
                                                             $buttonClass = 'text-success';
+                                                        } elseif ($time['tutorial']) {
+                                                            $buttonClass = 'text-warning';
                                                         } elseif ($time['offtime']) {
                                                             $buttonClass = 'text-danger';
                                                         } elseif (! $disabled) {
@@ -46,7 +56,7 @@
                                                     ?>
                                                     <button type="button" class="btn {{ $buttonClass }} btn-sm"
                                                             data-toggle="modal"
-                                                            data-target="{{ $time['lecture'] ? '#teacher-timetable-large' : '#teacher-timetable-small' }}"
+                                                            data-target="{{ $time['offtime'] ? '#teacher-timetable-small' : '#teacher-timetable-large' }}"
                                                             data-snippet-url="{{ route('admins::teachers.timetable.snippet', ['teacher_id' => $teacher->id, 'date' => $time['date'], 'time_slot_id' => $time['time_slot_id']]) }}"
                                                             data-title="{{ $time['string'] }}">
                                                         <small>

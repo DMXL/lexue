@@ -7,6 +7,7 @@ use App\Jobs\HandleLecturesPurchased;
 use App\Models\Course\Lecture;
 use App\Models\Course\Order;
 use App\Models\Course\TimeSlot;
+use App\Models\Course\Tutorial;
 use App\Models\User\Teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -99,31 +100,30 @@ class TeacherController extends Controller
                 $order->save();
 
                 /*
-                 * create lectures
+                 * create tutorials
                  */
-                $lectureIds = [];
+                $tutorialIds = [];
                 foreach ($bookTimes as $bookTime) {
                     $values = explode('--', $bookTime);
 
                     $timeSlot = TimeSlot::find($values[1]);
 
-                    $lecture = new Lecture();
-                    $lecture->date = $values[0];
-                    $lecture->time_slot_id = $values[1];
-                    $lecture->start = $timeSlot->start;
-                    $lecture->student_id = $student->id;
-                    $lecture->teacher_id = $teacher->id;
-                    $lecture->single = true;
-                    $lecture->save();
+                    $tutorial = new Tutorial();
+                    $tutorial->date = $values[0];
+                    $tutorial->time_slot_id = $values[1];
+                    $tutorial->start = $timeSlot->start;
+                    $tutorial->student_id = $student->id;
+                    $tutorial->teacher_id = $teacher->id;
+                    $tutorial->save();
 
                     // stack new lecture's id
-                    $lectureIds[] = $lecture->getAttribute('id');
+                    $tutorialIds[] = $tutorial->getAttribute('id');
                 }
 
                 /*
                  * associate lectures with order
                  */
-                $order->lectures()->sync($lectureIds);
+                $order->tutorials()->sync($tutorialIds);
 
                 return $order->id;
             });
@@ -137,6 +137,6 @@ class TeacherController extends Controller
 
         flash()->success('课程添加成功');
 
-        return $this->frontRedirect('students::lectures.index');
+        return $this->frontRedirect('students::tutorials.index');
     }
 }

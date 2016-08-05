@@ -21,9 +21,8 @@ Route::group(['middleware' => 'auth:students'], function(){
 
     Route::post('teachers/{id}/book', ['as' => 'teachers.book', 'uses' => 'TeacherController@book'] );
 
-    Route::resource('lectures', 'LectureController', ['only' => ['index', 'show']]);
-
-    Route::resource('openlectures', 'OpenLectureController', ['only' => ['index', 'show']]);
-
-    Route::resource('orders', 'OrderController', ['only' => ['index', 'show']]);
+    Route::get('purchases', ['as' => 'purchases.index', 'uses' => 'PurchaseController@index']);
+    Route::resource('lectures', 'LectureController', ['only' => ['show','index']]);
+    Route::resource('tutorials', 'TutorialController', ['only' => ['show']]);
+    Route::resource('orders', 'OrderController', ['only' => ['show']]);
 });

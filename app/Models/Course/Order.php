@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $with = ['student', 'teacher', 'lectures'];
+    protected $with = ['student', 'teacher', 'lecture', 'tutorials'];
 
     /*
     |--------------------------------------------------------------------------
@@ -25,9 +25,14 @@ class Order extends Model
         return $this->belongsTo(Teacher::class);
     }
 
-    public function lectures()
+    public function lecture()
     {
-        return $this->belongsToMany(Lecture::class);
+        return $this->belongsTo(Lecture::class);
+    }
+
+    public function tutorials()
+    {
+        return $this->belongsToMany(Tutorial::class);
     }
 
     /*

@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Student;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Course\Lecture;
 
 class LectureController extends Controller
 {
@@ -21,10 +19,7 @@ class LectureController extends Controller
 
     public function index()
     {
-        $singleLectures = $this->student->singleLectures()->with('teacher')->get();
-        $multiLectures = $this->student->multiLectures()->with('teacher')->get();
-
-        $lectures = $singleLectures->merge($multiLectures)->sortByDesc('start')->sortByDesc('date');
+        $lectures = Lecture::orderByLatest()->paginate();
 
         return $this->frontView('lectures.index', compact('lectures'));
     }

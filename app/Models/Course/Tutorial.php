@@ -4,36 +4,17 @@ namespace App\Models\Course;
 
 use App\Models\User\Student;
 use App\Models\User\Teacher;
-use Carbon\Carbon;
-use Codesleeve\Stapler\ORM\EloquentTrait;
-use Codesleeve\Stapler\ORM\StaplerableInterface;
+use Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class Lecture extends Model implements StaplerableInterface
+class Tutorial extends Model
 {
-    use EloquentTrait;
-
     protected $appends = [
         'human_date_time',
         'human_time',
     ];
 
-    protected $fillable = [
-        'avatar'
-    ];
-
     protected $with = ['timeSlot'];
-
-    public function __construct(array $attributes = array()) {
-        $this->hasAttachedFile('avatar', [
-            'styles' => [
-                'medium' => '300x300#',
-                'thumb' => '100x100#'
-            ]
-        ]);
-
-        parent::__construct($attributes);
-    }
 
     /*
     |--------------------------------------------------------------------------
@@ -45,9 +26,9 @@ class Lecture extends Model implements StaplerableInterface
         return $this->belongsTo(Teacher::class);
     }
 
-    public function students()
+    public function student()
     {
-        return $this->belongsToMany(Student::class);
+        return $this->belongsTo(Student::class);
     }
 
     public function timeSlot()
@@ -82,19 +63,9 @@ class Lecture extends Model implements StaplerableInterface
         return $query->orderBy('date', 'desc')->orderBy('start', 'desc');
     }
 
-    public function scopeIncoming($query)
+    public function scopeFollowingWeek($query)
     {
-        return $query->where('finished', 0);
-    }
-
-    public function scopeOngoing($query)
-    {
-        return $query->where('date', Carbon::today()->toDateString())->where();
-    }
-
-    public function scopeFinished($query)
-    {
-        return $query->where('finished', 1);
+        return $this->scopeFollowingDays($query, 7);
     }
 
     public function scopeFollowingDays($query, $days)
