@@ -23,6 +23,6 @@ Route::group(['middleware' => 'auth:students'], function(){
 
     Route::get('purchases', ['as' => 'purchases.index', 'uses' => 'PurchaseController@index']);
     Route::resource('lectures', 'LectureController', ['only' => ['show','index']]);
-    Route::resource('tutorials', 'TutorialController', ['only' => ['show']]);
-    Route::resource('orders', 'OrderController', ['only' => ['show']]);
+    Route::resource('tutorials', 'TutorialController', ['only' => ['show','index']]);
+    Route::resource('orders', 'OrderController', ['only' => ['show','index']]);
 });
