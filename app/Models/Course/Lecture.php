@@ -2,6 +2,7 @@
 
 namespace App\Models\Course;
 
+use App\Models\Teacher\Level;
 use App\Models\User\Student;
 use App\Models\User\Teacher;
 use Carbon\Carbon;
@@ -22,7 +23,7 @@ class Lecture extends Model implements StaplerableInterface
         'avatar'
     ];
 
-    protected $with = ['timeSlot'];
+    protected $with = ['timeSlot', 'levels'];
 
     public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('avatar', [
@@ -53,6 +54,11 @@ class Lecture extends Model implements StaplerableInterface
     public function timeSlot()
     {
         return $this->belongsTo(TimeSlot::class);
+    }
+
+    public function levels()
+    {
+        return $this->belongsToMany(Level::class);
     }
 
     /*
