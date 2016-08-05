@@ -21,11 +21,8 @@ class TutorialController extends Controller
 
     public function index()
     {
-        $singleLectures = $this->student->singleLectures()->with('teacher')->get();
-        $multiLectures = $this->student->multiLectures()->with('teacher')->get();
+        $tutorials = $this->student->tutorials()->with('teacher')->orderByLatest()->get();
 
-        $lectures = $singleLectures->merge($multiLectures)->sortByDesc('start')->sortByDesc('date');
-
-        return $this->frontView('lectures.index', compact('lectures'));
+        return $this->frontView('tutorials.index', compact('tutorials'));
     }
 }
