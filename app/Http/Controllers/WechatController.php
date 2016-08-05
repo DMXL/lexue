@@ -148,7 +148,7 @@ class WechatController extends Controller
                     [
                         "type" => "view",
                         "name" => "我的课程",
-                        "url"  => route('m.students::lectures.index')
+                        "url"  => route('m.students::tutorials.index')
                     ],
                 ],
             ],
@@ -158,12 +158,12 @@ class WechatController extends Controller
                     [
                         "type" => "view",
                         "name" => "直播课堂",
-                        "url"  => route('m.students::openlectures.index')
+                        "url"  => route('m.students::lectures.index')
                     ],
                     [
                         "type" => "view",
                         "name" => "精彩回放",
-                        "url"  => "https://weui.io/"
+                        "url"  => route('m.students::lectures.index')
                     ],
                 ],
             ]
