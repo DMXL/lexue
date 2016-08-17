@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\HandleLecturesPurchased;
+use App\Jobs\HandleTutorialsPurchased;
 use App\Models\Course\Lecture;
 use App\Models\Course\Order;
 use App\Models\Course\TimeSlot;
@@ -133,7 +134,7 @@ class TeacherController extends Controller
             return back();
         }
 
-        $this->dispatch(new HandleLecturesPurchased($orderId));
+        $this->dispatch(new HandleTutorialsPurchased($orderId));
 
         flash()->success('课程添加成功');
 

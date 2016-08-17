@@ -9,7 +9,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class HandleLecturesPurchased extends Job implements ShouldQueue
+class HandleTutorialsPurchased extends Job implements ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
