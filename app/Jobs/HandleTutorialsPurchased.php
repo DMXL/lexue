@@ -49,9 +49,9 @@ class HandleLecturesPurchased extends Job implements ShouldQueue
         $order = Order::find($orderId);
 
         /** @var \Illuminate\Support\Collection $lectures */
-        $lectures = $order->lectures;
+        $tutorials = $order->tutorials;
 
-        $sampleLecture = $lectures->first();
+        $sampleLecture = $tutorials->first();
 
         $student = $sampleLecture->student;
         $teacher = $sampleLecture->teacher;
@@ -70,7 +70,7 @@ class HandleLecturesPurchased extends Job implements ShouldQueue
                 "first"      => "亲爱的 " . $student->name . "，您已成功购买课程。",
                 "keyword1"   => $teacher->name . " 老师的一对一微信课程",    // 课程名称
                 "keyword2"   => $order->total . "元",    // 支付金额
-                "keyword3"   => $lectures->pluck('human_date_time')->implode(', '),    // 课程时间
+                "keyword3"   => $tutorials->pluck('human_date_time')->implode(', '),    // 课程时间
                 "remark"     => "随后乐学云教学主管老师将第一时间与您取得联系，请您及时关注微信消息！"
             ],
         ];
