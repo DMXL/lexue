@@ -1,6 +1,14 @@
 @extends('backend.layouts.app')
 
 @section('content')
+    <div class="ibox">
+        <div class="ibox-content">
+            <a href="{{ route('admins::lectures.create') }}" class="btn btn-primary btn-sm">
+                <i class="fa fa-plus"></i> 添加公开课
+            </a>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
@@ -25,7 +33,7 @@
                         @foreach($lectures as $lecture)
                             <tr>
                                 <td>
-                                    <img src="{{ $lecture->avatar->url('thumb') }}" alt="{{ $lecture->name }}">
+                                    <img src="{{ $lecture->avatar->url('thumb') }}" alt="{{ $lecture->name }}" class="lecture-admin-thumb">
                                 </td>
                                 <td class="text-left">
                                     {{ $lecture->name }}

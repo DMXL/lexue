@@ -29,7 +29,7 @@ class LectureController extends Controller
      */
     public function create()
     {
-        //
+        return $this->backView('backend.admins.lectures.create');
     }
 
     /**
