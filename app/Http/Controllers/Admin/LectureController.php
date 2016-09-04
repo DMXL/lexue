@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Jobs\HandleLecturesCreated;
 use App\Models\Course\Lecture;
 use App\Models\User\Teacher;
 use Illuminate\Http\Request;
@@ -46,7 +47,7 @@ class LectureController extends Controller
     public function store(LectureFormRequest $request)
     {
         try {
-            \DB::transaction(function() use ($request) {
+            $lectureId = \DB::transaction(function() use ($request) {
                 $lecture = new Lecture();
                 return $this->writeLectureData($lecture, $request);
             });
@@ -55,7 +56,9 @@ class LectureController extends Controller
             return back();
         }
 
+        $this->dispatch(new HandleLecturesCreated($lectureId));
         \Flash::success('添加成功');
+
         return redirect()->route('admins::lectures.index');
     }
 

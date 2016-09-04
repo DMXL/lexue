@@ -90,7 +90,7 @@ class DuobeiyunApi {
 	 * 创建房间2
 	 * @param string $title
 	 * @param date $startTime
-	 * @param int $duration
+	 * @param smallint $length
 	 * @param string $video
 	 * @param string $roomType
 	 * @return string
