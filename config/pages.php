@@ -39,7 +39,19 @@ return [
                     ]
                 ]
             ], [
-                'title' => '课程管理',
+                'title' => '课时管理',
+                'route' => 'timeslots.index',
+                'children' => [
+                    [
+                        'title' => '添加课时',
+                        'route' => 'timeslots.create'
+                    ], [
+                        'title' => '修改课时',
+                        'route' => 'timeslots.edit'
+                    ]
+                ]
+            ], [
+                'title' => '公开课管理',
                 'route' => 'lectures.index',
                 'children' => [
                     [
@@ -51,15 +63,15 @@ return [
                     ]
                 ]
             ], [
-                'title' => '课时管理',
-                'route' => 'timeslots.index',
+                'title' => '微课管理',
+                'route' => 'tutorials.index',
                 'children' => [
                     [
-                        'title' => '添加课时',
-                        'route' => 'timeslots.create'
+                        'title' => '添加课程',
+                        'route' => 'tutorials.create'
                     ], [
-                        'title' => '修改课时',
-                        'route' => 'timeslots.edit'
+                        'title' => '修改课程',
+                        'route' => 'tutorials.edit'
                     ]
                 ]
             ]
