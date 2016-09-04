@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Course\Lecture;
+use App\Models\User\Teacher;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -29,7 +30,9 @@ class LectureController extends Controller
      */
     public function create()
     {
-        return $this->backView('backend.admins.lectures.create');
+        $teachers = Teacher::all();
+
+        return $this->backView('backend.admins.lectures.create', compact('teachers'));
     }
 
     /**
@@ -40,7 +43,18 @@ class LectureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            \DB::transaction(function() use ($request) {
+                $lecture = new Lecture();
+                return $this->writeLectureData($lecture, $request);
+            });
+        } catch (\Exception $e) {
+            $this->handleException($e);
+            return back();
+        }
+
+        \Flash::success('添加成功');
+        return redirect()->route('admins::lecture.index');
     }
 
     /**
@@ -86,5 +100,38 @@ class LectureController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Write lecture form data to db.
+     *
+     * @param Lecture $lecture
+     * @param LectureFormRequest $request
+     * @return Lecture
+     */
+    private function writeLectureData(Lecture $lecture, LectureFormRequest $request)
+    {
+        $lecture->fill($request->all())->save();
+
+        /* If have levels */
+        if ($levels = $request->input('levels')) {
+            $lecture->levels()->sync($levels);
+        }
+
+        /* If have labels */
+        if ($labels = $request->input('labels')) {
+            $existingLabels = Label::lists('name');
+
+            /* If have new labels */
+            $newLabels = collect($labels)->diff($existingLabels);
+            foreach ($newLabels as $newLabel) {
+                Label::create(['name' => $newLabel]);
+            }
+
+            $labelIds = Label::whereIn('name', $labels)->lists('id')->all();
+            $lecture->labels()->sync($labelIds);
+        }
+
+        return $lecture;
     }
 }

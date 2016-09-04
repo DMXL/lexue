@@ -19,37 +19,12 @@
 -->
 <script type="text/javascript">
     $(function() {
-        $('#datetime-picker').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm'
+        $('#date-picker').datetimepicker({
+            format: 'YYYY-MM-DD'
         });
 
-        $().click(function() {
-            
+        $('#time-picker').datetimepicker({
+            format: 'HH:mm'
         });
     });
-
-    /*
-    new Vue({
-        el: '#teacher-form',
-        data: {
-            teachingSince: ''
-        },
-        computed: {
-            yearsOfTeaching() {
-                var teachingSince = this.teachingSince;
-
-                if (! teachingSince || ! teachingSince.match(/\d{4}/)) {
-                    return '输入年份';
-                }
-
-                return (moment().year() - teachingSince) + '年';
-            }
-        },
-        methods: {
-            moment() {
-                return moment();
-            }
-        }
-    })
-    */
 </script>

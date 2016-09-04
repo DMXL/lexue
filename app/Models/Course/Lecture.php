@@ -3,7 +3,6 @@
 namespace App\Models\Course;
 
 use App\Models\Teacher\Level;
-use App\Models\User\Student;
 use App\Models\User\Teacher;
 use Carbon\Carbon;
 use Codesleeve\Stapler\ORM\EloquentTrait;
@@ -23,7 +22,7 @@ class Lecture extends Model implements StaplerableInterface
         'avatar'
     ];
 
-    protected $with = ['timeSlot', 'levels'];
+    protected $with = ['levels'];
 
     public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('avatar', [
@@ -46,16 +45,6 @@ class Lecture extends Model implements StaplerableInterface
         return $this->belongsTo(Teacher::class);
     }
 
-    public function students()
-    {
-        return $this->belongsToMany(Student::class);
-    }
-
-    public function timeSlot()
-    {
-        return $this->belongsTo(TimeSlot::class);
-    }
-
     public function levels()
     {
         return $this->belongsToMany(Level::class);
@@ -66,6 +55,8 @@ class Lecture extends Model implements StaplerableInterface
     | Accessors
     |--------------------------------------------------------------------------
     */
+
+    /*
     public function getHumanDateTimeAttribute()
     {
         $timeSlot = $this->timeSlot;
@@ -77,6 +68,7 @@ class Lecture extends Model implements StaplerableInterface
         $timeSlot = $this->timeSlot;
         return humanDayOfWeek(Carbon::parse($this->date)->dayOfWeek).$timeSlot->day_part . ' ' . $timeSlot->range;
     }
+    */
 
     /*
     |--------------------------------------------------------------------------

@@ -4,12 +4,13 @@
 $action = route('admins::lectures.store');
 $method = 'post';
 $defaults = [
-        'lecture_name' => '',
-        'teacher_name' => '',
-        'lecture_time' => '',
-        'lecture_length' => '',
-        'lecture_price' => '',
-        'lecture_description' => ''
+        'name' => '',
+        'teacher_id' => '',
+        'date' => '',
+        'start' => '',
+        'length' => '',
+        'price' => '',
+        'description' => ''
 ];
 ?>
 
