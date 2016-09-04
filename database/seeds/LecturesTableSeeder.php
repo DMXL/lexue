@@ -11,6 +11,15 @@ class LecturesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Course\Lecture::class, 50)->create();
+        /*
+        $faker = Faker\Factory::create('zh_CN');
+
+        DB::table('lectures')->insert([
+            'description' => $faker->text
+
+        ]);
+        */
+
+        //factory(\App\Models\Course\Lecture::class, 50)->create();
     }
 }

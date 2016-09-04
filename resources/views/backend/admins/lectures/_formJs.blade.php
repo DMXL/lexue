@@ -19,7 +19,13 @@
 -->
 <script type="text/javascript">
     $(function() {
-        $('#datetime-picker').datetimepicker();
+        $('#datetime-picker').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm'
+        });
+
+        $().click(function() {
+            
+        });
     });
 
     /*

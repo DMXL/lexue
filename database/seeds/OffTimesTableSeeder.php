@@ -11,6 +11,6 @@ class OffTimesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Teacher\OffTime::class, 20)->create();
+        //factory(\App\Models\Teacher\OffTime::class, 20)->create();
     }
 }
