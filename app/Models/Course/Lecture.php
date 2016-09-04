@@ -19,6 +19,12 @@ class Lecture extends Model implements StaplerableInterface
     ];
 
     protected $fillable = [
+        'name',
+        'teacher_id',
+        'date',
+        'start',
+        'length',
+        'price',
         'avatar'
     ];
 

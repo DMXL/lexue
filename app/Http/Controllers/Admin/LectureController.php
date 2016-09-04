@@ -7,6 +7,7 @@ use App\Models\User\Teacher;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\LectureFormRequest;
 use App\Http\Controllers\Controller;
 
 class LectureController extends Controller
@@ -38,10 +39,11 @@ class LectureController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param LectureFormRequest|Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function store(Request $request)
+    public function store(LectureFormRequest $request)
     {
         try {
             \DB::transaction(function() use ($request) {
@@ -112,25 +114,6 @@ class LectureController extends Controller
     private function writeLectureData(Lecture $lecture, LectureFormRequest $request)
     {
         $lecture->fill($request->all())->save();
-
-        /* If have levels */
-        if ($levels = $request->input('levels')) {
-            $lecture->levels()->sync($levels);
-        }
-
-        /* If have labels */
-        if ($labels = $request->input('labels')) {
-            $existingLabels = Label::lists('name');
-
-            /* If have new labels */
-            $newLabels = collect($labels)->diff($existingLabels);
-            foreach ($newLabels as $newLabel) {
-                Label::create(['name' => $newLabel]);
-            }
-
-            $labelIds = Label::whereIn('name', $labels)->lists('id')->all();
-            $lecture->labels()->sync($labelIds);
-        }
 
         return $lecture;
     }

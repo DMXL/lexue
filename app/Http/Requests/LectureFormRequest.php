@@ -43,17 +43,19 @@ class LectureFormRequest extends Request
     {
         return [
             'name' => 'required',
-            'email' => 'required|unique:teachers,email,'. $this->route('teachers'),
-            'unit_price' => 'required|numeric',
-            'teaching_since' => 'required|regex:/\d{4}/',
+            'teacher_id' => 'required',
+            'date' => 'required',
+            'start' => 'required',
+            'length' => 'required',
+            'price' => 'required|numeric',
         ];
     }
 
     public function attributes()
     {
-        // name field conflicts with name field on users
+        // name field conflicts with name field on lectures
         return [
-            'name' => '教师名字'
+            'name' => '课程名称'
         ];
     }
 }
