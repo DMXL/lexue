@@ -56,7 +56,7 @@ class LectureController extends Controller
         }
 
         \Flash::success('添加成功');
-        return redirect()->route('admins::lecture.index');
+        return redirect()->route('admins::lectures.index');
     }
 
     /**

@@ -24,7 +24,7 @@
                             <th>公开课名称</th>
                             <th>报名人数</th>
                             <th>教师</th>
-                            <th>时间</th>
+                            <th>开始时间</th>
                             <th>状态</th>
                             <th></th>
                         </tr>
@@ -39,13 +39,13 @@
                                     {{ $lecture->name }}
                                 </td>
                                 <td>
-                                    {{ $lecture->students()->count() }}
+                                    {{ $lecture->orders()->count() }}
                                 </td>
                                 <td class="text-left">
                                     <a href="{{ route('students::teachers.show', $lecture->teacher_id) }}">{{ $lecture->teacher->name }}</a>
                                 </td>
                                 <td>
-                                    {{ $lecture->human_date_time }}
+                                    {{ $lecture->date_time }}
                                 </td>
                                 <td class="project-status">
                                     @if($lecture->finished)

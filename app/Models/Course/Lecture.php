@@ -28,7 +28,7 @@ class Lecture extends Model implements StaplerableInterface
         'avatar'
     ];
 
-    protected $with = ['levels'];
+    protected $with = ['orders', 'levels'];
 
     public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('avatar', [
@@ -51,6 +51,11 @@ class Lecture extends Model implements StaplerableInterface
         return $this->belongsTo(Teacher::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function levels()
     {
         return $this->belongsToMany(Level::class);
@@ -62,19 +67,10 @@ class Lecture extends Model implements StaplerableInterface
     |--------------------------------------------------------------------------
     */
 
-    /*
-    public function getHumanDateTimeAttribute()
+    public function getDateTimeAttribute()
     {
-        $timeSlot = $this->timeSlot;
-        return humanDate($this->date, true) . $timeSlot->day_part . ' ' . $timeSlot->range;
+        return Carbon::parse($this->start)->format('Y-m-d H:i');
     }
-
-    public function getHumanTimeAttribute()
-    {
-        $timeSlot = $this->timeSlot;
-        return humanDayOfWeek(Carbon::parse($this->date)->dayOfWeek).$timeSlot->day_part . ' ' . $timeSlot->range;
-    }
-    */
 
     /*
     |--------------------------------------------------------------------------
