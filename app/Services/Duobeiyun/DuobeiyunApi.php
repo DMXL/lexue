@@ -85,6 +85,29 @@ class DuobeiyunApi {
 		$result = $this->post($path, $this->prepareParameters($params));
 		return $result;
 	}
+
+	/**
+	 * 创建房间2
+	 * @param string $title
+	 * @param date $startTime
+	 * @param int $duration
+	 * @param string $video
+	 * @param string $roomType
+	 * @return string
+	 */
+	public function createRoom2($title, $startTime, $length, $video, $roomType) {
+		$startTimeStr = date("Y-m-d H:i", $startTime);
+		$params = array();
+		$params["title"] = $title;
+		$params["startTime"] = $startTimeStr;
+		$params["length"] = (string)$length;
+		$params["video"] = $video;
+		$params["roomType"] = $roomType;
+
+		$path = "/api/v4/room/create";
+		$result = $this->post($path, $this->prepareParameters($params));
+		return $result;
+	}
 	
 	/**
 	 * 更新房间标题
