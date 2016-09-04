@@ -13,6 +13,7 @@
     <link href="{{ elixir('app/css/all.css') }}" rel="stylesheet">
     <link href="{{ elixir('app/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('app/css/customs.css') }}" rel="stylesheet">
+    <link href="{{ asset('app/css/datetime-picker.css') }}" rel="stylesheet">
 
     @yield('css')
 
@@ -65,6 +66,7 @@
 
 <!-- Main scripts -->
 <script src="{{ elixir('app/js/all.js') }}"></script>
+<script src="{{ asset('app/js/datetime-picker.min.js') }}"></script>
 
 <!-- Custom scripts -->
 <script>
