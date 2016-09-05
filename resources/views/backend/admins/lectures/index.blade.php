@@ -42,7 +42,7 @@
                                     {{ $lecture->orders()->count() }}
                                 </td>
                                 <td class="text-left">
-                                    <a href="{{ route('students::teachers.show', $lecture->teacher_id) }}">{{ $lecture->teacher->name }}</a>
+                                    <a href="{{ route('admins::teachers.show', $lecture->teacher_id) }}">{{ $lecture->teacher->name }}</a>
                                 </td>
                                 <td>
                                     {{ $lecture->date_time }}
