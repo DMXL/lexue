@@ -65,7 +65,7 @@ class TeacherController extends Controller
      */
     public function show($id)
     {
-        $teacher = Teacher::find($id);
+        $teacher = Teacher::withTrashed()->find($id);
 
         return $this->backView('backend.admins.teachers.show', compact('teacher'));
     }
