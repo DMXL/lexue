@@ -49,7 +49,7 @@ class LectureController extends Controller
     public function store(LectureFormRequest $request)
     {
         try {
-            $lectureId = \DB::transaction(function() use ($request) {
+            $lecture = \DB::transaction(function() use ($request) {
                 $lecture = new Lecture();
                 return $this->writeLectureData($lecture, $request);
             });
@@ -58,7 +58,7 @@ class LectureController extends Controller
             return back();
         }
 
-        $this->dispatch(new HandleLecturesCreated($lectureId));
+        $this->dispatch(new HandleLecturesCreated($lecture));
         \Flash::success('添加成功');
 
         return redirect()->route('admins::lectures.index');
@@ -116,7 +116,7 @@ class LectureController extends Controller
      *
      * @param Lecture $lecture
      * @param LectureFormRequest $request
-     * @return int $id
+     * @return Lecture
      */
     private function writeLectureData(Lecture $lecture, LectureFormRequest $request)
     {
