@@ -20,7 +20,9 @@ class LectureController extends Controller
      */
     public function index()
     {
-        $lectures = Lecture::orderByLatest()->with('teacher')->paginate();
+        $lectures = Lecture::orderByLatest()->with(['teacher' => function ($query) {
+            $query->withTrashed();
+        }])->paginate();
 
         return $this->backView('backend.admins.lectures.index', compact('lectures'));
     }
