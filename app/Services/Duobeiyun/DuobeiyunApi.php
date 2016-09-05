@@ -428,6 +428,7 @@ class DuobeiyunApi {
 		$params["sign"] = $sign;
 		echo $sign;
 		echo "\n";
+		//var_dump($params);
 		return $params;
 	}
 	

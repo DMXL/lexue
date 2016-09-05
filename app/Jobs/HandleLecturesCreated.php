@@ -46,11 +46,14 @@ class HandleLecturesCreated extends Job implements ShouldQueue
         $lecture = Lecture::find($lectureId);
 
         $title = $lecture->name;
-        $startTime = $lecture->date_time;
+        $startTime = urlencode((string)$lecture->date_time);
         $length = $lecture->length;
         $video = 1;
         $roomType = 2;
 
-        return \Duobeiyun::createRoom2($title, $startTime, $length, $video, $roomType);
+        $result = (array)json_decode(\Duobeiyun::createRoom2($title, $startTime, $length, $video, $roomType));
+        if ($result['success']) {
+
+        }
     }
 }

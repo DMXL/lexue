@@ -97,7 +97,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group{!! ($errors->has('price')) ? ' has-error' : '' !!}">
-            <label class="col-md-4 col-xs-2 control-label" for="teacher-price">课时费用</label>
+            <label class="col-md-4 col-xs-2 control-label" for="teacher-price">课程价格</label>
             <div class="col-md-8 col-xs-10">
                 <div class="input-group">
                     <span class="input-group-addon">￥</span>

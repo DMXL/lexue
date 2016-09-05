@@ -69,7 +69,12 @@ class Lecture extends Model implements StaplerableInterface
 
     public function getDateTimeAttribute()
     {
-        return Carbon::parse($this->start)->format('Y-m-d H:i');
+        return Carbon::parse($this->date.' '.$this->start)->format('Y-m-d H:i');
+    }
+
+    public function getTimestampAttribute()
+    {
+        return Carbon::parse($this->date.' '.$this->start)->timestamp;
     }
 
     /*

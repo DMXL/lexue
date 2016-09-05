@@ -55,7 +55,12 @@ class LectureFormRequest extends Request
     {
         // name field conflicts with name field on lectures
         return [
-            'name' => '课程名称'
+            'name' => '课程名称',
+            'teacher_id' => '教师姓名',
+            'date' => '课程日期',
+            'start' => '开始时间',
+            'length' => '课程时长',
+            'price' => '课程价格',
         ];
     }
 }

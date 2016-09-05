@@ -112,7 +112,7 @@ class LectureController extends Controller
      *
      * @param Lecture $lecture
      * @param LectureFormRequest $request
-     * @return Lecture
+     * @return int $id
      */
     private function writeLectureData(Lecture $lecture, LectureFormRequest $request)
     {
