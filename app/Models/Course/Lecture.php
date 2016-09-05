@@ -25,6 +25,7 @@ class Lecture extends Model implements StaplerableInterface
         'start',
         'length',
         'price',
+        'description',
         'avatar'
     ];
 

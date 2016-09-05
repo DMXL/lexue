@@ -5,5 +5,8 @@
 .lecture-admin-thumb { width: 100px; }
 
 /*
- * admins.lectures.create
+ * admins.lectures.show
  */
+
+.lecture-image { width: 100px; float: left; }
+.lecture-info { margin-left: 120px; }

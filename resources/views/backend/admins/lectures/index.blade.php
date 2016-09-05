@@ -55,7 +55,7 @@
                                     @endif
                                 </td>
                                 <td class="project-actions">
-                                    <a href="#" class="btn btn-white btn-sm"><i class="fa fa-eye"></i> 详情 </a>
+                                    <a href="{{ route('admins::lectures.show', $lecture->id) }}" class="btn btn-white btn-sm"><i class="fa fa-eye"></i> 详情 </a>
                                 </td>
                             </tr>
                         @endforeach

@@ -70,7 +70,9 @@ class LectureController extends Controller
      */
     public function show($id)
     {
-        //
+        $lecture = Lecture::find($id);
+
+        return $this->backView('backend.admins.lectures.show', compact('lecture'));
     }
 
     /**
