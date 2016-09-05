@@ -49,7 +49,7 @@ class Lecture extends Model implements StaplerableInterface
     */
     public function teacher()
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsTo(Teacher::class)->withTrashed();
     }
 
     public function orders()
