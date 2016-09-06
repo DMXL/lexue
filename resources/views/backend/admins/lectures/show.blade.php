@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="ibox-content">
-            <div class="row m-b-lg m-t-lg">
+            <div class="row m-t-lg">
                 <div class="col-md-6">
                     <div class="lecture-image">
                         <img src="{{ $lecture->avatar->url('thumb') }}" alt="{{ $lecture->name }}" class="lecture-admin-thumb">
@@ -113,14 +113,42 @@
                             </td>
                             <td>
                                 @if($lecture->finished)
-                                    <span class="label label-default">完结</span>
+                                    <span class="label label-default">已结束</span>
                                 @else
-                                    <span class="label label-primary">待学</span>
+                                    <span class="label label-primary">未结束</span>
+                                @endif
+                                @if(isset($lecture->room_id))
+                                    <span class="label label-success">教室已开通</span>
+                                @else
+                                    <span class="label label-danger">教室未开通</span>
                                 @endif
                             </td>
                         </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="row m-t-xs">
+                <div class="col-md-6">
+                    <div class="m-b-xs">
+                        <strong>主讲人登录</strong> <a href="http://xue.duobeiyun.com/" target="_blank">点击登录</a>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon"><strong>邀请码</strong></span>
+                        <input type="text" class="form-control" value="{!! $lecture->host_code !!}">
+                        <span class="btn btn-info input-group-addon">复制</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="m-b-xs">
+                        <strong>微信直播房间地址</strong>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" value="{!! 'http://weixin.duobeiyun.com/room/'.$lecture->room_id !!}">
+                        <span class="btn btn-info input-group-addon">复制</span>
+                    </div>
                 </div>
             </div>
         </div>

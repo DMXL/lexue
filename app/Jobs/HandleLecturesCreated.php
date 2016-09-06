@@ -50,12 +50,11 @@ class HandleLecturesCreated extends Job implements ShouldQueue
         if ($result['success']) {
             $roomId = $result['room']['roomId'];
             $hostCode = $result['room']['hostCode'];
-
-            \DB::table('lectures')
-                ->where('id', $this->lecture->id)
-                ->update(['room_id' => $roomId, 'host_code' => $hostCode]);
-
-            $this->openWechatLive($roomId);
+            if ($this->openWechatLive($roomId)) {
+                $this->lecture->room_id = $roomId;
+                $this->lecture->host_code = $hostCode;
+                $this->lecture->save();
+            }
         }
     }
 
@@ -63,6 +62,7 @@ class HandleLecturesCreated extends Job implements ShouldQueue
      * Send wechat live opening request to Duobei.
      *
      * @param $roomId
+     * @return boolean
      */
     private function openWechatLive($roomId)
     {
@@ -72,10 +72,8 @@ class HandleLecturesCreated extends Job implements ShouldQueue
 
         $result = json_decode(\Duobeiyun::openWeixinLive($roomId, $teacherName, $teacherBrief, $description), true);
         if ($result['success']) {
-            \DB::table('lectures')
-                ->where('id', $this->lecture->id)
-                ->update(['wechat_room_id' => $result['course']['roomId']]);
-        }
+            return true;
+        } else return false;
     }
 
 }

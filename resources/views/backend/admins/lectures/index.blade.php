@@ -49,9 +49,14 @@
                                 </td>
                                 <td class="project-status">
                                     @if($lecture->finished)
-                                        <span class="label label-default">完结</span>
+                                        <span class="label label-default">已结束</span>
                                     @else
-                                        <span class="label label-primary">待学</span>
+                                        <span class="label label-primary">未结束</span>
+                                    @endif
+                                    @if(isset($lecture->room_id))
+                                        <span class="label label-success">教室已开通</span>
+                                    @else
+                                        <span class="label label-danger">教室未开通</span>
                                     @endif
                                 </td>
                                 <td class="project-actions">

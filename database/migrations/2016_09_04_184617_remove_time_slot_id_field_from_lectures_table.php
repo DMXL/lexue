@@ -19,7 +19,6 @@ class RemoveTimeSlotIdFieldFromLecturesTable extends Migration
             $table->dropColumn('time_slot_id');
 
             $table->foreign('teacher_id')->references('id')->on('teachers');
-            $table->index('teacher_id', 'lectures_teacher_id_foreign');
             $table->unique(['teacher_id', 'date', 'start']);
         });
     }
@@ -33,10 +32,9 @@ class RemoveTimeSlotIdFieldFromLecturesTable extends Migration
     {
         Schema::table('lectures', function (Blueprint $table) {
             $table->dropForeign('lectures_teacher_id_foreign');
-            $table->dropIndex('lectures_teacher_id_foreign');
             $table->dropUnique(['teacher_id', 'date', 'start']);
 
-            $table->unsignedInteger('time_slot_id');
+            $table->unsignedInteger('time_slot_id')->nullable();
             $table->foreign('time_slot_id')->references('id')->on('time_slots');
             $table->foreign('teacher_id')->references('id')->on('teachers');
             $table->unique(['teacher_id', 'date', 'time_slot_id']);

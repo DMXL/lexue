@@ -9,6 +9,11 @@ use Codesleeve\Stapler\ORM\EloquentTrait;
 use Codesleeve\Stapler\ORM\StaplerableInterface;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Lecture
+ *
+ * @package App\Models\Course
+ */
 class Lecture extends Model implements StaplerableInterface
 {
     use EloquentTrait;
