@@ -137,8 +137,8 @@
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon"><strong>邀请码</strong></span>
-                        <input type="text" class="form-control" value="{!! $lecture->host_code !!}">
-                        <span class="btn btn-info input-group-addon">复制</span>
+                        <input type="text" id="host-code" class="form-control" value="{!! $lecture->host_code !!}">
+                        <span class="btn btn-info input-group-addon clipboard" data-clipboard-target="#host-code">复制</span>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -146,8 +146,8 @@
                         <strong>微信直播房间地址</strong>
                     </div>
                     <div class="input-group">
-                        <input type="text" class="form-control" value="{!! 'http://weixin.duobeiyun.com/room/'.$lecture->room_id !!}">
-                        <span class="btn btn-info input-group-addon">复制</span>
+                        <input type="text" id="wechat-link" class="form-control" value="{!! 'http://weixin.duobeiyun.com/room/'.$lecture->room_id !!}">
+                        <span class="btn btn-info input-group-addon clipboard" data-clipboard-target="#wechat-link">复制</span>
                     </div>
                 </div>
             </div>
@@ -162,4 +162,16 @@
 
         </div>
     </div>
+@endsection
+
+@section("js")
+    <script type="text/javascript">
+        $(function() {
+            var clipboard = new Clipboard('.clipboard');
+
+            clipboard.on('success', function() {
+                toastr.success('已复制')
+            });
+        });
+    </script>
 @endsection
