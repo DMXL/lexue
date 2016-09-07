@@ -27,6 +27,13 @@ class Student extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * The dynamic properties for eager load.
+     *
+     * @var array
+     */
+    protected $with = ['orders'];
+
     /*
     |--------------------------------------------------------------------------
     | Relations

@@ -136,9 +136,8 @@ class TeacherController extends Controller
         }
 
         $this->dispatch(new HandleTutorialsPurchased($orderId));
-
         flash()->success('课程添加成功');
 
-        return $this->frontRedirect('students::tutorials.index');
+        return $this->frontRedirect('m.students::tutorials.index');
     }
 }

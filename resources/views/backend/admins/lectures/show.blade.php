@@ -146,7 +146,7 @@
                         <strong>微信直播房间地址</strong>
                     </div>
                     <div class="input-group">
-                        <input type="text" id="wechat-link" class="form-control" value="{!! 'http://weixin.duobeiyun.com/room/'.$lecture->room_id !!}">
+                        <input type="text" id="wechat-link" class="form-control" value="{{ 'http://weixin.duobeiyun.com/room/'.$lecture->room_id }}">
                         <span class="btn btn-info input-group-addon clipboard" data-clipboard-target="#wechat-link">复制</span>
                     </div>
                 </div>

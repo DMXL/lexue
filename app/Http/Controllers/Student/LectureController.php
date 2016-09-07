@@ -64,6 +64,6 @@ class LectureController extends Controller
         //$this->dispatch(new HandleLecturesPurchased($orderId));
         flash()->success('课程添加成功');
 
-        return $this->frontRedirect('students::orders.show', $lectureId);
+        return $this->frontRedirect('m.students::orders.index');
     }
 }
