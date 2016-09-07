@@ -148,7 +148,7 @@ class WechatController extends Controller
                     [
                         "type" => "view",
                         "name" => "我的课程",
-                        "url"  => route('m.students::tutorials.index')
+                        "url"  => route('m.students::tutorials.index') // @TODO 整合两种课程
                     ],
                 ],
             ],
