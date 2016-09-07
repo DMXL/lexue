@@ -29,7 +29,7 @@ class Lecture extends Model implements StaplerableInterface
         'avatar'
     ];
 
-    protected $with = ['orders', 'levels'];
+    protected $with = ['teacher', 'orders', 'levels'];
 
     public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('avatar', [

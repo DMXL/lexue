@@ -307,12 +307,15 @@ body, .bd {
     color: #85bb65;
     font-size: 20px;
     font-weight: bold;
-
 }
 .lectures_show .weui_media_title {
     font-size: 14px;
     line-height: 24px;
 }
+.lectures_show .weui_media_desc {
+    line-height: 16px;
+}
 .lectures_show .lecture_desc {
     display: block;
+    line-height: 18px;
 }

@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 use App\Models\Course\Lecture;
+use App\Models\Course\Order;
 use App\Models\Course\TimeSlot;
 use App\Models\Course\Tutorial;
 use App\Models\Teacher\Level;
@@ -35,7 +36,7 @@ class Teacher extends Authenticatable implements StaplerableInterface
 
     protected $dates = ['teaching_since', 'deleted_at'];
 
-    protected $with = ['levels', 'labels'];
+    protected $with = ['levels', 'labels', 'orders'];
 
     protected $appends = [
         'years_of_teaching',
@@ -89,6 +90,11 @@ class Teacher extends Authenticatable implements StaplerableInterface
     public function lectures()
     {
         return $this->hasMany(Lecture::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 
     public function tutorials()

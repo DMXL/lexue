@@ -44,13 +44,6 @@
                 </div>
             </div>
             <div id="tab2" class="weui_tab_bd_item">
-                <!--
-                <article class="weui_article">
-                    <section>
-                        <p>无正在直播的课程！</p>
-                    </section>
-                </article>
-                -->
                 <div id="tab2" class="weui_panel weui_panel_access">
                     <div class="weui_panel_bd">
 

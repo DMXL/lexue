@@ -20,7 +20,7 @@ class LectureController extends Controller
      */
     public function index()
     {
-        $lectures = Lecture::orderByLatest()->with('teacher')->get();
+        $lectures = Lecture::orderByLatest()->with('teacher')->paginate();
 
         return $this->backView('backend.admins.lectures.index', compact('lectures'));
     }
@@ -71,6 +71,7 @@ class LectureController extends Controller
     public function show($id)
     {
         $lecture = Lecture::find($id);
+        dd($lecture->orders);
 
         return $this->backView('backend.admins.lectures.show', compact('lecture'));
     }

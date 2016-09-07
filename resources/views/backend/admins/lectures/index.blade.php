@@ -68,7 +68,9 @@
                     </table>
                 </div>
                 <div class="ibox-footer text-right">
-                    {{ $lectures->render() }}
+                    @if($lectures->render())
+                        {{ $lectures->render() }}
+                    @endif
                 </div>
             </div>
         </div>

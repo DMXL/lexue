@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $with = ['student', 'teacher', 'lecture', 'tutorials'];
+    protected $with = ['student', 'tutorials'];
 
     /*
     |--------------------------------------------------------------------------
@@ -28,6 +28,7 @@ class Order extends Model
     public function lecture()
     {
         return $this->belongsTo(Lecture::class);
+
     }
 
     public function tutorials()
