@@ -56,9 +56,7 @@ class LectureController extends Controller
             return back();
         }
 
-        //$this->dispatch(new HandleLecturesCreated($lecture));
-        $temp = new HandleLecturesCreated($lecture);
-        dd($temp->handle());
+        $this->dispatch(new HandleLecturesCreated($lecture));
         \Flash::success('添加成功');
 
         return redirect()->route('admins::lectures.index');
