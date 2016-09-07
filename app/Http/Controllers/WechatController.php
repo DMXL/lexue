@@ -123,12 +123,12 @@ class WechatController extends Controller
                     [
                         "type" => "view",
                         "name" => "联系我们",
-                        "url"  => "http://123.57.223.193/wecare/index/contact"
+                        "url"  => "http://lexuecloud.com/index/contact"
                     ],
                     [
                         "type" => "view",
                         "name" => "立即登录",
-                        "url"  => "http://123.57.223.193/wecare/"  //route('wechat::auth.redirect')
+                        "url"  => "http://lexuecloud.com/"
                     ],
                 ],
             ],
