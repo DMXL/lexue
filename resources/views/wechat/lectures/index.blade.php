@@ -11,7 +11,7 @@
  *
  * Filename->index.blade.php
  * Project->lexue
- * Description->This is the view for open lectures.
+ * Description->This is the view for lectures.
  *
  * Created by DM on 16/8/5 上午5:26.
  * Copyright 2016 Team Sudo. All rights reserved.
@@ -33,11 +33,13 @@
             <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
                 <div class="weui_panel weui_panel_access">
                     <div class="weui_panel_bd">
+
                         @foreach($lectures as $lecture)
                             @if($lecture->not_started)
                                 @include('wechat.partials.lecturebrief')
                             @endif
                         @endforeach
+
                     </div>
                 </div>
             </div>

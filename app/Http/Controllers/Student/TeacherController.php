@@ -98,6 +98,7 @@ class TeacherController extends Controller
                 $order->teacher_id = $teacher->id;
                 // TODO calculate based on lecture price with teacher unit price as a fallback
                 $order->total = count($bookTimes) * $teacher->unit_price;
+                $order->paid = 1; // @TODO 支付API对接完毕后删除此处
                 $order->save();
 
                 /*
