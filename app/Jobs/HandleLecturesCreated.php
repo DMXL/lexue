@@ -31,8 +31,7 @@ class HandleLecturesCreated extends Job implements ShouldQueue
      */
     public function handle()
     {
-        // $this->createRoom();
-        return $this->createRoom();
+        $this->createRoom();
     }
 
     /**
@@ -51,15 +50,11 @@ class HandleLecturesCreated extends Job implements ShouldQueue
         if ($result['success']) {
             $roomId = $result['room']['roomId'];
             $hostCode = $result['room']['hostCode'];
-
-            return $this->openWechatLive($roomId);
-            /*
             if ($this->openWechatLive($roomId)) {
                 $this->lecture->room_id = $roomId;
                 $this->lecture->host_code = $hostCode;
                 $this->lecture->save();
             }
-            */
         }
     }
 
@@ -72,13 +67,13 @@ class HandleLecturesCreated extends Job implements ShouldQueue
     private function openWechatLive($roomId)
     {
         $teacherName = $this->lecture->teacher->name;
-        $teacherBrief = $this->lecture->teacher->description;
-        $description =  $this->lecture->description;
+        $teacherBrief = 'This is still being tested.'; // $this->lecture->teacher->description;
+        $description = $this->lecture->description;
 
         $result = json_decode(\Duobeiyun::openWeixinLive($roomId, $teacherName, $teacherBrief, $description), true);
         if ($result['success']) {
             return true;
-        } else return $result;
+        } else return false;
     }
 
 }
