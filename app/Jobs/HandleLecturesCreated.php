@@ -31,6 +31,7 @@ class HandleLecturesCreated extends Job implements ShouldQueue
      */
     public function handle()
     {
+        // $this->createRoom();
         return $this->createRoom();
     }
 
@@ -50,13 +51,16 @@ class HandleLecturesCreated extends Job implements ShouldQueue
         if ($result['success']) {
             $roomId = $result['room']['roomId'];
             $hostCode = $result['room']['hostCode'];
+
+            return $this->openWechatLive($roomId);
+            /*
             if ($this->openWechatLive($roomId)) {
                 $this->lecture->room_id = $roomId;
                 $this->lecture->host_code = $hostCode;
                 $this->lecture->save();
-                return 'Success.';
-            } else return 'Live wechat failed.';
-        } else return 'Create room failed.';
+            }
+            */
+        }
     }
 
     /**
@@ -74,7 +78,7 @@ class HandleLecturesCreated extends Job implements ShouldQueue
         $result = json_decode(\Duobeiyun::openWeixinLive($roomId, $teacherName, $teacherBrief, $description), true);
         if ($result['success']) {
             return true;
-        } else return false;
+        } else return $result;
     }
 
 }
