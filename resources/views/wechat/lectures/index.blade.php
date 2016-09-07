@@ -33,34 +33,34 @@
             <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
                 <div class="weui_panel weui_panel_access">
                     <div class="weui_panel_bd">
-
                         @foreach($lectures as $lecture)
-                            @if(Carbon::now()->diffInDays(Carbon::parse($lecture->date), false) >= 0)
-
-                                <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
-                                    <div class="weui_media_hd" data-value="{{ route('m.students::teachers.show', $lecture->teacher_id) }}">
-                                        <div class="teacher_name">129人已报名</div>
-                                        <img class="weui_media_appmsg_thumb" src="{{ $lecture->teacher->avatar->url('thumb') }}" alt="">
-                                    </div>
-                                    <div class="weui_media_bd">
-                                        <h4 class="weui_media_title">{{ $lecture->name }}</h4>
-                                        <p>{{ Carbon::parse($lecture->date)->format('Y年n月j日') }} {{ $lecture->human_time }}</p>
-                                        <span class="badge success">￥{{ $lecture->teacher->unit_price }}.00</span>
-                                    </div>
-                                </a>
-
+                            @if($lecture->not_started)
+                                @include('wechat.partials.lecturebrief')
                             @endif
                         @endforeach
-
                     </div>
                 </div>
             </div>
             <div id="tab2" class="weui_tab_bd_item">
+                <!--
                 <article class="weui_article">
                     <section>
                         <p>无正在直播的课程！</p>
                     </section>
                 </article>
+                -->
+                <div id="tab2" class="weui_panel weui_panel_access">
+                    <div class="weui_panel_bd">
+
+                        @foreach($lectures as $lecture)
+                            @if($lecture->is_live)
+                                @include('wechat.partials.lecturebrief')
+                            @endif
+                        @endforeach
+
+                    </div>
+                </div>
+                </div>
             </div>
         </div>
     </div>

@@ -18,11 +18,6 @@ class Lecture extends Model implements StaplerableInterface
 {
     use EloquentTrait;
 
-    protected $appends = [
-        'human_date_time',
-        'human_time',
-    ];
-
     protected $fillable = [
         'name',
         'teacher_id',
@@ -72,15 +67,38 @@ class Lecture extends Model implements StaplerableInterface
     | Accessors
     |--------------------------------------------------------------------------
     */
+    public function getStartTimeAttribute()
+    {
+        return Carbon::parse($this->date.' '.$this->start);
+    }
+
+    public function getEndTimeAttribute()
+    {
+        return $this->start_time->copy()->addMinute($this->length);
+    }
 
     public function getDateTimeAttribute()
     {
-        return Carbon::parse($this->date.' '.$this->start)->format('Y-m-d H:i');
+        return $this->start_time->format('Y-m-d H:i');
     }
 
     public function getTimestampAttribute()
     {
-        return Carbon::parse($this->date.' '.$this->start)->timestamp;
+        return $this->start_time->timestamp;
+    }
+
+    public function getIsLiveAttribute()
+    {
+        if (Carbon::now()->diffInMinutes($this->start_time, false) <= 0 && Carbon::now()->diffInMinutes($this->end_time, false) >= 0)
+            return true;
+        return false;
+    }
+
+    public function getNotStartedAttribute()
+    {
+        if (Carbon::now()->diffInMinutes($this->start_time, false) > 0)
+            return true;
+        return false;
     }
 
     /*

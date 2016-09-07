@@ -21,9 +21,7 @@ class TutorialController extends Controller
 
     public function index()
     {
-        $tutorials = $this->student->tutorials()->with(['teacher' => function ($query) {
-            $query->withTrashed();
-        }])->orderByLatest()->get();
+        $tutorials = $this->student->tutorials()->with('teacher')->orderByLatest()->get();
 
         return $this->frontView('tutorials.index', compact('tutorials'));
     }
