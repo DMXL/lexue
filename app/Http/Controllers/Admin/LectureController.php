@@ -71,7 +71,6 @@ class LectureController extends Controller
     public function show($id)
     {
         $lecture = Lecture::find($id);
-        dd($lecture->orders);
 
         return $this->backView('backend.admins.lectures.show', compact('lecture'));
     }
