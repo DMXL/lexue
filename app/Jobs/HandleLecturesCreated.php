@@ -31,7 +31,7 @@ class HandleLecturesCreated extends Job implements ShouldQueue
      */
     public function handle()
     {
-        $this->createRoom();
+        return $this->createRoom();
     }
 
     /**
