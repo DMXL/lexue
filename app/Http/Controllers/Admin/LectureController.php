@@ -58,7 +58,7 @@ class LectureController extends Controller
 
         //$this->dispatch(new HandleLecturesCreated($lecture));
         $temp = new HandleLecturesCreated($lecture);
-        dd($temp->createRoom);
+        dd($temp->handle());
         \Flash::success('添加成功');
 
         return redirect()->route('admins::lectures.index');
