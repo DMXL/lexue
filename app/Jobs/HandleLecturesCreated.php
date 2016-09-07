@@ -51,12 +51,12 @@ class HandleLecturesCreated extends Job implements ShouldQueue
             $roomId = $result['room']['roomId'];
             $hostCode = $result['room']['hostCode'];
             if ($this->openWechatLive($roomId)) {
-                dd('wechat live succeeded. roomId='.$roomId);
                 $this->lecture->room_id = $roomId;
                 $this->lecture->host_code = $hostCode;
                 $this->lecture->save();
-            } else dd('wechat live failed');
-        }
+                return 'Success.';
+            } else return 'Live wechat failed.';
+        } else return 'Create room failed.';
     }
 
     /**
