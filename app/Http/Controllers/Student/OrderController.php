@@ -19,6 +19,8 @@ class OrderController extends Controller
 
     public function show($id)
     {
+        $lecture = Lecture::find($id);
 
+        return $this->frontView('lectures.show', compact('lecture'));
     }
 }

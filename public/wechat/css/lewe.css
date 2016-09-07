@@ -280,3 +280,39 @@ body, .bd {
     height: 75px;
     line-height: 130px;
 }
+
+/* Lectures Show Page */
+.lectures_show .weui_icon_area {
+    height: 200px;
+    vertical-align: middle;
+}
+.lectures_show .weui_icon_area img {
+    display: block;
+    width: 100%;
+}
+.lectures_show .weui_panel {
+    margin-top: 0;
+}
+.lectures_show .weui_panel_hd {
+    color: #444;
+    font-size: 15px;
+}
+.lectures_show .lecture_info {
+    width: 100%;
+}
+.lectures_show .lecture_info td {
+    vertical-align: bottom;
+}
+.lectures_show .lecture_info .price {
+    color: #85bb65;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+.lectures_show .weui_media_title {
+    font-size: 14px;
+    line-height: 24px;
+}
+.lectures_show .lecture_desc {
+    display: block;
+}

@@ -17,7 +17,7 @@
  * Copyright 2016 Team Sudo. All rights reserved.
  *
 -->
-<a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+<a href="{{ route('m.students::lectures.show', $lecture->id) }}" class="weui_media_box weui_media_appmsg">
 
     <div class="weui_media_hd" data-value="{{ route('m.students::teachers.show', $lecture->teacher_id) }}">
 
