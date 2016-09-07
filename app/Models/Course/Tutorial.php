@@ -23,7 +23,7 @@ class Tutorial extends Model
     */
     public function teacher()
     {
-        return $this->belongsTo(Teacher::class)->withTrashed();;
+        return $this->belongsTo(Teacher::class);
     }
 
     public function student()
