@@ -67,8 +67,8 @@ class HandleLecturesCreated extends Job implements ShouldQueue
     private function openWechatLive($roomId)
     {
         $teacherName = $this->lecture->teacher->name;
-        $teacherBrief = $this->lecture->teacher->description;
-        $description =  $this->lecture->description;
+        $teacherBrief = 'This is still being tested.'; // $this->lecture->teacher->description;
+        $description = $this->lecture->description;
 
         $result = json_decode(\Duobeiyun::openWeixinLive($roomId, $teacherName, $teacherBrief, $description), true);
         if ($result['success']) {
