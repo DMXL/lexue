@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Codesleeve\Stapler\ORM\EloquentTrait;
 use Codesleeve\Stapler\ORM\StaplerableInterface;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Lecture
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Lecture extends Model implements StaplerableInterface
 {
-    use EloquentTrait;
+    use EloquentTrait, SoftDeletes;
 
     protected $fillable = [
         'name',

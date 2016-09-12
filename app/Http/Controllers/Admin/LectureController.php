@@ -106,7 +106,15 @@ class LectureController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Lecture::destroy($id);
+        } catch (\Exception $e) {
+            $this->handleException($e);
+            return back();
+        }
+
+        \Flash::success('删除成功');
+        return redirect()->route('admins::lectures.index');
     }
 
     /**

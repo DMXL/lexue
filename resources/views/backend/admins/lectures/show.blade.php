@@ -32,7 +32,7 @@
         <div class="ibox-title">
             <h5 class="no-margins vertical-middle">公开课信息</h5>
             <div class="ibox-tools ibox-tools-buttons">
-                <button class="btn btn-danger btn-outline btn-xs"  data-toggle="modal" data-target="#lecture-delete-modal">
+                <button type="button" class="btn btn-danger btn-outline btn-xs"  data-toggle="modal" data-target="#lecture-delete-modal">
                     <i class="fa fa-trash"></i> 删除
                 </button>
             </div>
@@ -160,6 +160,36 @@
                 <i class="fa fa-cny"></i> 课程订单
             </a>
 
+        </div>
+    </div>
+
+    <div class="modal inmodal fade" id="lecture-delete-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">删除公开课</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger">
+                        <i class="fa fa-exclamation-circle"></i> 删除后将无法恢复
+                    </div>
+                    即将删除课程：<br />
+                    <p class="delete-info">
+                        <strong>名称：</strong>{{ $lecture->name }}<br />
+                        <strong>老师：</strong>{{ $lecture->teacher->name }}<br />
+                        <strong>创建时间：</strong>{{ $lecture->created_at }}
+                    </p>
+                </div>
+                <form action="{{ route('admins::lectures.destroy', $lecture->id) }}" method="post">
+                    {{ method_field('delete') }}
+                    {{ csrf_field() }}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-danger">确认删除</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 @endsection

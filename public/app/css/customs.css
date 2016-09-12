@@ -10,3 +10,4 @@
 
 .lecture-image { width: 100px; float: left; }
 .lecture-info { margin-left: 120px; }
+.modal .modal-body .delete-info { padding-top: 5px; }
