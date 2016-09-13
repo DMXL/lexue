@@ -102,7 +102,7 @@ class TeacherController extends Controller
             return back();
         }
 
-        \Flash::success('添加成功');
+        \Flash::success('信息已更新');
         return redirect()->route('admins::teachers.show', $teacher->id);
     }
 

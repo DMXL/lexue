@@ -32,9 +32,7 @@ class LectureController extends Controller
      */
     public function create()
     {
-        $teachers = Teacher::all();
-
-        return $this->backView('backend.admins.lectures.create', compact('teachers'));
+        return $this->backView('backend.admins.lectures.create');
     }
 
     /**
@@ -83,19 +81,32 @@ class LectureController extends Controller
      */
     public function edit($id)
     {
-        //
+        $lecture = Lecture::find($id);
+
+        return $this->backView('backend.admins.lectures.edit', compact('lecture'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param LectureFormRequest $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(LectureFormRequest $request, $id)
     {
-        //
+        try {
+            $lecture = \DB::transaction(function() use ($request, $id) {
+                $lecture = Lecture::find($id);
+                return $this->writeLectureData($lecture, $request);
+            });
+        } catch (\Exception $e) {
+            $this->handleException($e);
+            return back();
+        }
+
+        \Flash::success('信息已更新');
+        return redirect()->route('admins::lectures.show', $lecture->id);
     }
 
     /**

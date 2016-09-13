@@ -32,6 +32,10 @@
         <div class="ibox-title">
             <h5 class="no-margins vertical-middle">公开课信息</h5>
             <div class="ibox-tools ibox-tools-buttons">
+                <a href="{{ route('admins::lectures.edit', $lecture->id) }}" class="btn btn-default btn-outline btn-xs">
+                    <i class="fa fa-wrench"></i> 修改信息
+                </a>
+                <span class="m-l-sm m-r-sm"> - </span>
                 <button type="button" class="btn btn-danger btn-outline btn-xs"  data-toggle="modal" data-target="#lecture-delete-modal">
                     <i class="fa fa-trash"></i> 删除
                 </button>

@@ -14,10 +14,12 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         // Using class based composers...
+        /*
         view()->composer(
             'backend.admins.teachers._form',
             'App\ViewComposers\TeacherFormComposer'
         );
+        */
     }
 
     /**

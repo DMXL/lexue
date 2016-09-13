@@ -12,10 +12,12 @@
         'levels' => $teacher->levels->pluck('id')->all(),
         'labels' => $teacher->labels->pluck('name')->all(),
     ];
+    $levels = App\Models\Teacher\Level::all();
+    $labels = App\Models\Teacher\Label::all();
 ?>
 
 @section("content")
-    @include("backend.admins.teachers._form", compact('defaults'))
+    @include("backend.admins.teachers._form")
 @endsection
 
 @section("js")

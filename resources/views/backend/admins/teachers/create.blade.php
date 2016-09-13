@@ -9,13 +9,15 @@
         'unit_price' => '',
         'teaching_since' => '',
         'description' => '',
-        'levels' => [],
-        'labels' => [],
+        'levels' => '',
+        'labels' => '',
     ];
+    $levels = App\Models\Teacher\Level::all();
+    $labels = App\Models\Teacher\Label::all();
 ?>
 
 @section("content")
-    @include("backend.admins.teachers._form", compact('defaults','action'))
+    @include("backend.admins.teachers._form")
 @endsection
 
 @section("js")
