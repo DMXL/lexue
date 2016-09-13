@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Jobs\HandleLecturesPurchased;
 use App\Http\Controllers\Controller;
 use App\Models\Course\Lecture;
 use App\Models\Course\Order;
