@@ -60,8 +60,7 @@ class LectureController extends Controller
             return back();
         }
 
-        // @TODO 增加支付成功后的Job
-        //$this->dispatch(new HandleLecturesPurchased($orderId));
+        $this->dispatch(new HandleLecturesPurchased($orderId));
         flash()->success('课程添加成功');
 
         return $this->frontRedirect('m.students::orders.index');
