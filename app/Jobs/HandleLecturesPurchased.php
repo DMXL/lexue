@@ -7,6 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Models\Course\Lecture;
+use App\Models\Course\Order;
 
 class HandleLecturesPurchased extends Job implements ShouldQueue
 {

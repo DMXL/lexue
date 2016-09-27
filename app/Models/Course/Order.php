@@ -27,7 +27,7 @@ class Order extends Model
 
     public function lecture()
     {
-        return $this->belongsTo(Lecture::class);
+        return $this->belongsTo(Lecture::class)->withTrashed();
     }
 
     public function tutorials()
