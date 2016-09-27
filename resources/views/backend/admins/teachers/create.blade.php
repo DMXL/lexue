@@ -9,8 +9,8 @@
         'unit_price' => '',
         'teaching_since' => '',
         'description' => '',
-        'levels' => '',
-        'labels' => '',
+        'levels' => array(),
+        'labels' => array(),
     ];
     $levels = App\Models\Teacher\Level::all();
     $labels = App\Models\Teacher\Label::all();

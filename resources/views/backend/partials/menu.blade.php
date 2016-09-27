@@ -3,7 +3,7 @@
 ?>
 <li class="{{ $node['active'] ? "active" : '' }}">
     <a href="{{ isset($node['route']) ? route($node['route']) : '#' }}">
-        <i class="fa fa-th-large"></i> <span class="nav-label">{{ $node['title'] }}</span>
+        <i class="fa fa-{{ $node['icon'] }}"></i> <span class="nav-label">{{ $node['title'] }}</span>
         @if($children)
         <span class="fa arrow"></span>
         @endif

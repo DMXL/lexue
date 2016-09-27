@@ -97,10 +97,12 @@ return [
                         'route' => 'teachers.show',
                         'hidden' => true,
                     ]
-                ]
+                ],
+                'icon' => 'users'
             ], [
                 'title' => '课时管理',
                 'route' => 'timeslots.index',
+                'icon' => 'clock-o'
             ], [
                 'title' => '课表管理',
                 'route' => 'timetables.index',
@@ -110,7 +112,8 @@ return [
                         'route' => 'teachers.timetables.show',
                         'hidden' => true,
                     ]
-                ]
+                ],
+                'icon' => 'calendar'
             ],[
                 'title' => '课程管理',
                 'route' => 'lectures.index',
@@ -122,7 +125,8 @@ return [
                         'title' => '微课',
                         'route' => 'tutorials.index',
                     ]
-                ]
+                ],
+                'icon' => 'tasks'
             ]
         ],
     ],
