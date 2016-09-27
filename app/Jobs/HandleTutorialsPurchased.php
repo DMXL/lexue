@@ -67,14 +67,14 @@ class HandleTutorialsPurchased extends Job implements ShouldQueue
             'data'        => [
                 "first"      => [
                     "value" => "亲爱的 " . $student->name . "，您已成功购买课程。\n",
-                    "color" => "#bbbbbb"
+                    "color" => "#000000"
                 ],
                 "keyword1"   => [
                     "value" => $teacher->name . " 老师的一对一微信课程",    // 课程名称
                     "color" => "#00beb7"
                 ],
                 "keyword2"   => [
-                    "value" => $order->total . "元",    // 支付金额
+                    "value" => number_format($order->total, 2) . "元",    // 支付金额
                     "color" => "#00beb7"
                 ],
                 "keyword3"   => [
@@ -85,7 +85,7 @@ class HandleTutorialsPurchased extends Job implements ShouldQueue
                     "value" => "随后乐学云教学主管老师将第一时间与您取得联系，请您及时关注微信消息！",
                     "color" => "#000000"
                 ]
-            ],
+            ]
         ];
 
         \WechatPusher::push($message);
