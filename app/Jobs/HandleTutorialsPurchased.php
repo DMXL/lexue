@@ -67,7 +67,7 @@ class HandleTutorialsPurchased extends Job implements ShouldQueue
             'data'        => [
                 "first"      => [
                     "value" => "亲爱的 " . $student->name . "，您已成功购买课程。\n",
-                    "color" => "bbbbbb"
+                    "color" => "#bbbbbb"
                 ],
                 "keyword1"   => [
                     "value" => $teacher->name . " 老师的一对一微信课程",    // 课程名称
@@ -75,15 +75,15 @@ class HandleTutorialsPurchased extends Job implements ShouldQueue
                 ],
                 "keyword2"   => [
                     "value" => $order->total . "元",    // 支付金额
-                    "color" => "00beb7"
+                    "color" => "#00beb7"
                 ],
                 "keyword3"   => [
                     "value" => $tutorials->pluck('human_date_time')->implode(', ') . "\n",    // 课程时间
-                    "color" => "00beb7"
+                    "color" => "#00beb7"
                 ],
                 "remark"   => [
                     "value" => "随后乐学云教学主管老师将第一时间与您取得联系，请您及时关注微信消息！",
-                    "color" => "000000"
+                    "color" => "#000000"
                 ]
             ],
         ];
