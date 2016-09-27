@@ -62,14 +62,29 @@ class HandleTutorialsPurchased extends Job implements ShouldQueue
         $message = [
             'touser'      => $student->wechat_id,
             'template_id' => config('wechat.template.purchase_success'),
-            'url'         => route('m.students::lectures.index'),
-            'topcolor'    => '#00f7f7',
+            'url'         => route('m.students::tutorials.index'),
+            'topcolor'    => '#000000',
             'data'        => [
-                "first"      => "亲爱的 " . $student->name . "，您已成功购买课程。",
-                "keyword1"   => $teacher->name . " 老师的一对一微信课程",    // 课程名称
-                "keyword2"   => $order->total . "元",    // 支付金额
-                "keyword3"   => $tutorials->pluck('human_date_time')->implode(', '),    // 课程时间
-                "remark"     => "随后乐学云教学主管老师将第一时间与您取得联系，请您及时关注微信消息！"
+                "first"      => [
+                    "value" => "亲爱的 " . $student->name . "，您已成功购买课程。\n",
+                    "color" => "bbbbbb"
+                ],
+                "keyword1"   => [
+                    "value" => $teacher->name . " 老师的一对一微信课程",    // 课程名称
+                    "color" => "#00beb7"
+                ],
+                "keyword2"   => [
+                    "value" => $order->total . "元",    // 支付金额
+                    "color" => "00beb7"
+                ],
+                "keyword3"   => [
+                    "value" => $tutorials->pluck('human_date_time')->implode(', ') . "\n",    // 课程时间
+                    "color" => "00beb7"
+                ],
+                "remark"   => [
+                    "value" => "随后乐学云教学主管老师将第一时间与您取得联系，请您及时关注微信消息！",
+                    "color" => "000000"
+                ]
             ],
         ];
 

@@ -61,11 +61,11 @@ class HandleLecturesPurchased extends Job implements ShouldQueue
         $message = [
             'touser'      => $student->wechat_id,
             'template_id' => config('wechat.template.purchase_success'),
-            'url'         => route('m.students::lectures.index'),
-            'topcolor'    => '#00f7f7',
+            'url'         => route('m.students::orders.index'),
+            'topcolor'    => '#000000',
             'data'        => [
                 "first"      => "亲爱的 " . $student->name . "，您已成功购买课程。",
-                "keyword1"   => "<b>" . $teacher->name . "</b> 老师的公开课 <b>" . $lecture->name . "</b>",    // 课程名称
+                "keyword1"   => $teacher->name . " 老师的公开课 " . $lecture->name,    // 课程名称
                 "keyword2"   => $order->total . "元",    // 支付金额
                 "keyword3"   => $lecture->date_time,    // 课程时间
                 "remark"     => "请按时进入教室上课，不要迟到哦！"
