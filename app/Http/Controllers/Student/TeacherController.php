@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Events\TutorialPurchased;
 use App\Http\Controllers\Controller;
-use App\Jobs\HandleTutorialsPurchased;
 use App\Models\Course\Order;
 use App\Models\Course\TimeSlot;
 use App\Models\Course\Tutorial;
@@ -133,7 +133,9 @@ class TeacherController extends Controller
             return back();
         }
 
-        $this->dispatch(new HandleTutorialsPurchased($orderId));
+        $order = Order::find($orderId);
+
+        event(new TutorialPurchased($order));
         flash()->success('课程添加成功');
 
         return $this->frontRedirect('m.students::tutorials.index');

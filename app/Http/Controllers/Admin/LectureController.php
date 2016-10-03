@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Jobs\HandleLecturesCreated;
+use App\Events\LectureCreated;
 use App\Models\Course\Lecture;
 use App\Models\User\Teacher;
 use Illuminate\Http\Request;
@@ -54,7 +54,7 @@ class LectureController extends Controller
             return back();
         }
 
-        $this->dispatch(new HandleLecturesCreated($lecture));
+        event(new LectureCreated($lecture));
         \Flash::success('添加成功');
 
         return redirect()->route('admins::lectures.index');
@@ -106,6 +106,7 @@ class LectureController extends Controller
         }
 
         \Flash::success('信息已更新');
+
         return redirect()->route('admins::lectures.show', $lecture->id);
     }
 
