@@ -10,33 +10,33 @@
  *
  *
  *
- * Filename->LectureCreated.php
+ * Filename->TutorialPurchased.php
  * Project->lexue
- * Description->The event fired after a lecture is created.
+ * Description->The event fired after a tutorial is purchased by a student.
  *
- * Created by DM on 16/9/28 上午11:41.
+ * Created by DM on 16/10/4 上午12:05.
  * Copyright 2016 Team Sudo. All rights reserved.
  *
  */
 namespace App\Events;
 
-use App\Models\Course\Lecture;
+use App\Models\Course\Order;
 use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 
-class LectureCreated extends Event
+class TutorialPurchased extends Event
 {
     use SerializesModels;
 
-    public $lecture;
+    public $order;
 
     /**
      * Create a new event instance.
      *
-     * @param Lecture $lecture
+     * @param Order $order
      */
-    public function __construct(Lecture $lecture)
+    public function __construct(Order $order)
     {
-        $this->lecture = $lecture;
+        $this->order = $order;
     }
 }

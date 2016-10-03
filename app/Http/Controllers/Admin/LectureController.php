@@ -106,6 +106,7 @@ class LectureController extends Controller
         }
 
         \Flash::success('信息已更新');
+
         return redirect()->route('admins::lectures.show', $lecture->id);
     }
 

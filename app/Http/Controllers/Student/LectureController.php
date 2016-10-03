@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Student;
 
-use App\Jobs\HandleLecturesPurchased;
+use App\Events\LecturePurchased;
 use App\Http\Controllers\Controller;
 use App\Models\Course\Lecture;
 use App\Models\Course\Order;
@@ -61,7 +61,9 @@ class LectureController extends Controller
             return back();
         }
 
-        $this->dispatch(new HandleLecturesPurchased($orderId));
+        $order = Order::find($orderId);
+
+        event(new LecturePurchased($order));
         flash()->success('课程添加成功');
 
         return $this->frontRedirect('m.students::orders.index');

@@ -1,52 +1,40 @@
 <?php
+/**
+ *
+ *
+ *   ______                        _____           __
+ *  /_  __/__  ____ _____ ___     / ___/__  ______/ /___
+ *   / / / _ \/ __ `/ __ `__ \    \__ \/ / / / __  / __ \
+ *  / / /  __/ /_/ / / / / / /   ___/ / /_/ / /_/ / /_/ /
+ * /_/  \___/\__,_/_/ /_/ /_/   /____/\__,_/\__,_/\____/
+ *
+ *
+ *
+ * Filename->TutorialEventListener.php
+ * Project->lexue
+ * Description->The listener for tutorial events.
+ *
+ * Created by DM on 16/10/2 下午10:29.
+ * Copyright 2016 Team Sudo. All rights reserved.
+ *
+ */
+namespace App\Listeners;
 
-namespace App\Jobs;
-
-use App\Jobs\Job;
-use App\Models\Course\Order;
-use Illuminate\Queue\SerializesModels;
+use App\Events\TutorialPurchased;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class HandleTutorialsPurchased extends Job implements ShouldQueue
+class TutorialEventListener implements ShouldQueue
 {
-    use InteractsWithQueue, SerializesModels;
-
     /**
-     * @var null|array
-     */
-    private $orderId;
-
-    /**
-     * Create a new job instance.
-     * @param
-     */
-    public function __construct($orderId = null)
-    {
-        $this->orderId = $orderId;
-    }
-
-    /**
-     * Execute the job.
+     * Handle the TutorialPurchased event.
      *
-     * @return void
-     */
-    public function handle()
-    {
-        if (isset($this->orderId)) {
-            $this->notify($this->orderId);
-        }
-    }
-
-    /**
-     * 发送购买成功模板消息
-     * @param array $orderId
+     * @param TutorialPurchased $event
      * @return bool
      */
-    private function notify($orderId)
+    public function pushTutorialConfirmation(TutorialPurchased $event)
     {
-        $order = Order::find($orderId);
-
+        $order = $event->order;
         $tutorials = $order->tutorials;
 
         $sampleLecture = $tutorials->first();
@@ -74,5 +62,18 @@ class HandleTutorialsPurchased extends Job implements ShouldQueue
         ];
 
         \WechatPusher::push($message);
+    }
+
+    /**
+     * Register the listeners for the subscriber.
+     *
+     * @param $events
+     */
+    public function subscribe($events)
+    {
+        $events->listen(
+            'App\Events\TutorialPurchased',
+            'App\Listeners\TutorialEventListener@pushTutorialConfirmation'
+        );
     }
 }
