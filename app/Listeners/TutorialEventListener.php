@@ -66,11 +66,11 @@ class TutorialEventListener implements ShouldQueue
                     "color" => "#00beb7"
                 ],
                 "keyword3"   => [
-                    "value" => $tutorials->pluck('human_date_time')->implode(', ') . "\n",    // 课程时间
+                    "value" => $tutorials->pluck('human_date_time')->implode(', '),    // 课程时间
                     "color" => "#00beb7"
                 ],
                 "remark"   => [
-                    "value" => "随后乐学云教学主管老师将第一时间与您取得联系，请您及时关注微信消息！",
+                    "value" => "\n随后乐学云教学主管老师将第一时间与您取得联系，请您及时关注微信消息！",
                     "color" => "#000000"
                 ]
             ]

@@ -233,7 +233,7 @@ body, .bd {
 /* Tutorials Index Page */
 .tutorials_index .weui_tabbar_icon i {
     color: #bbb;
-    font-size: 24px;
+    font-size: 26px;
     display: block;
 }
 .tutorials_index .weui_bar_item_on .weui_tabbar_icon i {
@@ -318,4 +318,18 @@ body, .bd {
 .lectures_show .lecture_desc {
     display: block;
     line-height: 18px;
+}
+
+/* Orders Index Page */
+.orders_index .weui_tabbar_icon i {
+    color: #bbb;
+    font-size: 26px;
+    display: block;
+}
+.orders_index .weui_bar_item_on .weui_tabbar_icon i {
+    color: #09bb07;
+}
+.orders_index .weui_tabbar {
+    position: fixed;
+    z-index: 99;
 }

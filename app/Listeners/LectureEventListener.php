@@ -80,7 +80,7 @@ class LectureEventListener implements ShouldQueue
                     "color" => "#00beb7"
                 ],
                 "remark"   => [
-                    "value" => "请按时进入教室上课，不要迟到哦！",
+                    "value" => "\n请按时进入教室上课，不要迟到哦！",
                     "color" => "#000000"
                 ]
             ]

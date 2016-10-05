@@ -26,86 +26,50 @@
 
             <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
                 <div class="weui_panel weui_panel_access">
+                    <div class="weui_panel_hd">我的微课 - 即将开始</div>
                     <div class="weui_panel_bd">
-
                         @foreach($tutorials as $tutorial)
-                            @if(!$tutorial->complete)
-
-                                <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
-                                    <div class="weui_media_hd" data-value="{{ route('m.students::teachers.show', $tutorial->teacher_id) }}">
-                                        <div class="teacher_name">{{ $tutorial->teacher->name }}</div>
-                                        <img class="weui_media_appmsg_thumb" src="{{ $tutorial->teacher->avatar->url('thumb') }}" alt="">
-                                    </div>
-                                    <div class="weui_media_bd">
-                                        <h4 class="weui_media_title">{{ $tutorial->human_time }}</h4>
-
-                                        @if(Carbon::now()->diffInDays(Carbon::parse($tutorial->date), false) < 0)
-                                            <span class="badge grey">{{ $tutorial->date }}</span>
-                                        @else
-                                            <span class="badge success">{{ $tutorial->date }}</span>
-                                        @endif
-
-                                        @if($tutorial->single)
-                                            <span class="badge secondary">一对一</span>
-                                        @else
-                                            <span class="badge primary">一对多</span>
-                                        @endif
-                                    </div>
-                                </a>
-
-                            @endif
+                            <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg weui_panel_ft">
+                                <div class="weui_media_hd" data-value="{{ route('m.students::teachers.show', $tutorial->teacher_id) }}">
+                                    <img class="weui_media_appmsg_thumb" src="{{ $tutorial->teacher->avatar->url('thumb') }}" alt="{{ $tutorial->teacher->name }}">
+                                </div>
+                                <div class="weui_media_bd">
+                                    <h4 class="weui_media_title">{{ $tutorial->human_time }} {{ $tutorial->teacher->name }}老师</h4>
+                                    <p class="weui_media_desc">
+                                        <span class="badge success">{{ $tutorial->date }}</span> <span class="badge primary">{{ $tutorial->timeSlot->range }}</span>
+                                    </p>
+                                </div>
+                            </a>
                         @endforeach
-
                     </div>
                 </div>
             </div>
 
             <div id="tab2" class="weui_tab_bd_item">
                 <div class="weui_panel weui_panel_access">
+                    <div class="weui_panel_hd">我的微课 - 已结束</div>
                     <div class="weui_panel_bd">
-
-                        @foreach($tutorials as $tutorial)
-                            @if($tutorial->complete)
-
-                                <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
-                                    <div class="weui_media_hd" data-value="{{ route('m.students::teachers.show', $tutorial->teacher_id) }}">
-                                        <div class="teacher_name">{{ $tutorial->teacher->name }}</div>
-                                        <img class="weui_media_appmsg_thumb" src="{{ $tutorial->teacher->avatar->url('thumb') }}" alt="">
-                                    </div>
-                                    <div class="weui_media_bd">
-                                        <h4 class="weui_media_title">{{ $tutorial->human_time }}</h4>
-                                        <span class="badge grey">{{ $tutorial->date }}</span>
-
-                                        @if($tutorial->single)
-                                            <span class="badge secondary">一对一</span>
-                                        @else
-                                            <span class="badge primary">一对多</span>
-                                        @endif
-                                    </div>
-                                </a>
-
-                            @endif
-                        @endforeach
 
                     </div>
                 </div>
             </div>
+
         </div>
 
         <div class="weui_tabbar">
 
             <a href="#tab1" class="weui_tabbar_item weui_bar_item_on">
                 <div class="weui_tabbar_icon">
-                    <i class="fa fa-check-square-o"></i>
+                    <i class="fa fa-calendar"></i>
                 </div>
-                <p class="weui_tabbar_label">待学</p>
+                <p class="weui_tabbar_label">即将开始</p>
             </a>
 
             <a href="#tab2" class="weui_tabbar_item">
                 <div class="weui_tabbar_icon">
-                    <i class="fa fa-clock-o"></i>
+                    <i class="fa fa-calendar-check-o"></i>
                 </div>
-                <p class="weui_tabbar_label">完结</p>
+                <p class="weui_tabbar_label">已结束</p>
             </a>
 
         </div>

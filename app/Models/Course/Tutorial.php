@@ -50,7 +50,7 @@ class Tutorial extends Model
     public function getHumanTimeAttribute()
     {
         $timeSlot = $this->timeSlot;
-        return humanDayOfWeek(Carbon::parse($this->date)->dayOfWeek).$timeSlot->day_part . ' ' . $timeSlot->range;
+        return humanDayOfWeek(Carbon::parse($this->date)->dayOfWeek).$timeSlot->day_part;
     }
 
     /*

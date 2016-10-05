@@ -14,7 +14,7 @@ class OrderController extends Controller
     private $student;
 
     /**
-     * LectureController constructor.
+     * OrderController constructor.
      */
     public function __construct()
     {

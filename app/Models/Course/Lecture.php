@@ -83,6 +83,12 @@ class Lecture extends Model implements StaplerableInterface
         return $this->start_time->format('Y-m-d H:i');
     }
 
+    public function getArrayedTimeAttribute()
+    {
+        $time = [$this->start_time->format('Y-m-d'), $this->start_time->format('H:i')];
+        return $time;
+    }
+
     public function getTimestampAttribute()
     {
         return $this->start_time->timestamp;

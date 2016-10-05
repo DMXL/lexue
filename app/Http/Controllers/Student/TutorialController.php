@@ -12,7 +12,7 @@ class TutorialController extends Controller
     private $student;
 
     /**
-     * LectureController constructor.
+     * TutorialController constructor.
      */
     public function __construct()
     {
@@ -21,7 +21,10 @@ class TutorialController extends Controller
 
     public function index()
     {
-        $tutorials = $this->student->tutorials()->with('teacher')->orderByLatest()->get();
+        $tutorials = $this->student->tutorials()
+            ->with('teacher')
+            ->orderByLatest()
+            ->get();
 
         return $this->frontView('tutorials.index', compact('tutorials'));
     }
