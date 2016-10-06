@@ -2,8 +2,10 @@
 
 namespace App\Models\User;
 
+use App\Models\Course\Tutorial;
 use App\Models\Course\Lecture;
 use App\Models\Course\Order;
+use Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Student extends Authenticatable
@@ -31,7 +33,7 @@ class Student extends Authenticatable
      *
      * @var array
      */
-    protected $with = ['orders'];
+    protected $with = [];
 
     /*
     |--------------------------------------------------------------------------
@@ -42,4 +44,15 @@ class Student extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+
+    public function Tutorials()
+    {
+        return $this->hasMany(Tutorial::class);
+    }
+
+    public function lectures()
+    {
+        return $this->belongsToMany(Lecture::class, 'orders');
+    }
+
 }

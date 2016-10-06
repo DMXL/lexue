@@ -63,6 +63,11 @@ class Tutorial extends Model
         return $query->orderBy('date', 'desc')->orderBy('start', 'desc');
     }
 
+    public function scopeOrderByEarliest($query)
+    {
+        return $query->orderBy('date', 'asc')->orderBy('start', 'asc');
+    }
+
     public function scopeFollowingWeek($query)
     {
         return $this->scopeFollowingDays($query, 7);

@@ -28,28 +28,25 @@
                 <div class="weui_panel weui_panel_access">
                     <div class="weui_panel_hd">我的微课 - 即将开始</div>
                     <div class="weui_panel_bd">
-                        @foreach($tutorials as $tutorial)
-                            <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg weui_panel_ft">
-                                <div class="weui_media_hd" data-value="{{ route('m.students::teachers.show', $tutorial->teacher_id) }}">
-                                    <img class="weui_media_appmsg_thumb" src="{{ $tutorial->teacher->avatar->url('thumb') }}" alt="{{ $tutorial->teacher->name }}">
-                                </div>
-                                <div class="weui_media_bd">
-                                    <h4 class="weui_media_title">{{ $tutorial->human_time }} {{ $tutorial->teacher->name }}老师</h4>
-                                    <p class="weui_media_desc">
-                                        <span class="badge success">{{ $tutorial->date }}</span> <span class="badge primary">{{ $tutorial->timeSlot->range }}</span>
-                                    </p>
-                                </div>
-                            </a>
-                        @endforeach
+                        @include('wechat.tutorials.tutorialinfo', ['tutorials' => $upcoming, 'status' => 'primary'])
                     </div>
                 </div>
             </div>
 
             <div id="tab2" class="weui_tab_bd_item">
                 <div class="weui_panel weui_panel_access">
+                    <div class="weui_panel_hd">我的微课 - 正在进行</div>
+                    <div class="weui_panel_bd">
+                        @include('wechat.tutorials.tutorialinfo', ['tutorials' => $ongoing, 'status' => 'alert'])
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab3" class="weui_tab_bd_item">
+                <div class="weui_panel weui_panel_access">
                     <div class="weui_panel_hd">我的微课 - 已结束</div>
                     <div class="weui_panel_bd">
-
+                        @include('wechat.tutorials.tutorialinfo', ['tutorials' => $finished, 'status' => 'grey'])
                     </div>
                 </div>
             </div>
@@ -66,6 +63,13 @@
             </a>
 
             <a href="#tab2" class="weui_tabbar_item">
+                <div class="weui_tabbar_icon">
+                    <i class="fa fa-video-camera"></i>
+                </div>
+                <p class="weui_tabbar_label">正在进行</p>
+            </a>
+
+            <a href="#tab3" class="weui_tabbar_item">
                 <div class="weui_tabbar_icon">
                     <i class="fa fa-calendar-check-o"></i>
                 </div>

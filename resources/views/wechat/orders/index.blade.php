@@ -28,20 +28,7 @@
                 <div class="weui_panel weui_panel_access">
                     <div class="weui_panel_hd">我的公开课 - 即将开始</div>
                     <div class="weui_panel_bd">
-                        @foreach($orders as $order)
-                            <a href="http://weixin.duobeiyun.com/room/{{ $order->lecture->room_id }}" class="weui_media_box weui_media_appmsg weui_panel_ft">
-                                <div class="weui_media_hd">
-                                    <img class="weui_media_appmsg_thumb" src="{{ $order->lecture->avatar->url('thumb') }}" alt="{{ $order->lecture->name }}">
-                                </div>
-                                <div class="weui_media_bd">
-                                    <h4 class="weui_media_title">{{ $order->lecture->name }}</h4>
-                                    <p class="weui_media_desc">
-                                        开播时间：<span class="badge success">{{ $order->lecture->arrayed_time[0] }}</span><span class="badge primary">{{ $order->lecture->arrayed_time[1] }}</span><br />
-                                        {{ $order->lecture->description }}
-                                    </p>
-                                </div>
-                            </a>
-                        @endforeach
+                        @include('wechat.orders.lectureinfo', ['lectures' => $upcoming, 'status' => 'primary'])
                     </div>
                 </div>
             </div>
@@ -50,7 +37,7 @@
                 <div class="weui_panel weui_panel_access">
                     <div class="weui_panel_hd">我的公开课 - 正在直播</div>
                     <div class="weui_panel_bd">
-
+                        @include('wechat.orders.lectureinfo', ['lectures' => $ongoing, 'status' => 'alert'])
                     </div>
                 </div>
             </div>
@@ -59,7 +46,7 @@
                 <div class="weui_panel weui_panel_access">
                     <div class="weui_panel_hd">我的公开课 - 已结束</div>
                     <div class="weui_panel_bd">
-
+                        @include('wechat.orders.lectureinfo', ['lectures' => $finished, 'status' => 'grey'])
                     </div>
                 </div>
             </div>

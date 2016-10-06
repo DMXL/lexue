@@ -118,26 +118,13 @@ class Lecture extends Model implements StaplerableInterface
         return $query->orderBy('date', 'desc')->orderBy('start', 'desc');
     }
 
-    public function scopeIncoming($query)
+    public function scopeOrderByEarliest($query)
     {
-        return $query->where('finished', 0);
-    }
-
-    public function scopeOngoing($query)
-    {
-        return $query->where('date', Carbon::today()->toDateString())->where();
+        return $query->orderBy('date', 'asc')->orderBy('start', 'asc');
     }
 
     public function scopeFinished($query)
     {
         return $query->where('finished', 1);
-    }
-
-    public function scopeFollowingDays($query, $days)
-    {
-        return $query->where([
-            ['date', '>=' , Carbon::now()->tomorrow()->toDateString()],
-            ['date', '<', Carbon::now()->tomorrow()->addDays($days)->toDateString()]
-        ]);
     }
 }

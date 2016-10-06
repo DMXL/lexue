@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $with = ['tutorials'];
-
     /*
     |--------------------------------------------------------------------------
     | Relations

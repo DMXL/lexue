@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Student;
 
-use App\Models\Course\Order;
-use App\Models\Course\Lecture;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -23,12 +22,31 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = $this->student->orders()
-            ->where('is_lecture', 1)
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $raw = $this->student->lectures();
+        $lecturesDesc = $raw->orderByLatest()->get();
+        $lecturesAsc = $raw->orderByEarliest()->get();
 
-        return $this->frontView('wechat.orders.index', compact('orders'));
+        $upcoming = $lecturesAsc->filter(function($lecture) {
+            $startTime = $lecture->date.' '.$lecture->start;
+
+            return $startTime >= Carbon::now();
+        });
+
+        $ongoing = $lecturesDesc->filter(function($lecture) {
+            $startTime = $lecture->date.' '.$lecture->start;
+            $endTime = Carbon::createFromFormat('Y-m-d H:i:s', $startTime)->addMinutes($lecture->length);
+
+            return ($startTime < Carbon::now() && $endTime >= Carbon::now());
+        });
+
+        $finished = $lecturesDesc->filter(function($lecture) {
+            $startTime = $lecture->date.' '.$lecture->start;
+            $endTime = Carbon::createFromFormat('Y-m-d H:i:s', $startTime)->addMinutes($lecture->length);
+
+            return $endTime < Carbon::now();
+        });
+
+        return $this->frontView('wechat.orders.index', compact('upcoming', 'ongoing', 'finished'));
     }
 
     public function show()
