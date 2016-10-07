@@ -27,22 +27,15 @@ class TutorialController extends Controller
         $tutorialsAsc = $raw->orderByEarliest()->get();
 
         $upcoming = $tutorialsAsc->filter(function($tutorial) {
-            $startTime = $tutorial->date.' '.$tutorial->start;
-
-            return $startTime >= Carbon::now();
+            return $tutorial->start_time >= Carbon::now();
         });
 
         $ongoing = $tutorialsDesc->filter(function($tutorial) {
-            $startTime = $tutorial->date.' '.$tutorial->start;
-            $endTime = $tutorial->date.' '.$tutorial->timeSlot->end;
-
-            return ($startTime < Carbon::now() && $endTime >= Carbon::now());
+            return ($tutorial->start_time < Carbon::now() && $tutorial->end_time >= Carbon::now());
         });
 
         $finished = $tutorialsDesc->filter(function($tutorial) {
-            $endTime = $tutorial->date.' '.$tutorial->timeSlot->end;
-
-            return $endTime < Carbon::now();
+            return $tutorial->end_time < Carbon::now();
         });
 
         return $this->frontView('tutorials.index', compact('upcoming', 'ongoing', 'finished'));

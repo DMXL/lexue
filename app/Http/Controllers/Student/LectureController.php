@@ -6,6 +6,7 @@ use App\Events\LecturePurchased;
 use App\Http\Controllers\Controller;
 use App\Models\Course\Lecture;
 use App\Models\Course\Order;
+use Carbon\Carbon;
 
 class LectureController extends Controller
 {
@@ -23,7 +24,17 @@ class LectureController extends Controller
     {
         $lectures = Lecture::orderByLatest()->with('teacher')->get();
 
-        return $this->frontView('lectures.index', compact('lectures'));
+        $upcoming = $lectures->filter(function($lecture) {
+            return $lecture->start_time >= Carbon::now();
+        });
+
+        $ongoing = $lectures->filter(function($lecture) {
+            return ($lecture->start_time < Carbon::now() && $lecture->end_time >= Carbon::now());
+        });
+
+        $count = $ongoing->count();
+
+        return $this->frontView('lectures.index', compact('upcoming', 'ongoing', 'count'));
     }
 
     public function show($id)

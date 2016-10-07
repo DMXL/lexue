@@ -36,7 +36,7 @@ body, .bd {
     text-align: center;
 }
 
-/* Badges Style */
+/* Badges and Labels Style */
 .badge {
     font-size: 13px;
     line-height: 1;
@@ -50,40 +50,55 @@ body, .bd {
     border-radius: 0;
     color: #333;
 }
-.badge.primary {
+.label {
+    background-color: #D1DADE;
+    color: #5E5E5E;
+    font-family: 'Open Sans';
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 3px;
+    text-shadow: none;
+}
+.badge.primary,
+.label.primary {
     background: #0e90d2;
-    border-radius: 0;
     color: #fff;
 }
-.badge.secondary {
+.badge.secondary,
+.label.secondary {
     background: #3bb4f2;
-    border-radius: 0;
     color: #fff;
 }
-.badge.success {
+.badge.success,
+.label.success {
     background: #5eb95e;
-    border-radius: 0;
     color: #fff;
 }
-.badge.warning {
+.badge.warning,
+.label.warning {
     background: #f37b1d;
-    border-radius: 0;
     color: #fff;
 }
-.badge.alert {
+.badge.alert,
+.label.alert {
     background: #dd514c;
-    border-radius: 0;
     color: #fff;
 }
-.badge.dark {
+.badge.dark,
+.label.dark {
     background: #393939;
-    border-radius: 0;
     color: #fff;
 }
-.badge.grey {
+.badge.grey,
+.label.grey {
     background: #bbb;
-    border-radius: 0;
     color: #8e8e8e;
+}
+.badge.lexue,
+.label.lexue {
+    background: #00beb7;
+    color: #fff;
 }
 
 /* Awesome Icons */
@@ -255,7 +270,7 @@ body, .bd {
 }
 
 /* Lectures Index Page */
-.lectures_index .weui_panel_bd .weui_media_hd .teacher_name {
+.lectures_index .weui_panel_bd .weui_media_hd .count {
     position: absolute;
     width: 95px;
     height: 75px;
@@ -264,6 +279,10 @@ body, .bd {
     color: #fff;
     font-size: 13px;
     text-align: left;
+}
+.lectures_index .weui_panel_bd .weui_media_hd .badge.ongoing {
+    position: absolute;
+    font-size: 13px;
 }
 .lectures_index .weui_media_desc {
     display: inline-flex;
@@ -279,6 +298,13 @@ body, .bd {
     width: 100px;
     height: 75px;
     line-height: 130px;
+}
+.lectures_index .weui_navbar_item .label {
+    line-height: 12px;
+    padding: 3px 5px;
+    position: absolute;
+    margin-left: -3px;
+    margin-top: -5px;
 }
 
 /* Lectures Show Page */

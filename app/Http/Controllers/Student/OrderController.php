@@ -27,23 +27,15 @@ class OrderController extends Controller
         $lecturesAsc = $raw->orderByEarliest()->get();
 
         $upcoming = $lecturesAsc->filter(function($lecture) {
-            $startTime = $lecture->date.' '.$lecture->start;
-
-            return $startTime >= Carbon::now();
+            return $lecture->start_time >= Carbon::now();
         });
 
         $ongoing = $lecturesDesc->filter(function($lecture) {
-            $startTime = $lecture->date.' '.$lecture->start;
-            $endTime = Carbon::createFromFormat('Y-m-d H:i:s', $startTime)->addMinutes($lecture->length);
-
-            return ($startTime < Carbon::now() && $endTime >= Carbon::now());
+            return ($lecture->start_time < Carbon::now() && $lecture->end_time >= Carbon::now());
         });
 
         $finished = $lecturesDesc->filter(function($lecture) {
-            $startTime = $lecture->date.' '.$lecture->start;
-            $endTime = Carbon::createFromFormat('Y-m-d H:i:s', $startTime)->addMinutes($lecture->length);
-
-            return $endTime < Carbon::now();
+            return $lecture->end_time < Carbon::now();
         });
 
         return $this->frontView('wechat.orders.index', compact('upcoming', 'ongoing', 'finished'));

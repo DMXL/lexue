@@ -28,7 +28,9 @@
                 <div class="weui_panel weui_panel_access">
                     <div class="weui_panel_hd">我的微课 - 即将开始</div>
                     <div class="weui_panel_bd">
+
                         @include('wechat.tutorials.tutorialinfo', ['tutorials' => $upcoming, 'status' => 'primary'])
+
                     </div>
                 </div>
             </div>
@@ -37,7 +39,9 @@
                 <div class="weui_panel weui_panel_access">
                     <div class="weui_panel_hd">我的微课 - 正在进行</div>
                     <div class="weui_panel_bd">
+
                         @include('wechat.tutorials.tutorialinfo', ['tutorials' => $ongoing, 'status' => 'alert'])
+
                     </div>
                 </div>
             </div>
@@ -46,7 +50,9 @@
                 <div class="weui_panel weui_panel_access">
                     <div class="weui_panel_hd">我的微课 - 已结束</div>
                     <div class="weui_panel_bd">
+
                         @include('wechat.tutorials.tutorialinfo', ['tutorials' => $finished, 'status' => 'grey'])
+
                     </div>
                 </div>
             </div>

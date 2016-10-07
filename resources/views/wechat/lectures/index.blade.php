@@ -27,6 +27,9 @@
             </a>
             <a href="#tab2" class="weui_navbar_item">
                 直播中
+                @if($count > 0)
+                    <span class="label lexue">{{ $count }}</span>
+                @endif
             </a>
         </div>
         <div class="weui_tab_bd">
@@ -34,11 +37,7 @@
                 <div class="weui_panel weui_panel_access">
                     <div class="weui_panel_bd">
 
-                        @foreach($lectures as $lecture)
-                            @if($lecture->not_started)
-                                @include('wechat.partials.lecturebrief')
-                            @endif
-                        @endforeach
+                        @include('wechat.lectures.lectureinfo', ['lectures' => $upcoming, 'status' => 'upcoming'])
 
                     </div>
                 </div>
@@ -47,11 +46,7 @@
                 <div id="tab2" class="weui_panel weui_panel_access">
                     <div class="weui_panel_bd">
 
-                        @foreach($lectures as $lecture)
-                            @if($lecture->is_live)
-                                @include('wechat.partials.lecturebrief')
-                            @endif
-                        @endforeach
+                        @include('wechat.lectures.lectureinfo', ['lectures' => $ongoing, 'status' => 'ongoing'])
 
                     </div>
                 </div>

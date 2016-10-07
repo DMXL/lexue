@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tutorial extends Model
 {
     protected $appends = [
+        'start_time',
         'human_date_time',
         'human_time',
     ];
@@ -41,6 +42,11 @@ class Tutorial extends Model
     | Accessors
     |--------------------------------------------------------------------------
     */
+    public function getStartTimeAttribute()
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->date.' '.$this->start);
+    }
+
     public function getHumanDateTimeAttribute()
     {
         $timeSlot = $this->timeSlot;

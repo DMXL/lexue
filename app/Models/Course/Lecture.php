@@ -19,6 +19,14 @@ class Lecture extends Model implements StaplerableInterface
 {
     use EloquentTrait, SoftDeletes;
 
+    protected $appends = [
+        'start_time',
+        'end_time',
+        'date_time',
+        'arrayed_time',
+        'timestamp'
+    ];
+
     protected $fillable = [
         'name',
         'teacher_id',
@@ -30,7 +38,7 @@ class Lecture extends Model implements StaplerableInterface
         'avatar'
     ];
 
-    protected $with = ['teacher', 'orders', 'levels'];
+    protected $with = ['teacher', 'levels'];
 
     public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('avatar', [
@@ -70,12 +78,12 @@ class Lecture extends Model implements StaplerableInterface
     */
     public function getStartTimeAttribute()
     {
-        return Carbon::parse($this->date.' '.$this->start);
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->date.' '.$this->start);
     }
 
     public function getEndTimeAttribute()
     {
-        return $this->start_time->copy()->addMinute($this->length);
+        return $this->start_time->addMinute($this->length);
     }
 
     public function getDateTimeAttribute()
@@ -92,20 +100,6 @@ class Lecture extends Model implements StaplerableInterface
     public function getTimestampAttribute()
     {
         return $this->start_time->timestamp;
-    }
-
-    public function getIsLiveAttribute()
-    {
-        if (Carbon::now()->diffInMinutes($this->start_time, false) <= 0 && Carbon::now()->diffInMinutes($this->end_time, false) >= 0)
-            return true;
-        return false;
-    }
-
-    public function getNotStartedAttribute()
-    {
-        if (Carbon::now()->diffInMinutes($this->start_time, false) > 0)
-            return true;
-        return false;
     }
 
     /*
