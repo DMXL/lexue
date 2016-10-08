@@ -71,12 +71,14 @@ class OrderController extends Controller
             );
         }
 
+        dd($tradeInfo);
+
         $attributes = \WechatCashier::prepay($tradeInfo);
 
         $apiList = array('chooseWXPay');
         $wxConfigs = \WechatCashier::config($apiList);
 
-        return $this->frontView('wechat.orders.pay', compact('order', 'attributes', 'wxConfigs', 'tradeInfo'));
+        return $this->frontView('wechat.orders.pay', compact('order', 'attributes', 'wxConfigs'));
     }
 
     public function displayResult($id)
