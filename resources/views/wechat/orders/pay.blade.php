@@ -55,7 +55,7 @@
                 signType: "{!! $attributes['signType'] !!}",
                 paySign: "{!! $attributes['paySign'] !!}", // 支付签名
                 success: function (res) {
-                    if(res.errsg == "chooseWXPay:ok")
+                    if(res.errMsg == "chooseWXPay:ok")
                     {
                         document.location.href = "{!! route('m.students::orders.result', $order->id) !!}";
                     }
