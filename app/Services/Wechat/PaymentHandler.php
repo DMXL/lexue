@@ -49,7 +49,7 @@ class PaymentHandler
         if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
             $prepayId = $result->prepay_id;
         }
-        else return false;
+        else return $result->return_msg;
 
         return $this->wechat->payment->configForPayment($prepayId);
     }
