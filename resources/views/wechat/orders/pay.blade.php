@@ -48,10 +48,12 @@
 @section('js')
     <script>
         $('#pay').click(function() {
+            console.log({!! json_encode($attributes) !!});
+
             wx.config({!! $configs !!});
 
             wx.chooseWXPay({
-                timeStamp: "{!! $attributes['timetamp'] !!}",
+                timeStamp: "{!! $attributes['timeStamp'] !!}",
                 nonceStr: "{!! $attributes['nonceStr'] !!}",
                 package: "{!! $attributes['package'] !!}",
                 signType: "{!! $attributes['signType'] !!}",
