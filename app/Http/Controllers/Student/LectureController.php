@@ -19,7 +19,7 @@ class LectureController extends Controller
     public function __construct()
     {
         $this->student = authUser();
-        $this->purchased = $this->student->lectures()->pluck('lectures.id')->toArray();
+        $this->purchased = $this->student->lectures()->pluck('orders.paid', 'lectures.id')->toArray();
     }
 
     public function index()
@@ -46,7 +46,11 @@ class LectureController extends Controller
     public function show($id)
     {
         $lecture = Lecture::find($id);
-        $isPurchased = in_array($id, $this->purchased);
+        $isPurchased = null;
+
+        if(array_key_exists($id, $this->purchased))
+            $isPurchased = $this->purchased[$id];
+
 
         return $this->frontView('wechat.lectures.show', compact('lecture', 'isPurchased'));
     }
