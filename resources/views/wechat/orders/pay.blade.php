@@ -48,8 +48,6 @@
 @section('js')
     <script>
         $('#pay').click(function() {
-
-
             wx.config({!! $configs !!});
 
             wx.chooseWXPay({
@@ -59,7 +57,7 @@
                 signType: "{!! $attributes['signType'] !!}",
                 paySign: "{!! $attributes['paySign'] !!}", // 支付签名
                 success: function (res) {
-                    console.log(res['get_brand_wcpay_request']);
+                    console.log(res.err_msg);
                 }
             });
         });
