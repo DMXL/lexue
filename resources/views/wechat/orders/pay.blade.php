@@ -55,10 +55,14 @@
                 signType: "{!! $attributes['signType'] !!}",
                 paySign: "{!! $attributes['paySign'] !!}", // 支付签名
                 success: function (res) {
+                    console.log(res.err_msg);
+
                     if(res.err_msg == "get_brand_wcpay_request：ok")
                     {
+                        console.log('payment succeeded.');
                         document.location.href = "{!! route('m.students::orders.result', $order->id) !!}";
                     }
+                            /*
                     else if(res.err_msg == "get_brand_wcpay_request：cancel")
                     {
 
@@ -66,7 +70,7 @@
                     else
                     {
 
-                    }
+                    } */
                 }
             });
         });
