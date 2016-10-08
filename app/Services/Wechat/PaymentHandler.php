@@ -51,7 +51,7 @@ class PaymentHandler
         }
         else return $result->return_msg;
 
-        return $this->wechat->payment->configForPayment($prepayId);
+        return $this->wechat->payment->configForJSSDKPayment($prepayId);
     }
 
     /**
