@@ -48,8 +48,20 @@
 @section('js')
     <script>
         $('#pay').click(function() {
-            console.log({!! json_encode($attributes) !!});
 
+
+            wx.config({!! $configs !!});
+
+            wx.chooseWXPay({
+                timestamp: "{!! $attributes['timestamp'] !!}",
+                nonceStr: "{!! $attributes['nonceStr'] !!}",
+                package: "{!! $attributes['package'] !!}",
+                signType: "{!! $attributes['signType'] !!}",
+                paySign: "{!! $attributes['paySign'] !!}", // 支付签名
+                success: function (res) {
+                    console.log(res['get_brand_wcpay_request']);
+                }
+            });
         });
     </script>
 @endsection
