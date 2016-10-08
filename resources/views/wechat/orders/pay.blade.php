@@ -55,10 +55,7 @@
                 signType: "{!! $attributes['signType'] !!}",
                 paySign: "{!! $attributes['paySign'] !!}", // 支付签名
                 success: function (res) {
-                    for(var key in res)
-                        alert(res[key]);
-
-                    if(res.err_msg == "get_brand_wcpay_request：ok")
+                    if(res.errsg == "chooseWXPay:ok")
                     {
                         document.location.href = "{!! route('m.students::orders.result', $order->id) !!}";
                     }
