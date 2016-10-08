@@ -48,8 +48,6 @@
 @section('js')
     <script>
         $('#pay').click(function() {
-            wx.config({!! $configs !!});
-
             wx.chooseWXPay({
                 timestamp: "{!! $attributes['timestamp'] !!}",
                 nonceStr: "{!! $attributes['nonceStr'] !!}",

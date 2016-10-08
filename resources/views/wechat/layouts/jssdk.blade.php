@@ -33,6 +33,9 @@
 <script src="{{ asset('wechat/js/jquery-weui.js') }}"></script>
 <script src="{{ asset('wechat/js/lewe.js') }}"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    wx.config({!! $wxConfigs !!});
+</script>
 
 <!-- Ajax Setup -->
 <!--

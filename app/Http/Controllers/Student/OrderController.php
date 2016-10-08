@@ -64,9 +64,9 @@ class OrderController extends Controller
         $attributes = \WechatCashier::prepay($tradeInfo);
 
         $apiList = array('chooseWXPay');
-        $configs = \WechatCashier::config($apiList);
+        $wxConfigs = \WechatCashier::config($apiList);
 
-        return $this->frontView('wechat.orders.pay', compact('order', 'attributes', 'configs'));
+        return $this->frontView('wechat.orders.pay', compact('order', 'attributes', 'wxConfigs'));
     }
 
     public function handleLecturePaymentCallback()
