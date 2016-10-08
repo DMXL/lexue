@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use App\Services\PageGenerator;
 use App\Services\Duobeiyun\DuobeiyunApi;
-use App\Services\Wechat\PushNotification;
+use App\Services\Wechat\NotificationPusher;
+use App\Services\Wechat\PaymentHandler;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -41,9 +42,14 @@ class AppServiceProvider extends ServiceProvider
             return new PageGenerator();
         });
 
-        //
+        // Wechat Notification Pusher
         $this->app->singleton('wechat.pusher', function() {
-            return new PushNotification();
+            return new NotificationPusher();
+        });
+
+        // Wechat Payment Handler
+        $this->app->singleton('wechat.cashier', function() {
+            return new PaymentHandler();
         });
     }
 }

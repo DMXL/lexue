@@ -9,7 +9,7 @@
 namespace App\Services\Wechat;
 
 
-class PushNotification
+class NotificationPusher
 {
     /**
      * @var \EasyWeChat\Foundation\Application
@@ -17,7 +17,7 @@ class PushNotification
     private $wechat;
 
     /**
-     * PushNotification constructor.
+     * NotificationPusher constructor.
      */
     public function __construct()
     {

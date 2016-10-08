@@ -190,6 +190,12 @@ a {
   padding: 0 .75em;
   display: inline-block;
 }
+.weui_btn.weui_btn_m {
+  line-height: 2;
+  font-size: 15px;
+  padding: 0 .75em;
+  display: inline-block;
+}
 button.weui_btn,
 input.weui_btn {
   width: 100%;

@@ -11,6 +11,7 @@ use Carbon\Carbon;
 class LectureController extends Controller
 {
     private $student;
+    private $purchased;
 
     /**
      * LectureController constructor.
@@ -18,11 +19,14 @@ class LectureController extends Controller
     public function __construct()
     {
         $this->student = authUser();
+        $this->purchased = $this->student->lectures()->pluck('lectures.id')->toArray();
     }
 
     public function index()
     {
-        $lectures = Lecture::orderByLatest()->with('teacher')->get();
+        $lectures = Lecture::orderByEarliest()
+            ->with('teacher')
+            ->get();
 
         $upcoming = $lectures->filter(function($lecture) {
             return $lecture->start_time >= Carbon::now();
@@ -34,14 +38,17 @@ class LectureController extends Controller
 
         $count = $ongoing->count();
 
-        return $this->frontView('lectures.index', compact('upcoming', 'ongoing', 'count'));
+        $purchased = $this->purchased;
+
+        return $this->frontView('lectures.index', compact('upcoming', 'ongoing', 'count', 'purchased'));
     }
 
     public function show($id)
     {
         $lecture = Lecture::find($id);
+        $isPurchased = in_array($id, $this->purchased);
 
-        return $this->frontView('wechat.lectures.show', compact('lecture'));
+        return $this->frontView('wechat.lectures.show', compact('lecture', 'isPurchased'));
     }
 
     public function book($lectureId)
@@ -61,7 +68,7 @@ class LectureController extends Controller
                 $order->lecture_id = $lecture->id;
                 $order->is_lecture = 1; // @TODO 考虑删除
                 $order->total = $lecture->price;
-                $order->paid = 1; // @TODO 支付API对接完毕后删除此处
+                $order->paid = 0; // @TODO 支付API对接完毕后删除此处
                 $order->save();
 
                 return $order->id;
@@ -72,11 +79,11 @@ class LectureController extends Controller
             return back();
         }
 
-        $order = Order::find($orderId);
+        return redirect()->route('m.students::orders.pay', $orderId);
 
-        event(new LecturePurchased($order));
-        flash()->success('课程添加成功');
+        // event(new LecturePurchased($order));
+        // flash()->success('课程添加成功');
 
-        return $this->frontRedirect('m.students::orders.index');
+        // return $this->frontRedirect('m.students::orders.index');
     }
 }

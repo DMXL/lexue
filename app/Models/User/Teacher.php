@@ -45,8 +45,6 @@ class Teacher extends Authenticatable implements StaplerableInterface
         'price'
     ];
 
-    private $lectureUnavailabilities;
-
     private $tutorialUnavailabilities;
 
     private $offTimeUnavailabilities;
@@ -158,25 +156,6 @@ class Teacher extends Authenticatable implements StaplerableInterface
     | Computed properties
     |--------------------------------------------------------------------------
     */
-
-    public function getLectureUnavailabilities()
-    {
-        if (isset($this->lectureUnavailabilities)) {
-            return $this->lectureUnavailabilities;
-        }
-
-        $unavailabilities = [];
-        $lectures = $this->lectures()->incoming()->get();
-
-        foreach ($lectures as $lecture) {
-            $unavailabilities[] = $lecture->date . '--' . $lecture->time_slot_id;
-        }
-
-        $this->lectureUnavailabilities = $unavailabilities;
-
-        return $unavailabilities;
-    }
-
     public function getTutorialUnavailabilities()
     {
         if (isset($this->tutorialUnavailabilities)) {
@@ -190,7 +169,7 @@ class Teacher extends Authenticatable implements StaplerableInterface
             $unavailabilities[] = $tutorial->date . '--' . $tutorial->time_slot_id;
         }
 
-        $this->lectureUnavailabilities = $unavailabilities;
+        $this->tutorialUnavailabilities = $unavailabilities;
 
         return $unavailabilities;
     }
@@ -224,7 +203,6 @@ class Teacher extends Authenticatable implements StaplerableInterface
     public function getUnavailabilities()
     {
         return array_merge(
-            $this->getLectureUnavailabilities(),
             $this->getOffTimeUnavailabilities(),
             $this->getTutorialUnavailabilities()
         );
@@ -232,7 +210,6 @@ class Teacher extends Authenticatable implements StaplerableInterface
 
     public function getTimetable()
     {
-        $lectureUnavailabilities = $this->getLectureUnavailabilities();
         $tutorialUnavailabilities = $this->getTutorialUnavailabilities();
         $offTimeUnavailabilities = $this->getOffTimeUnavailabilities();
         $unavailabilities = $this->getUnavailabilities();
@@ -269,7 +246,6 @@ class Teacher extends Authenticatable implements StaplerableInterface
                     'date' => $date,
                     'range' => $range,
                     'disabled' => in_array($value, $unavailabilities),
-                    'lecture' => in_array($value, $lectureUnavailabilities),
                     'offtime' => in_array($value, $offTimeUnavailabilities),
                     'tutorial' => in_array($value, $tutorialUnavailabilities),
                 ];

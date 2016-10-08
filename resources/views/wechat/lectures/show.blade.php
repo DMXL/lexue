@@ -36,13 +36,20 @@
                             </td>
                             <td style="text-align: right;">
                                 <span class="price">￥{{ number_format($lecture->price, 2) }}</span><br />
-                                <span id="purchase" class="weui_btn weui_btn_mini weui_btn_primary">购买课时</span>
+                                @if($isPurchased)
+                                    <span class="weui_btn weui_btn_disabled weui_btn_m weui_btn_primary">已购买</span>
+                                @else
+                                    <span id="purchase" class="weui_btn weui_btn_m weui_btn_primary">购买课时</span>
+                                @endif
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="weui_panel_bd">
+                @if($isPurchased)
+                    <a href="{{ route('m.students::orders.index') }}" class="weui_panel_ft">查看已购买公开课</a>
+                @endif
                 <a href="{{ route('m.students::teachers.show', $lecture->teacher->id) }}" class="weui_media_box weui_media_appmsg">
                     <div class="weui_media_hd">
                         <img class="weui_media_appmsg_thumb" src="{{ $lecture->teacher->avatar->url('thumb') }}" alt="{{ $lecture->teacher->name }}">

@@ -242,6 +242,7 @@ return [
         'Duobeiyun' => App\Facades\Duobeiyun::class,
         'Page' => \App\Facades\Page::class,
         'WechatPusher' => \App\Facades\WechatPusher::class,
+        'WechatCashier' => \App\Facades\WechatCashier::class,
 
         /*
          * Third party

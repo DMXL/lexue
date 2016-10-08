@@ -95,6 +95,11 @@ body, .bd {
     background: #bbb;
     color: #8e8e8e;
 }
+.badge.grey2,
+.label.grey2 {
+    background: #bbb;
+    color: #fff;
+}
 .badge.lexue,
 .label.lexue {
     background: #00beb7;
@@ -358,4 +363,29 @@ body, .bd {
 .orders_index .weui_tabbar {
     position: fixed;
     z-index: 99;
+}
+
+/* Orders Pay Page */
+.weui_msg.orders_pay  {
+    padding-top: 20px;
+}
+.orders_pay .weui_text_area {
+    margin-bottom: 20px;
+}
+.orders_pay .weui_msg_desc {
+    color: #222;
+}
+.orders_pay .weui_msg_title {
+    font-size: 36px;
+    line-height: 40px;
+}
+.orders_pay .weui_cells {
+    margin-top: 15px;
+}
+.orders_pay .weui_cell {
+    font-size: 14px;
+    padding: 13px 15px;
+}
+.orders_pay .weui_cell .weui_cell_primary {
+    text-align: left;
 }
