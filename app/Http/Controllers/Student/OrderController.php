@@ -62,8 +62,8 @@ class OrderController extends Controller
         if($order->is_lecture == 1) {
             $tradeInfo = array(
                 'trade_type'       => 'JSAPI',
-                'body'             => '乐学云直播课 '.$order->lecture()->name,
-                'detail'           => $order->lecture()->start_time.' '.$order->lecture()->length.' 分钟',
+                'body'             => '乐学云直播课 '.$order->lecture->name,
+                'detail'           => $order->lecture->start_time.' '.$order->lecture->length.' 分钟',
                 'out_trade_no'     => generateTradeNo(),
                 'total_fee'        => $order->total * 100,
                 'notify_url'       => route('m.students::orders.callback.lecture'), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
