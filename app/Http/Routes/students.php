@@ -30,5 +30,5 @@ Route::group(['middleware' => 'auth:students'], function(){
     Route::resource('orders', 'OrderController', ['only' => ['show', 'index']]);
     Route::get('orders/pay/{id}', ['as' => 'orders.pay', 'uses' => 'OrderController@pay'] );
     Route::get('orders/result/{id}', ['as' => 'orders.result', 'uses' => 'OrderController@displayResult'] );
-    Route::resource('orders/callback/lecture', ['as' => 'orders.callback.lecture', 'uses' => 'OrderController@handleLecturePaymentCallback']);
+    Route::any('orders/callback/lecture', ['as' => 'orders.callback.lecture', 'uses' => 'OrderController@handleLecturePaymentCallback']);
 });
