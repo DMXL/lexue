@@ -71,6 +71,8 @@ class OrderController extends Controller
             );
         }
 
+        console_log($tradeInfo);
+
         $attributes = \WechatCashier::prepay($tradeInfo);
 
         $apiList = array('chooseWXPay');
