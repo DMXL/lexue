@@ -57,7 +57,7 @@
                 success: function (res) {
                     if(res.err_msg == "get_brand_wcpay_request：ok")
                     {
-
+                        document.location.href = "{!! route('m.students::orders.result', $order->id) !!}";
                     }
                     else if(res.err_msg == "get_brand_wcpay_request：cancel")
                     {

@@ -20,7 +20,7 @@
  */
 namespace App\Services\Wechat;
 
-use EasyWeChat\Payment\Order;
+use EasyWeChat\Payment\Order as WechatOrder;
 
 class PaymentHandler
 {
@@ -42,7 +42,7 @@ class PaymentHandler
      */
     public function prepay($tradeInfo)
     {
-        $order = new Order($tradeInfo);
+        $order = new WechatOrder($tradeInfo);
 
         $result = $this->wechat->payment->prepare($order);
 

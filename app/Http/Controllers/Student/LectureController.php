@@ -72,7 +72,7 @@ class LectureController extends Controller
                 $order->lecture_id = $lecture->id;
                 $order->is_lecture = 1; // @TODO 考虑删除
                 $order->total = $lecture->price;
-                $order->paid = 0; // @TODO 支付API对接完毕后删除此处
+                $order->paid = 0;
                 $order->save();
 
                 return $order->id;
@@ -84,10 +84,5 @@ class LectureController extends Controller
         }
 
         return redirect()->route('m.students::orders.pay', $orderId);
-
-        // event(new LecturePurchased($order));
-        // flash()->success('课程添加成功');
-
-        // return $this->frontRedirect('m.students::orders.index');
     }
 }

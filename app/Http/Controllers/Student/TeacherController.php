@@ -96,7 +96,7 @@ class TeacherController extends Controller
                 $order->teacher_id = $teacher->id;
                 // TODO calculate based on lecture price with teacher unit price as a fallback
                 $order->total = count($bookTimes) * $teacher->unit_price;
-                $order->paid = 1; // @TODO 支付API对接完毕后删除此处
+                $order->paid = 0;
                 $order->save();
 
                 /*
@@ -136,7 +136,7 @@ class TeacherController extends Controller
         $order = Order::find($orderId);
 
         event(new TutorialPurchased($order));
-        flash()->success('课程添加成功');
+        flash()->success('课程购买成功');
 
         return $this->frontRedirect('m.students::tutorials.index');
     }
