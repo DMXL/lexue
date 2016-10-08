@@ -32,3 +32,6 @@ Route::group(['middleware' => 'auth:students'], function(){
     Route::get('orders/result/{id}', ['as' => 'orders.result', 'uses' => 'OrderController@displayResult'] );
     Route::any('orders/callback/lecture', ['as' => 'orders.callback.lecture', 'uses' => 'OrderController@handleLecturePaymentCallback']);
 });
+Route::any('{all}', function () {
+    \Log::info('Callback request at '.Request::url());
+})->where(['all' => '.*']);
