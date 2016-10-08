@@ -28,6 +28,6 @@ Route::group(['middleware' => 'auth:students'], function(){
     Route::resource('tutorials', 'TutorialController', ['only' => ['show','index']]);
 
     Route::resource('orders', 'OrderController', ['only' => ['show', 'index']]);
-    Route::get('orders/{id}/pay', ['as' => 'orders.pay', 'uses' => 'OrderController@pay'] );
+    Route::get('orders/pay/{id}', ['as' => 'orders.pay', 'uses' => 'OrderController@pay'] );
     Route::get('orders/callback/lecture', ['as' => 'orders.callback.lecture', 'uses' => 'OrderController@handleLecturePaymentCallback']);
 });
