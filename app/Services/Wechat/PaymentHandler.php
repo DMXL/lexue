@@ -62,6 +62,6 @@ class PaymentHandler
      */
     public function config($apiList)
     {
-        return $this->wechat->js->config($apiList, true);
+        return $this->wechat->js->config($apiList);
     }
 }
