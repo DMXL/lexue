@@ -49,11 +49,11 @@
     <script>
         $('#pay').click(function() {
             wx.chooseWXPay({
-                timeStamp: {!! $configs['timetamp'] !!},
-                nonceStr: {!! $configs['nonceStr'] !!},
-                package: {!! $configs['package'] !!},
-                signType: {!! $configs['signType'] !!},
-                paySign: {!! $configs['paySign'] !!}, // 支付签名
+                timeStamp: "{!! $configs['timetamp'] !!}",
+                nonceStr: "{!! $configs['nonceStr'] !!}",
+                package: "{!! $configs['package'] !!}",
+                signType: "{!! $configs['signType'] !!}",
+                paySign: "{!! $configs['paySign'] !!}", // 支付签名
                 success: function (res) {
                     alert(res['get_brand_wcpay_request']);
                 }
