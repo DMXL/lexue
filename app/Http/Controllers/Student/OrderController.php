@@ -64,7 +64,7 @@ class OrderController extends Controller
                 'trade_type'       => 'JSAPI',
                 'body'             => '乐学云直播课 '.$order->lecture->name,
                 'detail'           => $order->lecture->start_time.' '.$order->lecture->length.' 分钟',
-                'out_trade_no'     => generateTradeNo(),
+                'out_trade_no'     => $order->trade_no,
                 'total_fee'        => $order->total * 100,
                 'notify_url'       => route('m.students::orders.callback.lecture'), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
                 'openid'           => $this->student->wechat_id
@@ -76,7 +76,7 @@ class OrderController extends Controller
         $apiList = array('chooseWXPay');
         $wxConfigs = \WechatCashier::config($apiList);
 
-        return $this->frontView('wechat.orders.pay', compact('order', 'attributes', 'wxConfigs'));
+        return $this->frontView('wechat.orders.pay', compact('order', 'attributes', 'wxConfigs', 'tradeInfo'));
     }
 
     public function displayResult($id)

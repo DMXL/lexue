@@ -67,6 +67,7 @@ class LectureController extends Controller
                  * create order
                  */
                 $order = new Order();
+                $order->trade_no = generateTradeNo();
                 $order->student_id = $student->id;
                 $order->teacher_id = $lecture->teacher->id;
                 $order->lecture_id = $lecture->id;
