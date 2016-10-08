@@ -60,9 +60,12 @@ class OrderController extends Controller
             'total_fee'        => 0.01,
             'notify_url'       => route('m.students::orders.callback.lecture'), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
         );
-        $configs = \WechatCashier::prepay($tradeInfo);
+        $attributes = \WechatCashier::prepay($tradeInfo);
 
-        return $this->frontView('wechat.orders.pay', compact('order', 'configs'));
+        $apiList = array('chooseWXPay');
+        $configs = \WechatCashier::config($apiList);
+
+        return $this->frontView('wechat.orders.pay', compact('order', 'attributes', 'configs'));
     }
 
     public function handleLecturePaymentCallback()

@@ -17,7 +17,7 @@
  * Copyright 2016 Team Sudo. All rights reserved.
  *
 -->
-@extends('wechat.layouts.blank')
+@extends('wechat.layouts.jssdk')
 
 @section('content')
 
@@ -48,14 +48,16 @@
 @section('js')
     <script>
         $('#pay').click(function() {
+            wx.config({!! $configs !!});
+
             wx.chooseWXPay({
-                timeStamp: "{!! $configs['timetamp'] !!}",
-                nonceStr: "{!! $configs['nonceStr'] !!}",
-                package: "{!! $configs['package'] !!}",
-                signType: "{!! $configs['signType'] !!}",
-                paySign: "{!! $configs['paySign'] !!}", // 支付签名
+                timeStamp: "{!! $attributes['timetamp'] !!}",
+                nonceStr: "{!! $attributes['nonceStr'] !!}",
+                package: "{!! $attributes['package'] !!}",
+                signType: "{!! $attributes['signType'] !!}",
+                paySign: "{!! $attributes['paySign'] !!}", // 支付签名
                 success: function (res) {
-                    alert(res['get_brand_wcpay_request']);
+                    console.log(res['get_brand_wcpay_request']);
                 }
             });
         });

@@ -29,20 +29,13 @@ class PaymentHandler
      */
     private $wechat;
 
-    /**
-     * @var \EasyWeChat\Payment\Payment
-     */
-    private $payment;
-
     public function __construct()
     {
         $this->wechat = app('wechat');
-
-        $this->payment = $this->wechat->payment;
     }
 
     /**
-     * Prepare to get local payment configs.
+     * Prepare to get local payment attributes.
      *
      * @param $tradeInfo
      * @return bool|mixed
@@ -51,13 +44,24 @@ class PaymentHandler
     {
         $order = new Order($tradeInfo);
 
-        $result = $this->payment->prepare($order);
+        $result = $this->wechat->payment->prepare($order);
 
         if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
             $prepayId = $result->prepay_id;
         }
         else return false;
 
-        return $this->payment->configForPayment($prepayId);
+        return $this->wechat->payment->configForPayment($prepayId);
+    }
+
+    /**
+     * Config Wechat js sdk.
+     *
+     * @param $apiList
+     * @return bool|mixed
+     */
+    public function config($apiList)
+    {
+        return $this->wechat->js->config($apiList, true);
     }
 }
