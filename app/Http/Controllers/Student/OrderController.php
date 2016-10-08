@@ -83,7 +83,7 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
 
-        return $this->frontView('wechat.orders.index', compact('order'));
+        return $this->frontView('wechat.orders.result', compact('order'));
     }
 
     /**
