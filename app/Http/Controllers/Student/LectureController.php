@@ -40,7 +40,7 @@ class LectureController extends Controller
 
         $purchased = $this->purchased;
 
-        return $this->frontView('lectures.index', compact('upcoming', 'ongoing', 'count', 'purchased'));
+        return $this->frontView('wechat.lectures.index', compact('upcoming', 'ongoing', 'count', 'purchased'));
     }
 
     public function show($id)
