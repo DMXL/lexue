@@ -35,8 +35,12 @@
             <h4 class="weui_media_title">{{ $lecture->name }}</h4>
             <p>{{ Carbon::parse($lecture->date)->format('Y年n月j日') }} {{ $lecture->start }}</p>
             <span class="badge success">￥{{ number_format($lecture->price, 2) }}</span>
-            @if(in_array($lecture->id, $purchased))
-                <span class="badge grey2">已购买</span>
+            @if(array_key_exists($lecture->id, $purchased))
+                @if($purchased[$lecture->id] == 1)
+                    <span class="badge grey2">已购买</span>
+                @else
+                    <span class="badge grey2">已下单</span>
+                @endif
             @endif
 
         </div>

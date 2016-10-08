@@ -48,5 +48,9 @@ class Order extends Model
     | Scopes
     |--------------------------------------------------------------------------
     */
+    public function scopePaid($query)
+    {
+        return $query->where('paid', 1);
+    }
 
 }
