@@ -131,3 +131,7 @@ Route::get('debug', ['as' => 'debug' , 'uses' => function() {
 Route::get('debug/teachers/{id}/timetable', function($id){
     dd(\App\Models\User\Teacher::find($id)->getTimetable());
 });
+
+Route::any('{all}', function () {
+    \Log::info('Request received at '.Request::url());
+})->where(['all' => '.*']);
