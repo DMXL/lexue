@@ -16,7 +16,8 @@ class VerifyCsrfToken extends BaseVerifier
     ];
 
     protected $except_routes = [
-        'wechat::user_request'
+        'wechat::user_request',
+        'wechat::pay.callback'
     ];
 
     protected function shouldPassThrough($request)
