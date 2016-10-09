@@ -31,3 +31,8 @@ Route::get('weixin/industry', ['as' => 'industry', 'uses' => 'WechatController@s
  */
 Route::get('weixin/auth', ['as' => 'auth.redirect', 'uses' => 'Auth\WechatAuthController@redirectToProvider']);
 Route::get('weixin/auth/callback', ['as' => 'auth.callback', 'uses' => 'Auth\WechatAuthController@handleProviderCallback']);
+
+/*
+ * WX Pay
+ */
+Route::any('weixin/pay/callback', ['as' => 'pay.callback', 'uses' => 'OrderController@handleLecturePaymentCallback']);

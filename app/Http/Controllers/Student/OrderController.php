@@ -66,7 +66,7 @@ class OrderController extends Controller
                 'detail'           => $order->lecture->start_time.' '.$order->lecture->length.' 分钟',
                 'out_trade_no'     => $order->trade_no,
                 'total_fee'        => $order->total * 100,
-                'notify_url'       => route('m.students::orders.callback.lecture'), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+                'notify_url'       => route('wechat::pay.callback'), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
                 'openid'           => $this->student->wechat_id
             );
         }
