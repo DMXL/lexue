@@ -35,4 +35,4 @@ Route::get('weixin/auth/callback', ['as' => 'auth.callback', 'uses' => 'Auth\Wec
 /*
  * WX Pay
  */
-Route::any('weixin/pay/callback', ['as' => 'pay.callback', 'uses' => 'OrderController@handleLecturePaymentCallback']);
+Route::any('weixin/pay/callback', ['as' => 'pay.callback', 'uses' => 'Student\OrderController@handleLecturePaymentCallback']);
