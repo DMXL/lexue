@@ -51,7 +51,6 @@ class LectureController extends Controller
         if(array_key_exists($id, $this->purchased))
             $isPurchased = $this->purchased[$id];
 
-
         return $this->frontView('wechat.lectures.show', compact('lecture', 'isPurchased'));
     }
 
@@ -85,5 +84,19 @@ class LectureController extends Controller
         }
 
         return redirect()->route('m.students::orders.pay', $orderId);
+    }
+
+    public function showRecords()
+    {
+        $records = Lecture::orderByLatest()
+            ->with('teacher')
+            ->get()
+            ->filter(function($lecture) {
+                return $lecture->end_time < Carbon::now();
+            });
+
+        $purchased = $this->purchased;
+
+        return $this->frontView('wechat.lectures.records', compact('records', 'purchased'));
     }
 }

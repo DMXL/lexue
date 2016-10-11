@@ -60,6 +60,9 @@ body, .bd {
     border-radius: 3px;
     text-shadow: none;
 }
+.badge.round {
+    border-radius: 3px;
+}
 .badge.primary,
 .label.primary {
     background: #0e90d2;
@@ -363,6 +366,13 @@ body, .bd {
 .orders_index .weui_tabbar {
     position: fixed;
     z-index: 99;
+}
+.orders_index .inline {
+    display: inline-block;
+    vertical-align: middle;
+}
+.orders_index .badge.round {
+    margin-left: 10px;
 }
 
 /* Orders Pay Page */

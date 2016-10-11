@@ -51,7 +51,7 @@
                     <div class="weui_panel_hd">我的公开课 - 已结束</div>
                     <div class="weui_panel_bd">
 
-                        @include('wechat.orders.lectureinfo', ['lectures' => $finished, 'status' => 'grey'])
+                        @include('wechat.orders.recordinfo', ['lectures' => $finished])
 
                     </div>
                 </div>

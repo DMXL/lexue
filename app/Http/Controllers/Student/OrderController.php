@@ -69,6 +69,16 @@ class OrderController extends Controller
                 'notify_url'       => route('wechat::pay.callback'), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
                 'openid'           => $this->student->wechat_id
             );
+        } else {
+            $tradeInfo = array(
+                'trade_type'       => 'JSAPI',
+                'body'             => '乐学云直播课 '.$order->lecture->name,
+                'detail'           => $order->lecture->start_time.' '.$order->lecture->length.' 分钟',
+                'out_trade_no'     => $order->trade_no,
+                'total_fee'        => $order->total * 100,
+                'notify_url'       => route('wechat::pay.callback'), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+                'openid'           => $this->student->wechat_id
+            );
         }
 
         $attributes = \WechatCashier::prepay($tradeInfo);
@@ -102,7 +112,7 @@ class OrderController extends Controller
 
             if($successful) {
                 $order->transaction_id = $notify->transaction_id;
-                $order->paid_at = time();
+                $order->paid_at = Carbon::now();
                 $order->paid = 1;
 
                 event(new LecturePurchased($order));

@@ -20,14 +20,15 @@ Route::group(['middleware' => 'auth:students'], function(){
 
     Route::get('profile', ['as' => 'profile.get', 'uses' => 'MainController@profile']);
 
-    Route::post('teachers/{id}/book', ['as' => 'teachers.book', 'uses' => 'TeacherController@book'] );
+    Route::post('teachers/{id}/book', ['as' => 'teachers.book', 'uses' => 'TeacherController@book']);
 
+    Route::get('lectures/records', ['as' => 'lectures.records', 'uses' => 'LectureController@showRecords']);
     Route::resource('lectures', 'LectureController', ['only' => ['show','index']]);
-    Route::post('lectures/{id}/book', ['as' => 'lectures.book', 'uses' => 'LectureController@book'] );
+    Route::post('lectures/{id}/book', ['as' => 'lectures.book', 'uses' => 'LectureController@book']);
 
-    Route::resource('tutorials', 'TutorialController', ['only' => ['show','index']]);
+    Route::resource('tutorials', 'TutorialController', ['only' => ['show', 'index']]);
 
     Route::resource('orders', 'OrderController', ['only' => ['show', 'index']]);
-    Route::get('orders/pay/{id}', ['as' => 'orders.pay', 'uses' => 'OrderController@pay'] );
-    Route::get('orders/result/{id}', ['as' => 'orders.result', 'uses' => 'OrderController@displayResult'] );
+    Route::get('orders/pay/{id}', ['as' => 'orders.pay', 'uses' => 'OrderController@pay']);
+    Route::get('orders/result/{id}', ['as' => 'orders.result', 'uses' => 'OrderController@displayResult']);
 });
