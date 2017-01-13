@@ -111,7 +111,7 @@ class TeacherController extends Controller
         /** @var \App\Models\User\Teacher $teacher */
         $teacher = Teacher::findOrFail($id);
 
-        $teacher->avatar = $request->file('avatar')->store('avatars');
+        $teacher->avatar = $request->file('avatar');
         $teacher->save();
 
         return 1;
