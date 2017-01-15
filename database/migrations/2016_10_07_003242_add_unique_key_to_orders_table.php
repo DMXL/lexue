@@ -25,8 +25,8 @@ class AddUniqueKeyToOrdersTable extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->dropForeign('students_student_id_foreign');
-            $table->dropForeign('lectures_lecture_id_foreign');
+            $table->dropForeign('orders_student_id_foreign');
+            $table->dropForeign('orders_lecture_id_foreign');
             $table->dropUnique(['student_id', 'lecture_id']);
         });
     }
