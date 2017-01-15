@@ -18,11 +18,21 @@ class DatabaseSeeder extends Seeder
          */
         if (\App::environment() == 'production') {
             $this->seeders = [
-                Local\LevelsTableSeeder::class,
+                Local\AdminsTableSeeder::class,
             ];
         } else if (\App::environment() == 'staging') {
             $this->seeders = [
-                Local\LevelsTableSeeder::class,
+                Local\AdminsTableSeeder::class,
+                Staging\TeachersTableSeeder::class,
+
+                Staging\LevelsTableSeeder::class,
+                Staging\LevelTeacherTableSeeder::class,
+
+                Staging\LabelsTableSeeder::class,
+                Staging\LabelTeacherTableSeeder::class,
+
+                Staging\TimeslotsTableSeeder::class,
+                Staging\TeacherTimeSlotTableSeeder::class,
             ];
         } else {
             $this->seeders = [
@@ -55,13 +65,6 @@ class DatabaseSeeder extends Seeder
     {
         foreach ($this->seeders as $seeder) {
             $this->call($seeder);
-            $this->call(TeachersTableSeeder::class);
-        $this->call(TimeSlotsTableSeeder::class);
-        $this->call(TeacherTimeSlotTableSeeder::class);
-        $this->call(LevelsTableSeeder::class);
-        $this->call(LabelsTableSeeder::class);
-        $this->call(LevelTeacherTableSeeder::class);
-        $this->call(LabelTeacherTableSeeder::class);
-    }
+        }
     }
 }

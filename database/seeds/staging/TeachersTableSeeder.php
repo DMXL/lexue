@@ -1,5 +1,7 @@
 <?php
 
+namespace Seeds\Staging;
+
 use Illuminate\Database\Seeder;
 
 class TeachersTableSeeder extends Seeder
