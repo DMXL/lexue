@@ -17,7 +17,7 @@ class TimeslotsTableSeeder extends Seeder
             $time = Carbon::create(0,0,0,$hour);
             $from = $time->toTimeString();
             $to = $time->addMinutes(45)->toTimeString();
-            DB::table('time_slots')->insert([
+            \DB::table('time_slots')->insert([
                 'start' => $from,
                 'end' => $to
             ]);

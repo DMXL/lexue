@@ -15,7 +15,7 @@ class LecturesTableSeeder extends Seeder
     {
         $faker = \Faker\Factory::create('zh_CN');
 
-        DB::table('lectures')->insert([
+        \DB::table('lectures')->insert([
             'description' => $faker->text
 
         ]);

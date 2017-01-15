@@ -241,10 +241,10 @@ return [
          * Custom Facades
          */
         'Duobeiyun' => App\Facades\Duobeiyun::class,
-        'Page' => \App\Facades\Page::class,
-        'WechatPusher' => \App\Facades\WechatPusher::class,
-        'WechatCashier' => \App\Facades\WechatCashier::class,
-        'DatabaseSeeder' => \Database\Seeds\DatabaseSeeder::class,
+        'Page' => App\Facades\Page::class,
+        'WechatPusher' => App\Facades\WechatPusher::class,
+        'WechatCashier' => App\Facades\WechatCashier::class,
+        'DatabaseSeeder' => Database\Seeds\DatabaseSeeder::class,
 
         /*
          * Third party

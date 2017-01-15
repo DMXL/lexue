@@ -16,11 +16,11 @@ class LevelTeacherPivotTableSeeder extends Seeder
         $teachers = \App\Models\User\Teacher::all();
         $levels = \App\Models\Teacher\Level::all();
         foreach ($teachers as $teacher) {
-            DB::table('level_teacher')->insert([
+            \DB::table('level_teacher')->insert([
                 'teacher_id' => $teacher->id,
                 'level_id' => $levels->random()->id,
             ]);
-            DB::table('level_teacher')->insert([
+            \DB::table('level_teacher')->insert([
                 'teacher_id' => $teacher->id,
                 'level_id' => $levels->random()->id,
             ]);

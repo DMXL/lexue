@@ -17,12 +17,12 @@ class LabelTeacherPivotTableSeeder extends Seeder
         $labels = \App\Models\Teacher\Label::all();
         foreach ($teachers as $teacher) {
             $labels = $labels->random(2);
-            DB::table('label_teacher')->insert([
+            \DB::table('label_teacher')->insert([
                 'teacher_id' => $teacher->id,
                 'label_id' => $labels->first()->id,
             ]);
 
-            DB::table('label_teacher')->insert([
+            \DB::table('label_teacher')->insert([
                 'teacher_id' => $teacher->id,
                 'label_id' => $labels->last()->id,
             ]);

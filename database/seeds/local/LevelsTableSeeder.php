@@ -16,7 +16,7 @@ class LevelsTableSeeder extends Seeder
     public function run()
     {
         foreach ($this->sample as $index => $level) {
-            DB::table('levels')->insert([
+            \DB::table('levels')->insert([
                 'name' => $level,
                 'order' => $index,
             ]);

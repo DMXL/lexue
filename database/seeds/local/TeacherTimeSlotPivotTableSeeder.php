@@ -18,7 +18,7 @@ class TeacherTimeSlotPivotTableSeeder extends Seeder
         foreach ($teachers as $teacher) {
             $times = $timeslots->random($timeslots->count() - mt_rand(0,4));
             foreach ($times as $time)
-            DB::table('teacher_time_slot')->insert([
+            \DB::table('teacher_time_slot')->insert([
                 'teacher_id' => $teacher->id,
                 'time_slot_id' => $time->id,
             ]);

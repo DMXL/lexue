@@ -16,7 +16,7 @@ class LabelsTableSeeder extends Seeder
     public function run()
     {
         foreach ($this->sample as $index => $label) {
-            DB::table('labels')->insert([
+            \DB::table('labels')->insert([
                 'name' => $label,
                 'order' => $index,
             ]);
