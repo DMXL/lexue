@@ -13,7 +13,8 @@
         "rap2hpoutre/laravel-log-viewer": "^0.7.0",
         "doctrine/dbal": "^2.5",
         "pda/pheanstalk": "~3.0",
-        "codesleeve/laravel-stapler": "^1.0"
+        "codesleeve/laravel-stapler": "^1.0",
+        "orangehill/iseed": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

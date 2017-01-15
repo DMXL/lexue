@@ -190,6 +190,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Overtrue\LaravelWechat\ServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        Orangehill\Iseed\IseedServiceProvider::class,
     ],
 
     /*
