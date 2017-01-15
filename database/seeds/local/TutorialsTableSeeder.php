@@ -1,6 +1,6 @@
 <?php
 
-namespace Seeds\Local;
+namespace Database\Seeds\Local;
 
 use Illuminate\Database\Seeder;
 

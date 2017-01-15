@@ -1,6 +1,6 @@
 <?php
 
-namespace Seeds\Staging;
+namespace Database\Seeds\Staging;
 
 use Illuminate\Database\Seeder;
 

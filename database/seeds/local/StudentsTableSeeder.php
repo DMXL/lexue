@@ -1,6 +1,6 @@
 <?php
 
-namespace Seeds\Local;
+namespace Database\Seeds\Local;
 
 use App\Models\User\Student;
 use Illuminate\Database\Seeder;
