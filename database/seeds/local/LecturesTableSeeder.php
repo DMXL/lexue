@@ -1,5 +1,7 @@
 <?php
 
+namespace Seeds\Local;
+
 use Illuminate\Database\Seeder;
 
 class LecturesTableSeeder extends Seeder
@@ -11,15 +13,13 @@ class LecturesTableSeeder extends Seeder
      */
     public function run()
     {
-        /*
-        $faker = Faker\Factory::create('zh_CN');
+        $faker = \Faker\Factory::create('zh_CN');
 
         DB::table('lectures')->insert([
             'description' => $faker->text
 
         ]);
-        */
 
-        //factory(\App\Models\Course\Lecture::class, 50)->create();
+        factory(\App\Models\Course\Lecture::class, 50)->create();
     }
 }

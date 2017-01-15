@@ -1,5 +1,7 @@
 <?php
 
+namespace Seeds;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,29 +16,32 @@ class DatabaseSeeder extends Seeder
         /*
          * Configure each environment separately because order matters
          */
-        if (\App::environment() !== 'production') {
+        if (\App::environment() == 'production') {
             $this->seeders = [
-                StudentsTableSeeder::class,
-
-                TeachersTableSeeder::class,
-                LevelsTableSeeder::class,
-                LevelTeacherPivotTableSeeder::class,
-
-                LabelsTableSeeder::class,
-                LabelTeacherPivotTableSeeder::class,
-
-                TimeslotsTableSeeder::class,
-                TeacherTimeSlotPivotTableSeeder::class,
-
-                TutorialsTableSeeder::class,
-                LecturesTableSeeder::class,
-                OffTimesTableSeeder::class,
-
-                AdminsTableSeeder::class,
+                Local\LevelsTableSeeder::class,
+            ];
+        } else if (\App::environment() == 'staging') {
+            $this->seeders = [
+                Local\LevelsTableSeeder::class,
             ];
         } else {
             $this->seeders = [
-                LevelsTableSeeder::class,
+                Local\StudentsTableSeeder::class,
+                Local\TeachersTableSeeder::class,
+                Local\AdminsTableSeeder::class,
+
+                Local\LevelsTableSeeder::class,
+                Local\LevelTeacherPivotTableSeeder::class,
+
+                Local\LabelsTableSeeder::class,
+                Local\LabelTeacherPivotTableSeeder::class,
+
+                Local\TimeslotsTableSeeder::class,
+                Local\TeacherTimeSlotPivotTableSeeder::class,
+
+                // Local\TutorialsTableSeeder::class,
+                // Local\LecturesTableSeeder::class,
+                // Local\OffTimesTableSeeder::class,
             ];
         }
     }

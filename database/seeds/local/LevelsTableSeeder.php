@@ -1,5 +1,7 @@
 <?php
 
+namespace Seeds\Local;
+
 use Illuminate\Database\Seeder;
 
 class LevelsTableSeeder extends Seeder

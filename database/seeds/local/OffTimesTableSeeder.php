@@ -1,8 +1,10 @@
 <?php
 
+namespace Seeds\Local;
+
 use Illuminate\Database\Seeder;
 
-class TutorialsTableSeeder extends Seeder
+class OffTimesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +13,6 @@ class TutorialsTableSeeder extends Seeder
      */
     public function run()
     {
-        //factory(\App\Models\Course\Tutorial::class, 50)->create();
+        factory(\App\Models\Teacher\OffTime::class, 20)->create();
     }
 }

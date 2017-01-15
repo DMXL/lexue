@@ -1,5 +1,7 @@
 <?php
 
+namespace Seeds\Local;
+
 use App\Models\User\Student;
 use Illuminate\Database\Seeder;
 
@@ -12,7 +14,7 @@ class StudentsTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create('zh_CN');
+        $faker = \Faker\Factory::create('zh_CN');
 
         DB::table('students')->insert([
             'name' => $faker->name,
@@ -20,6 +22,6 @@ class StudentsTableSeeder extends Seeder
             'password' => bcrypt(config('auth.test.password')),
         ]);
 
-        factory(Student::class, 20)->create();
+        // factory(Student::class, 20)->create();
     }
 }
