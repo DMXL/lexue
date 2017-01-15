@@ -49,6 +49,7 @@ class DatabaseSeeder extends Seeder
                 Local\TimeSlotsTableSeeder::class,
                 Local\TeacherTimeSlotPivotTableSeeder::class,
 
+                
                 // Local\TutorialsTableSeeder::class,
                 // Local\LecturesTableSeeder::class,
                 // Local\OffTimesTableSeeder::class,
