@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
                 Staging\LabelsTableSeeder::class,
                 Staging\LabelTeacherTableSeeder::class,
 
-                Staging\TimeslotsTableSeeder::class,
+                Staging\TimeSlotsTableSeeder::class,
                 Staging\TeacherTimeSlotTableSeeder::class,
             ];
         } else {
@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
                 Local\LabelsTableSeeder::class,
                 Local\LabelTeacherPivotTableSeeder::class,
 
-                Local\TimeslotsTableSeeder::class,
+                Local\TimeSlotsTableSeeder::class,
                 Local\TeacherTimeSlotPivotTableSeeder::class,
 
                 // Local\TutorialsTableSeeder::class,
