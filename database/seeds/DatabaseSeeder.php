@@ -55,6 +55,13 @@ class DatabaseSeeder extends Seeder
     {
         foreach ($this->seeders as $seeder) {
             $this->call($seeder);
-        }
+            $this->call(TeachersTableSeeder::class);
+        $this->call(TimeSlotsTableSeeder::class);
+        $this->call(TeacherTimeSlotTableSeeder::class);
+        $this->call(LevelsTableSeeder::class);
+        $this->call(LabelsTableSeeder::class);
+        $this->call(LevelTeacherTableSeeder::class);
+        $this->call(LabelTeacherTableSeeder::class);
+    }
     }
 }
