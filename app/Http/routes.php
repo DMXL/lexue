@@ -18,7 +18,7 @@ Route::group(['domain' => appDomain()], function() {
 | Log viewer routes
 |--------------------------------------------------------------------------
 */
-Route::get('logs', ['uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index']);
+Route::get('all', ['domain' => appDomain('logs'), 'uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index']);
 
 /*
 |--------------------------------------------------------------------------
