@@ -26,7 +26,6 @@
             <div class="weui_panel_bd">
 
                 @foreach($teachers as $teacher)
-                    @if($teacher->enabled)
 
                     <a href="{{ route('m.students::teachers.show', $teacher->id) }}" class="weui_media_box weui_media_appmsg">
                         <div class="weui_media_hd">
@@ -43,8 +42,7 @@
                             </div>
                         </div>
                     </a>
-
-                    @endif
+                    
                 @endforeach
 
             </div>
