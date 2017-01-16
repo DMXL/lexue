@@ -42,7 +42,7 @@
                                                 <?php $disabled = $time['disabled'] ?>
                                                 <div class="m-b-sm"{{ $disabled ? " disabled=disabled" : null }}>
                                                     <?php
-                                                        if ($time['lecture']) {
+                                                        if ($time['tutorial']) {
                                                             $buttonClass = 'text-success';
                                                         } elseif ($time['tutorial']) {
                                                             $buttonClass = 'text-warning';
