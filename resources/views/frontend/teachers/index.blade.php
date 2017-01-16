@@ -2,6 +2,7 @@
 
 @section('content')
     @foreach($teachers as $teacher)
+        @if($teacher->enabled)
             <div class="col-lg-3">
                 <div class="contact-box center-version">
                     <a href="{{ route('students::teachers.show', $teacher->id) }}">
@@ -19,5 +20,6 @@
                     </a>
                 </div>
             </div>
+        @endif
     @endforeach
 @endsection
