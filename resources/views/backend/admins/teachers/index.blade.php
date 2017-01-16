@@ -41,7 +41,7 @@
 
             </div>
         </div>
-        @endforeach
+    @endforeach
     </div>
 
     @if($teachers->render())
