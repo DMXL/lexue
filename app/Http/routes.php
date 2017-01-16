@@ -8,9 +8,11 @@ Route::group(['domain' => appDomain()], function() {
         return Request::getHost();
     });
 
-    Route::get('/', function () {
+    Route::get('/', function() {
         return 'home page of the home pages';
     });
+
+    Route::get('logs', ['uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index']);
 });
 
 /*
@@ -18,7 +20,7 @@ Route::group(['domain' => appDomain()], function() {
 | Log viewer routes
 |--------------------------------------------------------------------------
 */
-Route::get('all', ['domain' => appDomain('logs'), 'uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index']);
+Route::get('logs', ['uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index']);
 
 /*
 |--------------------------------------------------------------------------
