@@ -11,8 +11,6 @@ Route::group(['domain' => appDomain()], function() {
     Route::get('/', function() {
         return 'home page of the home pages';
     });
-
-    Route::get('logs', ['uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index']);
 });
 
 /*
