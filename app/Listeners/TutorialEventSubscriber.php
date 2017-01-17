@@ -21,8 +21,6 @@
 namespace App\Listeners;
 
 use App\Events\TutorialPurchased;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class TutorialEventSubscriber
 {
@@ -88,7 +86,7 @@ class TutorialEventSubscriber
     {
         $events->listen(
             'App\Events\TutorialPurchased',
-            'App\Listeners\TutorialEventListener@pushTutorialConfirmation'
+            'App\Listeners\TutorialEventSubscriber@pushTutorialConfirmation'
         );
     }
 }

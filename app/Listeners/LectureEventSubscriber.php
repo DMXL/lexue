@@ -23,8 +23,6 @@ namespace App\Listeners;
 use App\Models\Course\Lecture;
 use App\Events\LectureCreated;
 use App\Events\LecturePurchased;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class LectureEventSubscriber
 {
@@ -98,12 +96,12 @@ class LectureEventSubscriber
     {
         $events->listen(
             'App\Events\LectureCreated',
-            'App\Listeners\LectureEventListener@registerClassroom'
+            'App\Listeners\LectureEventSubscriber@registerClassroom'
         );
 
         $events->listen(
             'App\Events\LecturePurchased',
-            'App\Listeners\LectureEventListener@pushLectureConfirmation'
+            'App\Listeners\LectureEventSubscriber@pushLectureConfirmation'
         );
     }
 
