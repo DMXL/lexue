@@ -24,7 +24,7 @@ use App\Events\TutorialPurchased;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class TutorialEventListener implements ShouldQueue
+class TutorialEventSubscriber
 {
     /**
      * Handle the TutorialPurchased event.

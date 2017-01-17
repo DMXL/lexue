@@ -26,7 +26,7 @@ use App\Events\LecturePurchased;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class LectureEventListener implements ShouldQueue
+class LectureEventSubscriber
 {
     /**
      * Handle the LectureCreated event.
