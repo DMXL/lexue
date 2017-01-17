@@ -2,6 +2,7 @@
 
 @section('content')
     @foreach($teachers as $teacher)
+        @if($teacher->enabled)
 
             <div class="col-lg-3">
                 <div class="contact-box center-version">
@@ -21,5 +22,6 @@
                 </div>
             </div>
 
+        @endif
     @endforeach
 @endsection
