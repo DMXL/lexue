@@ -78,7 +78,7 @@ class Lecture extends Model implements StaplerableInterface
     */
     public function getStartTimeAttribute()
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $this->date.' '.$this->start);
+        return Carbon::createFromFormat('Y-m-d H:i', $this->date.' '.$this->start);
     }
 
     public function getEndTimeAttribute()
