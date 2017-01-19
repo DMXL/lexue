@@ -60,7 +60,7 @@
                         @if($teacher->video_file_name)
                             <video id="teachers_video" src="{{ $teacher->video->url() }}"></video>
                         @else
-                            <video id="teachers_video" src="{{ getVideoUrl($teacher->video, 'mp4') }}"></video>
+                            <video id="teachers_video" src="{{ getVideoUrl(null) }}"></video>
                         @endif
                     </div>
                     <div id="tab3" class="weui_tab_bd_item">
