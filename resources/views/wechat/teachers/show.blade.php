@@ -57,10 +57,11 @@
                         </article>
                     </div>
                     <div id="tab2" class="weui_tab_bd_item">
-                        <video loop id="teachers_video">
-                            <source src="{{ getVideoUrl($teacher->video, 'mp4') }}">
-                            你的浏览器不支持Html5视频，是时候换Chrome了
-                        </video>
+                        @if($teacher->video_file_name)
+                            <video id="teachers_video" src="{{ $teacher->video->url() }}"></video>
+                        @else
+                            <video id="teachers_video" src="{{ getVideoUrl($teacher->video, 'mp4') }}"></video>
+                        @endif
                     </div>
                     <div id="tab3" class="weui_tab_bd_item">
                         <div>
