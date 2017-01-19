@@ -10,6 +10,7 @@ Route::get('/', ['as' => 'home', 'uses' => 'MainController@index']);
 
 Route::resource('teachers', 'TeacherController');
 Route::post('teachers/{id}/avatar', ['as' => 'teachers.avatar.upload', 'uses' => 'TeacherController@uploadAvatar']);
+Route::post('teachers/{id}/video', ['as' => 'teachers.video.upload', 'uses' => 'TeacherController@uploadVideo']);
 Route::put('teachers/{id}/enable', ['as' => 'teachers.enable', 'uses' => 'TeacherController@enable']);
 Route::put('teachers/{id}/disable', ['as' => 'teachers.disable', 'uses' => 'TeacherController@disable']);
 

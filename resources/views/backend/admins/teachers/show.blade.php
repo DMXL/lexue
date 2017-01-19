@@ -13,13 +13,6 @@
         <div class="ibox-title">
             <h5 class="no-margins vertical-middle">教师信息</h5>
             <div class="ibox-tools ibox-tools-buttons">
-                <button class="btn btn-default btn-outline btn-xs"  data-toggle="modal" data-target="#modal-avatar">
-                    <i class="fa fa-photo"></i> 修改头像
-                </button>
-                <a href="{{ route('admins::teachers.edit', $teacher->id) }}" class="btn btn-default btn-outline btn-xs">
-                    <i class="fa fa-wrench"></i> 修改信息
-                </a>
-                <span class="m-l-sm m-r-sm"> - </span>
                 <?php
                 $enabled = $teacher->enabled;
                 $routeAction = $enabled ? 'disable' : 'enable';
@@ -30,15 +23,29 @@
                 <form action="{{ route('admins::teachers.' . $routeAction, $teacher->id) }}" class="inline" method="post">
                     {{ method_field('put') }}
                     {{ csrf_field() }}
-                    <button class="btn btn-{{ $buttonClass }} btn-outline btn-xs"><i class="fa fa-{{ $faClass }}"></i> {{ $buttonText }}</button>
+                    <button class="btn btn-{{ $buttonClass }} btn-xs"><i class="fa fa-{{ $faClass }}"></i> {{ $buttonText }}</button>
                 </form>
-                <span class="m-l-sm m-r-sm"> - </span>
-                <button class="btn btn-danger btn-outline btn-xs"  data-toggle="modal" data-target="#teacher-delete-modal">
+                <button class="btn btn-danger btn-xs"  data-toggle="modal" data-target="#teacher-delete-modal">
                     <i class="fa fa-trash"></i> 删除
                 </button>
             </div>
         </div>
         <div class="ibox-content">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="#modal-avatar">
+                            <i class="fa fa-photo"></i> 修改头像
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="#modal-video">
+                            <i class="fa fa-file-video-o"></i> 上传试听课
+                        </button>
+                        <a href="{{ route('admins::teachers.edit', $teacher->id) }}" class="btn btn-default btn-sm">
+                            <i class="fa fa-wrench"></i> 修改信息
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div class="row m-b-lg m-t-lg">
                 <div class="col-md-6">
                     <div class="profile-image">
@@ -59,44 +66,31 @@
                     <table class="table m-b-xs vertical-middle">
                         <tbody>
                         <tr>
-                            <td>
-                                <strong>教师教龄</strong>
-                            </td>
-                            <td>
-                                <span>
-                                    {{ $teacher->years_of_teaching }}
-                                </span>
-                            </td>
-
+                            <td><strong>教师教龄</strong></td>
+                            <td><span>{{ $teacher->years_of_teaching }}</span></td>
                         </tr>
                         <tr>
-                            <td>
-                                <strong>课时费用</strong>
-                            </td>
-                            <td>
-                                <span>
-                                    {{ $teacher->price }}
-                                </span>
-                            </td>
-
+                            <td><strong>课时费用</strong></td>
+                            <td><span>{{ $teacher->price }}</span></td>
                         </tr>
                         <tr>
-                            <td>
-                                <strong>授课范围</strong>
-                            </td>
-                            <td>
-                                <span>
-                                    @each('backend.admins.partials.tag', $teacher->levels->pluck('name'), 'name')
-                                </span>
-                            </td>
-
+                            <td><strong>授课范围</strong></td>
+                            <td><span>@each('backend.admins.partials.tag', $teacher->levels->pluck('name'), 'name')</span></td>
                         </tr>
                         <tr>
+                            <td><strong>教师标签</strong></td>
+                            <td>@each('backend.admins.partials.tag', $teacher->labels->pluck('name'), 'name')</td>
+                        </tr>
+                        <tr>
+                            <td><strong>试听课程</strong></td>
                             <td>
-                                <strong>教师标签</strong>
-                            </td>
-                            <td>
-                                @each('backend.admins.partials.tag', $teacher->labels->pluck('name'), 'name')
+                                @if($teacher->video_file_name)
+                                    <a href="{{ $teacher->video->url() }}" target="_blank">
+                                        <span class="label label-primary m-l-xs">查看</span>
+                                    </a>
+                                @else
+                                    <span class="label label-default m-l-xs">未上传</span>
+                                @endif
                             </td>
                         </tr>
                         </tbody>
@@ -118,7 +112,9 @@
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
                     <h4 class="modal-title">删除教师</h4>
                 </div>
                 <div class="modal-body">
@@ -136,6 +132,44 @@
                             <button class="btn btn-danger btn-block" :disabled="!matched">删除</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal fade" id="modal-video" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                                class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{ $teacher->name }}试听课</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="video-upload">
+                        <!-- The fileinput-button span is used to style the file input field as button -->
+                        <span class="btn btn-success fileinput-button">
+                            <span>选择视频文件</span>
+                            <!-- The file input field used as target for the file upload widget -->
+                            <input id="fileupload" type="file" name="video" data-url="{{ route('admins::teachers.video.upload', $teacher->id) }}">
+                        </span>
+                        <br>
+                        <br>
+                        <!-- The global progress bar -->
+                        <div id="progress" class="progress">
+                            <div class="progress-bar progress-bar-success"></div>
+                        </div>
+                        <!-- The container for the uploaded files -->
+                        <div id="files" class="files">
+                            @if($teacher->video_file_name)
+
+                                <video src="{{ $teacher->video->url() }}" controls></video>
+                                <br>
+                                <span>{{ $teacher->video_file_name }}</span>
+
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -172,6 +206,89 @@
 
 @section('js')
     <script>
+        $(function () {
+            'use strict';
+            // Change this to the location of your server-side upload handler:
+            var url = $('#video-form').attr('action'),
+                    uploadButton = $('<button/>')
+                            .addClass('btn btn-primary')
+                            .prop('disabled', true)
+                            .text('上传中...')
+                            .on('click', function () {
+                                var $this = $(this),
+                                        data = $this.data();
+                                $this
+                                        .off('click')
+                                        .text('取消')
+                                        .on('click', function () {
+                                            $this.remove();
+                                            data.abort();
+                                        });
+                                data.submit().always(function () {
+                                    $this.remove();
+                                });
+                            });
+            $('#fileupload').fileupload({
+                url: url,
+                dataType: 'json',
+                autoUpload: false,
+                acceptFileTypes: /(\.|\/)(mp4|avi)$/i,
+                maxFileSize: 50000000,
+                success: function(data)
+                {
+                    console.log(data);
+                    location.reload();
+                },
+                error: function(jqXHR, textStatus, error)
+                {
+                    console.log('ERRORS: ' + textStatus + ' - ' + error);
+                    toastr['error']("试听课上传失败...");
+                }
+            }).on('fileuploadadd', function (e, data) {
+                data.context = $('<div/>');
+                $('#files').html(data.context);
+                $.each(data.files, function (index, file) {
+                    var node = $('<p/>')
+                            .append($('<span/>').text(file.name));
+                    if (!index) {
+                        node
+                                .append('<br><br>')
+                                .append(uploadButton.clone(true).data(data));
+                    }
+                    node.appendTo(data.context);
+                });
+            }).on('fileuploadprocessalways', function (e, data) {
+                var index = data.index,
+                        file = data.files[index],
+                        node = $(data.context.children()[index]);
+                if (file.preview) {
+                    node
+                            .prepend('<br>')
+                            .prepend(file.preview);
+                }
+                if (file.error) {
+                    node
+                            .append('<br>')
+                            .append($('<span class="text-danger"/>').text(file.error));
+                }
+                if (index + 1 === data.files.length) {
+                    data.context.find('button')
+                            .text('上传')
+                            .prop('disabled', !!data.files.error);
+                }
+            }).on('fileuploadprogressall', function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress .progress-bar').css(
+                        'width',
+                        progress + '%'
+                );
+            }).prop('disabled', !$.support.fileInput)
+                    .parent().addClass($.support.fileInput ? undefined : 'disabled');
+        });
+    </script>
+
+    <script>
+
         new Vue({
             el: '#teacher-delete-modal',
             data: {
@@ -183,9 +300,11 @@
                 }
             },
         })
+
     </script>
 
     <script>
+
         new Vue({
             el: '#modal-avatar',
             props: ['avatar'],
@@ -261,5 +380,6 @@
                 }
             }
         });
+
     </script>
 @endsection

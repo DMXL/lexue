@@ -117,6 +117,17 @@ class TeacherController extends Controller
         return 1;
     }
 
+    public function uploadVideo(Request $request, $id)
+    {
+        /** @var \App\Models\User\Teacher $teacher */
+        $teacher = Teacher::findOrFail($id);
+
+        $teacher->video = $request->file('video');
+        $teacher->save();
+
+        return 1;
+    }
+
     public function enable($id)
     {
         try {

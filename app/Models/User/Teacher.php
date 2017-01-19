@@ -27,7 +27,8 @@ class Teacher extends Authenticatable implements StaplerableInterface
         'unit_price',
         'teaching_since',
         'description',
-        'avatar'
+        'avatar',
+        'video'
     ];
 
     protected $hidden = [
@@ -61,6 +62,7 @@ class Teacher extends Authenticatable implements StaplerableInterface
                 'thumb' => '100x100#'
             ]
         ]);
+        $this->hasAttachedFile('video');
 
         parent::__construct($attributes);
     }

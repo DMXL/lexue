@@ -5,8 +5,15 @@
     "dev": "gulp watch"
   },
   "devDependencies": {
+    "bootstrap-sass": "^3.0.0",
     "gulp": "^3.9.1",
     "laravel-elixir": "^5.0.0",
-    "bootstrap-sass": "^3.0.0"
+    "laravel-elixir-webpack-official": "^1.0.10"
+  },
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-autobind": "^1.0.6",
+    "react-dom": "^15.4.2",
+    "react-fileupload": "^2.4.0"
   }
 }

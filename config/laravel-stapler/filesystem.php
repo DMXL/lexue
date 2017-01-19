@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'url' => '/avatars/:id_partition/:style/:filename',
+    'url' => '/:attachment/:id_partition/:style/:filename',
     /*
     |--------------------------------------------------------------------------
     | Stapler File Path

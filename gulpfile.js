@@ -29,6 +29,7 @@ elixir(function(mix) {
         'plugins/pickadate/default.time.css',
         'plugins/selectize/selectize.css',
         'plugins/selectize/selectize.bootstrap3.css',
+        'plugins/jqueryupload/jquery.fileupload.css'
     ], 'public/app/css');
 
     mix.scripts([
@@ -49,6 +50,13 @@ elixir(function(mix) {
         'plugins/pickadate/picker.time.js',
         'plugins/selectize/selectize.min.js',
         'plugins/moment/moment.js',
+        'plugins/jqueryupload/jquery.ui.widget.js',
+        'plugins/jqueryupload/load-image.all.min.js',
+        'plugins/jqueryupload/jquery.iframe-transport.js',
+        'plugins/jqueryupload/jquery.fileupload.js',
+        'plugins/jqueryupload/jquery.fileupload-process.js',
+        'plugins/jqueryupload/jquery.fileupload-video.js',
+        'plugins/jqueryupload/jquery.fileupload-validate.js',
         'vue.min.js'
     ], 'public/app/js');
 
