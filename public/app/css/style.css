@@ -4499,7 +4499,7 @@ ul.clear-list:first-child {
   text-align: right;
   width: 110px;
   position: relative;
-  padding-top: 30px;
+  padding-top: 10px;
 }
 .timeline-item .content {
   border-left: 1px solid #e7eaec;
@@ -4742,12 +4742,21 @@ a.compose-mail {
   margin-right: 10px;
 }
 .profile-image {
-  width: 120px;
+  width: 150px;
   float: left;
 }
 .profile-image img {
-  width: 96px;
-  height: 96px;
+  width: 140px;
+  height: 140px;
+}
+@media (max-width: 992px) {
+  .profile-image {
+    width: 120px;
+  }
+  .profile-image img {
+    width: 96px;
+    height: 96px;
+  }
 }
 .profile-info {
   margin-left: 120px;

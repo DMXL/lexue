@@ -207,7 +207,7 @@ ul.clear-list:first-child {
   text-align: right;
   width: 110px;
   position: relative;
-  padding-top: 30px;
+  padding-top: 10px;
 }
 
 .timeline-item .content {
@@ -504,13 +504,24 @@ a.compose-mail {
 }
 
 .profile-image {
-  width: 120px;
+  width: 150px;
   float: left;
+
+  img {
+    width: 140px;
+    height: 140px;
+  }
 }
 
-.profile-image img {
-  width: 96px;
-  height: 96px;
+@media (max-width: 992px) {
+  .profile-image {
+    width: 120px;
+
+    img {
+      width: 96px;
+      height: 96px;
+    }
+  }
 }
 
 .profile-info {
