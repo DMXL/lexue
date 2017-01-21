@@ -63,7 +63,7 @@ class OrderController extends Controller
             $tradeInfo = array(
                 'trade_type'       => 'JSAPI',
                 'body'             => '乐学云直播课 '.$order->lecture->name,
-                'detail'           => $order->lecture->start_time.' '.$order->lecture->length.' 分钟',
+                'detail'           => $order->lecture->start_time->toDateTimeString().' '.$order->lecture->length.' 分钟',
                 'out_trade_no'     => $order->trade_no,
                 'total_fee'        => $order->total * 100,
                 'notify_url'       => route('wechat::pay.callback'), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
@@ -73,7 +73,7 @@ class OrderController extends Controller
             $tradeInfo = array(
                 'trade_type'       => 'JSAPI',
                 'body'             => '乐学云直播课 '.$order->lecture->name,
-                'detail'           => $order->lecture->start_time.' '.$order->lecture->length.' 分钟',
+                'detail'           => $order->lecture->start_time->toDateTimeString().' '.$order->lecture->length.' 分钟',
                 'out_trade_no'     => $order->trade_no,
                 'total_fee'        => $order->total * 100,
                 'notify_url'       => route('wechat::pay.callback'), // 支付结果通知网址，如果不设置则会使用配置里的默认地址

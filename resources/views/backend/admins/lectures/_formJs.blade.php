@@ -24,7 +24,7 @@
         });
 
         $('#time-picker').datetimepicker({
-            format: 'HH:mm'
+            format: 'HH:mm:00'
         });
     });
 </script>

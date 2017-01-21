@@ -13,7 +13,6 @@ class Tutorial extends Model
         'start_time',
         'human_date_time',
         'human_time',
-        'carbon_start'
     ];
 
     protected $with = ['timeSlot'];
@@ -45,12 +44,7 @@ class Tutorial extends Model
     */
     public function getStartTimeAttribute()
     {
-        return $this->date.' '.$this->start;
-    }
-
-    public function getCarbonStartAttribute()
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $this->start_time);
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->date.' '.$this->start);
     }
 
     public function getHumanDateTimeAttribute()

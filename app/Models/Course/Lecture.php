@@ -22,8 +22,6 @@ class Lecture extends Model implements StaplerableInterface
     protected $appends = [
         'start_time',
         'end_time',
-        'shorter_start',
-        'carbon_start',
         'timestamp'
     ];
 
@@ -78,27 +76,17 @@ class Lecture extends Model implements StaplerableInterface
     */
     public function getStartTimeAttribute()
     {
-        return $this->date.' '.$this->start;
-    }
-
-    public function getCarbonStartAttribute()
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $this->start_time);
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->date.' '.$this->start);
     }
 
     public function getEndTimeAttribute()
     {
-        return $this->carbon_start->addMinute($this->length);
-    }
-
-    public function getShorterTimeAttribute()
-    {
-        return $this->carbon_start->format('H:i');
+        return $this->start_time->addMinutes($this->length);
     }
 
     public function getTimestampAttribute()
     {
-        return $this->carbon_start->timestamp;
+        return $this->start_time->timestamp;
     }
 
     /*

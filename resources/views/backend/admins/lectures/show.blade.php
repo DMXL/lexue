@@ -77,7 +77,7 @@
                             </td>
                             <td>
                                 <span>
-                                    {{ $lecture->start_time }}
+                                    {{ $lecture->start_time->toDateTimeString() }}
                                 </span>
                             </td>
                         </tr>
