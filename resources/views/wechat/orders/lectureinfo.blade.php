@@ -25,7 +25,7 @@
         <div class="weui_media_bd">
             <h4 class="weui_media_title">{{ $lecture->name }}</h4>
             <p class="weui_media_desc">
-                开播时间：<span class="badge {{ $status == 'grey' ? 'dark' : 'success' }}">{{ $lecture->arrayed_time[0] }}</span><span class="badge {{ $status }}">{{ $lecture->arrayed_time[1] }}</span><br />
+                开播时间：<span class="badge {{ $status == 'grey' ? 'dark' : 'success' }}">{{ $lecture->date }}</span><span class="badge {{ $status }}">{{ $lecture->start }}</span><br />
                 {{ $lecture->description }}
             </p>
         </div>

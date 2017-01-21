@@ -74,7 +74,7 @@ class LectureEventSubscriber
                     "color" => "#00beb7"
                 ],
                 "keyword3"   => [
-                    "value" => $lecture->date_time,    // 课程时间
+                    "value" => $lecture->start_time,    // 课程时间
                     "color" => "#00beb7"
                 ],
                 "remark"   => [

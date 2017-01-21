@@ -77,7 +77,7 @@
                             </td>
                             <td>
                                 <span>
-                                    {{ $lecture->date_time }}
+                                    {{ $lecture->start_time }}
                                 </span>
                             </td>
                         </tr>
