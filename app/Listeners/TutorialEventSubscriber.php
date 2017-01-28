@@ -32,8 +32,10 @@ class TutorialEventSubscriber
      */
     public function pushTutorialConfirmation(TutorialPurchased $event)
     {
+        // @TODO 修改tutorial购买成功的message
         $order = $event->order;
         $tutorials = $order->tutorials;
+        $count = count($tutorials);
 
         $sampleLecture = $tutorials->first();
 
@@ -56,7 +58,7 @@ class TutorialEventSubscriber
                     "color" => "#000000"
                 ],
                 "keyword1"   => [
-                    "value" => $teacher->name . " 老师的一对一微信课程",    // 课程名称
+                    "value" => $teacher->name . " 老师的一对一微信课程 (共".$count."个课时))",    // 课程名称
                     "color" => "#00beb7"
                 ],
                 "keyword2"   => [

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Events\TutorialPurchased;
 use App\Events\LecturePurchased;
 use App\Models\Course\Order;
 use Carbon\Carbon;
@@ -70,10 +71,14 @@ class OrderController extends Controller
                 'openid'           => $this->student->wechat_id
             );
         } else {
+            $tutorials = $order->tutorials;
+            $count = count($tutorials);
+
+            // @TODO 修改购买tutorial的tradeInfo
             $tradeInfo = array(
                 'trade_type'       => 'JSAPI',
-                'body'             => '乐学云直播课 '.$order->lecture->name,
-                'detail'           => $order->lecture->start_time->toDateTimeString().' '.$order->lecture->length.' 分钟',
+                'body'             => '乐学云 '.$order->teacher->name.' 老师的一对一微信课程 (共'.$count.'个课时)',
+                'detail'           => $tutorials->pluck('human_date_time')->implode(', '),
                 'out_trade_no'     => $order->trade_no,
                 'total_fee'        => $order->total * 100,
                 'notify_url'       => route('wechat::pay.callback'), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
@@ -86,6 +91,7 @@ class OrderController extends Controller
         $apiList = array('chooseWXPay');
         $wxConfigs = \WechatCashier::config($apiList);
 
+        flash()->success('课程支付成功');
         return $this->frontView('wechat.orders.pay', compact('order', 'attributes', 'wxConfigs'));
     }
 
@@ -115,9 +121,13 @@ class OrderController extends Controller
                 $order->paid_at = Carbon::now();
                 $order->paid = 1;
 
-                event(new LecturePurchased($order));
+                if($order->is_lecture == 1) {
+                    event(new LecturePurchased($order));
+                } else {
+                    event(new TutorialPurchased($order));
+                }
             } else {
-                $order->paid= 0;
+                $order->paid = 0;
             }
             $order->save();
 

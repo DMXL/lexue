@@ -92,8 +92,10 @@ class TeacherController extends Controller
                  * create order
                  */
                 $order = new Order();
+                $order->trade_no = generateTradeNo();
                 $order->student_id = $student->id;
                 $order->teacher_id = $teacher->id;
+                $order->is_lecture = 0;
                 // TODO calculate based on lecture price with teacher unit price as a fallback
                 $order->total = count($bookTimes) * $teacher->unit_price;
                 $order->paid = 0;
@@ -133,11 +135,15 @@ class TeacherController extends Controller
             return back();
         }
 
+        return redirect()->route('m.students::orders.pay', $orderId);
+
+        /*
         $order = Order::find($orderId);
 
         event(new TutorialPurchased($order));
         flash()->success('课程购买成功');
 
         return $this->frontRedirect('m.students::tutorials.index');
+        */
     }
 }
