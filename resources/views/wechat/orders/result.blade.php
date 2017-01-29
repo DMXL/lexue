@@ -28,13 +28,12 @@
         </div>
         <div class="weui_opr_area">
             <p class="weui_btn_area">
-                <a href="{{ route('m.students::lectures.index') }}" class="weui_btn weui_btn_primary">查看详情</a>
+                @if($order->is_lecture)
+                    <a href="{{ route('m.students::lectures.index') }}" class="weui_btn weui_btn_primary">查看详情</a>
+                @else
+                    <a href="{{ route('m.students::tutorials.index') }}" class="weui_btn weui_btn_primary">查看详情</a>
+                @endif
             </p>
         </div>
-        <!--
-        <div class="weui_extra_area">
-            <a href="">查看详情</a>
-        </div>
-        -->
     </div>
 @endsection

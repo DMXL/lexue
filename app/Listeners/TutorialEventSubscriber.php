@@ -32,7 +32,6 @@ class TutorialEventSubscriber
      */
     public function pushTutorialConfirmation(TutorialPurchased $event)
     {
-        // @TODO 修改tutorial购买成功的message
         $order = $event->order;
         $tutorials = $order->tutorials;
         $count = count($tutorials);

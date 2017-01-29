@@ -74,7 +74,6 @@ class OrderController extends Controller
             $tutorials = $order->tutorials;
             $count = count($tutorials);
 
-            // @TODO 修改购买tutorial的tradeInfo
             $tradeInfo = array(
                 'trade_type'       => 'JSAPI',
                 'body'             => '乐学云 '.$order->teacher->name.' 老师的一对一微信课程 (共'.$count.'个课时)',
