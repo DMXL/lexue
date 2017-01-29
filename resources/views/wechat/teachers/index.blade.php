@@ -32,7 +32,7 @@
                             <img class="weui_media_appmsg_thumb" src="{{ $teacher->avatar->url('thumb') }}" alt="{{ $teacher->name }}">
                         </div>
                         <div class="weui_media_bd">
-                            <span class="pricetag">￥{{ $teacher->unit_price }}.00/课时</span>
+                            <span class="pricetag">￥{{ number_format($teacher->unit_price, 2) }}/课时</span>
                             <h4 class="weui_media_title">{{ $teacher->name }}</h4>
                             <p class="weui_media_desc">{{ $teacher->years_of_teaching }}教龄&nbsp;&nbsp;授课年级: {{ $teacher->levels->implode('name', ',') }}</p>
                             <div class="badgegroup">

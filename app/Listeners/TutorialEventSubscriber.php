@@ -57,7 +57,7 @@ class TutorialEventSubscriber
                     "color" => "#000000"
                 ],
                 "keyword1"   => [
-                    "value" => $teacher->name . " 老师的一对一微信课程 (共".$count."个课时))",    // 课程名称
+                    "value" => $teacher->name . " 老师的一对一微信课程 (共".$count."课时)",    // 课程名称
                     "color" => "#00beb7"
                 ],
                 "keyword2"   => [
