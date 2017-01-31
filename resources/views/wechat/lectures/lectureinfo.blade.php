@@ -33,7 +33,7 @@
         <div class="weui_media_bd">
 
             <h4 class="weui_media_title">{{ $lecture->name }}</h4>
-            <p>{{ Carbon::parse($lecture->date)->format('Y年n月j日') }} {{ $lecture->start }}</p>
+            <p>{{ $lecture->start_time->format('Y年n月j日 H:i') }}</p>
             <span class="badge success">￥{{ number_format($lecture->price, 2) }}</span>
             @if(array_key_exists($lecture->id, $purchased))
                 @if($purchased[$lecture->id] == 1)

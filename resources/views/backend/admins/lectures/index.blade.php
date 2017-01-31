@@ -45,7 +45,7 @@
                                     <a href="{{ route('admins::teachers.show', $lecture->teacher_id) }}">{{ $lecture->teacher->name }}</a>
                                 </td>
                                 <td>
-                                    {{ $lecture->start_time->toDateTimeString() }}
+                                    {{ $lecture->start_time->format('Y年n月j日 H:i') }}
                                 </td>
                                 <td class="project-status">
                                     @if($lecture->finished)
