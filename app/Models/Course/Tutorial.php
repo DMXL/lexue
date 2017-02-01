@@ -50,7 +50,7 @@ class Tutorial extends Model
 
     public function getEndTimeAttribute()
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $this->date.' '.$this->timeSlot->end);
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->date.' '.$this->timeSlot->getOriginal('end'));
     }
 
     public function getHumanDateTimeAttribute()
