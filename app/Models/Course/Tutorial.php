@@ -11,6 +11,7 @@ class Tutorial extends Model
 {
     protected $appends = [
         'start_time',
+        'end_time',
         'human_date_time',
         'human_time',
     ];
@@ -45,6 +46,11 @@ class Tutorial extends Model
     public function getStartTimeAttribute()
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->date.' '.$this->start);
+    }
+
+    public function getEndTimeAttribute()
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->date.' '.$this->timeSlot->end);
     }
 
     public function getHumanDateTimeAttribute()
