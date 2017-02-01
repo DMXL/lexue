@@ -29,7 +29,7 @@
                     <div class="weui_panel_hd">直播课 - 即将开播</div>
                     <div class="weui_panel_bd">
 
-                        @include('wechat.lectures.lectureinfo', ['tutorials' => $upcoming, 'status' => 'upcoming'])
+                        @include('wechat.lectures.lectureinfo', ['lectures' => $upcoming, 'status' => 'upcoming'])
 
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                     <div class="weui_panel_hd">直播课 - 直播中</div>
                     <div class="weui_panel_bd">
 
-                        @include('wechat.lectures.lectureinfo', ['tutorials' => $ongoing, 'status' => 'ongoing'])
+                        @include('wechat.lectures.lectureinfo', ['lectures' => $ongoing, 'status' => 'ongoing'])
 
                     </div>
                 </div>
