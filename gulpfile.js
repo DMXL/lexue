@@ -16,6 +16,8 @@ elixir.config.assetsPath = 'resources/assets/app/'; //trailing slash required.
 elixir(function(mix) {
     mix.less('inspinia/style.less', 'public/app/css');
 
+    mix.less('wechat/lewe.less', 'public/wechat/css')
+
     mix.styles([
         'bootstrap.min.css',
         'animate.css',
@@ -64,6 +66,7 @@ elixir(function(mix) {
 
     mix.copy('resources/assets/app/fonts', 'public/build/app/fonts');
     mix.copy('resources/assets/app/fonts', 'public/app/fonts');
+    mix.copy('resources/assets/app/fonts', 'public/wechat/fonts');
     mix.copy('resources/assets/app/patterns', 'public/build/app/css/patterns');
     mix.copy('resources/assets/app/avatars', 'public/avatars');
 });

@@ -1,0 +1,536 @@
+/*
+ *
+ *
+ *   ______                        _____           __
+ *  /_  __/__  ____ _____ ___     / ___/__  ______/ /___
+ *   / / / _ \/ __ `/ __ `__ \    \__ \/ / / / __  / __ \
+ *  / / /  __/ /_/ / / / / / /   ___/ / /_/ / /_/ / /_/ /
+ * /_/  \___/\__,_/_/ /_/ /_/   /____/\__,_/\__,_/\____/
+ *
+ *
+ *
+ * Filename->lewe.css
+ * Project->lexue
+ * Description->The stylesheet that modifies weui.css
+ *
+ * Created by DM on 16/7/15 上午0:03.
+ * Copyright 2016 Team Sudo. All rights reserved.
+ *
+ */
+@import (inline) "../../css/plugins/font-awesome/font-awesome.min.css";
+/*
+|--------------------------------------------------------------------------
+| COMMON STYLES
+|--------------------------------------------------------------------------
+*/
+/* Generic Style */
+body, .bd {
+  background-color: #fbf9fe;
+}
+
+/* Icon Area Style */
+.weui_icon_area {
+  text-align: center;
+}
+
+.weui_tabbar_icon {
+  text-align: center;
+}
+
+/* Badges and Labels Style */
+.badge {
+  font-size: 13px;
+  line-height: 1;
+  white-space: nowrap;
+  text-align: center;
+  display: inline-block;
+  cursor: default;
+  min-width: 30px;
+  padding: 3px 5px;
+  background: #e6e6e6;
+  border-radius: 0;
+  color: #333;
+}
+
+.label {
+  background-color: #D1DADE;
+  color: #5E5E5E;
+  font-family: 'Open Sans';
+  font-size: 10px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 3px;
+  text-shadow: none;
+}
+
+.badge.round {
+  border-radius: 3px;
+}
+
+.badge.primary,
+.label.primary {
+  background: #0e90d2;
+  color: #fff;
+}
+
+.badge.secondary,
+.label.secondary {
+  background: #3bb4f2;
+  color: #fff;
+}
+
+.badge.success,
+.label.success {
+  background: #5eb95e;
+  color: #fff;
+}
+
+.badge.warning,
+.label.warning {
+  background: #f37b1d;
+  color: #fff;
+}
+
+.badge.alert,
+.label.alert {
+  background: #dd514c;
+  color: #fff;
+}
+
+.badge.dark,
+.label.dark {
+  background: #393939;
+  color: #fff;
+}
+
+.badge.grey,
+.label.grey {
+  background: #bbb;
+  color: #8e8e8e;
+}
+
+.badge.grey2,
+.label.grey2 {
+  background: #bbb;
+  color: #fff;
+}
+
+.badge.lexue,
+.label.lexue {
+  background: #00beb7;
+  color: #fff;
+}
+
+/*
+|--------------------------------------------------------------------------
+| PAGE STYLES
+|--------------------------------------------------------------------------
+*/
+
+/* About Page */
+.about {
+
+  .weui_panel {
+    background-color: transparent;
+
+    .weui_panel_hd, .weui_media_box {
+      background-color: #fff;
+    }
+  }
+}
+
+/* Teachers Index Page */
+.teachers_index {
+
+  .weui_panel {
+    background-color: transparent;
+
+    .weui_panel_hd {
+      background-color: #fff;
+      /* box-shadow: 0 1px 2px rgba(0,0,0,.3); */
+
+      &:after {
+        left: 0;
+        border-bottom: 1px solid #bcbab6;
+      }
+    }
+
+    .weui_panel_bd {
+
+      .weui_media_box {
+        padding: 15px;
+
+        &:before {
+          left: 0;
+          border-top: none;
+        }
+
+        &.weui_media_appmsg {
+          margin: 15px;
+          background-color: #fff;
+          border-radius: 1px;
+          /*
+            border-right: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            */
+          box-shadow: 1px 1px 0 rgba(100, 100, 100, .1);
+
+          .weui_media_hd {
+            margin-right: 15px;
+            width: 20%;
+
+            .weui_media_appmsg_thumb {
+              border-radius: 50%;
+              width: auto;
+            }
+          }
+
+          .weui_media_bd {
+            .pricetag {
+              color: #fff;
+              background-color: #85bb65;
+              font-size: 16px;
+              padding: 2px 3px;
+              margin-top: -7px;
+              position: absolute;
+              right: -2px;
+            }
+
+            h4 {
+              margin: 0;
+            }
+
+            .weui_media_desc {
+              line-height: 1.5;
+              overflow: auto;
+              text-overflow: ellipsis;
+              display: block;
+            }
+
+            .badgegroup {
+              margin-top: 3px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Teachers Show Page */
+.teachers_show {
+
+  .weui_icon_area {
+    padding: 5% 0 3%;
+
+    .avatar {
+      width: 30%;
+      border-radius: 50%;
+    }
+  }
+
+  .weui_tab {
+
+    .weui_navbar {
+      border-top: 1px solid #ccc;
+    }
+
+    .weui_tab_bd {
+      background-color: #fff;
+      padding-bottom: 50px;
+
+      #tab2 {
+
+        #teachers_video {
+          margin-top: 30px;
+          width: 100%;
+        }
+      }
+
+      #tab3 {
+
+        .calendar {
+          padding: 5px;
+          margin: 15px 0 10px;
+
+          .calendar_day {
+            display: inline-block;
+            width: calc(100% / 7 - 4px);
+            text-align: center;
+            font-size: 13px;
+            color: #444;
+
+            .date {
+              font-size: 24px;
+            }
+          }
+        }
+
+        .weui_cells {
+
+          .weui_cell_desc {
+            font-size: 14px;
+            padding: 15px;
+          }
+
+          .coursegroup:before {
+            content: " ";
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            border-top: 1px solid #D9D9D9;
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+          }
+        }
+      }
+    }
+  }
+
+  .bottombar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    background-color: rgba(245, 245, 245, .8);
+    font-size: 15px;
+    padding: 13px 0;
+
+    .bottombar_text {
+      float: left;
+      margin-left: 10px;
+    }
+
+    .weui_btn {
+      float: right;
+      margin-top: -2px;
+      margin-right: 15px;
+    }
+  }
+}
+
+/* Tutorials Index Page */
+.tutorials_index {
+
+  .weui_tab_bd {
+
+    .weui_media_box {
+
+      .weui_media_hd {
+
+        .teacher_name {
+          position: absolute;
+          width: 60px;
+          background-color: rgba(80, 80, 80, .2);
+          color: #fff;
+          font-size: 16px;
+        }
+      }
+
+      .weui_media_bd {
+
+        .weui_media_desc {
+          display: inline-flex;
+        }
+      }
+    }
+  }
+
+  .weui_tabbar {
+    position: fixed;
+    z-index: 99;
+
+    .weui_tabbar_icon i {
+      color: #bbb;
+      font-size: 26px;
+      display: block;
+    }
+
+    .weui_bar_item_on {
+
+      .weui_tabbar_icon i {
+        color: #09bb07;
+      }
+    }
+  }
+}
+
+/* Lectures Index Page */
+.lectures_index {
+
+  .weui_tab_bd {
+
+    .weui_media_box {
+
+      .weui_media_hd {
+        width: 100px;
+        height: 75px;
+        line-height: 130px;
+
+        .count {
+          position: absolute;
+          width: 95px;
+          height: 75px;
+          padding-left: 5px;
+          background-color: rgba(80, 80, 80, .2);
+          color: #fff;
+          font-size: 13px;
+          text-align: left;
+        }
+
+        .badge.ongoing {
+          position: absolute;
+          font-size: 13px;
+        }
+      }
+
+      .weui_media_bd {
+
+        .weui_media_desc {
+          display: inline-flex;
+        }
+
+        p {
+          font-size: 14px;
+          color: #888;
+        }
+
+        .badge {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+
+  .weui_tabbar {
+    position: fixed;
+    z-index: 99;
+
+    .weui_tabbar_icon i {
+      color: #bbb;
+      font-size: 26px;
+      display: block;
+    }
+
+    .label {
+      line-height: 12px;
+      padding: 3px 5px;
+      position: absolute;
+      margin-left: -3px;
+      margin-top: -5px;
+    }
+
+    .weui_bar_item_on {
+
+      .weui_tabbar_icon i {
+        color: #09bb07;
+      }
+    }
+  }
+}
+
+/* Lectures Show Page */
+.lectures_show .weui_icon_area {
+  height: 200px;
+  vertical-align: middle;
+}
+
+.lectures_show .weui_icon_area img {
+  display: block;
+  width: 100%;
+}
+
+.lectures_show .weui_panel {
+  margin-top: 0;
+}
+
+.lectures_show .weui_panel_hd {
+  color: #444;
+  font-size: 15px;
+}
+
+.lectures_show .lecture_info {
+  width: 100%;
+}
+
+.lectures_show .lecture_info td {
+  vertical-align: bottom;
+}
+
+.lectures_show .lecture_info .price {
+  color: #85bb65;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.lectures_show .weui_media_title {
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.lectures_show .weui_media_desc {
+  line-height: 16px;
+}
+
+.lectures_show .lecture_desc {
+  display: block;
+  line-height: 18px;
+}
+
+/* Orders Index Page */
+.orders_index .weui_tabbar_icon i {
+  color: #bbb;
+  font-size: 26px;
+  display: block;
+}
+
+.orders_index .weui_bar_item_on .weui_tabbar_icon i {
+  color: #09bb07;
+}
+
+.orders_index .weui_tabbar {
+  position: fixed;
+  z-index: 99;
+}
+
+.orders_index .inline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.orders_index .badge.round {
+  margin-left: 10px;
+}
+
+/* Orders Pay Page */
+.weui_msg.orders_pay {
+  padding-top: 20px;
+}
+
+.orders_pay .weui_text_area {
+  margin-bottom: 20px;
+}
+
+.orders_pay .weui_msg_desc {
+  color: #222;
+}
+
+.orders_pay .weui_msg_title {
+  font-size: 36px;
+  line-height: 40px;
+}
+
+.orders_pay .weui_cells {
+  margin-top: 15px;
+}
+
+.orders_pay .weui_cell {
+  font-size: 14px;
+  padding: 13px 15px;
+}
+
+.orders_pay .weui_cell .weui_cell_primary {
+  text-align: left;
+}

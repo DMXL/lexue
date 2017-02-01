@@ -18,20 +18,18 @@
  *
 -->
 @foreach($lectures as $lecture)
-    <a href="{{ route('m.students::lectures.show', $lecture->id) }}" class="weui_media_box weui_media_appmsg">
+
+    <a href="{{ route('m.students::lectures.show', $lecture->id) }}" class="weui_media_box weui_media_appmsg weui_panel_ft">
 
         <div class="weui_media_hd" data-value="{{ route('m.students::teachers.show', $lecture->teacher_id) }}">
-
             <div class="count">{{ $lecture->orders()->count() }}人已报名</div>
             @if($status == 'ongoing')
                 <span class="badge lexue ongoing">直播中</span>
             @endif
             <img class="weui_media_appmsg_thumb" src="{{ $lecture->avatar->url('thumb') }}" alt="{{ $lecture->name }}">
-
         </div>
 
         <div class="weui_media_bd">
-
             <h4 class="weui_media_title">{{ $lecture->name }}</h4>
             <p>{{ $lecture->start_time->format('Y年n月j日 H:i') }}</p>
             <span class="badge success">￥{{ number_format($lecture->price, 2) }}</span>
@@ -42,7 +40,8 @@
                     <span class="badge grey2">已下单</span>
                 @endif
             @endif
-
         </div>
+
     </a>
+
 @endforeach

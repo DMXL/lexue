@@ -27,7 +27,7 @@ function appDomain($prefix = null)
 }
 
 /**
- * Get the subd-domain component
+ * Get the sub-domain component
  * Inverse of appDomain()
  *
  * @return string|null

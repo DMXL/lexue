@@ -48,6 +48,7 @@ Route::group(['domain' => '{user_type}.' . appDomain(), 'as' => 'auth::'], funct
 /*
  * Student specific routes
  */
+
 /* Web */
 Route::group(
     [
