@@ -19,7 +19,7 @@ class LectureController extends Controller
     public function __construct()
     {
         $this->student = authUser();
-        $this->purchased = $this->student->lectures()->pluck('orders.paid', 'lectures.id')->toArray();
+        $this->purchased = $this->student->lectures()->pluck('paid', 'lecture_id')->toArray();
     }
 
     public function index()
