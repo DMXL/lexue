@@ -11,7 +11,7 @@ use Carbon\Carbon;
 class LectureController extends Controller
 {
     private $student;
-    private $purchased;
+    private $orderList;
 
     /**
      * LectureController constructor.
@@ -19,7 +19,7 @@ class LectureController extends Controller
     public function __construct()
     {
         $this->student = authUser();
-        $this->purchased = $this->student->lectures()->pluck('paid', 'lecture_id')->toArray();
+        $this->orderList = $this->student->lectures()->pluck('paid', 'lecture_id')->toArray();
     }
 
     public function index()
@@ -36,11 +36,15 @@ class LectureController extends Controller
             return ($lecture->start_time < Carbon::now() && $lecture->end_time >= Carbon::now());
         });
 
+        $userLectures = $this->student->lectures;
+
         $count = $ongoing->count();
 
-        $purchased = $this->purchased;
+        $userLecturesList = $this->orderList;
 
-        return $this->frontView('wechat.lectures.index', compact('upcoming', 'ongoing', 'count', 'purchased'));
+        $now = Carbon::now();
+
+        return $this->frontView('wechat.lectures.index', compact('upcoming', 'ongoing', 'userLectures', 'count', 'userLecturesList', 'now'));
     }
 
     public function show($id)
@@ -48,8 +52,8 @@ class LectureController extends Controller
         $lecture = Lecture::find($id);
         $isPurchased = null;
 
-        if(array_key_exists($id, $this->purchased))
-            $isPurchased = $this->purchased[$id];
+        if(array_key_exists($id, $this->orderList))
+            $isPurchased = $this->orderList[$id];
 
         return $this->frontView('wechat.lectures.show', compact('lecture', 'isPurchased'));
     }
@@ -95,7 +99,7 @@ class LectureController extends Controller
                 return $lecture->end_time < Carbon::now();
             });
 
-        $purchased = $this->purchased;
+        $purchased = $this->orderList;
 
         return $this->frontView('wechat.lectures.records', compact('records', 'purchased'));
     }
