@@ -52,7 +52,7 @@
             </div>
             <div class="weui_panel_bd">
                 @if(isset($isPurchased))
-                    <a href="{{ route('m.students::orders.index') }}" class="weui_panel_ft">查看我的直播课</a>
+                    <a href="{{ route('m.students::lectures.index') }}#tab3" class="weui_panel_ft">查看我的直播课</a>
                 @endif
                 <a href="{{ route('m.students::teachers.show', $lecture->teacher->id) }}" class="weui_media_box weui_media_appmsg">
                     <div class="weui_media_hd">

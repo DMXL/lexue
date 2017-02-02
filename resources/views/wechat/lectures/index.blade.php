@@ -94,6 +94,12 @@
 
 @section('js')
     <script>
+        routie({
+            ':tab': function(tab) {
+                $('a[href=#' + tab + ']').click();
+            }
+        });
+
         $('.weui_media_hd').click(function() {
             location.href = $(this).attr('data-value');
         });

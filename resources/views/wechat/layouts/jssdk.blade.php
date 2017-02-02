@@ -31,6 +31,7 @@
 <!-- Scripts -->
 <script src="{{ asset('wechat/lib/jquery-2.1.4.min.js') }}"></script>
 <script src="{{ asset('wechat/js/jquery-weui.js') }}"></script>
+<script src="{{ asset('plugins/routie/routie.min.js') }}"></script>
 <script src="{{ asset('wechat/js/lewe.js') }}"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
 <script>

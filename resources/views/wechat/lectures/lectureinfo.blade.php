@@ -51,10 +51,8 @@
                 <p>{{ $lecture->start_time->format('Y年n月j日 H:i') }}</p>
                 <span class="badge success">￥{{ number_format($lecture->price, 2) }}</span>
                 @if(array_key_exists($lecture->id, $userLecturesList))
-                    @if($userLecturesList[$lecture->id] == 1)
-                        <span class="badge grey2">已购买</span>
-                    @else
-                        <span class="badge grey2">已下单</span>
+                    @if($userLecturesList[$lecture->id] == 0)
+                        <span class="badge grey2">未支付</span>
                     @endif
                 @endif
             </div>

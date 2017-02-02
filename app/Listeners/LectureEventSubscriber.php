@@ -58,7 +58,7 @@ class LectureEventSubscriber
         $message = [
             'touser'      => $student->wechat_id,
             'template_id' => config('wechat.template.purchase_success'),
-            'url'         => route('m.students::orders.index'),
+            'url'         => route('m.students::lectures.index')."#tab3",
             'topcolor'    => '#000000',
             'data'        => [
                 "first"      => [
