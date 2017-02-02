@@ -94,9 +94,16 @@
     @include('wechat.snippets.alert')
 
     <script>
+        routie({
+            ':tab': function(tab) {
+                $('a[href=#' + tab + ']').click();
+            }
+        });
+
         $('.weui_media_hd').click(function() {
             location.href = $(this).attr('data-value');
         });
+
         $('.weui_media_bd').click(function() {
             $.actions({
                 actions: [{

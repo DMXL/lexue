@@ -103,25 +103,17 @@
     @include('wechat.snippets.alert')
 
     <script>
-        // Hashtag定位
-        // var hash = window.location.hash;
-
-        // 点击tab事件
-        $('.weui_navbar_item').click(function() {
-            var tab = $(this).attr('href');
-
-            switch(tab) {
-                case '#tab1':
-                    $('.select_input').select('close');
-                    $('#teachers_video')[0].pause();
-                    break;
-                case '#tab2':
-                    $('.select_input').select('close');
-                    $('#teachers_video')[0].play();
-                    break;
-                case '#tab3':
-                    $('#teachers_video')[0].pause();
-                    break;
+        // Hash路由
+        routie({
+            'tab1': function() {
+                $('.select_input').select('close');
+                $('#teachers_video')[0].pause();
+            },
+            'tab2': function() {
+                $('.select_input').select('close');
+            },
+            'tab3': function() {
+                $('#teachers_video')[0].pause();
             }
         });
 
