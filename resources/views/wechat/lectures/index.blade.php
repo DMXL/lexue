@@ -48,8 +48,10 @@
 
             <div id="tab3" class="weui_tab_bd_item">
                 <div class="weui_panel weui_panel_access">
-                    <div class="weui_panel_hd">直播课 - 我的课程</div>
+                    <div class="weui_panel_hd">直播课 - 我的直播课</div>
                     <div class="weui_panel_bd">
+
+                        @include('wechat.lectures.lectureinfo', ['lectures' => $userLectures, 'status' => 'user'])
 
                     </div>
                 </div>
@@ -82,10 +84,38 @@
                 <div class="weui_tabbar_icon">
                     <i class="fa fa-user-circle-o"></i>
                 </div>
-                <p class="weui_tabbar_label">我的课程</p>
+                <p class="weui_tabbar_label">我的直播课</p>
             </a>
 
         </div>
 
     </div>
+@endsection
+
+@section('js')
+    <script>
+        $('.weui_media_hd').click(function() {
+            location.href = $(this).attr('data-value');
+        });
+        $('#tab3 .weui_media_bd').click(function() {
+            var infoLink = $(this).attr('data-info');
+            var roomLink = $(this).attr('data-room');
+
+            $.actions({
+                actions: [{
+                    text: "查看课程详情",
+                    className: "color-primary",
+                    onClick: function() {
+                        location.href = infoLink;
+                    }
+                },{
+                    text: "进入教室",
+                    className: "color-primary",
+                    onClick: function() {
+                        location.href = "http://weixin.duobeiyun.com/room/" + roomLink;
+                    }
+                }]
+            });
+        });
+    </script>
 @endsection

@@ -69,4 +69,8 @@ elixir(function(mix) {
     mix.copy('resources/assets/app/fonts', 'public/wechat/fonts');
     mix.copy('resources/assets/app/patterns', 'public/build/app/css/patterns');
     mix.copy('resources/assets/app/avatars', 'public/avatars');
+
+    mix.browserSync({
+        proxy: 'm.students.lexue.sudo.dev'
+    });
 });

@@ -56,7 +56,7 @@ body,
 .label {
   background-color: #D1DADE;
   color: #5E5E5E;
-  font-family: 'Open Sans';
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 10px;
   font-weight: bold;
   padding: 3px 8px;
@@ -271,12 +271,87 @@ body,
   color: #09bb07;
 }
 /* Lectures Index Page */
-.lectures_index .weui_tab_bd .weui_media_box .weui_media_hd {
+.lectures_index .weui_tab_bd #tab1 .weui_panel,
+.lectures_index .weui_tab_bd #tab2 .weui_panel {
+  background-color: transparent;
+}
+.lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_hd,
+.lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_hd {
+  background-color: #fff;
+  /* box-shadow: 0 1px 2px rgba(0,0,0,.3); */
+}
+.lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_hd:after,
+.lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_hd:after {
+  left: 0;
+  border-bottom: 1px solid #bcbab6;
+}
+.lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_bd .weui_media_box,
+.lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_bd .weui_media_box {
+  padding: 0;
+}
+.lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_bd .weui_media_box:before,
+.lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_bd .weui_media_box:before {
+  left: 0;
+  border-top: none;
+}
+.lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg,
+.lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg {
+  margin: 15px;
+  background-color: #fff;
+  border-radius: 1px;
+  /*
+                border-right: 1px solid #eee;
+                border-bottom: 1px solid #eee;
+                */
+  box-shadow: 1px 1px 0 rgba(100, 100, 100, 0.1);
+}
+.lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_hd,
+.lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_hd {
+  width: 140px;
+  height: 105px;
+  margin-right: 0;
+}
+.lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_hd .badge,
+.lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_hd .badge {
+  position: absolute;
+  font-size: 13px;
+  padding: 4px 6px;
+}
+.lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd,
+.lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd {
+  padding: 0 15px;
+}
+.lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd .pricetag,
+.lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd .pricetag {
+  color: #fff;
+  background-color: #85bb65;
+  font-size: 16px;
+  padding: 2px 3px;
+  margin-top: -7px;
+  position: absolute;
+  right: -2px;
+}
+.lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd h4,
+.lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd h4 {
+  margin: 0;
+}
+.lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd .weui_media_desc,
+.lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd .weui_media_desc {
+  line-height: 1.5;
+  overflow: auto;
+  text-overflow: ellipsis;
+  display: block;
+}
+.lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd .badgegroup,
+.lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd .badgegroup {
+  margin-top: 3px;
+}
+.lectures_index .weui_tab_bd #tab3 .weui_media_box .weui_media_hd {
   width: 100px;
   height: 75px;
   line-height: 130px;
 }
-.lectures_index .weui_tab_bd .weui_media_box .weui_media_hd .count {
+.lectures_index .weui_tab_bd #tab3 .weui_media_box .weui_media_hd .count {
   position: absolute;
   width: 95px;
   height: 75px;
@@ -286,19 +361,19 @@ body,
   font-size: 13px;
   text-align: left;
 }
-.lectures_index .weui_tab_bd .weui_media_box .weui_media_hd .badge.ongoing {
+.lectures_index .weui_tab_bd #tab3 .weui_media_box .weui_media_hd .badge {
   position: absolute;
   font-size: 13px;
 }
-.lectures_index .weui_tab_bd .weui_media_box .weui_media_bd .weui_media_desc {
+.lectures_index .weui_tab_bd #tab3 .weui_media_box .weui_media_bd .weui_media_desc {
   display: -ms-inline-flexbox;
   display: inline-flex;
 }
-.lectures_index .weui_tab_bd .weui_media_box .weui_media_bd p {
+.lectures_index .weui_tab_bd #tab3 .weui_media_box .weui_media_bd p {
   font-size: 14px;
   color: #888;
 }
-.lectures_index .weui_tab_bd .weui_media_box .weui_media_bd .badge {
+.lectures_index .weui_tab_bd #tab3 .weui_media_box .weui_media_bd .badge {
   font-size: 15px;
 }
 .lectures_index .weui_tabbar {
@@ -314,8 +389,8 @@ body,
   line-height: 12px;
   padding: 3px 5px;
   position: absolute;
-  margin-left: -3px;
-  margin-top: -5px;
+  margin-left: -1px;
+  margin-top: -7px;
 }
 .lectures_index .weui_tabbar .weui_bar_item_on .weui_tabbar_icon i {
   color: #09bb07;
