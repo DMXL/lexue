@@ -7,6 +7,6 @@
  */
 
 return [
-    'avatar' => env('DEFAULT_AVATAR','missing.png'),
-    'video' => env('DEFAULT_VIDEO','sample.mp4')
+    'avatar' => '/uploads/defaults/avatars/medium/'.env('DEFAULT_AVATAR','missing.png'),
+    'video' => '/uploads/defaults/videos/'.env('DEFAULT_VIDEO','sample.mp4')
 ];

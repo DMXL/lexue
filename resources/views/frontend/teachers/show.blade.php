@@ -65,10 +65,9 @@
             </div>
         </div>
         <div class="col-lg-8">
-            <video controls>
-                <source src="{{ getVideoUrl($teacher->video, 'mp4') }}">
-                你的浏览器不支持Html5视频，是时候换Chrome了
-            </video>
+            @if($teacher->video_file_name)
+                <video src="{{ $teacher->video->url() }}" controls></video>
+            @endif
         </div>
     </div>
     <hr>

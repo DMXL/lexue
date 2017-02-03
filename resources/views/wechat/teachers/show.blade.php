@@ -57,9 +57,10 @@
                         </article>
                     </div>
                     <div id="tab2" class="weui_tab_bd_item">
-                        <video id="teachers_video" src="{{ $teacher->video->url() }}"></video>
+                        @if($teacher->video_file_name)
+                            <video id="teachers_video" src="{{ $teacher->video->url() }}"></video>
                         @else
-                            <video id="teachers_video" src="/defaults/videos/{{ config('default_files.video') }}"></video>
+                            <video id="teachers_video" src="{{ config('default_files.video') }}"></video>
                         @endif
                     </div>
                     <div id="tab3" class="weui_tab_bd_item">

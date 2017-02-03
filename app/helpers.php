@@ -127,15 +127,6 @@ function viewPrefix()
     return $prefix;
 }
 
-function getVideoUrl($path)
-{
-    if (!$path) {
-        $path = 'videos/' . ltrim(config('default_files.video'),'/');
-    }
-
-    return url($path);
-}
-
 /**
  * @param $route
  * @return bool
