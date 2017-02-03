@@ -207,7 +207,7 @@ body,
 }
 .teachers_show .weui_tab .weui_tab_bd #tab3 .calendar .calendar_day {
   display: inline-block;
-  width: calc(10.28571429%);
+  width: 13.42857143%;
   text-align: center;
   font-size: 13px;
   color: #444;
@@ -307,8 +307,8 @@ body,
 }
 .lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_hd,
 .lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_hd {
-  width: 140px;
-  height: 105px;
+  width: 112px;
+  height: 90px;
   margin-right: 0;
 }
 .lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_hd .badge,
@@ -319,7 +319,7 @@ body,
 }
 .lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd,
 .lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd {
-  padding: 0 15px;
+  padding: 0 10px;
 }
 .lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd .pricetag,
 .lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd .pricetag {
@@ -327,7 +327,6 @@ body,
   background-color: #85bb65;
   font-size: 16px;
   padding: 2px 3px;
-  margin-top: -7px;
   position: absolute;
   right: -2px;
 }

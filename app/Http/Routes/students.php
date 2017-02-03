@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth:students'], function(){
 
     Route::post('teachers/{id}/book', ['as' => 'teachers.book', 'uses' => 'TeacherController@book']);
 
-    Route::get('lectures/records', ['as' => 'lectures.records', 'uses' => 'LectureController@showRecords']);
+    Route::get('lectures/records', ['as' => 'lectures.records', 'uses' => 'LectureController@records']);
     Route::resource('lectures', 'LectureController', ['only' => ['show','index']]);
     Route::post('lectures/{id}/book', ['as' => 'lectures.book', 'uses' => 'LectureController@book']);
 

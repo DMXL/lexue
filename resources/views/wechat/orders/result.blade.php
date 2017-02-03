@@ -29,7 +29,7 @@
         <div class="weui_opr_area">
             <p class="weui_btn_area">
                 @if($order->is_lecture)
-                    <a href="{{ route('m.students::lectures.index') }}" class="weui_btn weui_btn_primary">查看详情</a>
+                    <a href="{{ route('m.students::lectures.index') }}#tab3" class="weui_btn weui_btn_primary">查看详情</a>
                 @else
                     <a href="{{ route('m.students::tutorials.index') }}" class="weui_btn weui_btn_primary">查看详情</a>
                 @endif
