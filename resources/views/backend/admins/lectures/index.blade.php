@@ -4,7 +4,7 @@
     <div class="ibox">
         <div class="ibox-content">
             <a href="{{ route('admins::lectures.create') }}" class="btn btn-primary btn-sm">
-                <i class="fa fa-plus"></i> 添加公开课
+                <i class="fa fa-plus"></i> 添加直播课
             </a>
         </div>
     </div>
@@ -21,7 +21,7 @@
                         <thead>
                         <tr>
                             <th></th>
-                            <th>公开课名称</th>
+                            <th>直播课名称</th>
                             <th>报名人数</th>
                             <th>教师</th>
                             <th>开始时间</th>

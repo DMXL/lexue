@@ -39,10 +39,10 @@ class Lecture extends Model implements StaplerableInterface
     protected $with = ['teacher', 'levels'];
 
     public function __construct(array $attributes = array()) {
-        $this->hasAttachedFile('avatar', [
+        $this->hasAttachedFile('thumb', [
             'styles' => [
-                'medium' => '300x300#',
-                'thumb' => '100x100#'
+                'medium' => '600x450',
+                'small' => '120x90'
             ]
         ]);
 

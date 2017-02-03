@@ -27,6 +27,7 @@ class CreateTeachersTable extends Migration
             $table->boolean('enabled')->default(false);
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

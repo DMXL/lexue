@@ -51,7 +51,7 @@ return [
                     ]
                 ]
             ], [
-                'title' => '公开课管理',
+                'title' => '直播课管理',
                 'route' => 'lectures.index',
                 'children' => [
                     [
@@ -119,7 +119,7 @@ return [
                 'route' => 'lectures.index',
                 'children' => [
                     [
-                        'title' => '公开课',
+                        'title' => '直播课',
                         'route' => 'lectures.index',
                     ], [
                         'title' => '微课',

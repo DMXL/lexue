@@ -23,25 +23,33 @@
     <div class="ibox">
         <div class="ibox-content">
             <a href="{{ route('admins::lectures.index') }}" class="btn btn-default">
-                <i class="fa fa-long-arrow-left"></i> 公开课列表
+                <i class="fa fa-long-arrow-left"></i> 直播课列表
             </a>
         </div>
     </div>
 
     <div class="ibox">
         <div class="ibox-title">
-            <h5 class="no-margins vertical-middle">公开课信息</h5>
+            <h5 class="no-margins vertical-middle">直播课信息</h5>
             <div class="ibox-tools ibox-tools-buttons">
-                <a href="{{ route('admins::lectures.edit', $lecture->id) }}" class="btn btn-default btn-outline btn-xs">
-                    <i class="fa fa-wrench"></i> 修改信息
-                </a>
-                <span class="m-l-sm m-r-sm"> - </span>
-                <button type="button" class="btn btn-danger btn-outline btn-xs"  data-toggle="modal" data-target="#lecture-delete-modal">
+                <button type="button" class="btn btn-danger btn-xs"  data-toggle="modal" data-target="#lecture-delete-modal">
                     <i class="fa fa-trash"></i> 删除
                 </button>
             </div>
         </div>
         <div class="ibox-content">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="">
+                            <i class="fa fa-photo"></i> 修改图片
+                        </button>
+                        <a href="{{ route('admins::lectures.edit', $lecture->id) }}" class="btn btn-default btn-sm">
+                            <i class="fa fa-wrench"></i> 修改信息
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div class="row m-t-lg">
                 <div class="col-md-6">
                     <div class="lecture-image">
@@ -172,7 +180,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">删除公开课</h4>
+                    <h4 class="modal-title" id="myModalLabel">删除直播课</h4>
                 </div>
                 <div class="modal-body">
                     <div class="alert alert-danger">

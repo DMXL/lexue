@@ -66,7 +66,7 @@ class LectureEventSubscriber
                     "color" => "#000000"
                 ],
                 "keyword1"   => [
-                    "value" => $teacher->name . " 老师的公开课 " . $lecture->name,    // 课程名称
+                    "value" => $teacher->name . " 老师的直播课 " . $lecture->name,    // 课程名称
                     "color" => "#00beb7"
                 ],
                 "keyword2"   => [

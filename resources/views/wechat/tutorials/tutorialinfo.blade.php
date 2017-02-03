@@ -25,7 +25,7 @@
         <div class="weui_media_bd">
             <h4 class="weui_media_title">{{ $tutorial->human_time }} {{ $tutorial->teacher->name }}老师</h4>
             <p class="weui_media_desc">
-                <span class="badge {{ $status == 'grey' ? 'dark' : 'success' }}">{{ $tutorial->date }}</span> <span class="badge {{ $status }}">{{ $tutorial->timeSlot->range }}</span>
+                <span class="badge {{ $status == 'grey' ? 'grey2' : 'success' }}">{{ $tutorial->date }}</span> <span class="badge {{ $status }}">{{ $tutorial->timeSlot->range }}</span>
             </p>
         </div>
     </a>

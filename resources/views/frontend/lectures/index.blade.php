@@ -3,14 +3,14 @@
 @section('content')
     <div class="ibox">
         <div class="ibox-title">
-            <h5>公开课</h5>
+            <h5>直播课</h5>
         </div>
         <div class="ibox-content">
             <table class="table">
                 <thead>
                 <tr>
                     <th></th>
-                    <th>公开课名称</th>
+                    <th>直播课名称</th>
                     <th>报名人数</th>
                     <th>教师</th>
                     <th>时间</th>

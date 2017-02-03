@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <strong>说明： </strong>
-                    <div class="m-b-sm inline" disabled><button class="btn text-success btn-sm"><s>公开课</s></button></div>
+                    <div class="m-b-sm inline" disabled><button class="btn text-success btn-sm"><s>直播课</s></button></div>
                     <div class="m-b-sm inline" disabled><button class="btn text-warning btn-sm"><s>微课</s></button></div>
                     <div class="m-b-sm inline" disabled><button class="btn text-danger btn-sm"><s>教师有事</s></button></div>
                 </div>

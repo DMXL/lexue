@@ -18,20 +18,21 @@ class CreateLecturesTable extends Migration
             $table->unsignedInteger('teacher_id');
             $table->foreign('teacher_id')->references('id')->on('teachers');
 
-            $table->unsignedInteger('time_slot_id');
-            $table->foreign('time_slot_id')->references('id')->on('time_slots');
-
             $table->date('date');
-
             $table->time('start')->comment('for sorting purposes only');
+            $table->unique(['teacher_id', 'date', 'start']);
 
             $table->string('name')->nullable();
-
+            $table->smallInteger('length');
+            $table->float('price');
+            $table->text('description')->nullable();
+            $table->boolean('enabled')->default(false);
             $table->boolean('finished')->default(false);
-
-            $table->unique(['teacher_id', 'date', 'time_slot_id']);
+            $table->string('room_id')->nullable()->comment('端房间唯一id');
+            $table->string('host_code')->nullable()->comment('主讲人邀请码');
             
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

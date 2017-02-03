@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="text-center">
-            <h3>公开课</h3>
+            <h3>直播课</h3>
         </div>
         <table class="table table-bordered">
             <thead>

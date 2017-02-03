@@ -18,7 +18,7 @@
 -->
 <div class="ibox float-e-margins" id="lecture-form">
     <div class="ibox-title">
-        <h5>添加公开课</h5>
+        <h5>添加直播课</h5>
     </div>
     <div class="ibox-content">
         <form method="post" class="form-horizontal" action="{{ $action }}">

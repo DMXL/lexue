@@ -26,7 +26,7 @@
 
             <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
                 <div class="weui_panel weui_panel_access">
-                    <div class="weui_panel_hd">我的公开课 - 即将开始</div>
+                    <div class="weui_panel_hd">我的直播课 - 即将开始</div>
                     <div class="weui_panel_bd">
 
                         @include('wechat.orders.lectureinfo', ['lectures' => $upcoming, 'status' => 'primary'])
@@ -37,7 +37,7 @@
 
             <div id="tab2" class="weui_tab_bd_item">
                 <div class="weui_panel weui_panel_access">
-                    <div class="weui_panel_hd">我的公开课 - 正在直播</div>
+                    <div class="weui_panel_hd">我的直播课 - 正在直播</div>
                     <div class="weui_panel_bd">
 
                         @include('wechat.orders.lectureinfo', ['lectures' => $ongoing, 'status' => 'alert'])
@@ -48,7 +48,7 @@
 
             <div id="tab3" class="weui_tab_bd_item">
                 <div class="weui_panel weui_panel_access">
-                    <div class="weui_panel_hd">我的公开课 - 已结束</div>
+                    <div class="weui_panel_hd">我的直播课 - 已结束</div>
                     <div class="weui_panel_bd">
 
                         @include('wechat.orders.recordinfo', ['lectures' => $finished])
