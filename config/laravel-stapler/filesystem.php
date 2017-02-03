@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'url' => '/:attachment/:id_partition/:style/:filename',
+    'url' => '/uploads/:attachment/:id_partition/:style/:filename',
     /*
     |--------------------------------------------------------------------------
     | Stapler File Path
@@ -27,7 +27,7 @@ return [
     |
     */
 
-    'path' => ':app_root/public/uploads:url',
+    'path' => ':app_root/public:url',
 
     /*
     |--------------------------------------------------------------------------
