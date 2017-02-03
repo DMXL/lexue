@@ -4706,4 +4706,16 @@ input[type="radio"] .styled:checked + label::after {
   }
 }
 
+/*
+ * admins.lectures.index
+ */
+.lecture-admin-thumb { width: 120px; }
+
+/*
+ * admins.lectures.show
+ */
+.lecture-image { width: 120px; float: left; }
+.lecture-info { margin-left: 140px; }
+.modal .modal-body .delete-info { padding-top: 5px; }
+#thumb-upload { text-align: center; }
 /*# sourceMappingURL=all.css.map */

@@ -34,10 +34,10 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="#modal-avatar">
+                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-avatar">
                             <i class="fa fa-photo"></i> 修改头像
                         </button>
-                        <button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="#modal-video">
+                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-video">
                             <i class="fa fa-file-video-o"></i> 上传试听课
                         </button>
                         <a href="{{ route('admins::teachers.edit', $teacher->id) }}" class="btn btn-default btn-sm">

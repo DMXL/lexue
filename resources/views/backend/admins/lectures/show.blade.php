@@ -32,6 +32,18 @@
         <div class="ibox-title">
             <h5 class="no-margins vertical-middle">直播课信息</h5>
             <div class="ibox-tools ibox-tools-buttons">
+                <?php
+                $enabled = $lecture->enabled;
+                $routeAction = $enabled ? 'disable' : 'enable';
+                $buttonText = $enabled ? '下线' : '上线';
+                $buttonClass = $enabled ? 'warning' : 'primary';
+                $faClass = $enabled ? 'arrow-down' : 'arrow-up';
+                ?>
+                <form action="{{ route('admins::lectures.' . $routeAction, $lecture->id) }}" class="inline" method="post">
+                    {{ method_field('put') }}
+                    {{ csrf_field() }}
+                    <button class="btn btn-{{ $buttonClass }} btn-xs"><i class="fa fa-{{ $faClass }}"></i> {{ $buttonText }}</button>
+                </form>
                 <button type="button" class="btn btn-danger btn-xs"  data-toggle="modal" data-target="#lecture-delete-modal">
                     <i class="fa fa-trash"></i> 删除
                 </button>
@@ -41,7 +53,7 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="">
+                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-thumb">
                             <i class="fa fa-photo"></i> 修改图片
                         </button>
                         <a href="{{ route('admins::lectures.edit', $lecture->id) }}" class="btn btn-default btn-sm">
@@ -204,6 +216,34 @@
             </div>
         </div>
     </div>
+
+    <div class="modal inmodal fade" id="modal-thumb" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                                class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{ $lecture->name }} 课程小图</h4>
+                </div>
+                <div class="modal-body" id="settings">
+                    <div id="thumb-upload" thumb="{{ $lecture->thumb_file_name }}">
+                        <div>
+                            <img v-if="image" :src="image" />
+                            <h4 v-else>还没有小图</h4>
+                            <button v-if="!added" :class="buttonClass" @click="selectFile">@{{ buttonText }}</button>
+                            <button v-show="added" :disabled="uploading" class="btn btn-primary btn-sm" @click="uploadImage" data-style="zoom-in">
+                            <i class="fa fa-spinner fa-spin fa-fw" v-show="uploading"></i> 确认
+                            </button>
+                            <button v-if="added && !uploading" class="btn btn-danger btn-sm" @click="cancelImage">取消</button>
+                            <form action="{{ route('admins::lectures.thumb.upload', $lecture->id) }}" method="post" enctype="multipart/form-data">
+                                <input type="file" name="thumb" class="hide" @change="onFileChange">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section("js")
@@ -215,5 +255,85 @@
                 toastr.success('已复制')
             });
         });
+    </script>
+
+    <script>
+
+        new Vue({
+            el: '#modal-thumb',
+            props: ['thumb'],
+            data() {
+                return {
+                    image: '',
+                    added: false,
+                    uploading: false
+                };
+            },
+            computed: {
+                buttonText: function() {
+                    return this.thumb ? "修改" : "上传";
+                },
+                buttonClass: function() {
+                    return this.thumb ? "btn btn-warning btn-sm" : "btn btn-primary btn-sm";
+                }
+            },
+            ready() {
+                this.image = this.thumb;
+            },
+            methods: {
+                selectFile(e) {
+                    $(e.target).siblings('form').find('input[type=file]').first().click();
+                },
+                onFileChange(e) {
+                    var files = e.target.files || e.dataTransfer.files;
+                    if (!files.length)
+                        return;
+                    this.createImage(files[0]);
+                },
+                createImage(file) {
+                    this.added = true;
+                    var reader = new FileReader();
+                    var vm = this;
+
+                    reader.onload = (e) => {
+                        vm.image = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                },
+                cancelImage (e) {
+                    this.added = false;
+                    this.image = this.thumb;
+                    $('#thumb-upload').find('input[name=thumb]').val('');
+                },
+                uploadImage(e) {
+                    var vm = this;
+
+                    var form = $('#thumb-upload').find('form')[0];
+
+                    this.uploading = true;
+
+                    $.ajax({
+                        url: form.action,
+                        type: 'POST',
+                        data: new FormData(form),
+                        cache: false,
+                        contentType: false,
+                        processData: false, // Don't process the files
+                        success: function(data)
+                        {
+                            console.log(data);
+                            location.reload();
+                        },
+                        error: function(jqXHR, textStatus, error)
+                        {
+                            vm.uploading = false;
+                            console.log('ERRORS: ' + textStatus + ' - ' + error);
+                            toastr['error']("图片上传失败...");
+                        }
+                    });
+                }
+            }
+        });
+
     </script>
 @endsection

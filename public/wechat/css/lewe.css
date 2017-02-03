@@ -307,7 +307,7 @@ body,
 }
 .lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_hd,
 .lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_hd {
-  width: 112px;
+  width: 120px;
   height: 90px;
   margin-right: 0;
 }
@@ -396,7 +396,6 @@ body,
 }
 /* Lectures Show Page */
 .lectures_show .weui_icon_area {
-  height: 200px;
   vertical-align: middle;
 }
 .lectures_show .weui_icon_area img {
@@ -406,29 +405,29 @@ body,
 .lectures_show .weui_panel {
   margin-top: 0;
 }
-.lectures_show .weui_panel_hd {
+.lectures_show .weui_panel .weui_panel_hd {
   color: #444;
   font-size: 15px;
 }
-.lectures_show .lecture_info {
+.lectures_show .weui_panel .weui_panel_hd .lecture_info {
   width: 100%;
 }
-.lectures_show .lecture_info td {
+.lectures_show .weui_panel .weui_panel_hd .lecture_info td {
   vertical-align: bottom;
 }
-.lectures_show .lecture_info .price {
+.lectures_show .weui_panel .weui_panel_hd .lecture_info td .price {
   color: #85bb65;
   font-size: 20px;
   font-weight: bold;
 }
-.lectures_show .weui_media_title {
+.lectures_show .weui_panel .weui_panel_bd .weui_media_title {
   font-size: 14px;
   line-height: 24px;
 }
-.lectures_show .weui_media_desc {
+.lectures_show .weui_panel .weui_panel_bd .weui_media_desc {
   line-height: 16px;
 }
-.lectures_show .lecture_desc {
+.lectures_show .weui_panel .weui_panel_bd .lecture_desc {
   display: block;
   line-height: 18px;
 }

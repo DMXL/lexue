@@ -31,7 +31,8 @@ elixir(function(mix) {
         'plugins/pickadate/default.time.css',
         'plugins/selectize/selectize.css',
         'plugins/selectize/selectize.bootstrap3.css',
-        'plugins/jqueryupload/jquery.fileupload.css'
+        'plugins/jqueryupload/jquery.fileupload.css',
+        'customs.css'
     ], 'public/app/css');
 
     mix.scripts([

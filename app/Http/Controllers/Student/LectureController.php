@@ -38,7 +38,9 @@ class LectureController extends Controller
 
         $userLectures = $this->student->lectures;
 
-        $count = $ongoing->count();
+        $count = $ongoing->filter(function($lecture) {
+            return $lecture->enabled;
+        })->count();
 
         $userLecturesList = $this->orderList;
 

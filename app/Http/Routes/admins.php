@@ -16,7 +16,9 @@ Route::put('teachers/{id}/disable', ['as' => 'teachers.disable', 'uses' => 'Teac
 
 Route::resource('tutorials', 'TutorialController');
 Route::resource('lectures', 'LectureController');
-Route::get('teachers/{teacher_id}/lectures', ['as' => 'teachers.lectures.index', 'uses' => 'LectureController@showTeacher']);
+Route::post('lectures/{id}/thumb', ['as' => 'lectures.thumb.upload', 'uses' => 'LectureController@uploadThumb']);
+Route::put('lectures/{id}/enable', ['as' => 'lectures.enable', 'uses' => 'LectureController@enable']);
+Route::put('lectures/{id}/disable', ['as' => 'lectures.disable', 'uses' => 'LectureController@disable']);
 
 Route::resource('timeslots', 'TimeSlotController');
 Route::resource('teachers.timeslots', 'TeacherTimeSlotController', ['only' => ['index', 'store']]);

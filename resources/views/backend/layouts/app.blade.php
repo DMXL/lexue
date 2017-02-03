@@ -12,7 +12,6 @@
 
     <link href="{{ elixir('app/css/all.css') }}" rel="stylesheet">
     <link href="{{ elixir('app/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('app/css/customs.css') }}" rel="stylesheet">
     <link href="{{ asset('plugins/datetimepicker/datetime-picker.css') }}" rel="stylesheet">
 
     @yield('css')

@@ -111,6 +111,69 @@ class LectureController extends Controller
     }
 
     /**
+     * Upload lecture thumbnail.
+     *
+     * @param Request $request
+     * @param $id
+     * @return int
+     */
+    public function uploadThumb(Request $request, $id)
+    {
+        $lecture = Lecture::findOrFail($id);
+
+        $lecture->thumb = $request->file('thumb');
+        $lecture->save();
+
+        return 1;
+    }
+
+    /**
+     * Put lecture online.
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function enable($id)
+    {
+        try {
+            $lecture = Lecture::find($id);
+            if (!$lecture->enabled) {
+                $lecture->enabled = true;
+                $lecture->save();
+            }
+        } catch (\Exception $e) {
+            // TODO logging and notify
+            return back();
+        }
+
+        \Flash::success('直播课已上线');
+        return back();
+    }
+
+    /**
+     * Pub lecture offline.
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function disable($id)
+    {
+        try {
+            $lecture = Lecture::find($id);
+            if ($lecture->enabled) {
+                $lecture->enabled = false;
+                $lecture->save();
+            }
+        } catch (\Exception $e) {
+            // TODO logging and notify
+            return back();
+        }
+
+        \Flash::success('直播课已下线');
+        return back();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
