@@ -22,7 +22,7 @@
 @section('content')
     <div class="bd lectures_show" style="height: 100%;">
         <div class="weui_icon_area">
-            <img src="{{ $lecture->avatar->url('medium') }}" />
+            <img src="{{ $lecture->thumb->url('medium') }}" />
         </div>
         <div class="weui_panel weui_panel_access">
             <div class="weui_panel_hd">

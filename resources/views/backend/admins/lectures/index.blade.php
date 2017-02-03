@@ -33,7 +33,7 @@
                         @foreach($lectures as $lecture)
                             <tr>
                                 <td>
-                                    <img src="{{ $lecture->avatar->url('thumb') }}" alt="{{ $lecture->name }}" class="lecture-admin-thumb">
+                                    <img src="{{ $lecture->thumb->url('small') }}" alt="{{ $lecture->name }}" class="lecture-admin-thumb">
                                 </td>
                                 <td class="text-left">
                                     {{ $lecture->name }}

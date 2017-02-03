@@ -53,7 +53,7 @@
             <div class="row m-t-lg">
                 <div class="col-md-6">
                     <div class="lecture-image">
-                        <img src="{{ $lecture->avatar->url('thumb') }}" alt="{{ $lecture->name }}" class="lecture-admin-thumb">
+                        <img src="{{ $lecture->thumb->url('small') }}" alt="{{ $lecture->name }}" class="lecture-admin-thumb">
                     </div>
                     <div class="lecture-info">
                         <div class="m-b-sm">

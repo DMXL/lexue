@@ -28,7 +28,7 @@
                 @if($lecture->end_time < $now)
 
                     <span class="badge grey2">已结束</span>
-                <img class="weui_media_appmsg_thumb" src="{{ $lecture->avatar->url('thumb') }}" alt="{{ $lecture->name }}">
+                <img class="weui_media_appmsg_thumb" src="{{ $lecture->thumb->url('small') }}" alt="{{ $lecture->name }}">
             </div>
             <div class="weui_media_bd ended"
                  data-info="{{ route('m.students::lectures.show', $lecture->id) }}"
@@ -39,7 +39,7 @@
                     @if($lecture->start_time <= $now)
                         <span class="badge lexue">直播中</span>
                     @endif
-                <img class="weui_media_appmsg_thumb" src="{{ $lecture->avatar->url('thumb') }}" alt="{{ $lecture->name }}">
+                <img class="weui_media_appmsg_thumb" src="{{ $lecture->thumb->url('small') }}" alt="{{ $lecture->name }}">
             </div>
             <div class="weui_media_bd available"
                  data-info="{{ route('m.students::lectures.show', $lecture->id) }}"
@@ -65,7 +65,7 @@
                 @if($status == 'ongoing')
                     <span class="badge lexue">直播中</span>
                 @endif
-                <img class="weui_media_appmsg_thumb" src="{{ $lecture->avatar->url('thumb') }}" alt="{{ $lecture->name }}">
+                <img class="weui_media_appmsg_thumb" src="{{ $lecture->thumb->url('small') }}" alt="{{ $lecture->name }}">
             </div>
             <div class="weui_media_bd">
                 <span class="pricetag">￥{{ number_format($lecture->price, 2) }}</span>

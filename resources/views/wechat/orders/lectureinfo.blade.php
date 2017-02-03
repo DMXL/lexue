@@ -20,7 +20,7 @@
 @foreach($lectures as $lecture)
     <a href="http://weixin.duobeiyun.com/room/{{ $lecture->room_id }}" class="weui_media_box weui_media_appmsg weui_panel_ft">
         <div class="weui_media_hd">
-            <img class="weui_media_appmsg_thumb" src="{{ $lecture->avatar->url('thumb') }}" alt="{{ $lecture->name }}">
+            <img class="weui_media_appmsg_thumb" src="{{ $lecture->thumb->url('small') }}" alt="{{ $lecture->name }}">
         </div>
         <div class="weui_media_bd">
             <h4 class="weui_media_title">{{ $lecture->name }}</h4>
