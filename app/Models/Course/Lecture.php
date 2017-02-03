@@ -41,8 +41,8 @@ class Lecture extends Model implements StaplerableInterface
     public function __construct(array $attributes = array()) {
         $this->hasAttachedFile('thumb', [
             'styles' => [
-                'medium' => '600x450',
-                'small' => '120x90'
+                'medium' => '600x450#',
+                'small' => '120x90#'
             ]
         ]);
 

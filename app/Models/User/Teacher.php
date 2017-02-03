@@ -58,8 +58,8 @@ class Teacher extends Authenticatable implements StaplerableInterface
     {
         $this->hasAttachedFile('avatar', [
             'styles' => [
-                'medium' => '400x300',
-                'thumb' => '100x100'
+                'medium' => '400x300#',
+                'thumb' => '100x100#'
             ]
         ]);
         $this->hasAttachedFile('video');
