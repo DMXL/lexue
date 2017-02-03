@@ -24,6 +24,6 @@ class TeachersTableSeeder extends Seeder
 
         ]);
 
-        // factory(Teacher::class, 20)->create();
+        factory(Teacher::class, 20)->create();
     }
 }
