@@ -26,13 +26,9 @@ class DatabaseSeeder extends Seeder
                 Staging\TeachersTableSeeder::class,
 
                 Staging\LevelsTableSeeder::class,
-                Staging\LevelTeacherTableSeeder::class,
-
                 Staging\LabelsTableSeeder::class,
-                Staging\LabelTeacherTableSeeder::class,
 
                 Staging\TimeSlotsTableSeeder::class,
-                Staging\TeacherTimeSlotTableSeeder::class,
             ];
         } else {
             $this->seeders = [

@@ -169,6 +169,6 @@ class TeachersTableSeeder extends Seeder
                 'avatar_updated_at' => NULL,
             ),
         ));
-        
+
     }
 }
