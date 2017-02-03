@@ -59,7 +59,7 @@ return [
     |
     */
 
-    'default_url' => '/defaults/:attachment/:style/missing.png',
+    'default_url' => '/uploads/defaults/:attachment/:style/missing.png',
 
     /*
     |--------------------------------------------------------------------------
