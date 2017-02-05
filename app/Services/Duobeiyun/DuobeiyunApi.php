@@ -2,6 +2,9 @@
 
 namespace App\Services\Duobeiyun;
 
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
 /**
  *
  * @author sharpbai
@@ -53,6 +56,7 @@ class DuobeiyunApi {
 	private $serverAddress;
 	private $partnerId;
 	private $appKey;
+	private $log;
 
 	function __construct() {
 		if(!function_exists('curl_init')) {
@@ -61,6 +65,9 @@ class DuobeiyunApi {
 		$this->serverAddress = config('duobeiyun.server');
 		$this->partnerId = config('duobeiyun.id');
 		$this->appKey = config('duobeiyun.key');
+
+		$this->log = new Logger('Duobeiyun');
+		$this->log->pushHandler(new StreamHandler(storage_path('logs/duobeiyun.log')));
 	}
 	
 	/**
@@ -290,6 +297,8 @@ class DuobeiyunApi {
 
 		$path = "/api/v3/room/detail";
 		$result = $this->post($path, $this->prepareParameters($params));
+
+        $this->log->debug('Room Detail:', json_decode($result, true));
 		return $result;
 	}
 
