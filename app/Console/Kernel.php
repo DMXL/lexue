@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        Commands\UpdateLectureStatuses::class,
          // Commands\Inspire::class,
     ];
 
@@ -24,7 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         // $schedule->command('inspire')
-         //          ->everyMinute();
+         $schedule->command('lecture-statuses:update')
+             ->everyMinute()
+             ->sendOutputTo(storage_path('logs/tasks.log'), true);
     }
 }

@@ -113,6 +113,8 @@ class DuobeiyunApi {
 
 		$path = "/api/v4/room/create";
 		$result = $this->post($path, $this->prepareParameters($params));
+
+        $this->log->debug('Room created:', json_decode($result, true));
 		return $result;
 	}
 	
@@ -298,7 +300,7 @@ class DuobeiyunApi {
 		$path = "/api/v3/room/detail";
 		$result = $this->post($path, $this->prepareParameters($params));
 
-        $this->log->debug('Room Detail:', json_decode($result, true));
+        $this->log->debug('Room detail:', json_decode($result, true));
 		return $result;
 	}
 
@@ -356,6 +358,8 @@ class DuobeiyunApi {
 
 		$path = "/api/v3/course/weixin/live/open";
 		$result = $this->post($path, $this->prepareParameters($params));
+
+        $this->log->debug('Weixin live open:', json_decode($result, true));
 		return $result;
 	}
 
