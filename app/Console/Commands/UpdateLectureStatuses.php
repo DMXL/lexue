@@ -56,7 +56,7 @@ class UpdateLectureStatuses extends Command
             $output = '';
 
             foreach($lectures as $lecture) {
-                $this->dispatch(new CheckRoomDetail($lecture));
+                $this->dispatch(new CheckRoomDetail($lecture))->onQueue('updatestats');
                 $output .= 'Lecture '.$lecture->id.' "'.$lecture->name.'" is finished. ';
                 $count++;
             }
