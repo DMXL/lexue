@@ -56,7 +56,11 @@ class UpdateLectureStatuses extends Command
             $output = '';
 
             foreach($lectures as $lecture) {
-                $this->dispatch(new CheckRoomDetail($lecture));
+                $job = (new CheckRoomDetail($lecture))
+                    ->onConnection('beanstalkd')
+                    ->onQueue('statsupdate');
+                $this->dispatch($job);
+
                 $output .= 'Lecture '.$lecture->id.' "'.$lecture->name.'" is finished. ';
                 $count++;
             }

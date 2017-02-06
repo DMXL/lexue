@@ -26,7 +26,6 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
          $schedule->command('lecture-statuses:update')
-             ->everyMinute()
              ->sendOutputTo(storage_path('logs/tasks.log'), true);
     }
 }
