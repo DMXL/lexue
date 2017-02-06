@@ -57,12 +57,12 @@
                                             <span class="label label-danger">教室未开通</span>
                                         @endif
                                     @endif
-                                    @if($lecture->enabled)
-                                        <span class="label label-success">已上线</span>
-                                    @else
-                                        <span class="label label-danger">未上线</span>
-                                    @endif
 
+                                    @if($lecture->enabled)
+                                        <span class="label label-primary">已上线</span>
+                                    @else
+                                        <span class="label label-warning">未上线</span>
+                                    @endif
                                 </td>
                                 <td class="project-actions">
                                     <a href="{{ route('admins::lectures.show', $lecture->id) }}" class="btn btn-white btn-sm"><i class="fa fa-eye"></i> 详情 </a>

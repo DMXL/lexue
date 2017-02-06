@@ -139,12 +139,17 @@
                                 @if($lecture->finished)
                                     <span class="label label-default">已结束</span>
                                 @else
-                                    <span class="label label-primary">未结束</span>
+                                    @if(isset($lecture->room_id))
+                                        <span class="label label-success">教室已开通</span>
+                                    @else
+                                        <span class="label label-danger">教室未开通</span>
+                                    @endif
                                 @endif
-                                @if(isset($lecture->room_id))
-                                    <span class="label label-success">教室已开通</span>
-                                @else
-                                    <span class="label label-danger">教室未开通</span>
+
+                                @if($lecture->enabled)
+                                        <span class="label label-primary">已上线</span>
+                                    @else
+                                        <span class="label label-warning">未上线</span>
                                 @endif
                             </td>
                         </tr>
