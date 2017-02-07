@@ -86,7 +86,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="teacher-description">教师简介</label>
                 <div class="col-sm-10">
-                    <textarea name="description" id="teacher-description" class="form-control"></textarea>
+                    <textarea name="description" id="teacher-description" class="form-control">{!! Request::old('description', $defaults['description']) !!}</textarea>
                 </div>
             </div>
 

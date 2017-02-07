@@ -102,7 +102,7 @@
         $('#tab3 .weui_media_bd').click(function() {
             var infoLink = $(this).attr('data-info');
             var roomLink = $(this).attr('data-room');
-            var buttonText = $(this).hassClass('finished') ? "观看回放" : "进入教室";
+            var buttonText = $(this).hasClass('finished') ? "观看回放" : "进入教室";
 
             $.actions({
                 actions: [{
