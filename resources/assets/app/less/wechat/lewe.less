@@ -432,6 +432,10 @@ body, .bd {
                   display: block;
                 }
 
+                .weui_media_title {
+                  margin-right: 45px;
+                }
+
                 .badgegroup {
                   margin-top: 3px;
                 }
@@ -567,58 +571,93 @@ body, .bd {
   }
 }
 
-/* Orders Index Page */
-.orders_index .weui_tabbar_icon i {
-  color: #bbb;
-  font-size: 26px;
-  display: block;
-}
+/* Lectures Replays Page */
+.lectures_replays {
 
-.orders_index .weui_bar_item_on .weui_tabbar_icon i {
-  color: #09bb07;
-}
+  .weui_panel {
+    background-color: transparent;
 
-.orders_index .weui_tabbar {
-  position: fixed;
-  z-index: 99;
-}
+    .weui_panel_hd {
+      background-color: #fff;
+      /* box-shadow: 0 1px 2px rgba(0,0,0,.3); */
 
-.orders_index .inline {
-  display: inline-block;
-  vertical-align: middle;
-}
+      &:after {
+        left: 0;
+        border-bottom: 1px solid #bcbab6;
+      }
+    }
 
-.orders_index .badge.round {
-  margin-left: 10px;
-}
+    .weui_panel_bd {
 
-/* Orders Pay Page */
-.weui_msg.orders_pay {
-  padding-top: 20px;
-}
+      .weui_media_box {
+        padding: 0;
 
-.orders_pay .weui_text_area {
-  margin-bottom: 20px;
-}
+        &:before {
+          left: 0;
+          border-top: none;
+        }
 
-.orders_pay .weui_msg_desc {
-  color: #222;
-}
+        &.weui_media_appmsg {
+          margin: 15px;
+          background-color: #fff;
+          border-radius: 1px;
+          /*
+            border-right: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            */
+          box-shadow: 1px 1px 0 rgba(100, 100, 100, .1);
 
-.orders_pay .weui_msg_title {
-  font-size: 36px;
-  line-height: 40px;
-}
+          .weui_media_hd {
+            width: 120px;
+            height: 90px;
+            margin-right: 0;
 
-.orders_pay .weui_cells {
-  margin-top: 15px;
-}
+            .badge {
+              position: absolute;
+              font-size: 13px;
+              padding: 4px 6px;
+            }
+          }
 
-.orders_pay .weui_cell {
-  font-size: 14px;
-  padding: 13px 15px;
-}
+          .weui_media_bd {
+            padding: 0 10px;
 
-.orders_pay .weui_cell .weui_cell_primary {
-  text-align: left;
+            .pricetag {
+              color: #fff;
+              background-color: #85bb65;
+              font-size: 16px;
+              padding: 2px 3px;
+              position: absolute;
+              right: -2px;
+            }
+
+            .lexue {
+              position: absolute;
+              margin-top: 4px;
+            }
+
+            h4 {
+              margin: 0;
+            }
+
+            .weui_media_title {
+              margin-left: 45px;
+              margin-right: 45px;
+            }
+
+            .weui_media_desc {
+              line-height: 1.5;
+              overflow: auto;
+              text-overflow: ellipsis;
+              display: block;
+            }
+
+            .badgegroup {
+              margin-top: 3px;
+            }
+          }
+        }
+      }
+    }
+  }
 }

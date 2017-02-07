@@ -92,17 +92,14 @@ class LectureController extends Controller
         return redirect()->route('m.students::orders.pay', $orderId);
     }
 
-    public function showRecords()
+    public function replays()
     {
-        $records = Lecture::orderByLatest()
+        $lectures = Lecture::finished()
             ->with('teacher')
-            ->get()
-            ->filter(function($lecture) {
-                return $lecture->end_time < Carbon::now();
-            });
+            ->get();
 
-        $purchased = $this->orderList;
+        $userLecturesList = $this->orderList;
 
-        return $this->frontView('wechat.lectures.records', compact('records', 'purchased'));
+        return $this->frontView('wechat.lectures.replays', compact('lectures', 'userLecturesList'));
     }
 }

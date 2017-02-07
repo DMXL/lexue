@@ -341,6 +341,10 @@ body,
   text-overflow: ellipsis;
   display: block;
 }
+.lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd .weui_media_title,
+.lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd .weui_media_title {
+  margin-right: 45px;
+}
 .lectures_index .weui_tab_bd #tab1 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd .badgegroup,
 .lectures_index .weui_tab_bd #tab2 .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd .badgegroup {
   margin-top: 3px;
@@ -431,49 +435,75 @@ body,
   display: block;
   line-height: 18px;
 }
-/* Orders Index Page */
-.orders_index .weui_tabbar_icon i {
-  color: #bbb;
-  font-size: 26px;
+/* Lectures Replays Page */
+.lectures_replays .weui_panel {
+  background-color: transparent;
+}
+.lectures_replays .weui_panel .weui_panel_hd {
+  background-color: #fff;
+  /* box-shadow: 0 1px 2px rgba(0,0,0,.3); */
+}
+.lectures_replays .weui_panel .weui_panel_hd:after {
+  left: 0;
+  border-bottom: 1px solid #bcbab6;
+}
+.lectures_replays .weui_panel .weui_panel_bd .weui_media_box {
+  padding: 0;
+}
+.lectures_replays .weui_panel .weui_panel_bd .weui_media_box:before {
+  left: 0;
+  border-top: none;
+}
+.lectures_replays .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg {
+  margin: 15px;
+  background-color: #fff;
+  border-radius: 1px;
+  /*
+            border-right: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            */
+  box-shadow: 1px 1px 0 rgba(100, 100, 100, 0.1);
+}
+.lectures_replays .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_hd {
+  width: 120px;
+  height: 90px;
+  margin-right: 0;
+}
+.lectures_replays .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_hd .badge {
+  position: absolute;
+  font-size: 13px;
+  padding: 4px 6px;
+}
+.lectures_replays .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd {
+  padding: 0 10px;
+}
+.lectures_replays .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd .pricetag {
+  color: #fff;
+  background-color: #85bb65;
+  font-size: 16px;
+  padding: 2px 3px;
+  position: absolute;
+  right: -2px;
+}
+.lectures_replays .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd .lexue {
+  position: absolute;
+  margin-top: 4px;
+}
+.lectures_replays .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd h4 {
+  margin: 0;
+}
+.lectures_replays .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd .weui_media_title {
+  margin-left: 45px;
+  margin-right: 45px;
+}
+.lectures_replays .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd .weui_media_desc {
+  line-height: 1.5;
+  overflow: auto;
+  text-overflow: ellipsis;
   display: block;
 }
-.orders_index .weui_bar_item_on .weui_tabbar_icon i {
-  color: #09bb07;
-}
-.orders_index .weui_tabbar {
-  position: fixed;
-  z-index: 99;
-}
-.orders_index .inline {
-  display: inline-block;
-  vertical-align: middle;
-}
-.orders_index .badge.round {
-  margin-left: 10px;
-}
-/* Orders Pay Page */
-.weui_msg.orders_pay {
-  padding-top: 20px;
-}
-.orders_pay .weui_text_area {
-  margin-bottom: 20px;
-}
-.orders_pay .weui_msg_desc {
-  color: #222;
-}
-.orders_pay .weui_msg_title {
-  font-size: 36px;
-  line-height: 40px;
-}
-.orders_pay .weui_cells {
-  margin-top: 15px;
-}
-.orders_pay .weui_cell {
-  font-size: 14px;
-  padding: 13px 15px;
-}
-.orders_pay .weui_cell .weui_cell_primary {
-  text-align: left;
+.lectures_replays .weui_panel .weui_panel_bd .weui_media_box.weui_media_appmsg .weui_media_bd .badgegroup {
+  margin-top: 3px;
 }
 
 /*# sourceMappingURL=lewe.css.map */

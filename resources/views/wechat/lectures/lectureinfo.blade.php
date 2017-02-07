@@ -29,7 +29,7 @@
 
                     @if($lecture->finished)
 
-                        <span class="badge grey2">已结束</span><span class="badge lexue">回放</span>
+                        <span class="badge grey2">已结束</span>
                     <img class="weui_media_appmsg_thumb" src="{{ $lecture->thumb->url('small') }}" alt="{{ $lecture->name }}">
                 </div>
                 <div class="weui_media_bd finished"
@@ -52,6 +52,7 @@
                     <h4 class="weui_media_title">{{ $lecture->name }}</h4>
                     <p>{{ $lecture->start_time->format('Y年n月j日 H:i') }}</p>
                     <span class="badge success">￥{{ number_format($lecture->price, 2) }}</span>
+                    <span class="badge lexue">回放</span>
                     @if(array_key_exists($lecture->id, $userLecturesList))
                         @if($userLecturesList[$lecture->id] == 0)
                             <span class="badge grey2">未支付</span>

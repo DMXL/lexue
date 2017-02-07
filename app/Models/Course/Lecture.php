@@ -106,6 +106,6 @@ class Lecture extends Model implements StaplerableInterface
 
     public function scopeFinished($query)
     {
-        return $query->where('finished', 1);
+        return $query->where('finished', true);
     }
 }

@@ -12,7 +12,6 @@
 |--------------------------------------------------------------------------
 */
 
-
 /*
  * General requests - no names needed
  */
@@ -22,7 +21,6 @@ Route::post('weixin', ['as' => 'user_request', 'uses' => 'WechatController@serve
 /*
  * MP setup tools - normally they are POST requests sent to Wechat server
  */
-
 Route::get('weixin/menu', ['as' => 'menu', 'uses' => 'WechatController@setMenu']);
 Route::get('weixin/industry', ['as' => 'industry', 'uses' => 'WechatController@setIndustry']);
 
