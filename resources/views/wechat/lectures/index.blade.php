@@ -106,6 +106,7 @@
         $('#tab3 .weui_media_bd').click(function() {
             var infoLink = $(this).attr('data-info');
             var roomLink = $(this).attr('data-room');
+            var buttonText = $(this).hassClass('finished') ? "观看回放" : "进入教室";
 
             $.actions({
                 actions: [{
@@ -115,7 +116,7 @@
                         location.href = infoLink;
                     }
                 },{
-                    text: "进入教室",
+                    text: buttonText,
                     className: "color-primary",
                     onClick: function() {
                         location.href = "http://weixin.duobeiyun.com/room/" + roomLink;

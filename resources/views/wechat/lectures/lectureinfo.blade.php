@@ -27,12 +27,12 @@
                 <div class="weui_media_hd" data-value="{{ route('m.students::teachers.show', $lecture->teacher_id) }}">
                     <div class="count">{{ $lecture->orders()->count() }}人已报名</div>
 
-                    @if($lecture->end_time < $now)
+                    @if($lecture->finished)
 
-                        <span class="badge grey2">已结束</span>
+                        <span class="badge grey2">已结束</span><span class="badge lexue">回放</span>
                     <img class="weui_media_appmsg_thumb" src="{{ $lecture->thumb->url('small') }}" alt="{{ $lecture->name }}">
                 </div>
-                <div class="weui_media_bd ended"
+                <div class="weui_media_bd finished"
                      data-info="{{ route('m.students::lectures.show', $lecture->id) }}"
                      data-room="{{ $lecture->room_id }}">
 
@@ -43,7 +43,7 @@
                         @endif
                     <img class="weui_media_appmsg_thumb" src="{{ $lecture->thumb->url('small') }}" alt="{{ $lecture->name }}">
                 </div>
-                <div class="weui_media_bd available"
+                <div class="weui_media_bd"
                      data-info="{{ route('m.students::lectures.show', $lecture->id) }}"
                      data-room="{{ $lecture->room_id }}">
 
