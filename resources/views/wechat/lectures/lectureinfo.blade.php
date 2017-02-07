@@ -24,7 +24,7 @@
         @if($status == 'user')
 
             <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg weui_panel_ft">
-                <div class="weui_media_hd" data-value="{{ route('m.students::teachers.show', $lecture->teacher_id) }}">
+                <div class="weui_media_hd">
                     <div class="count">{{ $lecture->orders()->count() }}人已报名</div>
 
                     @if($lecture->finished)

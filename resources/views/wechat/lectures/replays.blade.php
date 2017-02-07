@@ -33,29 +33,5 @@
 @endsection
 
 @section('js')
-    <script>
-        $('.weui_media_hd').click(function() {
-            location.href = $(this).attr('data-value');
-        });
-        $('.weui_media_bd').click(function() {
-            var infoLink = $(this).attr('data-info');
-            var roomLink = $(this).attr('data-room');
 
-            $.actions({
-                actions: [{
-                    text: "查看课程详情",
-                    className: "color-primary",
-                    onClick: function() {
-                        location.href = infoLink;
-                    }
-                },{
-                    text: "观看回放",
-                    className: "color-primary",
-                    onClick: function() {
-                        location.href = "http://weixin.duobeiyun.com/room/" + roomLink;
-                    }
-                }]
-            });
-        });
-    </script>
 @endsection
