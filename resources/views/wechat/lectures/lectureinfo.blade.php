@@ -35,6 +35,7 @@
                 <div class="weui_media_bd finished"
                      data-info="{{ route('m.students::lectures.show', $lecture->id) }}"
                      data-room="{{ $lecture->room_id }}">
+                    <span class="badge lexue replay">回放</span>
 
                     @else
 
@@ -52,7 +53,6 @@
                     <h4 class="weui_media_title">{{ $lecture->name }}</h4>
                     <p>{{ $lecture->start_time->format('Y年n月j日 H:i') }}</p>
                     <span class="badge success">￥{{ number_format($lecture->price, 2) }}</span>
-                    <span class="badge lexue">回放</span>
                     @if(array_key_exists($lecture->id, $userLecturesList))
                         @if($userLecturesList[$lecture->id] == 0)
                             <span class="badge grey2">未支付</span>

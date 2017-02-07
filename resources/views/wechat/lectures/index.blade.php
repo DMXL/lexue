@@ -99,10 +99,11 @@
                 $('a[href=#' + tab + ']').click();
             }
         });
-        $('#tab3 .weui_media_bd').click(function() {
-            var infoLink = $(this).attr('data-info');
-            var roomLink = $(this).attr('data-room');
-            var buttonText = $(this).hasClass('finished') ? "观看回放" : "进入教室";
+        $('#tab3 .weui_panel_ft').click(function() {
+            var panelBody = $(this).children('.weui_media_bd');
+            var infoLink = panelBody.attr('data-info');
+            var roomLink = panelBody.attr('data-room');
+            var buttonText = panelBody.hasClass('finished') ? "观看回放" : "进入教室";
 
             $.actions({
                 actions: [{
