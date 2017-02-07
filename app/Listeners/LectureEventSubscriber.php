@@ -140,7 +140,7 @@ class LectureEventSubscriber
     private function openWechatLive(Lecture $lecture, $roomId)
     {
         $teacherName = $lecture->teacher->name;
-        $teacherBrief = 'This is still being tested.'; // $lecture->teacher->description;
+        $teacherBrief = $lecture->teacher->description;
         $description = $lecture->description;
 
         $result = json_decode(\Duobeiyun::openWeixinLive($roomId, $teacherName, $teacherBrief, $description), true);
