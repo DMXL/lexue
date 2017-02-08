@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Student;
 
 use App\Events\TutorialPurchased;
 use App\Events\LecturePurchased;
+use App\Models\User\Student;
 use App\Models\Course\Order;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

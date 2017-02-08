@@ -50,7 +50,6 @@ class Order extends Model
     */
     public function scopePaid($query)
     {
-        return $query->where('paid', 1);
+        return $query->where('paid', true);
     }
-
 }

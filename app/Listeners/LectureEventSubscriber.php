@@ -20,7 +20,10 @@
  */
 namespace App\Listeners;
 
+use Carbon\Carbon;
 use App\Models\Course\Lecture;
+use App\Models\Course\Order;
+use App\Models\Course\Schedule;
 use App\Events\LectureCreated;
 use App\Events\LecturePurchased;
 
@@ -31,7 +34,7 @@ class LectureEventSubscriber
      *
      * @param LectureCreated $event
      */
-    public function registerClassroom(LectureCreated $event)
+    public function onLectureCreated(LectureCreated $event)
     {
         $this->createRoom($event->lecture);
     }
@@ -40,12 +43,85 @@ class LectureEventSubscriber
      * Handle the LecturePurchased event.
      *
      * @param LecturePurchased $event
-     * @return bool
      */
-    public function pushLectureConfirmation(LecturePurchased $event)
+    public function onLecturePurchased(LecturePurchased $event)
     {
         $order = $event->order;
+        $this->assignSchedules($order);
+        $this->pushLectureConfirmation($order);
+    }
 
+
+
+    /**
+     * Register the listeners for the subscriber.
+     *
+     * @param $events
+     */
+    public function subscribe($events)
+    {
+        $events->listen(
+            'App\Events\LectureCreated',
+            'App\Listeners\LectureEventSubscriber@registerClassroom'
+        );
+
+        $events->listen(
+            'App\Events\LecturePurchased',
+            'App\Listeners\LectureEventSubscriber@pushLectureConfirmation'
+        );
+    }
+
+    /**
+     * Assign schedules to the schedules table.
+     *
+     * @param Order $order
+     */
+    public function assignSchedules(Order $order)
+    {
+        if($order->is_lecture)
+        {
+            $lecture = $order->lecture;
+
+            $schedule = new Schedule([
+                'student_id'  => $lecture->student_id,
+                'teacher_id'  => $lecture->teacher_id,
+                'course_id'   => $lecture->id,
+                'course_type' => 'lecture',
+                'date'        => $lecture->date,
+                'start'       => $lecture->start,
+                'end'         => $lecture->end_time->toTimeString()
+            ]);
+
+            $schedule->save();
+        } else
+        {
+            $tutorials = $order->tutorials;
+
+            foreach($tutorials as $tutorial)
+            {
+                $schedule = new Schedule([
+                    'student_id'  => $tutorial->student_id,
+                    'teacher_id'  => $tutorial->teacher_id,
+                    'course_id'   => $tutorial->id,
+                    'course_type' => 'tutorial',
+                    'date'        => $tutorial->date,
+                    'start'       => $tutorial->time_slot->star,
+                    'end'         => $tutorial->time_slot->end
+                ]);
+
+                $schedule->save();
+            }
+        }
+    }
+
+    /**
+     * Push Wechat notification to user.
+     *
+     * @param Order $order
+     * @return bool
+     */
+    public function pushLectureConfirmation(Order $order)
+    {
         $lecture = $order->lecture;
         $student = $order->student;
         $teacher = $lecture->teacher;
@@ -85,24 +161,6 @@ class LectureEventSubscriber
         ];
 
         \WechatPusher::push($message);
-    }
-
-    /**
-     * Register the listeners for the subscriber.
-     *
-     * @param $events
-     */
-    public function subscribe($events)
-    {
-        $events->listen(
-            'App\Events\LectureCreated',
-            'App\Listeners\LectureEventSubscriber@registerClassroom'
-        );
-
-        $events->listen(
-            'App\Events\LecturePurchased',
-            'App\Listeners\LectureEventSubscriber@pushLectureConfirmation'
-        );
     }
 
     /**
