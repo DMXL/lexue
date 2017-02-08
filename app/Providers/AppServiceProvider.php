@@ -6,8 +6,9 @@ use App\Services\PageGenerator;
 use App\Services\Duobeiyun\DuobeiyunApi;
 use App\Services\Wechat\NotificationPusher;
 use App\Services\Wechat\PaymentHandler;
-use Illuminate\Support\ServiceProvider;
 
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Relations\Relation;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +24,11 @@ class AppServiceProvider extends ServiceProvider
             $app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
             $app->register(\Barryvdh\Debugbar\ServiceProvider::class);
         }
+
+        Relation::morphMap([
+            'tutorial' => 'App\Models\Course\Tutorial',
+            'lecture'  => 'App\Models\Course\Lecture'
+        ]);
     }
 
     /**

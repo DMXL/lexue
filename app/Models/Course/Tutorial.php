@@ -38,6 +38,11 @@ class Tutorial extends Model
         return $this->belongsTo(TimeSlot::class);
     }
 
+    public function schedules()
+    {
+        return $this->morphMany(Schedule::class, 'course');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Accessors

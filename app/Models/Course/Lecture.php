@@ -69,6 +69,11 @@ class Lecture extends Model implements StaplerableInterface
         return $this->belongsToMany(Level::class);
     }
 
+    public function schedules()
+    {
+        return $this->morphMany(Schedule::class, 'course');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Accessors
