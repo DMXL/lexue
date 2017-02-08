@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model
 {
+    protected $fillable = [
+        'student_id',
+        'teacher_id',
+        'course_id',
+        'course_type',
+        'date',
+        'start',
+        'end'
+    ];
     /*
     |--------------------------------------------------------------------------
     | Relations
