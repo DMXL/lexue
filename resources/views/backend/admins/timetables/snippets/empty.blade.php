@@ -1,7 +1,3 @@
-<button class="btn btn-primary btn-outline btn-block">
-    手动添加课程
-</button>
-<br>
 <form action="{{ route('admins::teachers.offtimes.store', $teacher->id) }}" method="post">
     {{ csrf_field() }}
     <input type="hidden" name="date" value="{{ $date }}">

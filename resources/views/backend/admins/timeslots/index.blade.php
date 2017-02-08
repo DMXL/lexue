@@ -40,6 +40,15 @@
         </div>
     </div>
 
+    @if($timeslots->isEmpty())
+    <div class="ibox">
+        <div class="ibox-content">
+            <div class="row m-b-lg m-t-lg text-center">
+                请添加新的课时
+            </div>
+        </div>
+    </div>
+    @else
     <div class="ibox">
         <div class="ibox-content">
             <div class="row m-b-lg m-t-lg">
@@ -71,13 +80,14 @@
             </div>
         </div>
     </div>
+    @endif
 @endsection
 
 @section('js')
     <script>
         $(function() {
-            $("#timeslot-start").pickatime({
-                format: "HH:i"
+            $("#timeslot-start").datetimepicker({
+                format: "HH:mm"
             });
         });
 

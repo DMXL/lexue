@@ -75,16 +75,6 @@ class TimetableController extends Controller
             return view('backend.admins.timetables.snippets.tutorial', compact('tutorial'));
         }
 
-        /* check for lectures */
-        $lecture = $teacher->lectures()->where([
-            ['date', '=', $date],
-            ['time_slot_id', '=', $timeSlotId]
-        ])->first();
-
-        if ($lecture) {
-            return view('backend.admins.timetables.snippets.lecture', compact('lecture'));
-        }
-
         /* check for offtimes */
         // for some reason orWhere does not work properly here so queyring individually
         $offTime = $teacher->offTimes()->where([
