@@ -62,12 +62,12 @@ class LectureEventSubscriber
     {
         $events->listen(
             'App\Events\LectureCreated',
-            'App\Listeners\LectureEventSubscriber@registerClassroom'
+            'App\Listeners\LectureEventSubscriber@onLectureCreated'
         );
 
         $events->listen(
             'App\Events\LecturePurchased',
-            'App\Listeners\LectureEventSubscriber@pushLectureConfirmation'
+            'App\Listeners\LectureEventSubscriber@onLecturePurchased'
         );
     }
 
