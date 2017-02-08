@@ -87,7 +87,8 @@
     <script>
         $(function() {
             $("#timeslot-start").datetimepicker({
-                format: "HH:mm"
+                format: "HH:mm",
+                stepping: 15
             });
         });
 

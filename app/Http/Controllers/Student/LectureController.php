@@ -69,16 +69,16 @@ class LectureController extends Controller
                 $student = authUser();
 
                 /*
-                 * create order
+                 * create order and schedule
                  */
                 $order = new Order();
                 $order->trade_no = generateTradeNo();
                 $order->student_id = $student->id;
                 $order->teacher_id = $lecture->teacher->id;
                 $order->lecture_id = $lecture->id;
-                $order->is_lecture = 1; // @TODO 考虑删除
+                $order->is_lecture = true; // @TODO 考虑删除
                 $order->total = $lecture->price;
-                $order->paid = 0;
+                $order->paid = false;
                 $order->save();
 
                 return $order->id;

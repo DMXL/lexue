@@ -95,14 +95,14 @@ class TeacherController extends Controller
                 $order->trade_no = generateTradeNo();
                 $order->student_id = $student->id;
                 $order->teacher_id = $teacher->id;
-                $order->is_lecture = 0;
+                $order->is_lecture = false;
                 // TODO calculate based on lecture price with teacher unit price as a fallback
                 $order->total = count($bookTimes) * $teacher->unit_price;
-                $order->paid = 0;
+                $order->paid = false;
                 $order->save();
 
                 /*
-                 * create tutorials
+                 * create tutorials and schedules
                  */
                 $tutorialIds = [];
                 foreach ($bookTimes as $bookTime) {
