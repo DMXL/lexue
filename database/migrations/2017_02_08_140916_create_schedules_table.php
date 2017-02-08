@@ -22,6 +22,8 @@ class CreateSchedulesTable extends Migration
             $table->foreign('teacher_id')->references('id')->on('teachers');
 
             $table->morphs('course'); //Adds unsigned INTEGER course_id and STRING course_type.
+            $table->unique(['course_id', 'course_type']);
+
             $table->date('date');
             $table->time('start');
             $table->time('end');
