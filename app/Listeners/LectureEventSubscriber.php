@@ -83,8 +83,8 @@ class LectureEventSubscriber
             $lecture = $order->lecture;
 
             $schedule = new Schedule([
-                'student_id'  => $lecture->student_id,
-                'teacher_id'  => $lecture->teacher_id,
+                'student_id'  => $order->student_id,
+                'teacher_id'  => $order->teacher_id,
                 'course_id'   => $lecture->id,
                 'course_type' => 'lecture',
                 'date'        => $lecture->date,
@@ -100,8 +100,8 @@ class LectureEventSubscriber
             foreach($tutorials as $tutorial)
             {
                 $schedule = new Schedule([
-                    'student_id'  => $tutorial->student_id,
-                    'teacher_id'  => $tutorial->teacher_id,
+                    'student_id'  => $order->student_id,
+                    'teacher_id'  => $order->teacher_id,
                     'course_id'   => $tutorial->id,
                     'course_type' => 'tutorial',
                     'date'        => $tutorial->date,
