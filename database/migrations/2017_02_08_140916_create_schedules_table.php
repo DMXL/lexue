@@ -27,6 +27,7 @@ class CreateSchedulesTable extends Migration
             $table->date('date');
             $table->time('start');
             $table->time('end');
+            $table->nullableTimestamps();
         });
     }
 
