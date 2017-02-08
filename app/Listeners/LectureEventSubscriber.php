@@ -78,40 +78,19 @@ class LectureEventSubscriber
      */
     public function assignSchedules(Order $order)
     {
-        if($order->is_lecture)
-        {
-            $lecture = $order->lecture;
+        $lecture = $order->lecture;
 
-            $schedule = new Schedule([
-                'student_id'  => $order->student_id,
-                'teacher_id'  => $order->teacher_id,
-                'course_id'   => $lecture->id,
-                'course_type' => 'lecture',
-                'date'        => $lecture->date,
-                'start'       => $lecture->start,
-                'end'         => $lecture->end_time->toTimeString()
-            ]);
+        $schedule = new Schedule([
+            'student_id'  => $order->student_id,
+            'teacher_id'  => $order->teacher_id,
+            'course_id'   => $lecture->id,
+            'course_type' => 'lecture',
+            'date'        => $lecture->date,
+            'start'       => $lecture->start,
+            'end'         => $lecture->end_time->toTimeString()
+        ]);
 
-            $schedule->save();
-        } else
-        {
-            $tutorials = $order->tutorials;
-
-            foreach($tutorials as $tutorial)
-            {
-                $schedule = new Schedule([
-                    'student_id'  => $order->student_id,
-                    'teacher_id'  => $order->teacher_id,
-                    'course_id'   => $tutorial->id,
-                    'course_type' => 'tutorial',
-                    'date'        => $tutorial->date,
-                    'start'       => $tutorial->time_slot->star,
-                    'end'         => $tutorial->time_slot->end
-                ]);
-
-                $schedule->save();
-            }
-        }
+        $schedule->save();
     }
 
     /**

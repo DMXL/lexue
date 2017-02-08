@@ -20,19 +20,64 @@
  */
 namespace App\Listeners;
 
+use App\Models\Course\Order;
+use App\Models\Course\Schedule;
 use App\Events\TutorialPurchased;
 
 class TutorialEventSubscriber
 {
+    public function onTutorialPurchased(TutorialPurchased $event)
+    {
+        $order = $event->order;
+        $this->assignSchedules($order);
+        $this->pushTutorialConfirmation($order);
+    }
+
+    /**
+     * Register the listeners for the subscriber.
+     *
+     * @param $events
+     */
+    public function subscribe($events)
+    {
+        $events->listen(
+            'App\Events\TutorialPurchased',
+            'App\Listeners\TutorialEventSubscriber@onTutorialPurchased'
+        );
+    }
+
+    /**
+     * Assign schedules to the schedules table.
+     *
+     * @param Order $order
+     */
+    public function assignSchedules(Order $order)
+    {
+        $tutorials = $order->tutorials;
+
+        foreach ($tutorials as $tutorial) {
+            $schedule = new Schedule([
+                'student_id' => $tutorial->student_id,
+                'teacher_id' => $tutorial->teacher_id,
+                'course_id' => $tutorial->id,
+                'course_type' => 'tutorial',
+                'date' => $tutorial->date,
+                'start' => $tutorial->time_slot->start,
+                'end' => $tutorial->time_slot->end
+            ]);
+
+            $schedule->save();
+        }
+    }
+
     /**
      * Handle the TutorialPurchased event.
      *
-     * @param TutorialPurchased $event
+     * @param Order $order
      * @return bool
      */
-    public function pushTutorialConfirmation(TutorialPurchased $event)
+    public function pushTutorialConfirmation(Order $order)
     {
-        $order = $event->order;
         $tutorials = $order->tutorials;
         $count = count($tutorials);
 
@@ -76,18 +121,5 @@ class TutorialEventSubscriber
         ];
 
         \WechatPusher::push($message);
-    }
-
-    /**
-     * Register the listeners for the subscriber.
-     *
-     * @param $events
-     */
-    public function subscribe($events)
-    {
-        $events->listen(
-            'App\Events\TutorialPurchased',
-            'App\Listeners\TutorialEventSubscriber@pushTutorialConfirmation'
-        );
     }
 }
