@@ -62,8 +62,8 @@ class TutorialEventSubscriber
                 'course_id' => $tutorial->id,
                 'course_type' => 'tutorial',
                 'date' => $tutorial->date,
-                'start' => $tutorial->time_slot->start,
-                'end' => $tutorial->time_slot->end
+                'start' => $tutorial->timeSlot->start,
+                'end' => $tutorial->timeSlot->end
             ]);
 
             $schedule->save();
