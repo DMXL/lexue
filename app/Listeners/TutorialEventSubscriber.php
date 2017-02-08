@@ -82,7 +82,6 @@ class TutorialEventSubscriber
         $count = count($tutorials);
 
         $sampleLecture = $tutorials->first();
-
         $student = $sampleLecture->student;
         $teacher = $sampleLecture->teacher;
 
