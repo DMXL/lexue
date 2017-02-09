@@ -17,6 +17,20 @@
                     <div class="timeline-item">
                         <div class="row">
                             <div class="col-xs-3 date">
+                                2017.02.10
+                                <br/>
+                                <small class="text-navy">v0.5.0</small>
+                            </div>
+                            <div class="col-xs-7 content no-top-border">
+                                <p class="m-b-xs"><strong>2月更新</strong></p>
+                                <p>新增课表视图，同时更新了大量前后台UI设计，对数据库及部分代码结构进行了重构</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-xs-3 date">
                                 2016.10.11
                                 <br/>
                                 <small class="text-navy">v0.3.0</small>
