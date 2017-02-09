@@ -3,19 +3,72 @@
 @section('content')
     <div class="ibox">
         <div class="ibox-content">
-            <a href="{{ route('admins::teachers.index') }}" class="btn btn-default">
-                <i class="fa fa-long-arrow-left"></i> 教师列表
-            </a>
+            <h4 class="no-margins vertical-middle inline">
+                {{ $teacher->name }}
+            </h4>
+            <a href="{{ route('admins::teachers.show', $teacher->id) }}" class="btn btn-default btn-sm m-l-md"><i class="fa fa-user"></i> 教师信息</a>
         </div>
     </div>
 
     <div class="ibox">
         <div class="ibox-title">
-            <h4 class="no-margins vertical-middle inline">
-                {{ $teacher->name }}
-            </h4>
-            <a href="{{ route('admins::teachers.show', $teacher->id) }}" class="btn btn-default btn-sm"><i class="fa fa-user"></i> 教师信息</a>
-            <a href="{{ route('admins::teachers.timeslots.index', $teacher->id) }}" class="btn btn-default btn-sm"><i class="fa fa-wrench"></i> 修改课时</a>
+            <h4 class="no-margins vertical-middle inline">微课课时</h4>
+        </div>
+        <form action="{{ route('admins::teachers.timeslots.store', $teacher->id) }}" method="post">
+            {{ csrf_field() }}
+            <div class="ibox-content">
+                <div class="row">
+                    <table class="table table-bordered text-center m-b-sm" id="teacher-timeslots">
+                        <thead>
+                        <tr>
+                            <?php $dayParts = $timeslots->keys() ?>
+                            @foreach($dayParts as $dayPart)
+                                <th class="text-center">
+                                    {{ $dayPart }}
+                                </th>
+                            @endforeach
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($timeslots->first() as $index => $timeslotGroup)
+                            <tr>
+                                @foreach($dayParts as $dayPart)
+                                    <?php
+                                    $timeslot = $timeslots[$dayPart][$index];
+                                    $assigned = ($timeslot AND $teacherTimeslots->contains($timeslot->id));
+                                    ?>
+                                    <td class="{{ $assigned ? 'success' : '' }}">
+                                        @if($timeslot)
+                                            <div class="checkbox checkbox-success no-margins checked">
+                                                <input type="checkbox" name="timeslots[]"
+                                                       id="timeslot-{{ $timeslot->id }}"
+                                                       value="{{ $timeslot->id }}"
+                                                       @if($assigned)
+                                                       checked="checked"
+                                                        @endif
+                                                >
+                                                <label for="timeslot-{{ $timeslot->id }}">
+                                                    {{ $timeslots[$dayPart][$index]->range }}
+                                                </label>
+                                            </div>
+                                        @endif
+                                    </td>
+                                @endforeach
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ibox-footer text-center">
+                <button type="submit" class="btn btn-primary">提交更新</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="ibox">
+        <div class="ibox-title">
+            <h4 class="no-margins vertical-middle inline">微课课表</h4>
         </div>
         <div class="ibox-content">
             <div class="row">
@@ -41,17 +94,17 @@
                                                 <?php $disabled = $time['disabled'] ?>
                                                 <div class="m-b-sm"{{ $disabled ? " disabled=disabled" : null }}>
                                                     <?php
-                                                        if ($time['tutorial']) {
-                                                            $buttonClass = 'text-success';
-                                                        } elseif ($time['tutorial']) {
-                                                            $buttonClass = 'text-warning';
-                                                        } elseif ($time['offtime']) {
-                                                            $buttonClass = 'text-danger';
-                                                        } elseif (! $disabled) {
-                                                            $buttonClass = 'btn-link';
-                                                        } else {
-                                                            $buttonClass = '';
-                                                        }
+                                                    if ($time['tutorial']) {
+                                                        $buttonClass = 'text-success';
+                                                    } elseif ($time['tutorial']) {
+                                                        $buttonClass = 'text-warning';
+                                                    } elseif ($time['offtime']) {
+                                                        $buttonClass = 'text-danger';
+                                                    } elseif (! $disabled) {
+                                                        $buttonClass = 'btn-link';
+                                                    } else {
+                                                        $buttonClass = '';
+                                                    }
                                                     ?>
                                                     <button type="button" class="btn {{ $buttonClass }} btn-sm"
                                                             data-toggle="modal"

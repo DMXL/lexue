@@ -41,7 +41,13 @@ return [
                         'route' => 'teachers.show'
                     ], [
                         'title' => '微课',
-                        'route' => 'teachers.timetables.show'
+                        'route' => 'teachers.timetables'
+                    ], [
+                        'title' => '直播课',
+                        'route' => 'teachers.lectures'
+                    ], [
+                        'title' => '课表',
+                        'route' => 'teachers.schedules'
                     ]
                 ]
             ], [
@@ -57,6 +63,9 @@ return [
                     ]
                 ]
             ], [
+                'title' => '课表管理',
+                'route' => 'schedules.index'
+            ], [
                 'title' => '直播课管理',
                 'route' => 'lectures.index',
                 'children' => [
@@ -66,6 +75,9 @@ return [
                     ], [
                         'title' => '修改课程',
                         'route' => 'lectures.edit'
+                    ], [
+                        'title' => '课程详情',
+                        'route' => 'lectures.show'
                     ]
                 ]
             ], [
@@ -78,6 +90,9 @@ return [
                     ], [
                         'title' => '修改课程',
                         'route' => 'tutorials.edit'
+                    ], [
+                        'title' => '课程详情',
+                        'route' => 'tutorials.show'
                     ]
                 ]
             ]
@@ -111,11 +126,11 @@ return [
                 'icon' => 'clock-o'
             ], [
                 'title' => '课表管理',
-                'route' => 'timetables.index',
+                'route' => 'schedules.index',
                 'children' => [
                     [
                         'title' => '教师课表',
-                        'route' => 'teachers.timetables.show',
+                        'route' => 'teachers.schedules',
                         'hidden' => true,
                     ]
                 ],

@@ -1081,6 +1081,16 @@ button.dim:active:before {
   background-color: #23c6c8;
   color: #FFFFFF;
 }
+.label-weixin,
+.badge-weixin {
+  background-color: #62b900;
+  color: #FFFFFF;
+}
+.label-lexue,
+.badge-lexuye {
+  background-color: #00beb7;
+  color: #FFFFFF;
+}
 .label-inverse,
 .badge-inverse {
   background-color: #262626;

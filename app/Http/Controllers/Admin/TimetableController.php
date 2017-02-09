@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User\Teacher;
+use App\Models\Course\TimeSlot;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -51,14 +52,18 @@ class TimetableController extends Controller
     {
         $teacher = Teacher::find($teacherId);
 
+        $teacherTimeslots = $teacher->timeSlots->pluck('id');
+
+        $timeslots = TimeSlot::orderByStart()->get()->groupBy('day_part');
+        $timeslots = padArray($timeslots);
+
         $timetable = $teacher->getTimetable();
 
         if (!$timetable) {
             \Flash::warning('请先添加教师课时');
-            return redirect()->route('admins::teachers.timeslots.index', $teacherId);
         }
 
-        return $this->backView('backend.admins.timetables.show', compact('teacher', 'timetable'));
+        return $this->backView('backend.admins.timetables.show', compact('teacher', 'timetable', 'teacherTimeslots', 'timeslots'));
     }
 
     public function showSnippet($teacherId, $date, $timeSlotId)

@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 use App\Models\Course\Lecture;
 use App\Models\Course\Order;
+use App\Models\Course\Schedule;
 use App\Models\Course\TimeSlot;
 use App\Models\Course\Tutorial;
 use App\Models\Teacher\Level;
@@ -105,6 +106,11 @@ class Teacher extends Authenticatable implements StaplerableInterface
     public function offTimes()
     {
         return $this->hasMany(OffTime::class);
+    }
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
     }
     
     /*

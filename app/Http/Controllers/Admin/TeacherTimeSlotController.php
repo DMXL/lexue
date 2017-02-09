@@ -11,18 +11,6 @@ use App\Http\Controllers\Controller;
 
 class TeacherTimeSlotController extends Controller
 {
-    public function index($id)
-    {
-        $teacher = Teacher::findOrFail($id);
-        $teacherTimeslots = $teacher->timeSlots->pluck('id');
-
-        $timeslots = TimeSlot::orderByStart()->get()->groupBy('day_part');
-        $timeslots = padArray($timeslots);
-
-        return $this->backView('admins.teachers.timeslots.index',
-            compact('teacher', 'teacherTimeslots', 'timeslots'));
-    }
-
     public function store(Request $request, $id)
     {
         $timeslotIds = $request->input('timeslots') ? : [];

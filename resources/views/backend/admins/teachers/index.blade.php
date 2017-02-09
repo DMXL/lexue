@@ -32,11 +32,15 @@
                     </div>
                 </a>
                 <div class="contact-box-footer">
-                        <a href="{{ route('admins::teachers.timeslots.index', $teacher->id) }}" class="btn btn-sm btn-white">
-                            <i class="fa fa-clock-o"></i> 课时</a>
-                        <a href="{{ route('admins::teachers.timetables.index', $teacher->id) }}" class="btn btn-sm btn-white">
-                            <i class="fa fa-calendar"></i> 课表</a>
-                        <a class="btn btn-sm btn-white"><i class="fa fa-bullhorn"></i> 课程</a>
+                        <a href="{{ route('admins::teachers.timetables', $teacher->id) }}" class="btn btn-sm btn-white">
+                            <i class="fa fa-weixin"></i> 微课
+                        </a>
+                        <a href="{{ route('admins::teachers.lectures', $teacher->id) }}" class="btn btn-sm btn-white">
+                            <i class="fa fa-youtube-play"></i> 直播课
+                        </a>
+                        <a href="{{ route('admins::teachers.schedules', $teacher->id) }}" class="btn btn-sm btn-white">
+                            <i class="fa fa-calendar"></i> 课表
+                        </a>
                 </div>
 
             </div>

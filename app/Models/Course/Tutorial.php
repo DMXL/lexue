@@ -70,6 +70,11 @@ class Tutorial extends Model
         return humanDayOfWeek(Carbon::parse($this->date)->dayOfWeek).$timeSlot->day_part;
     }
 
+    public function getNameAttribute()
+    {
+        return '1对1微信课程';
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Scopes

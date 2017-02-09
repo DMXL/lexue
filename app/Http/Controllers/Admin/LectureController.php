@@ -74,6 +74,20 @@ class LectureController extends Controller
     }
 
     /**
+     * Display lectures that belong to a certain teacher.
+     *
+     * @param int  $teacherId
+     * @return \Illuminate\Http\Response
+     */
+    public function showTeacher($teacherId)
+    {
+        $teacher = Teacher::find($teacherId);
+        $lectures = $teacher->lectures;
+
+        return $this->backView('backend.admins.teachers.lectures', compact('lectures', 'teacher'));
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

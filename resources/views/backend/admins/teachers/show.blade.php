@@ -99,11 +99,14 @@
             </div>
         </div>
         <div class="ibox-footer">
-            <a href="{{ route('admins::teachers.timeslots.index', $teacher->id) }}" class="btn btn-default">
-                <i class="fa fa-clock-o"></i> 课时管理
+            <a href="{{ route('admins::teachers.timetables', $teacher->id) }}" class="btn btn-default">
+                <i class="fa fa-calendar"></i> 管理微课
             </a>
-            <a href="{{ route('admins::teachers.timetables.index', $teacher->id) }}" class="btn btn-default">
-                <i class="fa fa-calendar"></i> 课表管理
+            <a href="{{ route('admins::teachers.lectures', $teacher->id) }}" class="btn btn-default">
+                <i class="fa fa-calendar"></i> 管理直播课
+            </a>
+            <a href="{{ route('admins::teachers.schedules', $teacher->id) }}" class="btn btn-default">
+                <i class="fa fa-calendar"></i> 查看课表
             </a>
         </div>
     </div>

@@ -368,6 +368,9 @@ body,
   position: absolute;
   font-size: 13px;
 }
+.lectures_index .weui_tab_bd #tab3 .weui_media_box .weui_media_bd .weui_media_title {
+  margin-left: 45px;
+}
 .lectures_index .weui_tab_bd #tab3 .weui_media_box .weui_media_bd .weui_media_desc {
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -378,6 +381,10 @@ body,
 }
 .lectures_index .weui_tab_bd #tab3 .weui_media_box .weui_media_bd .badge {
   font-size: 15px;
+}
+.lectures_index .weui_tab_bd #tab3 .weui_media_box .weui_media_bd .replay {
+  position: absolute;
+  margin-top: 4px;
 }
 .lectures_index .weui_tabbar {
   position: fixed;

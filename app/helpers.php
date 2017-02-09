@@ -151,7 +151,7 @@ function humanDateTime($timestamp, $showDayOfWeek = true)
 function humanTime($timestamp)
 {
     $time = Carbon::parse($timestamp);
-    return humanDayPart($time->hour) . $time->format('h:1');
+    return humanDayPart($time->hour) . $time->format('H:i');
 }
 
 function humanDate($timestamp, $showDayOfWeek = false)

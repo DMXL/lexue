@@ -36,7 +36,10 @@ class LectureEventSubscriber
      */
     public function onLectureCreated(LectureCreated $event)
     {
-        $this->createRoom($event->lecture);
+        $lecture = $event->lecture;
+
+        $this->createRoom($lecture);
+        $this->assignSchedules($lecture);
     }
 
     /**
@@ -46,9 +49,7 @@ class LectureEventSubscriber
      */
     public function onLecturePurchased(LecturePurchased $event)
     {
-        $order = $event->order;
-        $this->assignSchedules($order);
-        $this->pushLectureConfirmation($order);
+        $this->pushLectureConfirmation($event->order);
     }
 
 
@@ -76,13 +77,10 @@ class LectureEventSubscriber
      *
      * @param Order $order
      */
-    public function assignSchedules(Order $order)
+    public function assignSchedules(Lecture $lecture)
     {
-        $lecture = $order->lecture;
-
         $schedule = new Schedule([
-            'student_id'  => $order->student_id,
-            'teacher_id'  => $order->teacher_id,
+            'teacher_id'  => $lecture->teacher_id,
             'course_id'   => $lecture->id,
             'course_type' => 'lecture',
             'date'        => $lecture->date,
