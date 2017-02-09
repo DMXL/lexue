@@ -36,6 +36,12 @@ return [
                     ], [
                         'title' => '修改教师',
                         'route' => 'teachers.edit'
+                    ], [
+                        'title' => '教师信息',
+                        'route' => 'teachers.show'
+                    ], [
+                        'title' => '微课',
+                        'route' => 'teachers.timetables.show'
                     ]
                 ]
             ], [

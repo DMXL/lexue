@@ -118,8 +118,6 @@ class PageGenerator
                 if ($newNodes = $this->buildBctNodes($children)) {
                     return $this->buildBctNode($this->fullRoute($node['route']), $node['title'], $newNodes);
                 }
-            } else {
-                return null;
             }
         }
 
