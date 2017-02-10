@@ -75,7 +75,7 @@ class LectureEventSubscriber
     /**
      * Assign schedules to the schedules table.
      *
-     * @param Order $order
+     * @param Lecture $lecture
      */
     public function assignSchedules(Lecture $lecture)
     {

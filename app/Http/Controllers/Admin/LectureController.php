@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Events\LectureCreated;
 use App\Models\Course\Lecture;
 use App\Models\User\Teacher;
+use DB;
+use Exception;
+use Flash;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -44,18 +47,10 @@ class LectureController extends Controller
      */
     public function store(LectureFormRequest $request)
     {
-        try {
-            $lecture = \DB::transaction(function() use ($request) {
-                $lecture = new Lecture();
-                return $this->writeLectureData($lecture, $request);
-            });
-        } catch (\Exception $e) {
-            $this->handleException($e);
-            return back();
-        }
+        $lecture = $this->writeLectureData(new Lecture(), $request);
 
         event(new LectureCreated($lecture));
-        \Flash::success('添加成功');
+        Flash::success('添加成功');
 
         return redirect()->route('admins::lectures.index');
     }
@@ -63,25 +58,22 @@ class LectureController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Lecture $lecture
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Lecture $lecture)
     {
-        $lecture = Lecture::find($id);
-
         return $this->backView('backend.admins.lectures.show', compact('lecture'));
     }
 
     /**
      * Display lectures that belong to a certain teacher.
      *
-     * @param int  $teacherId
+     * @param Teacher $teacher
      * @return \Illuminate\Http\Response
      */
-    public function showTeacher($teacherId)
+    public function showTeacher(Teacher $teacher)
     {
-        $teacher = Teacher::find($teacherId);
         $lectures = $teacher->lectures;
 
         return $this->backView('backend.admins.teachers.lectures', compact('lectures', 'teacher'));
@@ -90,13 +82,11 @@ class LectureController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Lecture $lecture
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Lecture $lecture)
     {
-        $lecture = Lecture::find($id);
-
         return $this->backView('backend.admins.lectures.edit', compact('lecture'));
     }
 
@@ -104,22 +94,14 @@ class LectureController extends Controller
      * Update the specified resource in storage.
      *
      * @param LectureFormRequest $request
-     * @param  int  $id
+     * @param Lecture $lecture
      * @return \Illuminate\Http\Response
      */
-    public function update(LectureFormRequest $request, $id)
+    public function update(LectureFormRequest $request, Lecture $lecture)
     {
-        try {
-            $lecture = \DB::transaction(function() use ($request, $id) {
-                $lecture = Lecture::find($id);
-                return $this->writeLectureData($lecture, $request);
-            });
-        } catch (\Exception $e) {
-            $this->handleException($e);
-            return back();
-        }
+        $lecture =  $this->writeLectureData($lecture, $request);
 
-        \Flash::success('信息已更新');
+        Flash::success('信息已更新');
 
         return redirect()->route('admins::lectures.show', $lecture->id);
     }
@@ -128,13 +110,11 @@ class LectureController extends Controller
      * Upload lecture thumbnail.
      *
      * @param Request $request
-     * @param $id
+     * @param Lecture $lecture
      * @return int
      */
-    public function uploadThumb(Request $request, $id)
+    public function uploadThumb(Request $request, Lecture $lecture)
     {
-        $lecture = Lecture::findOrFail($id);
-
         $lecture->thumb = $request->file('thumb');
         $lecture->save();
 
@@ -144,65 +124,48 @@ class LectureController extends Controller
     /**
      * Put lecture online.
      *
-     * @param $id
+     * @param Lecture $lecture
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function enable($id)
+    public function enable(Lecture $lecture)
     {
-        try {
-            $lecture = Lecture::find($id);
-            if (!$lecture->enabled) {
-                $lecture->enabled = true;
-                $lecture->save();
-            }
-        } catch (\Exception $e) {
-            // TODO logging and notify
-            return back();
+        if (!$lecture->enabled) {
+            $lecture->enabled = true;
+            $lecture->save();
         }
 
-        \Flash::success('直播课已上线');
+        Flash::success('直播课已上线');
         return back();
     }
 
     /**
      * Pub lecture offline.
      *
-     * @param $id
+     * @param Lecture $lecture
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function disable($id)
+    public function disable(Lecture $lecture)
     {
-        try {
-            $lecture = Lecture::find($id);
-            if ($lecture->enabled) {
-                $lecture->enabled = false;
-                $lecture->save();
-            }
-        } catch (\Exception $e) {
-            // TODO logging and notify
-            return back();
+        if ($lecture->enabled) {
+            $lecture->enabled = false;
+            $lecture->save();
         }
 
-        \Flash::success('直播课已下线');
+        Flash::success('直播课已下线');
         return back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Lecture $lecture
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Lecture $lecture)
     {
-        try {
-            Lecture::destroy($id);
-        } catch (\Exception $e) {
-            $this->handleException($e);
-            return back();
-        }
+        $lecture->delete();
 
-        \Flash::success('删除成功');
+        Flash::success('删除成功');
         return redirect()->route('admins::lectures.index');
     }
 

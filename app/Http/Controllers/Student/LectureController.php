@@ -10,7 +10,14 @@ use Carbon\Carbon;
 
 class LectureController extends Controller
 {
+    /**
+     * @var \App\Models\User\Student
+     */
     private $student;
+
+    /**
+     * @var array
+     */
     private $orderList;
 
     /**
@@ -19,7 +26,6 @@ class LectureController extends Controller
     public function __construct()
     {
         $this->student = authUser();
-        $this->orderList = $this->student->lectures()->pluck('paid', 'lecture_id')->toArray();
     }
 
     public function index()
@@ -42,7 +48,7 @@ class LectureController extends Controller
             return $lecture->enabled;
         })->count();
 
-        $userLecturesList = $this->orderList;
+        $userLecturesList = $this->getOrderList();
 
         $now = Carbon::now();
 
@@ -54,8 +60,8 @@ class LectureController extends Controller
         $lecture = Lecture::find($id);
         $isPurchased = null;
 
-        if(array_key_exists($id, $this->orderList))
-            $isPurchased = $this->orderList[$id];
+        if(array_key_exists($id, $this->getOrderList()))
+            $isPurchased = $this->getOrderList()[$id];
 
         return $this->frontView('wechat.lectures.show', compact('lecture', 'isPurchased'));
     }
@@ -98,8 +104,17 @@ class LectureController extends Controller
             ->with('teacher')
             ->get();
 
-        $userLecturesList = $this->orderList;
+        $userLecturesList = $this->getOrderList();
 
         return $this->frontView('wechat.lectures.replays', compact('lectures', 'userLecturesList'));
+    }
+
+    private function getOrderList()
+    {
+        if (!$this->orderList) {
+            $this->orderList = $this->student->lectures()->pluck('paid', 'lecture_id')->toArray();
+        }
+
+        return $this->orderList;
     }
 }
