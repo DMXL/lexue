@@ -233,8 +233,9 @@
                 <div class="modal-body" id="settings">
                     <div id="thumb-upload" thumb="{{ $lecture->thumb_file_name }}">
                         <div>
-                            <img v-if="image" :src="image" />
+                            <img class="img-responsive" v-if="image" :src="image" />
                             <h4 v-else>还没有小图</h4>
+                            <hr>
                             <button v-if="!added" :class="buttonClass" @click="selectFile">@{{ buttonText }}</button>
                             <button v-show="added" :disabled="uploading" class="btn btn-primary btn-sm" @click="uploadImage" data-style="zoom-in">
                             <i class="fa fa-spinner fa-spin fa-fw" v-show="uploading"></i> 确认
