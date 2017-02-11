@@ -14,10 +14,10 @@
 
 ### 工具及依赖
 
-- [`overtrue/laravel-wechat`](https://github.com/overtrue/laravel-wechat) 微信公众平台及支付接口的SDK
+- [laravel-wechat](https://github.com/overtrue/laravel-wechat) 微信公众平台及支付接口的SDK
 - [多贝云API](http://docs.duobeiyun.com/) 多贝云直播课堂API
 - [INSPINIA Admin Theme](https://wrapbootstrap.com/theme/inspinia-responsive-admin-theme-WB0R5L90S) 后台样式基于INSPINIA和Bootstrap 3
-- [`lihongxun945/jquery-weui`](https://github.com/lihongxun945/jquery-weui) 微信端H5页面样式基于Jquery WeUI v0.8.3组件库
+- [jquery-weui](https://github.com/lihongxun945/jquery-weui) 微信端H5页面样式基于Jquery WeUI v0.8.3组件库
 
 ### 线上演示
 
