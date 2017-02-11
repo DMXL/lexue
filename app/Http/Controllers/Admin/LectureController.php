@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Events\LectureCreated;
 use App\Models\Course\Lecture;
 use App\Models\User\Teacher;
-use DB;
-use Exception;
 use Flash;
 use Illuminate\Http\Request;
 
@@ -43,7 +41,6 @@ class LectureController extends Controller
      *
      * @param LectureFormRequest|Request $request
      * @return \Illuminate\Http\Response
-     * @throws \Exception
      */
     public function store(LectureFormRequest $request)
     {

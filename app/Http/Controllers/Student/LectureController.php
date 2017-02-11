@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Student;
 
-use App\Events\LecturePurchased;
 use App\Http\Controllers\Controller;
 use App\Models\Course\Lecture;
 use App\Models\Course\Order;
 use Carbon\Carbon;
+use DB;
 
 class LectureController extends Controller
 {
@@ -71,7 +71,7 @@ class LectureController extends Controller
         $lecture = Lecture::find($lectureId);
 
         try {
-            $orderId = \DB::transaction(function() use ($lecture) {
+            $orderId = DB::transaction(function() use ($lecture) {
                 $student = authUser();
 
                 /*
