@@ -109,8 +109,31 @@ class Lecture extends Model implements StaplerableInterface
         return $query->orderBy('date', 'asc')->orderBy('start', 'asc');
     }
 
+    public function scopeEnabled($query)
+    {
+        return $query->where('enabled', true);
+    }
+
     public function scopeFinished($query)
     {
         return $query->where('finished', true);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Methods
+    |--------------------------------------------------------------------------
+    */
+    public function isComing()
+    {
+        return $this->start_time >= Carbon::now();
+    }
+
+    public function isLive()
+    {
+        if(!$this->isComing())
+            return $this->end_time >= Carbon::now();
+
+        return false;
     }
 }

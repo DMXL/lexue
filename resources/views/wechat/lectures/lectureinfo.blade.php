@@ -19,75 +19,71 @@
 -->
 @foreach($lectures as $lecture)
 
-    @if($lecture->enabled)
+    @if($status == 'user')
 
-        @if($status == 'user')
+        <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg weui_panel_ft">
+            <div class="weui_media_hd">
+                <div class="count">{{ $lecture->orders()->count() }}人已报名</div>
 
-            <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg weui_panel_ft">
-                <div class="weui_media_hd">
-                    <div class="count">{{ $lecture->orders()->count() }}人已报名</div>
+                @if($lecture->finished)
 
-                    @if($lecture->finished)
+                    <span class="badge grey2">已结束</span>
+                <img class="weui_media_appmsg_thumb" src="{{ $lecture->thumb->url('small') }}" alt="{{ $lecture->name }}">
+            </div>
+            <div class="weui_media_bd finished"
+                 data-info="{{ route('m.students::lectures.show', $lecture->id) }}"
+                 data-room="{{ $lecture->room_id }}">
+                <span class="badge lexue replay">回放</span>
 
-                        <span class="badge grey2">已结束</span>
-                    <img class="weui_media_appmsg_thumb" src="{{ $lecture->thumb->url('small') }}" alt="{{ $lecture->name }}">
-                </div>
-                <div class="weui_media_bd finished"
-                     data-info="{{ route('m.students::lectures.show', $lecture->id) }}"
-                     data-room="{{ $lecture->room_id }}">
-                    <span class="badge lexue replay">回放</span>
+                @else
 
-                    @else
-
-                        @if($lecture->start_time <= $now)
-                            <span class="badge lexue">直播中</span>
-                        @endif
-                    <img class="weui_media_appmsg_thumb" src="{{ $lecture->thumb->url('small') }}" alt="{{ $lecture->name }}">
-                </div>
-                <div class="weui_media_bd"
-                     data-info="{{ route('m.students::lectures.show', $lecture->id) }}"
-                     data-room="{{ $lecture->room_id }}">
-
-                    @endif
-
-                    <h4 class="weui_media_title">{{ $lecture->name }}</h4>
-                    <p>{{ $lecture->start_time->format('Y年n月j日 H:i') }}</p>
-                    <span class="badge success">￥{{ number_format($lecture->price, 2) }}</span>
-                    @if(array_key_exists($lecture->id, $userLecturesList))
-                        @if($userLecturesList[$lecture->id] == 0)
-                            <span class="badge grey2">未支付</span>
-                        @endif
-                    @endif
-                </div>
-            </a>
-
-        @else
-
-            <a href="{{ route('m.students::lectures.show', $lecture->id) }}" class="weui_media_box weui_media_appmsg">
-                <div class="weui_media_hd">
-                    @if($status == 'ongoing')
+                    @if($lecture->isLive()))
                         <span class="badge lexue">直播中</span>
                     @endif
-                    <img class="weui_media_appmsg_thumb" src="{{ $lecture->thumb->url('small') }}" alt="{{ $lecture->name }}">
-                </div>
-                <div class="weui_media_bd">
-                    <span class="pricetag">￥{{ number_format($lecture->price, 2) }}</span>
-                    <h4 class="weui_media_title">{{ $lecture->name }}</h4>
-                    <p class="weui_media_desc">{{ $lecture->start_time->format('Y年n月j日 H:i') }}</p>
-                    <div class="badgegroup">
-                        <span class="badge secondary">{{ $lecture->orders->count() }}人已购买</span>
-                        @if(array_key_exists($lecture->id, $userLecturesList))
-                            @if($userLecturesList[$lecture->id] == 1)
-                                <span class="badge grey2">已购买</span>
-                            @else
-                                <span class="badge grey2">已下单</span>
-                            @endif
-                        @endif
-                    </div>
-                </div>
-            </a>
+                <img class="weui_media_appmsg_thumb" src="{{ $lecture->thumb->url('small') }}" alt="{{ $lecture->name }}">
+            </div>
+            <div class="weui_media_bd"
+                 data-info="{{ route('m.students::lectures.show', $lecture->id) }}"
+                 data-room="{{ $lecture->room_id }}">
 
-        @endif
+                @endif
+
+                <h4 class="weui_media_title">{{ $lecture->name }}</h4>
+                <p>{{ $lecture->start_time->format('Y年n月j日 H:i') }}</p>
+                <span class="badge success">￥{{ number_format($lecture->price, 2) }}</span>
+                @if(array_key_exists($lecture->id, $userLecturesList))
+                    @if($userLecturesList[$lecture->id] == 0)
+                        <span class="badge grey2">未支付</span>
+                    @endif
+                @endif
+            </div>
+        </a>
+
+    @else
+
+        <a href="{{ route('m.students::lectures.show', $lecture->id) }}" class="weui_media_box weui_media_appmsg">
+            <div class="weui_media_hd">
+                @if($status == 'ongoing')
+                    <span class="badge lexue">直播中</span>
+                @endif
+                <img class="weui_media_appmsg_thumb" src="{{ $lecture->thumb->url('small') }}" alt="{{ $lecture->name }}">
+            </div>
+            <div class="weui_media_bd">
+                <span class="pricetag">￥{{ number_format($lecture->price, 2) }}</span>
+                <h4 class="weui_media_title">{{ $lecture->name }}</h4>
+                <p class="weui_media_desc">{{ $lecture->start_time->format('Y年n月j日 H:i') }}</p>
+                <div class="badgegroup">
+                    <span class="badge secondary">{{ $lecture->orders->count() }}人已购买</span>
+                    @if(array_key_exists($lecture->id, $userLecturesList))
+                        @if($userLecturesList[$lecture->id] == 1)
+                            <span class="badge grey2">已购买</span>
+                        @else
+                            <span class="badge grey2">已下单</span>
+                        @endif
+                    @endif
+                </div>
+            </div>
+        </a>
 
     @endif
 

@@ -30,29 +30,28 @@ class LectureController extends Controller
 
     public function index()
     {
-        $lectures = Lecture::orderByEarliest()
+        $lectures = Lecture::enabled()
+            ->orderByEarliest()
             ->with('teacher')
             ->get();
 
-        $upcoming = $lectures->filter(function($lecture) {
-            return $lecture->start_time >= Carbon::now();
-        });
+        $upcoming = $ongoing = collect();
 
-        $ongoing = $lectures->filter(function($lecture) {
-            return ($lecture->start_time < Carbon::now() && $lecture->end_time >= Carbon::now());
-        });
+        foreach ($lectures as $lecture) {
+            if ($lecture->isComing()) {
+                $upcoming->push($lecture);
+            }
+            elseif ($lecture->isLive()) {
+                $ongoing->prepend($lecture);
+            }
+        }
+
+        $count = $ongoing->count();
 
         $userLectures = $this->student->lectures;
-
-        $count = $ongoing->filter(function($lecture) {
-            return $lecture->enabled;
-        })->count();
-
         $userLecturesList = $this->getOrderList();
 
-        $now = Carbon::now();
-
-        return $this->frontView('wechat.lectures.index', compact('upcoming', 'ongoing', 'userLectures', 'count', 'userLecturesList', 'now'));
+        return $this->frontView('wechat.lectures.index', compact('upcoming', 'ongoing', 'count', 'userLectures', 'userLecturesList'));
     }
 
     public function show($id)
@@ -100,7 +99,8 @@ class LectureController extends Controller
 
     public function replays()
     {
-        $lectures = Lecture::finished()
+        $lectures = Lecture::enabled()
+            ->finished()
             ->with('teacher')
             ->get();
 
