@@ -1,6 +1,6 @@
 # lexue <font size=4>v0.5.1</font>
 
-[乐学云](http://lexuecloud.com)微信在线课程管理平台，基于 `Laravel 5.2` 开发。
+微信在线课程管理平台，基于 `Laravel 5.2` 开发。
 
 ### 开发及测试环境
 
@@ -14,14 +14,14 @@
 
 ### 工具及依赖
 
-- [laravel-wechat](https://github.com/overtrue/laravel-wechat) 微信公众平台及支付接口的SDK
+- [overtrue/laravel-wechat](https://github.com/overtrue/laravel-wechat) 微信公众平台及支付接口的SDK
 - [多贝云API](http://docs.duobeiyun.com/) 多贝云直播课堂API
 - [INSPINIA Admin Theme](https://wrapbootstrap.com/theme/inspinia-responsive-admin-theme-WB0R5L90S) 后台样式基于INSPINIA和Bootstrap 3
-- [jquery-weui](https://github.com/lihongxun945/jquery-weui) 微信端H5页面样式基于Jquery WeUI v0.8.3组件库
+- [lihongxun945/jquery-weui](https://github.com/lihongxun945/jquery-weui) 微信端H5页面样式基于Jquery WeUI v0.8.3组件库
 
 ### 线上演示
 
-请关注乐学云教学质量管理系统微信公众号
+请关注微信公众号
 
 ![image](https://github.com/thesudoteam/lexue/blob/master/public/images/qrcode_for_gh_bc197aa3e945_258.jpg)
 
