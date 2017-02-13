@@ -32,7 +32,7 @@
             </div>
             <div class="weui_media_bd finished"
                  data-info="{{ route('m.students::lectures.show', $lecture->id) }}"
-                 data-room="{{ $lecture->room_id }}">
+                 data-room="{{ route('m.students::lectures.room', $lecture->id) }}">
 
                 @else
 
