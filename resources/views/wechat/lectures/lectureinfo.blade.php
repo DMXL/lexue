@@ -37,7 +37,7 @@
 
                 @else
 
-                    @if($lecture->isLive()))
+                    @if($lecture->isLive())
                         <span class="badge lexue">直播中</span>
                     @endif
                 <img class="weui_media_appmsg_thumb" src="{{ $lecture->thumb->url('small') }}" alt="{{ $lecture->name }}">

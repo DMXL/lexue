@@ -60,6 +60,7 @@ class OrderController extends Controller
     public function pay($id)
     {
         $order = Order::find($id);
+        $this->testLocalRedirect($order);
 
         if($order->is_lecture) {
             $tradeInfo = array(
@@ -135,5 +136,22 @@ class OrderController extends Controller
         });
 
         return $response;
+    }
+
+    public function testLocalRedirect(Order $order)
+    {
+        if(config('app.env') == 'local') {
+            $order->paid_at = Carbon::now();
+            $order->paid = 1;
+            $order->save();
+
+            if($order->is_lecture) {
+                event(new LecturePurchased($order));
+                return redirect()->route('m.students::lectures.index', ['#tab3']);
+            } else {
+                event(new TutorialPurchased($order));
+                return redirect()->route('m.students::tutorials.index');
+            }
+        }
     }
 }

@@ -35,7 +35,8 @@ class LectureController extends Controller
             ->with('teacher')
             ->get();
 
-        $upcoming = $ongoing = collect();
+        $upcoming = collect();
+        $ongoing = collect();
 
         foreach ($lectures as $lecture) {
             if ($lecture->isComing()) {
