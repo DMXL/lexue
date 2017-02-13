@@ -103,7 +103,16 @@
             var panelBody = $(this).children('.weui_media_bd');
             var infoLink = panelBody.attr('data-info');
             var roomLink = panelBody.attr('data-room');
-            var buttonText = panelBody.hasClass('finished') ? "观看回放" : "进入教室";
+            var buttonText = "";
+            var buttonLink = "";
+
+            if (panelBody.has('.unpaid')) {
+                buttonText = "继续支付";
+                buttonLink = "#";
+            } else {
+                buttonText = panelBody.hasClass('finished') ? "观看回放" : "进入教室";
+                buttonLink = "http://weixin.duobeiyun.com/room/" + roomLink;
+            }
 
             $.actions({
                 actions: [{
@@ -116,7 +125,7 @@
                     text: buttonText,
                     className: "color-primary",
                     onClick: function() {
-                        location.href = "http://weixin.duobeiyun.com/room/" + roomLink;
+                        location.href = buttonLink;
                     }
                 }]
             });

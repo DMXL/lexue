@@ -53,7 +53,7 @@
                 <span class="badge success">￥{{ number_format($lecture->price, 2) }}</span>
                 @if(array_key_exists($lecture->id, $userLecturesList))
                     @if($userLecturesList[$lecture->id] == 0)
-                        <span class="badge grey2">未支付</span>
+                        <span class="badge grey2 unpaid">未支付</span>
                     @endif
                 @endif
             </div>
