@@ -33,7 +33,6 @@
             <div class="weui_media_bd finished"
                  data-info="{{ route('m.students::lectures.show', $lecture->id) }}"
                  data-room="{{ $lecture->room_id }}">
-                <span class="badge lexue replay">回放</span>
 
                 @else
 

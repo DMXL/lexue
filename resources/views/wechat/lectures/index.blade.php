@@ -106,7 +106,7 @@
             var buttonText = "";
             var buttonLink = "";
 
-            if (panelBody.has('.unpaid')) {
+            if (panelBody.has('.unpaid').length) {
                 buttonText = "继续支付";
                 buttonLink = "#";
             } else {
