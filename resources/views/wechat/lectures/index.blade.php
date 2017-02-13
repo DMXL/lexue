@@ -111,7 +111,7 @@
                 buttonLink = "#";
             } else {
                 buttonText = panelBody.hasClass('finished') ? "观看回放" : "进入教室";
-                buttonLink = "http://weixin.duobeiyun.com/room/" + roomLink;
+                buttonLink = roomLink;
             }
 
             $.actions({

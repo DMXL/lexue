@@ -30,8 +30,9 @@ Route::group(['middleware' => 'auth:students'], function(){
     Route::post('teachers/{id}/book', ['as' => 'teachers.book', 'uses' => 'TeacherController@book']);
 
     // Lectures related
-    Route::resource('lectures', 'LectureController', ['only' => ['show','index']]);
+    Route::resource('lectures', 'LectureController', ['only' => ['show','index'], 'parameters' => 'singular']);
     Route::post('lectures/{id}/book', ['as' => 'lectures.book', 'uses' => 'LectureController@book']);
+    Route::get('lectures/room/{id}', ['as' => 'lectures.room', 'uses' => 'LectureController@showRoom']);
     Route::get('replays', ['as' => 'lectures.replays', 'uses' => 'LectureController@replays']);
 
     // Tutorials

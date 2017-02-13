@@ -55,20 +55,35 @@ class LectureController extends Controller
         return $this->frontView('wechat.lectures.index', compact('upcoming', 'ongoing', 'count', 'userLectures', 'userLecturesList'));
     }
 
-    public function show($id)
+    public function show(Lecture $lecture)
     {
-        $lecture = Lecture::find($id);
         $isPurchased = null;
 
-        if(array_key_exists($id, $this->getOrderList()))
-            $isPurchased = $this->getOrderList()[$id];
+        if(array_key_exists($lecture->id, $this->getOrderList()))
+            $isPurchased = $this->getOrderList()[$lecture->id];
 
         return $this->frontView('wechat.lectures.show', compact('lecture', 'isPurchased'));
     }
 
+    public function showRoom($lectureId)
+    {
+        $lecture = Lecture::findOrFail($lectureId);
+        $order = $this->student->orders()->where('lecture_id', $lectureId)->first();
+
+        if ($order) {
+            if ($order->paid) {
+                $roomId = $lecture->room_id;
+                return $this->frontView('wechat.lectures.room', compact('roomId'));
+            }
+        }
+
+        flash()->error('抱歉，您还未购买该课程');
+        return redirect()->route('m.students::lectures.show', $lectureId);
+    }
+
     public function book($lectureId)
     {
-        $lecture = Lecture::find($lectureId);
+        $lecture = Lecture::findOrFail($lectureId);
 
         try {
             $orderId = DB::transaction(function() use ($lecture) {
