@@ -56,13 +56,9 @@ class UpdateLectureStatuses extends Command
 
             foreach($lectures as $lecture) {
                 if(!$lecture->isComing()) {
-                    /*
-                    $job = (new CheckRoomDetail($lecture))
-                        ->onConnection('beanstalkd')
-                        ->onQueue('statsupdate'); */
                     $this->dispatch(new CheckRoomDetail($lecture));
+                    $count++;
                 }
-                $count++;
             }
 
             if($count > 0) {
