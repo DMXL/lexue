@@ -34,9 +34,9 @@ class CheckRoomDetail extends Job implements ShouldQueue
     public function handle()
     {
         $detail = json_decode(\Duobeiyun::getRoomDetail($this->lecture->room_id), true);
-        $endTime = Carbon::createFromFormat('Y-m-d H:i:s', $detail['course']['endTime']);
+        $endTime = Carbon::parse($detail['course']['endTime']);
 
-        if(Carbon::now() >= $endTime)
+        if($endTime->isPast())
         {
             $this->lecture->length = $endTime->diffInMinutes($this->lecture->start_time);
             $this->lecture->finished = true;
