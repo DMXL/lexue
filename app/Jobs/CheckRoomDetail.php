@@ -18,6 +18,7 @@ class CheckRoomDetail extends Job implements ShouldQueue
     /**
      * Create a new job instance.
      *
+     * @param Lecture $lecture
      * @return void
      */
     public function __construct(Lecture $lecture)
@@ -38,7 +39,7 @@ class CheckRoomDetail extends Job implements ShouldQueue
         if(Carbon::now() >= $endTime)
         {
             $this->lecture->length = $endTime->diffInMinutes($this->lecture->start_time);
-            $this->lecture->finished = 1;
+            $this->lecture->finished = true;
             $this->lecture->save();
         }
     }

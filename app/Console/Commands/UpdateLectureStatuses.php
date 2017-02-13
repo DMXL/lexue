@@ -56,16 +56,17 @@ class UpdateLectureStatuses extends Command
 
             foreach($lectures as $lecture) {
                 if(!$lecture->isComing()) {
+                    /*
                     $job = (new CheckRoomDetail($lecture))
                         ->onConnection('beanstalkd')
-                        ->onQueue('statsupdate');
-                    $this->dispatch($job);
+                        ->onQueue('statsupdate'); */
+                    $this->dispatch(new CheckRoomDetail($lecture));
                 }
                 $count++;
             }
 
             if($count > 0) {
-                $this->info('['.Carbon::now()->toDateTimeString().'] tasks.INFO: '.$count.' lectures are being watched.');
+                $this->info('['.Carbon::now()->toDateTimeString().'] tasks.INFO: '.$count.' '.($count == 1 ? 'lecture is' : 'lectures are').' being watched.');
             }
         }
     }
