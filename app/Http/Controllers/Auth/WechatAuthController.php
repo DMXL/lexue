@@ -69,7 +69,7 @@ class WechatAuthController extends AuthController
         $wechatUser = $wechatUserService->get($wechatId);
 
         if ($wechatUser->get('subscribe') == 0)
-            return redirect()->getSubscribeUrl();
+            return redirect()->to(getSubscribeUrl());
 
         if (! Student::where('wechat_id', $wechatId)->exists()) {
             $user = new Student();
