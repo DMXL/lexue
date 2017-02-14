@@ -254,3 +254,14 @@ function generateTradeNo()
 
     return $orderSn;
 }
+
+/**
+ * Get the wechat subscribe page url.
+ *
+ * @return string
+ */
+function getSubscribeUrl()
+{
+    $url = 'http://mp.weixin.qq.com/s?__biz=MzIzMjI2NjAzMQ==&mid=2247483697&idx=1&sn=f0af35b6fa1f35ecb943d8e81d782549&chksm=e896c171dfe14867da9c9fde8148a568ddeb3d7f16500485bdff83d8179dfc0f2ce7c5bc1dcb#rd';
+    return $url;
+}
