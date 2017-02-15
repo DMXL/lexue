@@ -49,13 +49,11 @@ class UpdateLectureStatuses extends Command
             $this->info('This works, lecture id is '.$lectureId.'.');
         } else
         {
-            // $this->info('['.Carbon::now()->toDateTimeString().'] tasks.INFO: Scheduled command executed.');
-
-            $lectures = Lecture::where('finished', false)->get();
+            $lectures = Lecture::unfinished()->get();
             $count = 0;
 
             foreach($lectures as $lecture) {
-                if(!$lecture->isComing()) {
+                if($lecture->start_time->isPast()) {
                     $this->dispatch(new CheckRoomDetail($lecture));
                     $count++;
                 }

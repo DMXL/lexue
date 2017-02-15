@@ -119,20 +119,20 @@ class Lecture extends Model implements StaplerableInterface
         return $query->where('finished', true);
     }
 
+    public function scopeUnfinished($query)
+    {
+        return $query->where('finished', false);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Custom Methods
     |--------------------------------------------------------------------------
     */
-    public function isComing()
-    {
-        return $this->start_time >= Carbon::now();
-    }
-
     public function isLive()
     {
-        if(!$this->isComing())
-            return $this->end_time >= Carbon::now();
+        if($this->start_time->isPast())
+            return $this->end_time->isFutre();
 
         return false;
     }

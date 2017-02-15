@@ -31,6 +31,7 @@ class LectureController extends Controller
     public function index()
     {
         $lectures = Lecture::enabled()
+            ->unfinished()
             ->orderByEarliest()
             ->with('teacher')
             ->get();
@@ -39,11 +40,10 @@ class LectureController extends Controller
         $ongoing = collect();
 
         foreach ($lectures as $lecture) {
-            if ($lecture->isComing()) {
-                $upcoming->push($lecture);
-            }
-            elseif ($lecture->isLive()) {
+            if ($lecture->isLive()) {
                 $ongoing->prepend($lecture);
+            } else {
+                $upcoming->push($lecture);
             }
         }
 
