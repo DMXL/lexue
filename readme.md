@@ -25,9 +25,7 @@
 
 ![image](https://github.com/thesudoteam/lexue/blob/master/public/images/qrcode_for_gh_bc197aa3e945_258.jpg)
 
-![image](https://github.com/thesudoteam/lexue/blob/master/public/images/WechatIMG1.jpeg)
-
-![image](https://github.com/thesudoteam/lexue/blob/master/public/images/WechatIMG2.jpeg)
+![image](https://github.com/thesudoteam/lexue/blob/master/public/images/WechatIMG1.jpg)
 
 ### 更新日志
 
