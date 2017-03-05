@@ -132,7 +132,7 @@ class Lecture extends Model implements StaplerableInterface
     public function isLive()
     {
         if($this->start_time->isPast())
-            return $this->end_time->isFutre();
+            return $this->end_time->isFuture();
 
         return false;
     }
