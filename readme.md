@@ -25,6 +25,10 @@
 
 ![image](https://github.com/thesudoteam/lexue/blob/master/public/images/qrcode_for_gh_bc197aa3e945_258.jpg)
 
+![image](https://github.com/thesudoteam/lexue/blob/master/public/images/WechatIMG1.jpeg)
+
+![image](https://github.com/thesudoteam/lexue/blob/master/public/images/WechatIMG2.jpeg)
+
 ### 更新日志
 
 * 2017.02 v0.5.0: 新增课表视图，同时更新了大量前后台UI设计，对数据库及部分代码结构进行了重构
