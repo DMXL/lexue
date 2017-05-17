@@ -175,8 +175,11 @@ class LectureEventSubscriber
     private function openWechatLive(Lecture $lecture, $roomId)
     {
         $teacherName = $lecture->teacher->name;
-        $teacherBrief = $lecture->teacher->description;
-        $description = $lecture->description;
+        $teacherDesc = $lecture->teacher->description;
+        $lectureDesc = $lecture->description;
+
+        $teacherBrief = empty($teacherDesc) ? '暂无教师信息' : $teacherDesc;
+        $description = empty($lectureDesc) ? '暂无课程信息' : $lectureDesc;
 
         $result = json_decode(\Duobeiyun::openWeixinLive($roomId, $teacherName, $teacherBrief, $description), true);
         if ($result['success']) {
