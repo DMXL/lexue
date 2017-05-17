@@ -41,8 +41,6 @@ class CheckRoomDetail extends Job implements ShouldQueue
             $this->lecture->length = $endTime->diffInMinutes($this->lecture->start_time);
             $this->lecture->finished = true;
             $this->lecture->save();
-
-            \Duobeiyun::closeWeixinLive($this->lecture->room_id); // 关闭微信直播
         }
     }
 
