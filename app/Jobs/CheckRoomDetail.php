@@ -36,11 +36,23 @@ class CheckRoomDetail extends Job implements ShouldQueue
         $detail = json_decode(\Duobeiyun::getRoomDetail($this->lecture->room_id), true);
         $endTime = Carbon::parse($detail['course']['endTime']);
 
-        if($endTime->isPast())
+        if($endTime->isPast()) // 课程已结束
         {
             $this->lecture->length = $endTime->diffInMinutes($this->lecture->start_time);
             $this->lecture->finished = true;
             $this->lecture->save();
+
+            \Duobeiyun::closeWeixinLive($this->lecture->room_id); // 关闭微信直播
         }
+    }
+
+    /**
+     * Handle a job failure.
+     *
+     * @return void
+     */
+    public function failed()
+    {
+        // Called when the job is failing...
     }
 }
